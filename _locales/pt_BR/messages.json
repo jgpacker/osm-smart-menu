@@ -1,0 +1,26 @@
+{
+  "extensionName": {
+    "message": "Menu Inteligente OSM"
+  },
+
+  "extensionDescription": {
+    "message": "Pule de um site compatível com o OSM para outro, preservando algumas informações do contexto."
+  },
+
+  "loadingPanel": {
+    "message": "Carregando..."
+  },
+
+  "site_openstreetmap": {
+    "message": "Site oficial do OpenStreetMap"
+  },
+  "site_historicmap": {
+    "message": "Objetos históricos"
+  },
+  "site_idlatest": {
+    "message": "Editor iD mais novo"
+  },
+  "site_osmwiki": {
+    "message": "Wiki OpenStreetMap"
+  }
+}

@@ -1,0 +1,117 @@
+{
+  "extensionName": {
+    "message": "OSM Smart Menu"
+  },
+
+  "extensionDescription": {
+    "message": "Jumps from an OSM-compatible website to another one, preserving some contextual information."
+  },
+  
+  "loadingPanel": {
+    "message": "Loading...",
+    "description": "Shown in panel popup shortly before menu appears"
+  },
+
+  "site_openstreetmap": {
+    "message": "OpenStreetMap Official Website"
+  },
+  "site_bingmaps": {
+    "message": "Bing Maps"
+  },
+  "site_googlemaps": {
+    "message": "Google Maps"
+  },
+  "site_openmapsurfer": {
+    "message": "OpenMapSurfer"
+  },
+  "site_opencyclemap": {
+    "message": "OpenCycleMap"
+  },
+  "site_openseamap": {
+    "message": "OpenSeaMap"
+  },
+  "site_opensnowmap": {
+    "message": "OpenSnowMap"
+  },
+  "site_historicmap": {
+    "message": "Historical Objects"
+  },
+  "site_openwhatevermap": {
+    "message": "OpenWhateverMap"
+  },
+  "site_openptmap": {
+    "message": "Open Public Transport Map"
+  },
+  "site_opnvkarte": {
+    "message": "ÖPNVKarte"
+  },
+  "site_stamen": {
+    "message": "Stamen watercolor"
+  },
+  "site_f4map": {
+    "message": "F4 Map (3D demo)"
+  },
+  "site_opensciencemap": {
+    "message": "OpenScienceMap"
+  },
+  "site_hotmap": {
+    "message": "Humanitarian OSM Team Map"
+  },
+  "site_idlatest": {
+    "message": "Latest iD Editor"
+  },
+  "site_josm": {
+    "message": "JOSM Editor Remote"
+  },
+  "site_level0": {
+    "message": "Level0 Editor"
+  },
+  "site_rawedit": {
+    "message": "RawEdit"
+  },
+  "site_umap": {
+    "message": "uMap"
+  },
+  "site_osmdeephistory": {
+    "message": "OSM Deep History"
+  },
+  "site_deepdiff": {
+    "message": "Deep Diff"
+  },
+  "site_osmhistoryviewer": {
+    "message": "OSM History Viewer"
+  },
+  "site_whodidit": {
+    "message": "WHODIDIT (Zverik)"
+  },
+  "site_overpassapi": {
+    "message": "Augmented OSM Change Viewer"
+  },
+  "site_osmrelationanalyzer": {
+    "message": "OSM Relation Analyzer"
+  },
+  "site_osmroutemanager": {
+    "message": "OSM Route Manager"
+  },
+  "site_osmose": {
+    "message": "Osmose"
+  },
+  "site_osminspector": {
+    "message": "Geofabrik OSM Inspector"
+  },
+  "site_mapcompare": {
+    "message": "Geofabrik Map Compare"
+  },
+  "site_keepright": {
+    "message": "keep right!"
+  },
+  "site_howdidyoucontribute": {
+    "message": "How did you contribute to OSM?"
+  },
+  "site_osmwiki": {
+    "message": "OpenStreetMap Wiki"
+  },
+  "site_taginfo": {
+    "message": "Taginfo"
+  }
+}

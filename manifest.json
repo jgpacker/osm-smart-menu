@@ -1,0 +1,43 @@
+{
+  "name": "__MSG_extensionName__",
+  "description": "__MSG_extensionDescription__",
+  "default_locale": "en",
+
+  "applications": {
+    "gecko": {
+      "id": "osm-smart-menu@jgpacker.me.br",
+      "strict_min_version": "48.0"
+    }
+  },
+  "minimum_chrome_version": "45",
+
+  "author": "João Guilherme Packer",
+  "homepage_url": "https://github.com/jgpacker/osm-smart-menu",
+  "version": "0.2.2",
+
+  "permissions": [
+    "activeTab"
+  ],
+
+  "browser_action": {
+    "browser_style": true,
+    "default_icon": {
+      "16": "icons/osm16x16.png",
+      "19": "icons/osm19x19.png",
+      "32": "icons/osm32x32.png",
+      "38": "icons/osm38x38.png",
+      "64": "icons/osm64x64.png"
+    },
+    "default_title": "__MSG_extensionName__",
+    "default_popup": "lib/panel/popup.html"
+  },
+
+  "background": {
+    "scripts": [
+      "lib/sites-configuration.js",
+      "lib/background/main-script.js"
+    ]
+  },
+
+  "manifest_version": 2
+}

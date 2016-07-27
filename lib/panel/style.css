@@ -1,0 +1,20 @@
+html, body {
+  margin: 0;
+  white-space: nowrap;
+
+/* needed until https://bugzilla.mozilla.org/show_bug.cgi?id=1215025 */
+  min-height: 250px;
+  min-width: 230px;
+}
+
+a {
+  display: block;
+}
+
+.panel:empty::after {
+  content: "__MSG_loadingPanel__"
+}
+
+.disabled { /* TODO: behavior could be configurable */
+  display: none;
+}
