@@ -13,7 +13,7 @@
   },
 
   "site_openstreetmap": {
-    "message": "OpenStreetMap Official Website"
+    "message": "OpenStreetMap"
   },
   "site_bingmaps": {
     "message": "Bing Maps"
@@ -61,7 +61,7 @@
     "message": "Mapillary"
   },
   "site_idlatest": {
-    "message": "Latest iD Editor"
+    "message": "iD Editor"
   },
   "site_josm": {
     "message": "JOSM Editor Remote"
@@ -100,10 +100,10 @@
     "message": "Osmose"
   },
   "site_osminspector": {
-    "message": "Geofabrik OSM Inspector"
+    "message": "OSM Inspector"
   },
   "site_mapcompare": {
-    "message": "Geofabrik Map Compare"
+    "message": "Map Compare"
   },
   "site_keepright": {
     "message": "keep right!"

@@ -11,14 +11,11 @@
     "message": "Carregando..."
   },
 
-  "site_openstreetmap": {
-    "message": "Site oficial do OpenStreetMap"
-  },
   "site_historicmap": {
     "message": "Objetos históricos"
   },
   "site_idlatest": {
-    "message": "Editor iD mais novo"
+    "message": "Editor iD"
   },
   "site_osmwiki": {
     "message": "Wiki OpenStreetMap"
