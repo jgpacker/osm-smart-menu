@@ -57,6 +57,9 @@
   "site_hotmap": {
     "message": "Humanitarian OSM Team Map"
   },
+  "site_mapillary": {
+    "message": "Mapillary"
+  },
   "site_idlatest": {
     "message": "Latest iD Editor"
   },
