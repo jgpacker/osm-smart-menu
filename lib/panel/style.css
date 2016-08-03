@@ -1,18 +1,24 @@
 html, body {
   margin: 0;
   white-space: nowrap;
+  overflow-x: hidden;
 
 /* needed until https://bugzilla.mozilla.org/show_bug.cgi?id=1215025 */
   min-height: 250px;
-  min-width: 230px;
+  min-width: 250px;
 }
 
 a {
   display: block;
+  text-decoration: inherit;
+  color: inherit;
 }
 
 .panel:empty::after {
-  content: "__MSG_loadingPanel__"
+  content: "__MSG_loadingPanel__";
+}
+.panel:empty {
+  text-align: center;
 }
 
 .disabled { /* TODO: behavior could be configurable */
