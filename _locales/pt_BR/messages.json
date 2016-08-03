@@ -3,6 +3,10 @@
     "message": "Menu Inteligente OSM"
   },
 
+  "extensionShortName": {
+    "message": "Menu OSM"
+  },
+
   "extensionDescription": {
     "message": "Pule de um site compatível com o OSM para outro, preservando algumas informações do contexto."
   },

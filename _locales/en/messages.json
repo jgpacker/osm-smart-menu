@@ -3,6 +3,10 @@
     "message": "OSM Smart Menu"
   },
 
+  "extensionShortName": {
+    "message": "OSMenu"
+  },
+
   "extensionDescription": {
     "message": "Jumps from an OSM-compatible website to another one, preserving some contextual information."
   },
