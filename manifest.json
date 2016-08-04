@@ -14,7 +14,7 @@
 
   "author": "João Guilherme Packer",
   "homepage_url": "https://github.com/jgpacker/osm-smart-menu",
-  "version": "0.2.2",
+  "version": "0.3.0",
 
   "permissions": [
     "activeTab"
