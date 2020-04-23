@@ -120,5 +120,8 @@
   },
   "site_taginfo": {
     "message": "Taginfo"
+  },
+  "site_neistools": {
+    "message": "Neis Visualization Tools"
   }
 }
