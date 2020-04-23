@@ -4,12 +4,6 @@
   "description": "__MSG_extensionDescription__",
   "default_locale": "en",
 
-  "applications": {
-    "gecko": {
-      "id": "osm-smart-menu@jgpacker.me.br",
-      "strict_min_version": "48.0"
-    }
-  },
   "minimum_chrome_version": "45",
 
   "author": "João Guilherme Packer",
