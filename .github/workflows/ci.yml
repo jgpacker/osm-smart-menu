@@ -1,0 +1,17 @@
+name: CI
+
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v1
+      with:
+        node-version: 14.x
+    - name: web-ext Action for Firefox Add-ons
+      uses: kewisch/action-web-ext@v1.0
+      with:
+        cmd: lint
