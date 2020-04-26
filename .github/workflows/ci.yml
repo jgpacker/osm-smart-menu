@@ -11,7 +11,5 @@ jobs:
     - uses: actions/setup-node@v1
       with:
         node-version: 14.x
-    - name: web-ext Action for Firefox Add-ons
-      uses: kewisch/action-web-ext@v1.0
-      with:
-        cmd: lint
+    - run: npm install
+    - run: npm run build:firefox

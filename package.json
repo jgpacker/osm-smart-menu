@@ -1,0 +1,26 @@
+{
+  "name": "osm-smart-menu",
+  "version": "0.0.0",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --mode=production",
+    "build:firefox": "npm run build && web-ext build --source-dir addon"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jgpacker/osm-smart-menu.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jgpacker/osm-smart-menu/issues"
+  },
+  "dependencies": {
+    "webextension-polyfill-ts": "^0.14.0"
+  },
+  "devDependencies": {
+    "ts-loader": "^7.0.1",
+    "typescript": "^3.8.3",
+    "web-ext": "^4.2.0",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11"
+  }
+}

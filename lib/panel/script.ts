@@ -1,18 +1,20 @@
-"use strict";
+import { browser } from 'webextension-polyfill-ts'
+import { SelectedSite } from '../background/main-script';
 
-const port = chrome.runtime.connect({"name": "get-pages"});
+const port = browser.runtime.connect();
 
-port.onMessage.addListener(function(response){
+port.onMessage.addListener(function(response: SelectedSite[]){
   console.debug("popup script received message through port: " + JSON.stringify(response));
 
   replacePanelContent(response);
 });
 
 
-document.addEventListener("click", function(event) {
+document.addEventListener("click", function(event: Event) {
   //we have to ask the background script to open links because links in the panel don't open in tabs :-(
+  // @ts-ignore
   if (event.target.nodeName == "A") {
-    const a = event.target;
+    const a = event.target as HTMLAnchorElement;
     const message = {
       "url": a.href,
       "id": a.id //currently this is unnecessary
@@ -24,7 +26,7 @@ document.addEventListener("click", function(event) {
   }
 });
 
-function replacePanelContent(sitesList) {
+function replacePanelContent(sitesList: SelectedSite[]) {
   const panel = document.querySelector(".panel");
 
   sitesList.forEach(function(site) {
@@ -34,7 +36,7 @@ function replacePanelContent(sitesList) {
     const anchor = document.createElement('a');
     anchor.id = site.id;
     anchor.href = site.url;
-    anchor.textContent = chrome.i18n.getMessage('site_'+ site.id)
+    anchor.textContent = browser.i18n.getMessage('site_'+ site.id)
 
     const textDiv = document.createElement('div');
     textDiv.className = 'text';
@@ -44,6 +46,6 @@ function replacePanelContent(sitesList) {
     listItem.className = `panel-list-item ${additionalClass}`;
     listItem.appendChild(textDiv);
 
-    panel.appendChild(listItem);
+    panel!.appendChild(listItem);
   });
 }

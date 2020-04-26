@@ -8,7 +8,7 @@
 
   "author": "João Guilherme Packer",
   "homepage_url": "https://github.com/jgpacker/osm-smart-menu",
-  "version": "0.3.2",
+  "version": "0.4.0",
 
   "permissions": [
     "activeTab"
@@ -24,13 +24,12 @@
       "64": "icons/osm64x64.png"
     },
     "default_title": "__MSG_extensionName__",
-    "default_popup": "lib/panel/popup.html"
+    "default_popup": "panel/popup.html"
   },
 
   "background": {
     "scripts": [
-      "lib/sites-configuration.js",
-      "lib/background/main-script.js"
+      "background/main-script.js"
     ]
   },
 

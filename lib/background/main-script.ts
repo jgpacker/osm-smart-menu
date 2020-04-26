@@ -1,17 +1,23 @@
-"use strict";
+import { browser } from 'webextension-polyfill-ts'
+import { Sites, SiteConfiguration, InfoRegExp, ParamOpt } from '../sites-configuration'
+import { ExtractedData } from './injectable-content-script';
 
-chrome.runtime.onConnect.addListener(function(port) {
-  console.assert(port.name == "get-pages");
+export type SelectedSite = {
+  id: string;
+  active: boolean;
+  url: string;
+}
 
+browser.runtime.onConnect.addListener(async function(port) {
   console.debug("background script connected to a port: " + JSON.stringify(port));
 
 
   //const defaultZoom = 12; TODO: get from configuration
 
-  chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-    const currentTab = tabs[0];
+  const tabs = await browser.tabs.query({active: true, currentWindow: true});
+  const currentTab = tabs[0];
 
-    const currentSiteId = detectSite(currentTab.url, Sites);
+    const currentSiteId = detectSite(currentTab.url!, Sites);
     if (currentSiteId != null) {
       console.debug("Current site detected to be "+currentSiteId);
     } else {
@@ -19,43 +25,38 @@ chrome.runtime.onConnect.addListener(function(port) {
       console.debug("Current site is not known"); // TODO: tell this to panel popup
     }
 
-    chrome.tabs.executeScript(currentTab.id, {
-      file: "/lib/background/injectable-content-script.js"
-    }, function(_){
-
-      chrome.tabs.sendMessage(currentTab.id, {id: currentSiteId}, function(result){
-        result = result || {};
-        console.debug("result from injected content script: " + JSON.stringify(result));
-
-        //Note: all retrieved values must be URL-encoded strings
-        const currentUrl = result.permalink || currentTab.url;
-        const retrievedValues = Object.assign(
-          extractValuesFromUrl(currentUrl, Sites[currentSiteId]),
-          result.additionalValues || {}
-        );
-        console.debug("retrievedValues are "+JSON.stringify(retrievedValues));
-
-        // TODO: pre-process whatever you can
-        const sitesList = getRelevantSites(currentSiteId, retrievedValues);
-
-        port.onMessage.addListener(function(message){
-          console.debug("background script received message through a port: " + JSON.stringify(message));
-
-          chrome.tabs.create({ url: message.url});
-        });
-
-        port.postMessage(sitesList);
-      });
+    await browser.tabs.executeScript(currentTab.id, {
+      file: "./background/injectable-content-script.js"
     });
-  });
+    const result = ((await browser.tabs.sendMessage(currentTab.id!, {id: currentSiteId})) || {}) as ExtractedData;
+    console.debug("result from injected content script: " + JSON.stringify(result));
+
+    //Note: all retrieved values must be URL-encoded strings
+    const currentUrl = result.permalink || currentTab.url;
+    const retrievedValues = Object.assign(
+      extractValuesFromUrl(currentUrl!, Sites[currentSiteId!]),
+      result.additionalValues || {}
+    );
+    console.debug("retrievedValues are "+JSON.stringify(retrievedValues));
+
+    // TODO: pre-process whatever you can
+    const sitesList = getRelevantSites(currentSiteId!, retrievedValues);
+
+    port.onMessage.addListener(function(message){
+      console.debug("background script received message through a port: " + JSON.stringify(message));
+
+      browser.tabs.create({ url: message.url});
+    });
+
+    port.postMessage(sitesList);
 });
 
-function detectSite(url, sitesList) {
+function detectSite(url: string, sitesList: Record<string, SiteConfiguration>) {
   const hostname = (new URL(url).hostname).replace("www.", "") // maybe add www in config
   return Object.keys(sitesList).find(id => sitesList[id].link.includes(hostname));
 }
 
-function getRelevantSites(currentSiteId, retrievedValues) {
+function getRelevantSites(currentSiteId: string, retrievedValues: Record<string, string>): SelectedSite[] {
   return Object.keys(Sites).map(function(siteId) {
     const chosenOption = Sites[siteId].paramOpts.find(function(paramOpt){
       const [orderedParameters, unorderedParameters] = extractParametersFromParamOpt(paramOpt);
@@ -76,10 +77,10 @@ function getRelevantSites(currentSiteId, retrievedValues) {
   }).filter(s => s.id != currentSiteId);
 }
 
-function extractValuesFromUrl(url, siteConfig) {
+function extractValuesFromUrl(url: string, siteConfig: SiteConfiguration) {
   for(let i=0; i< siteConfig.paramOpts.length; i++) {
-    let extractedValues = {};
-    let [orderedParameters, _] = extractParametersFromParamOpt(siteConfig.paramOpts[i]);
+    let extractedValues: Record<string, string> = {};
+    let [orderedParameters] = extractParametersFromParamOpt(siteConfig.paramOpts[i]);
 
     let partialUrl = siteConfig.paramOpts[i].ordered;
     partialUrl = partialUrl.replace(/([.?^$])/g, '\\$1'); // escape regex special characters TODO: add more and review location in code
@@ -93,17 +94,17 @@ function extractValuesFromUrl(url, siteConfig) {
     if(orderedMatch) {
       console.debug("orderedMatch: "+ orderedMatch);
       const unorderedParametersMap = siteConfig.paramOpts[i].unordered || {};
-      const matchesUnordered = Object.keys(unorderedParametersMap).every(function(unorderedParameter){
+      const matchesUnordered = Object.entries(unorderedParametersMap).every(function([key, value]: [string, string?]){
         let unorderedPartXRegExp = new RegExp(
-          unorderedParametersMap[unorderedParameter]+"=("+InfoRegExp[unorderedParameter]+")"
+          value+"=("+InfoRegExp[key]+")"
         )
         let unorderedMatch = unorderedPartXRegExp.exec(url)
         if(!unorderedMatch){
-          console.debug("bad match for "+unorderedPartXRegExp.toString()+" (parameter "+unorderedParameter+")");
+          console.debug("bad match for "+unorderedPartXRegExp.toString()+" (parameter "+key+")");
           return false;
         } else {
-          console.debug("extracted values "+JSON.stringify(unorderedMatch)+" to unordered parameter "+unorderedParameter);
-          extractedValues[unorderedParameter] = unorderedMatch[1];
+          console.debug("extracted values "+JSON.stringify(unorderedMatch)+" to unordered parameter "+key);
+          extractedValues[key] = unorderedMatch[1];
           return true;
         }
       })
@@ -122,7 +123,7 @@ function extractValuesFromUrl(url, siteConfig) {
 }
 
 
-function extractParametersFromParamOpt(paramOpt) {
+function extractParametersFromParamOpt(paramOpt: ParamOpt) {
    let necessaryParameters = [];
    const fieldGetterRegExp = /\{([^\}]+)\}/g;
    let orderedParameters = []
@@ -143,7 +144,7 @@ function extractParametersFromParamOpt(paramOpt) {
 }
 
 /* gets an "interpolable" string and applies the parameters from an object into it, returning a new string; if that's not possible, null is returned */
-function applyParametersToUrl(option, retrievedValues) { //: ParamOpt -> Map[String, String] -> String
+function applyParametersToUrl(option: ParamOpt, retrievedValues: Record<string, string>): string {
   let url = option.ordered || "";
 
   Object.keys(retrievedValues).forEach(function(key){
@@ -152,9 +153,8 @@ function applyParametersToUrl(option, retrievedValues) { //: ParamOpt -> Map[Str
 
   if(option.unordered){
     const urlQueryParameters =
-      Object.keys(option.unordered).map(function(key){
-        return option.unordered[key] + '=' +
-               retrievedValues[key];
+      Object.entries(option.unordered).map(function([key, value]){
+        return value + '=' + retrievedValues[key];
       });
     url += '?' + urlQueryParameters.join('&'); // TODO: be mindful of whether there is an '?' or '#' already
   }

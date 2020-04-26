@@ -1,0 +1,5 @@
+node_modules/
+addon/**/*.js
+
+# from firefox's web-ext tool
+web-ext-artifacts/

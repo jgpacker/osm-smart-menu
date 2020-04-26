@@ -1,6 +1,4 @@
-"use strict";
-
-const InfoRegExp = {
+export const InfoRegExp: Record<string, string> = {
   //link       : {regExp: ".+"},
   nodeId     : "[0-9]+",
   wayId      : "[0-9]+",
@@ -17,14 +15,32 @@ const InfoRegExp = {
 };
 //TODO: should I add support for route information? (start, intermediary and end points, and maybe transport mode)
 
-const urlPattern1 = {ordered:"/", unordered: {zoom:"zoom", lat:"lat", lon: "lon"}};
+export type SiteConfiguration = {
+  link: string;
+  paramOpts: ParamOpt[];
+}
+
+export type ParamOpt = {
+  ordered: string;
+  unordered?: {
+      zoom?: string;
+      lat?: string;
+      lon?: string;
+      changesetId?: string;
+      wayId?: string;
+      nodeId?: string;
+      relationId?: string;
+  };
+}
+
+const urlPattern1: ParamOpt = {ordered:"/", unordered: {zoom:"zoom", lat:"lat", lon: "lon"}};
 
 //TODO:
 // * document it in a schema
 // * allow customization by the user
 // * become language-aware (knowing which languages are supported by these sites)
 // for now, verifying an https alternative is out of scope
-const Sites = {
+export const Sites: Record<string, SiteConfiguration> = {
   openstreetmap: {
     link: "openstreetmap.org",
     //icon: "www.openstreetmap.org/favicon.ico", // TODO: I will need to pre-download this because otherwise I need additional security permissions in the CSP

@@ -1,16 +1,17 @@
-"use strict";
-(function(){
+import { browser } from 'webextension-polyfill-ts';
 
-chrome.runtime.onMessage.addListener(function(request, _sender, sendResponse) {
-  console.debug("injected content script received request: " + JSON.stringify(request));
+type ExtractorType = {
+  getPermalink?: (document: Document) => string | undefined;
+  getValues?: () => Record<string, string> | undefined;
+}
 
-  const siteId = request.id;
-  sendResponse(extraData(siteId));
-})
-
+export type ExtractedData = {
+  permalink?: string;
+  additionalValues?: Record<string, string>;
+}
 
 // note that the response given to the main thread should contain URL-encoded values (only strings)
-const Extractors = {
+const Extractors: Record<string, ExtractorType> = {
   howdidyoucontribute: {
     getPermalink: getPermalinkBySelector('a[href*="//hdyc.neis-one.org/?"]')
   },
@@ -27,40 +28,29 @@ const Extractors = {
           zoom: mapState.level
         };
       }
+      return;
     }
   },
   overpassapi: {
     getPermalink: openLayers_getPermalink(),
-    getValues: function(){
-      //TODO: we can get userName if it's a changeset analysis and maybe map coordinates on both cases
-    }
+      //TODO: getValues - we can get userName if it's a changeset analysis and maybe map coordinates on both cases
   },
   whodidit: {
-    getValues: function(){
-      //TODO: we may get an username or changeset info
-    },
+      //TODO: getValues - we may get an username or changeset info
     getPermalink: openLayers_getPermalink()
   },
   osmrelationanalyzer: {
-    getValues: function(){
-      //TODO: we can get userName if it's a changeset analysis and maybe map coordinates on both cases
-    }
+      //TODO: getValues - we can get userName if it's a changeset analysis and maybe map coordinates on both cases
   },
   osmroutemanager: {
-    getValues: function(){
-      //TODO: get user that change this relation for the last time
-    }
+      //TODO: getValues - get user that change this relation for the last time
   },
   osmose: {
     getPermalink: getPermalinkBySelector("[class*=permalink] a"),
-    getValues: function(){
-      //TODO: get parameters from URL because there is a language prefix between /map and /#zoom
-    }
+      //TODO: getValues - get parameters from URL because there is a language prefix between /map and /#zoom
   },
   osmhistoryviewer: {
-    getValues: function(){
-      //TODO: we can get userName if it's a changeset analysis and maybe map coordinates on both cases
-    }
+      //TODO: getValues - we can get userName if it's a changeset analysis and maybe map coordinates on both cases
   },
   osminspector: {
     getPermalink: getPermalinkBySelector("a#permalink")
@@ -95,9 +85,9 @@ const Extractors = {
 }
 
 
-function getPermalinkBySelector(selector){
-  return function(document){
-      const permalink = document.querySelector(selector);
+function getPermalinkBySelector(selector: string){
+  return function(document: Document){
+      const permalink = document.querySelector(selector) as HTMLAnchorElement;
       return permalink && permalink.href;
   }
 }
@@ -106,24 +96,25 @@ function openLayers_getPermalink(){
   return getPermalinkBySelector("[id*=Permalink] a");
 }
 
-function getPermalinkByValue(){
-  return function(document){
-    const permalinkAnchor = [...(document.querySelectorAll('a'))]
-                            .find(a => /permalink/i.test(a.textContent));
-    return permalinkAnchor && permalinkAnchor.href;
-  }
-}
+// function getPermalinkByValue(){
+//   return function(document: Document){
+//     const permalinkAnchor = [...(document.querySelectorAll('a'))]
+//                             .find(a => a.textContent && /permalink/i.test(a.textContent));
+//     return permalinkAnchor && permalinkAnchor.href;
+//   }
+// }
 
-function extraData(siteId) {
-  let permalink = null;
-  let additionalValues = {};
+function extraData(siteId: string): ExtractedData {
+  let permalink;
+  let additionalValues;
+  const currentSite = Extractors[siteId];
 
-  if (Extractors[siteId]) {
-    if (Extractors[siteId].getPermalink) {
-      permalink = Extractors[siteId].getPermalink(document);
+  if (currentSite) {
+    if (currentSite.getPermalink) {
+      permalink = currentSite.getPermalink(document);
     }
-    if (Extractors[siteId].getValues) {
-      additionalValues = Extractors[siteId].getValues();
+    if (currentSite.getValues) {
+      additionalValues = currentSite.getValues();
     }
   }
 
@@ -133,4 +124,12 @@ function extraData(siteId) {
   };
 }
 
+
+(function(){
+  browser.runtime.onMessage.addListener(async function(message: { id: string }, _sender) {
+    console.debug("injected content script received request: " + JSON.stringify(message));
+  
+    const siteId = message.id;
+    return extraData(siteId);
+  });
 })();
