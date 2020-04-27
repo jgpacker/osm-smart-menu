@@ -17,10 +17,10 @@ function extractData(siteId: string): ExtractedData {
   }
 }
 
-(function(){
-  browser.runtime.onMessage.addListener(async function(message: { id: string }, _sender) {
+(function () {
+  browser.runtime.onMessage.addListener(async function (message: { id: string }, _sender) {
     console.debug("injected content script received request: " + JSON.stringify(message));
-  
+
     const siteId = message.id;
     return extractData(siteId);
   });

@@ -3,14 +3,14 @@ import { SelectedSite } from '../background/main-script';
 
 const port = browser.runtime.connect();
 
-port.onMessage.addListener(function(response: SelectedSite[]){
+port.onMessage.addListener(function (response: SelectedSite[]) {
   console.debug("popup script received message through port: " + JSON.stringify(response));
 
   replacePanelContent(response);
 });
 
 
-document.addEventListener("click", function(event: Event) {
+document.addEventListener("click", function (event: Event) {
   //we have to ask the background script to open links because links in the panel don't open in tabs :-(
   // @ts-ignore
   if (event.target.nodeName == "A") {
@@ -29,14 +29,14 @@ document.addEventListener("click", function(event: Event) {
 function replacePanelContent(sitesList: SelectedSite[]) {
   const panel = document.querySelector(".panel");
 
-  sitesList.forEach(function(site) {
+  sitesList.forEach(function (site) {
     let additionalClass = '';
-    if(!site.active) additionalClass+='disabled' //TODO: behavior could be configurable by user
+    if (!site.active) additionalClass += 'disabled' //TODO: behavior could be configurable by user
 
     const anchor = document.createElement('a');
     anchor.id = site.id;
     anchor.href = site.url;
-    anchor.textContent = browser.i18n.getMessage('site_'+ site.id)
+    anchor.textContent = browser.i18n.getMessage(`site_${site.id}`);
 
     const textDiv = document.createElement('div');
     textDiv.className = 'text';
