@@ -12,7 +12,7 @@ A file will be created in `./web-ext-artifacts/`.
 ### Translations
 Add a file called `messages.json` in the folder `addon/_locales/xy`, where xy is your languages' code.
 You just need to translate the sentences that are different from the default values (in this case, values from the english translation).
-Feel free to create regional tranlations adding the country code after the language code.
+Feel free to create regional translations adding the country code after the language code.
 See [Chrome's documentation](https://developer.chrome.com/webstore/i18n) for details.
 
 ### Adding new websites
