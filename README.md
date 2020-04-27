@@ -18,7 +18,6 @@ See [Chrome's documentation](https://developer.chrome.com/webstore/i18n) for det
 ### Adding new websites
 1. Add an entry in `lib/sites-configuration.ts`;
 2. Add an entry for it's name translation in the default i18n file (`addon/_locales/en/messages.json`) and for other languages you know;
-3. If possible, add in `lib/background/injectable-content-script.ts` a function for getting permalinks or some additional data from the website that is not extractable from the URL.
 
 I reserve the right of refusing to add a website to the extension for any reason.
 In the future, I plan to find a way to allow the users to add their own websites.
