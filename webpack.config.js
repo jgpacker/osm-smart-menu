@@ -2,8 +2,7 @@ const path = require("path");
 
 module.exports = {
   entry: {
-    "background/main-script": "./lib/background/main-script.ts",
-    "background/injectable-content-script": "./lib/background/injectable-content-script.ts",
+    "injectable-content-script": "./lib/injectable-content-script.ts",
     "panel/script": "./lib/panel/script.ts"
   },
   output: {

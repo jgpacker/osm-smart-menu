@@ -27,11 +27,5 @@
     "default_popup": "panel/popup.html"
   },
 
-  "background": {
-    "scripts": [
-      "background/main-script.js"
-    ]
-  },
-
   "manifest_version": 2
 }

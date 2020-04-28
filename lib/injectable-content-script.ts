@@ -1,5 +1,5 @@
 import { browser } from 'webextension-polyfill-ts';
-import { Sites } from '../sites-configuration';
+import { Sites } from './sites-configuration';
 
 export type ExtractedData = {
   permalink?: string;
