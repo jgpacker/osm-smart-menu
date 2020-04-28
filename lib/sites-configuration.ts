@@ -69,6 +69,7 @@ export const Sites: Record<string, SiteConfiguration> = {
       { ordered: "/user/{userName}" },
       { ordered: "/#map={zoom}/{lat}/{lon}" },
       { ordered: "/", unordered: { lat: "mlat", lon: "mlon" } }
+      //TODO: recognize pattern https://www.openstreetmap.org/edit#map=18/-7.57646/110.94519
     ]
   },
 
@@ -79,11 +80,12 @@ export const Sites: Record<string, SiteConfiguration> = {
     ],
     extractors: {
       getValues: function () {
+        // TODO: it seems this no longer works because of https://developer.mozilla.org/en-US/docs/Mozilla/Tech/Xray_vision
         // Known bug:
         // The URL doesn't change automatically. If the user enters into //www.bing.com/maps (without parameters) and
         //   doesn't move the map around at least once, then this script won't be able to extract any information.
         if (window.history && window.history.state && window.history.state.MapModeStateHistory && window.history.state.MapModeStateHistory.centerPoint) {
-          const mapState = window.history.state.MapModeStateHistory;
+          const mapState = window.history.state.state.MapModeStateHistory;
           return {
             lat: mapState.centerPoint.latitude,
             lon: mapState.centerPoint.longitude,
@@ -103,6 +105,7 @@ export const Sites: Record<string, SiteConfiguration> = {
     ]
   },
 
+/* TODO: change to https://maps.openrouteservice.org/directions?n1=49.409445&n2=8.692953&n3=13&b=0&k1=en-US&k2=km
   openmapsurfer: {
     link: "korona.geog.uni-heidelberg.de",
     paramOpts: [urlPattern1],
@@ -110,6 +113,7 @@ export const Sites: Record<string, SiteConfiguration> = {
       getPermalink: openLayers_getPermalink()
     }
   },
+*/
 
   opencyclemap: {
     link: "www.opencyclemap.org",
@@ -140,14 +144,6 @@ export const Sites: Record<string, SiteConfiguration> = {
     paramOpts: [urlPattern1],
     extractors: {
       getPermalink: getPermalinkBySelector("a#permalink")
-    },
-  },
-
-  openwhatevermap: {
-    link: "www.openwhatevermap.org",
-    paramOpts: [urlPattern1],
-    extractors: {
-      getPermalink: openLayers_getPermalink()
     },
   },
 
@@ -185,16 +181,6 @@ export const Sites: Record<string, SiteConfiguration> = {
     ]
   },
 
-  opensciencemap: {
-    link: "opensciencemap.org/map",
-    paramOpts: [
-      { ordered: "/#&scale={zoom}&lat={lat}&lon={lon}" }, //go-to option
-      { ordered: "/#", unordered: { zoom: "scale", lat: "lat", lon: "lon" } } //maximum recognizability option
-    ]
-    //TODO: has other attributes e.g. rot and tilt
-    // example: http://opensciencemap.org/map/#&scale=17&rot=0&tilt=0&lat=-26.253&lon=-48.854
-  },
-
   hotmap: {
     link: "map.hotosm.org",
     httpOnly: true,
@@ -210,14 +196,6 @@ export const Sites: Record<string, SiteConfiguration> = {
     ]
   },
 
-  idlatest: {
-    link: "openstreetmap.us/iD/release",
-    paramOpts: [ // Note: has a decimal zoom and has an unusual order for latitude and longitude
-      { ordered: "#map={zoom}/{lon}/{lat}" }, //go-to option
-      { ordered: "map={zoom}/{lon}/{lat}" } //maximum recognizability option
-    ]
-  },
-
   level0: {
     link: "level0.osmz.ru",
     httpOnly: true,
@@ -226,15 +204,6 @@ export const Sites: Record<string, SiteConfiguration> = {
       { ordered: "/?url=w{wayId}!" },
       { ordered: "/?url=r{relationId}" },
       //In the future, there might be a permalink for the mini-map: https://github.com/Zverik/Level0/issues/16
-    ]
-  },
-
-  rawedit: {
-    link: "rawedit.openstreetmap.fr",
-    paramOpts: [
-      { ordered: "/edit/node/{nodeId}" },
-      { ordered: "/edit/way/{wayId}" },
-      { ordered: "/edit/relation/{relationId}" }
     ]
   },
 
@@ -276,6 +245,7 @@ export const Sites: Record<string, SiteConfiguration> = {
     },
   },
 
+  /* TODO: change to https://simon04.dev.openstreetmap.org/whodidit/
   whodidit: {
     link: "zverik.osm.rambler.ru/whodidit",
     paramOpts: [urlPattern1],
@@ -284,6 +254,7 @@ export const Sites: Record<string, SiteConfiguration> = {
       getPermalink: openLayers_getPermalink()
     },
   },
+  */
 
   overpassapi: {
     link: "overpass-api.de/achavi",
