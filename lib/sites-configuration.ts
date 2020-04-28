@@ -28,6 +28,7 @@ export type SiteConfiguration = {
   link: string;
   paramOpts: ParamOpt[];
   extractors?: Extractors;
+  httpOnly?: boolean;
 }
 
 export type ParamOpt = {
@@ -152,6 +153,7 @@ export const Sites: Record<string, SiteConfiguration> = {
 
   openptmap: {
     link: "www.openptmap.org",
+    httpOnly: true,
     paramOpts: [urlPattern1],
     extractors: {
       getPermalink: openLayers_getPermalink()
@@ -168,6 +170,7 @@ export const Sites: Record<string, SiteConfiguration> = {
 
   stamen: { // Note: no permalink, so if an user enters into the site by a link without parameters and doesn't move around at least once, then we don't have access to current coordinates
     link: "maps.stamen.com",
+    httpOnly: true,
     paramOpts: [
       { ordered: "/#terrain/{zoom}/{lat}/{lon}" }, // wasn't able to find a generic URL, so this one was arbitrarily chosen as the first
       { ordered: "/#watercolor/{zoom}/{lat}/{lon}" },
@@ -194,6 +197,7 @@ export const Sites: Record<string, SiteConfiguration> = {
 
   hotmap: {
     link: "map.hotosm.org",
+    httpOnly: true,
     paramOpts: [
       { ordered: "/#{zoom}/{lat}/{lon}" }
     ]
@@ -216,6 +220,7 @@ export const Sites: Record<string, SiteConfiguration> = {
 
   level0: {
     link: "level0.osmz.ru",
+    httpOnly: true,
     paramOpts: [
       { ordered: "/?url=n{nodeId}" },
       { ordered: "/?url=w{wayId}!" },
@@ -252,6 +257,7 @@ export const Sites: Record<string, SiteConfiguration> = {
 
   deepdiff: {
     link: "osm.mapki.com",
+    httpOnly: true,
     paramOpts: [
       { ordered: "/history/node.php", unordered: { nodeId: "id" } },
       { ordered: "/history/way.php", unordered: { wayId: "id" } },
@@ -293,6 +299,7 @@ export const Sites: Record<string, SiteConfiguration> = {
 
   osmrelationanalyzer: {
     link: "ra.osmsurround.org",
+    httpOnly: true,
     paramOpts: [
       { ordered: "/analyzeRelation", unordered: { relationId: "relationId" } }
     ],

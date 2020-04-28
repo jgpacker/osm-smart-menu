@@ -11,9 +11,7 @@ export type SelectedSite = {
 browser.runtime.onConnect.addListener(async function (port) {
   console.debug("background script connected to a port: " + JSON.stringify(port));
 
-
   //const defaultZoom = 12; TODO: get from configuration
-
   const tabs = await browser.tabs.query({ active: true, currentWindow: true });
   const currentTab = tabs[0];
 
@@ -69,10 +67,12 @@ function getRelevantSites(currentSiteId: string, retrievedValues: Record<string,
       url = applyParametersToUrl(chosenOption, retrievedValues)
     }
 
+    const protocol = Sites[siteId].httpOnly ? 'http': 'https';
+
     return {
       id: siteId,
       active: chosenOption != null,
-      url: `http://${Sites[siteId].link}${url}`,
+      url: `${protocol}://${Sites[siteId].link}${url}`,
     };
   }).filter(s => s.id != currentSiteId);
 }
