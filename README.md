@@ -16,8 +16,5 @@ Feel free to create regional translations adding the country code after the lang
 See [Chrome's documentation](https://developer.chrome.com/webstore/i18n) for details.
 
 ### Adding new websites
-1. Add an entry in `lib/sites-configuration.ts`;
-2. Add an entry for it's name translation in the default i18n file (`addon/_locales/en/messages.json`) and for other languages you know;
-
-I reserve the right of refusing to add a website to the extension for any reason.
-In the future, I plan to find a way to allow the users to add their own websites.
+1. Add a new entry in `lib/sites-configuration.ts`;
+2. Add an entry for it's name in the english language file (`addon/_locales/en/messages.json`) and for other languages you know. The entry's message id should be `site_<NEW_ENTRY_ID>`;
