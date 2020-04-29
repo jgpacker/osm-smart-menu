@@ -41,6 +41,7 @@ document.addEventListener("click", function (event: Event) {
   if (event.target.nodeName == "A") {
     const a = event.target as HTMLAnchorElement;
     browser.tabs.create({ url: a.href });
+    event.preventDefault();
   }
 });
 
