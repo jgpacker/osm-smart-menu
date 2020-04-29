@@ -245,6 +245,13 @@ export const Sites: Record<string, SiteConfiguration> = {
     },
   },
 
+  osmcha: {
+    link: 'osmcha.org',
+    paramOpts: [
+      { ordered: "/changesets/{changesetId}" },
+    ],
+  },
+
   /* TODO: change to https://simon04.dev.openstreetmap.org/whodidit/
   whodidit: {
     link: "zverik.osm.rambler.ru/whodidit",

@@ -111,5 +111,8 @@
   },
   "site_neistools": {
     "message": "Neis Visualization Tools"
+  },
+  "site_osmcha": {
+    "message": "OSMCha"
   }
 }
