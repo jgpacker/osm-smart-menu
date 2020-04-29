@@ -46,26 +46,16 @@ document.addEventListener("click", function (event: Event) {
 });
 
 function replacePanelContent(sitesList: SelectedSite[]) {
-  const panel = document.querySelector(".panel");
-
+  document.body.textContent = '';
   sitesList.forEach(function (site) {
-    let additionalClass = '';
-    if (!site.active) additionalClass += 'disabled' //TODO: behavior could be configurable by user
-
     const anchor = document.createElement('a');
     anchor.id = site.id;
     anchor.href = site.url;
     anchor.textContent = browser.i18n.getMessage(`site_${site.id}`);
+    const additionalClass = site.active? '': 'disabled'; //TODO: behavior could be configurable by user
+    anchor.className = `site ${additionalClass}`;
 
-    const textDiv = document.createElement('div');
-    textDiv.className = 'text';
-    textDiv.appendChild(anchor);
-
-    const listItem = document.createElement('div');
-    listItem.className = `panel-list-item ${additionalClass}`;
-    listItem.appendChild(textDiv);
-
-    panel!.appendChild(listItem);
+    document.body.appendChild(anchor);
   });
 }
 
