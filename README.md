@@ -1,5 +1,6 @@
 # OSM Smart Menu
-A browser extension to help the OpenStreetMap community easily visualize different maps and tools (officially supported for [Firefox](https://addons.mozilla.org/pt-BR/firefox/addon/osm-smart-menu/) and [Chromium](https://chrome.google.com/webstore/detail/osm-smart-menu/icipmdhgbkejfideagkhdebiaeohfijk)).
+A browser extension to help the OpenStreetMap community easily visualize different maps and tools.
+It's officially supported for [Google Chrome](https://chrome.google.com/webstore/detail/osm-smart-menu/icipmdhgbkejfideagkhdebiaeohfijk) and Mozilla Firefox (for [Desktop](https://addons.mozilla.org/firefox/addon/osm-smart-menu/) and [Android](https://addons.mozilla.org/android/addon/osm-smart-menu/)).
 
 
 ## Building for Firefox
