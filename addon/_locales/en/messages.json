@@ -2,18 +2,20 @@
   "extensionName": {
     "message": "OSM Smart Menu"
   },
-
   "extensionShortName": {
     "message": "OSMenu"
   },
-
   "extensionDescription": {
-    "message": "Jumps from an OSM-compatible website to another one, preserving some contextual information."
+    "message": "Jumps from an OpenStreetMap-compatible website to another one, preserving some contextual information."
   },
   
-  "loadingPanel": {
+  "loading_firstLine": {
     "message": "Loading...",
-    "description": "Shown in panel popup shortly before menu appears"
+    "description": "Shown in popup shortly before menu appears"
+  },
+  "loading_secondLine": {
+    "message": "If this does not stop loading, go to the website $1 and try again.",
+    "description": "Shown in popup shortly before menu appears. Leave `$1` untranslated"
   },
 
   "site_openstreetmap": {

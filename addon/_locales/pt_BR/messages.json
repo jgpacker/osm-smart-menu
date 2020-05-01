@@ -8,11 +8,14 @@
   },
 
   "extensionDescription": {
-    "message": "Pule de um site compatível com o OSM para outro, preservando algumas informações do contexto."
+    "message": "Pule de um site compatível com o OpenStreetMap para outro, preservando algumas informações de contexto."
   },
 
-  "loadingPanel": {
+  "loading_firstLine": {
     "message": "Carregando..."
+  },
+  "loading_secondLine": {
+    "message": "Se não parar de carregar, vá para o site $1 e tente novamente."
   },
 
   "site_historicmap": {

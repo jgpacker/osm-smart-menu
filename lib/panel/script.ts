@@ -2,6 +2,8 @@ import { browser } from 'webextension-polyfill-ts'
 import { Sites, SiteConfiguration, InfoRegExp, ParamOpt } from '../sites-configuration'
 import { ExtractedData } from '../injectable-content-script';
 
+initializePopupWithLoadingMessage(document);
+
 (async function () {
   //const defaultZoom = 12; TODO: get from configuration
   const tabs = await browser.tabs.query({ active: true, currentWindow: true });
@@ -33,7 +35,7 @@ import { ExtractedData } from '../injectable-content-script';
   // TODO: pre-process whatever you can
   const sitesList = getRelevantSites(currentSiteId!, retrievedValues);
 
-  replacePanelContent(sitesList);
+  replacePopupContent(document, sitesList);
 })();
 
 document.addEventListener("click", function (event: Event) {
@@ -45,8 +47,9 @@ document.addEventListener("click", function (event: Event) {
   }
 });
 
-function replacePanelContent(sitesList: SelectedSite[]) {
-  document.body.textContent = '';
+function replacePopupContent(document: Document, sitesList: SelectedSite[]) {
+  const div = document.createElement('div');
+
   sitesList.forEach(function (site) {
     const anchor = document.createElement('a');
     anchor.id = site.id;
@@ -55,8 +58,33 @@ function replacePanelContent(sitesList: SelectedSite[]) {
     const additionalClass = site.active? '': 'disabled'; //TODO: behavior could be configurable by user
     anchor.className = `site ${additionalClass}`;
 
-    document.body.appendChild(anchor);
+    div.appendChild(anchor);
   });
+
+  const body = document.body;
+  while (body.firstChild) body.firstChild.remove();
+  body.textContent = '';
+  body.append(div);
+}
+
+function initializePopupWithLoadingMessage(document: Document) {
+  const div = document.createElement('div');
+  div.id = 'loading';
+
+  div.append(browser.i18n.getMessage('loading_firstLine'));
+  div.append(document.createElement('br'));
+
+  const splitPoint = '__OPENSTREETMAP_LINK__';
+  const secondLine = browser.i18n.getMessage('loading_secondLine', splitPoint);
+  const [firstHalf, secondHalf] = secondLine.split(splitPoint);
+  div.append(firstHalf);
+  const anchor = document.createElement('a');
+  anchor.href = 'http://www.openstreetmap.org/';
+  anchor.textContent = anchor.href;
+  div.append(anchor);
+  div.append(secondHalf);
+
+  document.body.append(div);
 }
 
 type SelectedSite = {

@@ -2,16 +2,21 @@ html, body {
   margin: 0;
   padding: 0;
   font-size: 15px;
-  white-space: nowrap;
 }
 
-#info {
+#loading {
   text-align: center;
+  padding: 4px;
+}
+
+#loading::first-line {
+  font-weight: bold;
 }
 
 .site {
   padding: 4px 16px;
   display: block;
+  white-space: nowrap;
   text-decoration: inherit;
   color: inherit;
 }
