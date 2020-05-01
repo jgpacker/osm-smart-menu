@@ -5,7 +5,7 @@ import { ExtractedData } from '../injectable-content-script';
 initializePopupWithLoadingMessage(document);
 
 (async function () {
-  //const defaultZoom = 12; TODO: get from configuration
+  //const defaultZoom = 12; TODO: it may complement cases where only lat and lon are given (e.g. markers)
   const tabs = await browser.tabs.query({ active: true, currentWindow: true });
   const currentTab = tabs[0];
 
@@ -14,7 +14,7 @@ initializePopupWithLoadingMessage(document);
     console.debug("Current site detected to be " + currentSiteId);
   } else {
     // TODO: even if it is unknown, try to extract some information from site with some generic guesses
-    console.debug("Current site is not known"); // TODO: tell this to panel popup
+    console.debug("Current site is not known");
   }
 
   await browser.tabs.executeScript(currentTab.id, {
@@ -24,7 +24,6 @@ initializePopupWithLoadingMessage(document);
   const result = ((await browser.tabs.sendMessage(currentTab.id!, { id: currentSiteId })) || {}) as ExtractedData;
   console.debug("result from injected content script: " + JSON.stringify(result));
 
-  //Note: all retrieved values must be URL-encoded strings
   const currentUrl = result.permalink || currentTab.url;
   const retrievedValues = Object.assign(
     extractValuesFromUrl(currentUrl!, Sites[currentSiteId!]),
@@ -171,7 +170,7 @@ function extractParametersFromParamOpt(paramOpt: ParamOpt) {
   const fieldGetterRegExp = /\{([^\}]+)\}/g;
   let orderedParameters = []
   let match;
-  while (match = fieldGetterRegExp.exec(paramOpt.ordered)) { // TODO: what was the alternative to `exec`?
+  while (match = fieldGetterRegExp.exec(paramOpt.ordered)) {
     let attributeNameWithoutBraces = match[1];
     orderedParameters.push(attributeNameWithoutBraces);
   }
@@ -189,15 +188,17 @@ function extractParametersFromParamOpt(paramOpt: ParamOpt) {
 /* gets an "interpolable" string and applies the parameters from an object into it, returning a new string */
 function applyParametersToUrl(option: ParamOpt, retrievedValues: Record<string, string>): string {
   let url = option.ordered;
-
+  const encodedValues: Record<string, string> = {};
+  
   Object.keys(retrievedValues).forEach(function (key) {
-    url = url.replace('{' + key + '}', retrievedValues[key]);
+    encodedValues[key] = encodeURIComponent(retrievedValues[key]);
+    url = url.replace('{' + key + '}', encodedValues[key]);
   });
 
   if (option.unordered) {
     const urlQueryParameters =
       Object.entries(option.unordered).map(function ([key, value]) {
-        return value + '=' + retrievedValues[key];
+        return value + '=' + encodedValues[key];
       });
     url += '?' + urlQueryParameters.join('&'); // TODO: be mindful of whether there is an '?' or '#' already
   }
