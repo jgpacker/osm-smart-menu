@@ -1,3 +1,3 @@
-To easily generate a PNG file from a SVG, install ImageMagick and run (changing the resolution and file name as needed):
+To easily generate a PNG file from a SVG, install Inkscape and run (changing the resolution as needed):
 
-    convert -resize 19 -background none image.svg image19x19.png
+    export RESOLUTION=96; inkscape -z -w "$RESOLUTION" -h "$RESOLUTION" osm.svg -e "osm${RESOLUTION}x${RESOLUTION}.png"

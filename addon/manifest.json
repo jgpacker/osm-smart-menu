@@ -8,20 +8,24 @@
 
   "author": "João Guilherme Packer",
   "homepage_url": "https://github.com/jgpacker/osm-smart-menu",
-  "version": "0.5.3",
+  "version": "0.5.4",
 
   "permissions": [
     "activeTab"
   ],
 
+  "icons": {
+    "48": "icons/osm48x48.png",
+    "96": "icons/osm96x96.png",
+    "128": "icons/osm128x128.png"
+  },
+
   "browser_action": {
     "browser_style": true,
     "default_icon": {
       "16": "icons/osm16x16.png",
-      "19": "icons/osm19x19.png",
-      "32": "icons/osm32x32.png",
-      "38": "icons/osm38x38.png",
-      "64": "icons/osm64x64.png"
+      "48": "icons/osm48x48.png",
+      "96": "icons/osm96x96.png"
     },
     "default_title": "__MSG_extensionName__",
     "default_popup": "popup/index.html"
