@@ -76,24 +76,24 @@ export const Sites: Record<string, SiteConfiguration> = {
   bingmaps: {
     link: "www.bing.com",
     paramOpts: [
-      { ordered: "/mapspreview?cp={lat}~{lon}&lvl={zoom}" } // this CenterPoint syntax can be tricky...
+      { ordered: "/maps?cp={lat}~{lon}&lvl={zoom}" }
     ],
     extractors: {
-      getValues: function () {
-        // TODO: it seems this no longer works because of https://developer.mozilla.org/en-US/docs/Mozilla/Tech/Xray_vision
-        // Known bug:
-        // The URL doesn't change automatically. If the user enters into //www.bing.com/maps (without parameters) and
-        //   doesn't move the map around at least once, then this script won't be able to extract any information.
-        if (window.history && window.history.state && window.history.state.MapModeStateHistory && window.history.state.MapModeStateHistory.centerPoint) {
-          const mapState = window.history.state.state.MapModeStateHistory;
-          return {
-            lat: mapState.centerPoint.latitude,
-            lon: mapState.centerPoint.longitude,
-            zoom: mapState.level
-          };
-        }
-        return;
-      }
+      // TODO: it seems this no longer works because of https://developer.mozilla.org/en-US/docs/Mozilla/Tech/Xray_vision
+      //getValues: function () {
+      //  // Known bug:
+      //  // The URL doesn't change automatically. If the user enters into //www.bing.com/maps (without parameters) and
+      //  //   doesn't move the map around at least once, then this script won't be able to extract any information.
+      //  if (window.history && window.history.state && window.history.state.MapModeStateHistory && window.history.state.MapModeStateHistory.centerPoint) {
+      //    const mapState = window.history.state.state.MapModeStateHistory;
+      //    return {
+      //      lat: mapState.centerPoint.latitude,
+      //      lon: mapState.centerPoint.longitude,
+      //      zoom: mapState.level
+      //    };
+      //  }
+      //  return;
+      //}
     },
   },
 
