@@ -2,8 +2,8 @@ const path = require("path");
 
 module.exports = {
   entry: {
-    "injectable-content-script": "./lib/injectable-content-script.ts",
-    "panel/script": "./lib/panel/script.ts"
+    "injectable-content-script": "./src/injectable-content-script.ts",
+    "popup/script": "./src/popup/script.ts"
   },
   output: {
     path: path.resolve(__dirname, "addon"),

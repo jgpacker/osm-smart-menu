@@ -24,7 +24,7 @@
       "64": "icons/osm64x64.png"
     },
     "default_title": "__MSG_extensionName__",
-    "default_popup": "panel/popup.html"
+    "default_popup": "popup/index.html"
   },
 
   "manifest_version": 2
