@@ -1,29 +1,3 @@
-const naturalNumberRegExp = "[0-9]+";
-const decimalNumberRegExp = "[0-9.-]+";
-const positiveDecimalNumberRegExp = "[0-9.]+";
-
-export const InfoRegExp: Record<string, string> = {
-  //link: ".+",
-  nodeId: naturalNumberRegExp,
-  wayId: naturalNumberRegExp,
-  relationId: naturalNumberRegExp,
-  tracesId: naturalNumberRegExp,
-  userId: naturalNumberRegExp, // id bigint NOT NULL,
-  userName: "[^#?\/]+", // display_name character varying DEFAULT ''::character varying NOT NULL, https://github.com/openstreetmap/openstreetmap-website/blob/master/app/models/user.rb#L37-L46
-  changesetId: naturalNumberRegExp,
-  zoom: positiveDecimalNumberRegExp, //believe it or not, some websites accept a decimal zoom. TODO: verify if any site has a problem having a decimal zoom as a parameter
-  lat: decimalNumberRegExp,
-  lon: decimalNumberRegExp,
-  key: "[^#?\/=]+",
-  value: "[^#?\/]+"
-};
-//TODO: should I add support for route information? (start, intermediary and end points, and maybe transport mode)
-
-export type Extractors = {
-  getPermalink?: (document: Document) => string | undefined;
-  getValues?: () => Record<string, string> | undefined;
-};
-
 export type SiteConfiguration = {
   link: string;
   paramOpts: ParamOpt[];
@@ -33,24 +7,23 @@ export type SiteConfiguration = {
 
 export type ParamOpt = {
   ordered: string;
-  unordered?: {
-    zoom?: string;
-    lat?: string;
-    lon?: string;
-    changesetId?: string;
-    wayId?: string;
-    nodeId?: string;
-    relationId?: string;
-  };
+  unordered?: Partial<Record<OsmAttribute, string>>;
 }
+
+export type Extractors = {
+  getPermalink?: (document: Document) => string | undefined;
+  getAttributesFromPage?: (window: Window) => Partial<Record<OsmAttribute, string>>;
+};
+
+export type OsmAttribute =
+  | "nodeId" | "wayId" | "relationId"
+  | "userId" | "userName" | "changesetId"
+  | "zoom" | "lat" | "lon"
+  | "tracesId" | "key" | "value"
+  ;
 
 const urlPattern1: ParamOpt = { ordered: "/", unordered: { zoom: "zoom", lat: "lat", lon: "lon" } };
 
-//TODO:
-// * document it in a schema
-// * allow customization by the user
-// * become language-aware (knowing which languages are supported by these sites)
-// for now, verifying an https alternative is out of scope
 export const Sites: Record<string, SiteConfiguration> = {
   openstreetmap: {
     link: "openstreetmap.org",
@@ -79,21 +52,27 @@ export const Sites: Record<string, SiteConfiguration> = {
       { ordered: "/maps?cp={lat}~{lon}&lvl={zoom}" }
     ],
     extractors: {
-      // TODO: it seems this no longer works because of https://developer.mozilla.org/en-US/docs/Mozilla/Tech/Xray_vision
-      //getValues: function () {
-      //  // Known bug:
-      //  // The URL doesn't change automatically. If the user enters into //www.bing.com/maps (without parameters) and
-      //  //   doesn't move the map around at least once, then this script won't be able to extract any information.
-      //  if (window.history && window.history.state && window.history.state.MapModeStateHistory && window.history.state.MapModeStateHistory.centerPoint) {
-      //    const mapState = window.history.state.state.MapModeStateHistory;
-      //    return {
-      //      lat: mapState.centerPoint.latitude,
-      //      lon: mapState.centerPoint.longitude,
-      //      zoom: mapState.level
-      //    };
-      //  }
-      //  return;
-      //}
+      getAttributesFromPage: (window: Window) => {
+        // Known bug:
+        // If the user enters into bing.com/maps (i.e. without parameters) and doesn't move the
+        //    map around at least once, this script won't be able to extract any information.
+        if (window.history && window.history.state && window.history.state) {
+          // wrappedJSObject is a security feature from Firefox
+          const whs = window.history.state.wrappedJSObject || window.history.state;
+          if (whs && whs.state && whs.state.MapModeStateHistory) {
+            const m = whs.state.MapModeStateHistory;
+            if (m.level && typeof m.level === "number" && m.centerPoint && m.centerPoint.latitude && m.centerPoint.longitude
+              && typeof m.centerPoint.latitude === "number" && typeof m.centerPoint.longitude === "number") {
+              return {
+                lat: m.centerPoint.latitude.toString(),
+                lon: m.centerPoint.longitude.toString(),
+                zoom: m.level.toString(),
+              };
+            }
+          }
+        }
+        return {};
+      }
     },
   },
 
@@ -105,15 +84,15 @@ export const Sites: Record<string, SiteConfiguration> = {
     ]
   },
 
-/* TODO: change to https://maps.openrouteservice.org/directions?n1=49.409445&n2=8.692953&n3=13&b=0&k1=en-US&k2=km
-  openmapsurfer: {
-    link: "korona.geog.uni-heidelberg.de",
-    paramOpts: [urlPattern1],
-    extractors: {
-      getPermalink: openLayers_getPermalink()
-    }
-  },
-*/
+  /* TODO: change to https://maps.openrouteservice.org/directions?n1=49.409445&n2=8.692953&n3=13&b=0&k1=en-US&k2=km
+    openmapsurfer: {
+      link: "korona.geog.uni-heidelberg.de",
+      paramOpts: [urlPattern1],
+      extractors: {
+        getPermalink: openLayers_getPermalink()
+      }
+    },
+  */
 
   opencyclemap: {
     link: "www.opencyclemap.org",
@@ -340,11 +319,17 @@ export const Sites: Record<string, SiteConfiguration> = {
     ]
   },
 
-  neistools: {
+  osmchangeviz: {
     link: "resultmaps.neis-one.org",
     paramOpts: [
       { ordered: "/osm-change-viz?c={changesetId}" },
       { ordered: "/osm-change-viz.php?c={changesetId}" },
+    ]
+  },
+
+  osmchangetiles: {
+    link: "resultmaps.neis-one.org",
+    paramOpts: [
       { ordered: "/osm-change-tiles#{zoom}/{lat}/{lon}" },
       { ordered: "/osm-change-tiles.php#{zoom}/{lat}/{lon}" }
     ]
@@ -403,3 +388,23 @@ function openLayers_getPermalink() {
 //     return permalinkAnchor && permalinkAnchor.href;
 //   }
 // }
+
+const naturalNumberRegExp = "[0-9]+";
+const decimalNumberRegExp = "[0-9.-]+";
+const positiveDecimalNumberRegExp = "[0-9.]+";
+
+export const InfoRegExp: Record<string, string> = {
+  nodeId: naturalNumberRegExp,
+  wayId: naturalNumberRegExp,
+  relationId: naturalNumberRegExp,
+  tracesId: naturalNumberRegExp,
+  userId: naturalNumberRegExp,
+  userName: "[^#?\/]+", // any character except URL separator characters
+  changesetId: naturalNumberRegExp,
+  zoom: positiveDecimalNumberRegExp, //believe it or not, some websites accept a decimal zoom. TODO: verify if any site has a problem having a decimal zoom as a parameter
+  lat: decimalNumberRegExp,
+  lon: decimalNumberRegExp,
+  key: "[^#?\/=]+",
+  value: "[^#?\/]+",
+};
+//TODO: should I add support for route information? (start, intermediary and end points, and maybe transport mode)

@@ -1,27 +1,29 @@
 import { browser } from 'webextension-polyfill-ts';
-import { Sites } from './sites-configuration';
+import { Sites, OsmAttribute } from './sites-configuration';
 
-export type ExtractedData = {
+browser.runtime.onMessage.addListener(async (message: ContentScriptInputMessage): Promise<ContentScriptOutputMessage> =>
+  message.candidateSiteIds.map(extractData)
+);
+
+export type ContentScriptOutputMessage = ExtractedData[]
+
+export type ContentScriptInputMessage = {
+  candidateSiteIds: string[];
+}
+
+type ExtractedData = {
+  siteId: string;
   permalink?: string;
-  additionalValues?: Record<string, string>;
+  additionalAttributes?: Partial<Record<OsmAttribute, string>>;
 }
 
 function extractData(siteId: string): ExtractedData {
-  const currentSiteExtractors = Sites[siteId] && Sites[siteId].extractors;
-  if (currentSiteExtractors) {
-    const permalink = currentSiteExtractors.getPermalink && currentSiteExtractors.getPermalink(document);
-    const additionalValues = currentSiteExtractors.getValues && currentSiteExtractors.getValues();
-    return { permalink, additionalValues };
+  const extr = Sites[siteId] && Sites[siteId].extractors;
+  if (extr) {
+    const permalink = extr.getPermalink && extr.getPermalink(document);
+    const additionalAttributes = extr.getAttributesFromPage && extr.getAttributesFromPage(window);
+    return { siteId, permalink, additionalAttributes };
   } else {
-    return {};
+    return { siteId };
   }
 }
-
-(function () {
-  browser.runtime.onMessage.addListener(async function (message: { id: string }, _sender) {
-    console.debug("injected content script received request: " + JSON.stringify(message));
-
-    const siteId = message.id;
-    return extractData(siteId);
-  });
-})();

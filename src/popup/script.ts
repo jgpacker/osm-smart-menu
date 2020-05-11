@@ -1,50 +1,79 @@
 import { browser } from 'webextension-polyfill-ts'
 import { Sites, SiteConfiguration, InfoRegExp, ParamOpt } from '../sites-configuration'
-import { ExtractedData } from '../injectable-content-script';
-
-initializePopupWithLoadingMessage(document);
+import { ContentScriptOutputMessage, ContentScriptInputMessage } from '../injectable-content-script';
 
 (async function () {
+  initializePopupWithLoadingMessage(document);
+
   //const defaultZoom = 12; TODO: it may complement cases where only lat and lon are given (e.g. markers)
   const tabs = await browser.tabs.query({ active: true, currentWindow: true });
   const currentTab = tabs[0];
-
-  const currentSiteId = detectSite(currentTab.url!, Sites);
-  if (currentSiteId != null) {
-    console.debug("Current site detected to be " + currentSiteId);
-  } else {
+  if (!currentTab || !currentTab.url || !currentTab.id) {
+    console.debug('ERROR: Could not find a tab or did not have permission to access it.')
+    return;
+  }
+  
+  const candidateSiteIds = detectSiteCandidates(currentTab.url, Sites);
+  if (candidateSiteIds.length === 0) {
     // TODO: even if it is unknown, try to extract some information from site with some generic guesses
-    console.debug("Current site is not known");
+    console.debug("ERROR: Current site is not known");
+    return;
   }
 
-  await browser.tabs.executeScript(currentTab.id, {
-    file: "/injectable-content-script.js"
-  });
+  let contentScriptResult = await getDataFromContentScript(currentTab.id, candidateSiteIds);
 
-  const result = ((await browser.tabs.sendMessage(currentTab.id!, { id: currentSiteId })) || {}) as ExtractedData;
-  console.debug("result from injected content script: " + JSON.stringify(result));
+  const currentSite = contentScriptResult && pickWinningCandidate(contentScriptResult, currentTab.url);
+  if (!currentSite) {
+    console.debug("ERROR: Could not find a match for current site candidates");
+    return;
+  }
 
-  const currentUrl = result.permalink || currentTab.url;
-  const retrievedValues = Object.assign(
-    extractValuesFromUrl(currentUrl!, Sites[currentSiteId!]),
-    result.additionalValues || {}
-  );
-  console.debug("retrievedValues are " + JSON.stringify(retrievedValues));
-
-  // TODO: pre-process whatever you can
-  const sitesList = getRelevantSites(currentSiteId!, retrievedValues);
+  const sitesList = getRelevantSites(currentSite.siteId, currentSite.attributes);
 
   replacePopupContent(document, sitesList);
+
+  document.addEventListener("click", function (event: Event) {
+    // @ts-ignore
+    if (event.target.nodeName === "A") {
+      const a = event.target as HTMLAnchorElement;
+      browser.tabs.create({ url: a.href });
+      event.preventDefault();
+    }
+  });
 })();
 
-document.addEventListener("click", function (event: Event) {
-  // @ts-ignore
-  if (event.target.nodeName == "A") {
-    const a = event.target as HTMLAnchorElement;
-    browser.tabs.create({ url: a.href });
-    event.preventDefault();
+function pickWinningCandidate(results: ContentScriptOutputMessage, currentTabUrl: string)
+: { siteId: string, attributes: Record<string, string> } | undefined {
+  if (results.length === 0) {
+    return undefined;
   }
-});
+  const [head, ...tail] = results;
+  const url = head.permalink || currentTabUrl;
+  const extractedAttributes = extractAttributesFromUrl(url, Sites[head.siteId]);
+  const allExtractedAttributes = Object.assign(extractedAttributes, head.additionalAttributes);
+
+  if (Object.values(allExtractedAttributes).length === 0) {
+    return pickWinningCandidate(tail, currentTabUrl);
+  } else {
+    return {
+      siteId: head.siteId,
+      attributes: allExtractedAttributes,
+    };
+  }
+}
+
+
+async function getDataFromContentScript(tabId: number, candidateSiteIds: string[]): Promise<ContentScriptOutputMessage | undefined> {
+  try {
+    await browser.tabs.executeScript(tabId, { file: "/injectable-content-script.js" });
+
+    const message: ContentScriptInputMessage = { candidateSiteIds };
+    return (await browser.tabs.sendMessage(tabId, message)) as ContentScriptOutputMessage;
+  } catch (e) {
+    logUnexpectedError(e);
+    return;
+  }
+}
 
 function replacePopupContent(document: Document, sitesList: SelectedSite[]) {
   const div = document.createElement('div');
@@ -92,37 +121,37 @@ type SelectedSite = {
   url: string;
 }
 
-function detectSite(url: string, sitesList: Record<string, SiteConfiguration>) {
+function detectSiteCandidates(url: string, sitesList: Record<string, SiteConfiguration>): string[] {
   const hostname = (new URL(url).hostname).replace("www.", "") // maybe add www in config
-  return Object.keys(sitesList).find(id => sitesList[id].link.includes(hostname));
+  return Object.keys(sitesList).filter(id => sitesList[id].link.includes(hostname));
 }
 
-function getRelevantSites(currentSiteId: string, retrievedValues: Record<string, string>): SelectedSite[] {
-  return Object.keys(Sites).map(function (siteId) {
-    const chosenOption = Sites[siteId].paramOpts.find(function (paramOpt) {
+function getRelevantSites(currentSiteId: string, retrievedAttributes: Record<string, string>): SelectedSite[] {
+  return Object.entries(Sites).map(function ([siteId, site]) {
+    const chosenOption = site.paramOpts.find(function (paramOpt) {
       const [orderedParameters, unorderedParameters] = extractParametersFromParamOpt(paramOpt);
       const necessaryParameters = orderedParameters.concat(unorderedParameters);
-      return necessaryParameters.every(param => retrievedValues[param] != null);
+      return necessaryParameters.every(param => retrievedAttributes[param] !== undefined);
     });
 
     let url = "/";
-    if (chosenOption != null) {
-      url = applyParametersToUrl(chosenOption, retrievedValues)
+    if (chosenOption) {
+      url = applyParametersToUrl(chosenOption, retrievedAttributes)
     }
 
-    const protocol = Sites[siteId].httpOnly ? 'http': 'https';
+    const protocol = site.httpOnly ? 'http': 'https';
 
     return {
       id: siteId,
-      active: chosenOption != null,
+      active: Boolean(chosenOption),
       url: `${protocol}://${Sites[siteId].link}${url}`,
     };
-  }).filter(s => s.id != currentSiteId);
+  }).filter(s => s.id !== currentSiteId);
 }
 
-function extractValuesFromUrl(url: string, siteConfig: SiteConfiguration) {
+function extractAttributesFromUrl(url: string, siteConfig: SiteConfiguration) {
   for (let i = 0; i < siteConfig.paramOpts.length; i++) {
-    let extractedValues: Record<string, string> = {};
+    let extractedAttributes: Record<string, string> = {};
     let [orderedParameters] = extractParametersFromParamOpt(siteConfig.paramOpts[i]);
 
     let partialUrl = siteConfig.paramOpts[i].ordered;
@@ -147,18 +176,18 @@ function extractValuesFromUrl(url: string, siteConfig: SiteConfiguration) {
           return false;
         } else {
           console.debug("extracted values " + JSON.stringify(unorderedMatch) + " to unordered parameter " + key);
-          extractedValues[key] = unorderedMatch[1];
+          extractedAttributes[key] = unorderedMatch[1];
           return true;
         }
       })
       if (matchesUnordered) {
         orderedParameters.forEach(function (orderedParameter, index) {
           console.debug("ordered parameter " + orderedParameter + " got value " + orderedMatch[index + 1]);
-          extractedValues[orderedParameter] = orderedMatch[index + 1];
+          extractedAttributes[orderedParameter] = orderedMatch[index + 1];
         });
-        return extractedValues;
+        return extractedAttributes;
       } else {
-        extractedValues = {};
+        extractedAttributes = {};
       }
     }
   }
@@ -186,22 +215,31 @@ function extractParametersFromParamOpt(paramOpt: ParamOpt) {
 }
 
 /* gets an "interpolable" string and applies the parameters from an object into it, returning a new string */
-function applyParametersToUrl(option: ParamOpt, retrievedValues: Record<string, string>): string {
+function applyParametersToUrl(option: ParamOpt, retrievedAttributes: Record<string, string>): string {
   let url = option.ordered;
-  const encodedValues: Record<string, string> = {};
+  const encodedAttributes: Record<string, string> = {};
   
-  Object.keys(retrievedValues).forEach(function (key) {
-    encodedValues[key] = encodeURIComponent(retrievedValues[key]);
-    url = url.replace('{' + key + '}', encodedValues[key]);
+  Object.keys(retrievedAttributes).forEach(function (key) {
+    encodedAttributes[key] = encodeURIComponent(retrievedAttributes[key]);
+    url = url.replace('{' + key + '}', encodedAttributes[key]);
   });
 
   if (option.unordered) {
     const urlQueryParameters =
       Object.entries(option.unordered).map(function ([key, value]) {
-        return value + '=' + encodedValues[key];
+        return value + '=' + encodedAttributes[key];
       });
     url += '?' + urlQueryParameters.join('&'); // TODO: be mindful of whether there is an '?' or '#' already
   }
 
   return url;
+}
+
+function logUnexpectedError(e: any): void {
+  const errorPrefix = 'OSM WebExtension ERROR';
+  if(e instanceof Error) {
+    console.debug(errorPrefix, e.message, e.stack);
+  } else {
+    console.debug(errorPrefix, JSON.stringify(e));
+  }
 }

@@ -111,8 +111,11 @@
   "site_taginfo": {
     "message": "Taginfo"
   },
-  "site_neistools": {
-    "message": "Neis Visualization Tools"
+  "site_osmchangeviz": {
+    "message": "Changeset by Comparison (Neis)"
+  },
+  "site_osmchangetiles": {
+    "message": "Latest OSM Edits (Neis)"
   },
   "site_osmcha": {
     "message": "OSMCha"
