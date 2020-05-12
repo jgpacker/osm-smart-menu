@@ -3,6 +3,15 @@ import { Sites, SiteConfiguration, InfoRegExp, ParamOpt } from '../sites-configu
 import { ContentScriptOutputMessage, ContentScriptInputMessage } from '../injectable-content-script';
 
 (async function () {
+  document.addEventListener("click", function (event: Event) {
+    // @ts-ignore
+    if (event.target.nodeName === "A") {
+      const a = event.target as HTMLAnchorElement;
+      browser.tabs.create({ url: a.href });
+      event.preventDefault();
+    }
+  });
+
   initializePopupWithLoadingMessage(document);
 
   //const defaultZoom = 12; TODO: it may complement cases where only lat and lon are given (e.g. markers)
@@ -31,15 +40,6 @@ import { ContentScriptOutputMessage, ContentScriptInputMessage } from '../inject
   const sitesList = getRelevantSites(currentSite.siteId, currentSite.attributes);
 
   replacePopupContent(document, sitesList);
-
-  document.addEventListener("click", function (event: Event) {
-    // @ts-ignore
-    if (event.target.nodeName === "A") {
-      const a = event.target as HTMLAnchorElement;
-      browser.tabs.create({ url: a.href });
-      event.preventDefault();
-    }
-  });
 })();
 
 function pickWinningCandidate(results: ContentScriptOutputMessage, currentTabUrl: string)
