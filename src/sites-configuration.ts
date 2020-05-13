@@ -388,23 +388,3 @@ function openLayers_getPermalink() {
 //     return permalinkAnchor && permalinkAnchor.href;
 //   }
 // }
-
-const naturalNumberRegExp = "[0-9]+";
-const decimalNumberRegExp = "[0-9.-]+";
-const positiveDecimalNumberRegExp = "[0-9.]+";
-
-export const InfoRegExp: Record<string, string> = {
-  nodeId: naturalNumberRegExp,
-  wayId: naturalNumberRegExp,
-  relationId: naturalNumberRegExp,
-  tracesId: naturalNumberRegExp,
-  userId: naturalNumberRegExp,
-  userName: "[^#?\/]+", // any character except URL separator characters
-  changesetId: naturalNumberRegExp,
-  zoom: positiveDecimalNumberRegExp, //believe it or not, some websites accept a decimal zoom. TODO: verify if any site has a problem having a decimal zoom as a parameter
-  lat: decimalNumberRegExp,
-  lon: decimalNumberRegExp,
-  key: "[^#?\/=]+",
-  value: "[^#?\/]+",
-};
-//TODO: should I add support for route information? (start, intermediary and end points, and maybe transport mode)
