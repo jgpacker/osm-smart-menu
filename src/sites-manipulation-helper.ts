@@ -24,6 +24,7 @@ const InfoRegExp: Record<string, string> = {
 
 export function detectSiteCandidates(url: string, sitesList: Record<string, SiteConfiguration>): string[] {
   const hostname = (new URL(url).hostname).replace("www.", "") // maybe add www in config
+  if (!hostname) return [];
   return Object.keys(sitesList).filter(id => sitesList[id].link.includes(hostname));
 }
 

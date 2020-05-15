@@ -14,8 +14,33 @@
     "description": "Shown in popup shortly before menu appears"
   },
   "loading_secondLine": {
-    "message": "If this does not stop loading, go to the website $1 and try again.",
-    "description": "Shown in popup shortly before menu appears. Leave `$1` untranslated"
+    "message": "If this does not stop loading, reload the page and try again.",
+    "description": "Shown in popup shortly before menu appears."
+  },
+
+  "error_noAccess": {
+    "message": "ERROR: Could not find page or did not have permission to access it.",
+    "description": "Error shown when the current page cannot be accessed (technical exception)"
+  },
+  "error_unknownWebsite": {
+    "message": "ERROR: Current site was not recognized. If you believe it should have been recognized, you can request this in $EXTENSION_SITE$.",
+    "description": "Error shown when current page is not recognized",
+    "placeholders": {
+      "EXTENSION_SITE": {
+        "content": "$1",
+        "example": "https://github.com/jgpacker/osm-smart-menu/"
+      }
+    }
+  },
+  "error_noInformationExtracted": {
+    "message": "ERROR: The website was recognized, but it's parameters were not understood. If you believe this is a bug, please report it in $EXTENSION_SITE$.",
+    "description": "Error shown when no parameters were found in the current page",
+    "placeholders": {
+      "EXTENSION_SITE": {
+        "content": "$1",
+        "example": "https://github.com/jgpacker/osm-smart-menu/"
+      }
+    }
   },
 
   "site_openstreetmap": {

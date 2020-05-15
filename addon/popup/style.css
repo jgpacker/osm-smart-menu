@@ -4,13 +4,11 @@ html, body {
   font-size: 15px;
 }
 
-#loading {
+#loading, #error {
   text-align: center;
   padding: 4px;
-}
-
-#loading::first-line {
-  font-weight: bold;
+  min-width: 150px; /* Chrome adjustment */
+  max-width: 600px; /* Desktop Firefox adjustment */
 }
 
 .site {
