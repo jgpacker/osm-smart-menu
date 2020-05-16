@@ -38,22 +38,19 @@ export enum KnownError {
 export function getErrorMessage(d: Document, error: KnownError): HTMLElement {
   const div = d.createElement('div');
   div.id = 'error';
-  if (error === KnownError.UNKNOWN_WEBSITE || error === KnownError.NO_INFORMATION_EXTRACTED) {
-    const linkPlaceholder = '__LINK__';
-    const text = browser.i18n.getMessage(`error_${error}`, linkPlaceholder);
-    insertLinkInsideText(d, text, linkPlaceholder, 'https://github.com/jgpacker/osm-smart-menu/').forEach(
-      (x) => div.append(x)
-    )
-  } else {
-    div.append(browser.i18n.getMessage(`error_${error}`,));
-  }
+  const linkPlaceholder = '__LINK__';
+  const text = browser.i18n.getMessage(`error_${error}`, linkPlaceholder);
+  const linkText = 'github.com/jgpacker/osm-smart-menu/';
+  insertLinkInsideText(d, text, linkPlaceholder, `https://${linkText}blob/master/README.md`, linkText).forEach(
+    (x) => div.append(x)
+  )
   return div;
 }
 
-function insertLinkInsideText(d: Document, text: string, linkPlaceholder: string, link: string): (string | HTMLElement)[] {
+function insertLinkInsideText(d: Document, text: string, linkPlaceholder: string, link: string, linkText: string): (string | HTMLElement)[] {
   const [firstHalf, secondHalf] = text.split(linkPlaceholder);
   const anchor = d.createElement('a');
   anchor.href = link;
-  anchor.textContent = anchor.href;
+  anchor.textContent = linkText;
   return [firstHalf, anchor, secondHalf];
 }

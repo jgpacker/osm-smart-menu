@@ -15,7 +15,21 @@
     "message": "Carregando..."
   },
   "loading_secondLine": {
-    "message": "Se não parar de carregar, vá para o site $1 e tente novamente."
+    "message": "Se não parar de carregar, recarregue a página e tente novamente."
+  },
+
+
+  "error_noAccess": {
+    "message": "ERRO: Não foi possível encontrar ou acessar a página atual. Se isto for inesperado, por favor relate isto em $EXTENSION_SITE$.",
+    "placeholders": { "EXTENSION_SITE": { "content": "$1" } }
+  },
+  "error_unknownWebsite": {
+    "message": "ERRO: O site atual não foi reconhecido como compatível com OpenStreetMap. Se isto for inesperado, você pode relatar isto em $EXTENSION_SITE$.",
+    "placeholders": { "EXTENSION_SITE": { "content": "$1" } }
+  },
+  "error_noInformationExtracted": {
+    "message": "ERRO: O site foi reconhecido, mas seus parâmetros não foram. Se você acredita que isto é um bug, por favor relate em $EXTENSION_SITE$.",
+    "placeholders": { "EXTENSION_SITE": { "content": "$1" } }
   },
 
   "site_historicmap": {
@@ -23,5 +37,14 @@
   },
   "site_osmwiki": {
     "message": "Wiki OpenStreetMap"
+  },
+  "site_howdidyoucontribute": {
+    "message": "Como você contribuiu no OSM?"
+  },
+  "site_osmchangeviz": {
+    "message": "Comparação de alterações (Neis)"
+  },
+  "site_osmchangetiles": {
+    "message": "Últimas Edições OSM (Neis)"
   }
 }
