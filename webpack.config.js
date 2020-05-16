@@ -1,6 +1,9 @@
 const path = require("path");
 
 module.exports = {
+  optimization: {
+    minimize: false, // ease code review by webextension stores
+  },
   entry: {
     "injectable-content-script": "./src/injectable-content-script.ts",
     "popup/script": "./src/popup/script.ts"
@@ -20,5 +23,5 @@ module.exports = {
   },
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
-  }
+  },
 };
