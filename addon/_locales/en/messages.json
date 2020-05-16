@@ -6,7 +6,7 @@
     "message": "OSMenu"
   },
   "extensionDescription": {
-    "message": "Jumps from an OpenStreetMap-compatible website to another one, preserving some contextual information."
+    "message": "Helps OpenStreetMap contributors to easily switch between different maps and analysis tools from the community."
   },
   
   "loading_firstLine": {
