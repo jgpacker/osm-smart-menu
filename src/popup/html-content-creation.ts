@@ -4,16 +4,17 @@ import { SelectedSite } from "../sites-manipulation-helper";
 export function createOptionsList(d: Document, sitesList: SelectedSite[]): HTMLElement {
   const div = d.createElement('div');
 
-  sitesList.forEach(function (site) {
-    const anchor = d.createElement('a');
-    anchor.id = site.id;
-    anchor.href = site.url;
-    anchor.textContent = browser.i18n.getMessage(`site_${site.id}`);
-    const additionalClass = site.active? '': 'disabled';
-    anchor.className = `site ${additionalClass}`;
+  sitesList
+    .filter((site) => site.active)
+    .forEach(function (site) {
+      const anchor = d.createElement('a');
+      anchor.id = site.id;
+      anchor.href = site.url;
+      anchor.textContent = browser.i18n.getMessage(`site_${site.id}`);
+      anchor.className = 'site';
 
-    div.appendChild(anchor);
-  });
+      div.appendChild(anchor);
+    });
 
   return div;
 }
