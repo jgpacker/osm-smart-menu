@@ -24,3 +24,4 @@ See [Chrome's documentation](https://developer.chrome.com/extensions/i18n#overvi
 
 Some websites' names should be left untranslated, preserving the original name.
 
+After that's done, you can also translate `addon/_locales/en/long_description.html`. This file's content is used in extension websites.
