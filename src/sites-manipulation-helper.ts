@@ -62,9 +62,13 @@ export function getRelevantSites(currentSiteId: string, retrievedAttributes: Rec
       return necessaryParameters.every(param => retrievedAttributes[param] !== undefined);
     });
 
+    let attributes = retrievedAttributes;
+    if (retrievedAttributes.zoom) {
+      attributes = {...retrievedAttributes, zoom: reviewZoom(siteId, retrievedAttributes.zoom)}
+    }
     let url = "/";
     if (chosenOption) {
-      url = applyParametersToUrl(chosenOption, retrievedAttributes)
+      url = applyParametersToUrl(chosenOption, attributes)
     }
 
     const protocol = site.httpOnly ? 'http': 'https';
@@ -156,4 +160,13 @@ function applyParametersToUrl(option: ParamOpt, retrievedAttributes: Record<stri
   }
 
   return url;
+}
+
+function reviewZoom(siteId: string, zoom: string): string {
+  const maxZoom = Sites[siteId] && Sites[siteId].maxZoom;
+  if (maxZoom) {
+    return Math.min(Number(zoom), maxZoom).toString()
+  } else {
+    return zoom;
+  }
 }

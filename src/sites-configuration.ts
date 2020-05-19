@@ -3,6 +3,9 @@ export type SiteConfiguration = {
   paramOpts: ParamOpt[];
   extractors?: Extractors;
   httpOnly?: boolean;
+  // it's only necessary to specify `maxZoom` if the website
+  // doesn't handle gracefully a `zoom` parameter above their range
+  maxZoom?: number;
 }
 
 export type ParamOpt = {
@@ -97,6 +100,7 @@ export const Sites: Record<string, SiteConfiguration> = {
   opencyclemap: {
     link: "www.opencyclemap.org",
     paramOpts: [urlPattern1],
+    maxZoom: 18,
     extractors: {
       getPermalink: getPermalinkBySelector("a#permalink")
     },
@@ -105,6 +109,7 @@ export const Sites: Record<string, SiteConfiguration> = {
   openseamap: {
     link: "map.openseamap.org",
     paramOpts: [urlPattern1],
+    maxZoom: 18,
     extractors: {
       getPermalink: openLayers_getPermalink()
     },
@@ -113,6 +118,7 @@ export const Sites: Record<string, SiteConfiguration> = {
   opensnowmap: {
     link: "www.opensnowmap.org",
     paramOpts: [urlPattern1],
+    maxZoom: 18,
     extractors: {
       getPermalink: getPermalinkBySelector("a#permalink")
     },
@@ -121,6 +127,7 @@ export const Sites: Record<string, SiteConfiguration> = {
   historicmap: {
     link: "gk.historic.place/historische_objekte",
     paramOpts: [urlPattern1],
+    maxZoom: 19,
     extractors: {
       getPermalink: getPermalinkBySelector("a#permalink")
     },
@@ -130,16 +137,20 @@ export const Sites: Record<string, SiteConfiguration> = {
     link: "www.openptmap.org",
     httpOnly: true,
     paramOpts: [urlPattern1],
+    maxZoom: 17,
     extractors: {
       getPermalink: openLayers_getPermalink()
     },
   },
 
   opnvkarte: {
-    link: "www.öpnvkarte.de",
-    paramOpts: [urlPattern1],
+    link: "xn--pnvkarte-m4a.de",
+    paramOpts: [
+      { ordered: "/#{lon};{lat};{zoom}" },
+      urlPattern1,
+    ],
     extractors: {
-      getPermalink: openLayers_getPermalink()
+      getPermalink: getPermalinkBySelector("a#editLink"),
     },
   },
 
@@ -147,9 +158,9 @@ export const Sites: Record<string, SiteConfiguration> = {
     link: "maps.stamen.com",
     httpOnly: true,
     paramOpts: [
-      { ordered: "/#terrain/{zoom}/{lat}/{lon}" }, // wasn't able to find a generic URL, so this one was arbitrarily chosen as the first
+      { ordered: "/#toner/{zoom}/{lat}/{lon}" }, // Did not find a generic URL (without choosing theme). This theme was chosen because it seems to have the highest zoom capacity
+      { ordered: "/#terrain/{zoom}/{lat}/{lon}" },
       { ordered: "/#watercolor/{zoom}/{lat}/{lon}" },
-      { ordered: "/#toner/{zoom}/{lat}/{lon}" },
     ]
   },
 
@@ -289,6 +300,7 @@ export const Sites: Record<string, SiteConfiguration> = {
   osminspector: {
     link: "tools.geofabrik.de/osmi",
     paramOpts: [urlPattern1],
+    maxZoom: 18,
     extractors: {
       getPermalink: getPermalinkBySelector("a#permalink")
     },
