@@ -133,6 +133,14 @@ export const Sites: Record<string, SiteConfiguration> = {
     },
   },
 
+  openstreetbrowser: {
+    link: "openstreetbrowser.org",
+    maxZoom: 20,
+    paramOpts: [
+      { ordered: "/#map={zoom}/{lat}/{lon}" },
+    ],
+  },
+
   openptmap: {
     link: "www.openptmap.org",
     httpOnly: true,
@@ -262,6 +270,29 @@ export const Sites: Record<string, SiteConfiguration> = {
     extractors: {
       getPermalink: openLayers_getPermalink(),
       //TODO: getValues - we can get userName if it's a changeset analysis and maybe map coordinates on both cases
+    },
+  },
+
+  waze: { // TODO: this website has unique zoom levels, so it might need workarounds
+    link: "www.waze.com",
+    paramOpts: [
+      { ordered: "/livemap/directions?latlng={lat}%2C{lon}" },
+      { ordered: "/en/livemap/directions?latlng={lat}%2C{lon}" },
+      { ordered: "/editor", unordered: { lat: "lat", lon: "lon", /* zoom: "zoom", not compatible with other websites zoom levels */ } },
+    ],
+    extractors: {
+      getPermalink: getPermalinkBySelector("a#permalink"),
+      getAttributesFromPage: (window: Window): Partial<Record<OsmAttribute, string>> => {
+        const latLngElement = window.document.querySelector('.wm-attribution-control__latlng');
+        if (latLngElement) {
+          const latLngText = latLngElement.textContent;
+          if (latLngText) {
+            const [lat, lon] = latLngText.split(" | ");
+            if (lat && lon) return { lat, lon };
+          }
+        };
+        return {};
+      },
     },
   },
 

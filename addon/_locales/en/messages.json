@@ -148,6 +148,12 @@
   "site_osmchangetiles": {
     "message": "Latest OSM Edits (Neis)"
   },
+  "site_waze": {
+    "message": "Waze"
+  },
+  "site_openstreetbrowser": {
+    "message": "OpenStreetBrowser"
+  },
   "site_osmcha": {
     "message": "OSMCha"
   }
