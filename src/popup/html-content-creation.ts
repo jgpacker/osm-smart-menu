@@ -1,12 +1,10 @@
 import { browser } from "webextension-polyfill-ts";
-import { SelectedSite } from "../sites-manipulation-helper";
+import { SelectedSite } from "./sites-manipulation-helper";
 
 export function createOptionsList(d: Document, sitesList: SelectedSite[]): HTMLElement {
   const div = d.createElement('div');
 
-  sitesList
-    .filter((site) => site.active)
-    .forEach(function (site) {
+  sitesList.forEach(function (site) {
       const anchor = d.createElement('a');
       anchor.id = site.id;
       anchor.href = site.url;

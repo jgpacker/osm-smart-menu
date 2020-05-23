@@ -1,5 +1,6 @@
-import { Sites, SiteConfiguration, ParamOpt } from "./sites-configuration";
-import { ContentScriptOutputMessage } from "./injectable-content-script";
+import { Sites, SiteConfiguration, ParamOpt } from "../sites-configuration";
+import { ContentScriptOutputMessage } from "../injectable-content-script";
+import { getLocalConfig } from "../config-handler";
 
 const naturalNumberRegExp = "[0-9]+";
 const decimalNumberRegExp = "[0-9.-]+";
@@ -50,12 +51,13 @@ export function pickWinningCandidate(results: ContentScriptOutputMessage, curren
 
 export type SelectedSite = {
   id: string;
-  active: boolean;
   url: string;
 }
 
-export function getRelevantSites(currentSiteId: string, retrievedAttributes: Record<string, string>): SelectedSite[] {
-  return Object.entries(Sites).map(function ([siteId, site]) {
+export async function getRelevantSites(currentSiteId: string, retrievedAttributes: Record<string, string>): Promise<SelectedSite[]> {
+  return (await Promise.all(Object.entries(Sites).map(async function ([siteId, site]) {
+    if (siteId == currentSiteId) return undefined;
+
     const chosenOption = site.paramOpts.find(function (paramOpt) {
       const [orderedParameters, unorderedParameters] = extractParametersFromParamOpt(paramOpt);
       const necessaryParameters = orderedParameters.concat(unorderedParameters);
@@ -64,21 +66,23 @@ export function getRelevantSites(currentSiteId: string, retrievedAttributes: Rec
 
     let attributes = retrievedAttributes;
     if (retrievedAttributes.zoom) {
-      attributes = {...retrievedAttributes, zoom: reviewZoom(siteId, retrievedAttributes.zoom)}
-    }
-    let url = "/";
-    if (chosenOption) {
-      url = applyParametersToUrl(chosenOption, attributes)
+      attributes = {...retrievedAttributes, zoom: reviewZoom(site, retrievedAttributes.zoom)}
     }
 
-    const protocol = site.httpOnly ? 'http': 'https';
+    if (!chosenOption) {
+      return undefined;
+    } else {
+      const localConfig = await getLocalConfig(siteId);
+      if (!localConfig.isEnabled) return undefined;
 
-    return {
-      id: siteId,
-      active: Boolean(chosenOption),
-      url: `${protocol}://${Sites[siteId].link}${url}`,
-    };
-  }).filter(s => s.id !== currentSiteId);
+      const path = applyParametersToUrl(chosenOption, attributes);
+      const protocol = site.httpOnly ? 'http': 'https';
+      return {
+        id: siteId,
+        url: `${protocol}://${site.link}${path}`,
+      };
+    }
+  }))).filter((s): s is SelectedSite => Boolean(s));
 }
 
 function extractAttributesFromUrl(url: string, siteConfig: SiteConfiguration) {
@@ -162,8 +166,8 @@ function applyParametersToUrl(option: ParamOpt, retrievedAttributes: Record<stri
   return url;
 }
 
-function reviewZoom(siteId: string, zoom: string): string {
-  const maxZoom = Sites[siteId] && Sites[siteId].maxZoom;
+function reviewZoom(site: SiteConfiguration, zoom: string): string {
+  const maxZoom = site && site.maxZoom;
   if (maxZoom) {
     return Math.min(Number(zoom), maxZoom).toString()
   } else {

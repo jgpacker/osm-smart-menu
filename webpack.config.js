@@ -4,9 +4,11 @@ module.exports = {
   optimization: {
     minimize: false, // ease code review by webextension stores
   },
+  devtool: false, // related to optimization.minimize=false and https://bugzilla.mozilla.org/show_bug.cgi?id=1437937
   entry: {
     "injectable-content-script": "./src/injectable-content-script.ts",
-    "popup/script": "./src/popup/script.ts"
+    "options/script": "./src/options/main.ts",
+    "popup/script": "./src/popup/main.ts"
   },
   output: {
     path: path.resolve(__dirname, "addon"),

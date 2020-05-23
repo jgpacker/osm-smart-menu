@@ -2,7 +2,7 @@ import { browser } from 'webextension-polyfill-ts'
 import { Sites } from '../sites-configuration'
 import { ContentScriptOutputMessage, ContentScriptInputMessage } from '../injectable-content-script';
 import { getLoadingMessage, createOptionsList, getErrorMessage, KnownError } from './html-content-creation';
-import { detectSiteCandidates, pickWinningCandidate, getRelevantSites } from '../sites-manipulation-helper';
+import { detectSiteCandidates, pickWinningCandidate, getRelevantSites } from './sites-manipulation-helper';
 
 (async function () {
   document.addEventListener("click", openLink);
@@ -38,7 +38,7 @@ async function tryToExtractAndCreateOptions(document: Document): Promise<HTMLEle
     return getErrorMessage(document, KnownError.NO_INFORMATION_EXTRACTED);
   }
 
-  const sitesList = getRelevantSites(currentSite.siteId, currentSite.attributes);
+  const sitesList = await getRelevantSites(currentSite.siteId, currentSite.attributes);
 
   return createOptionsList(document, sitesList);
 }
@@ -56,10 +56,8 @@ async function getDataFromContentScript(tabId: number, candidateSiteIds: string[
 }
 
 function openLink(event: Event): void {
-  if (!event.target) return;
-  const target = event.target as HTMLElement;
-  if (target.nodeName === "A") {
-    browser.tabs.create({ url: (target as HTMLAnchorElement).href });
+  if (event.target instanceof HTMLAnchorElement) {
+    browser.tabs.create({ url: event.target.href });
     event.preventDefault();
   }
 } 
