@@ -384,6 +384,13 @@ export const Sites: Record<string, SiteConfiguration> = {
       { ordered: "/tags/{key}={value}" },
       { ordered: "/keys/{key}" }
     ]
+  },
+
+  osmbuildings: {
+    link: "osmbuildings.org",
+    paramOpts: [
+      { ordered: "/?lat={lat}&lon={lon}&zoom={zoom}" }, // &tilt=45&rotation=168
+    ]
   }
 };
 //http://brouter.de/brouter-web/#zoom=6&lat=50.99&lon=9.86&layer=OpenStreetMap
