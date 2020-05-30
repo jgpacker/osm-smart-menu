@@ -156,5 +156,8 @@
   },
   "site_osmcha": {
     "message": "OSMCha"
+  },
+  "site_osmbuildings": {
+    "message": "OSM Buildings"
   }
 }
