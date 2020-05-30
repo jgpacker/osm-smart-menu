@@ -389,7 +389,7 @@ export const Sites: Record<string, SiteConfiguration> = {
   osmbuildings: {
     link: "osmbuildings.org",
     paramOpts: [
-      { ordered: "/?lat={lat}&lon={lon}&zoom={zoom}" }, // &tilt=45&rotation=168
+      urlPattern1, //TODO: &tilt=45&rotation=168
     ]
   }
 };
