@@ -208,9 +208,23 @@ export const Sites: Record<string, SiteConfiguration> = {
   umap: {
     link: "umap.openstreetmap.fr",
     paramOpts: [
-      { ordered: "/#{zoom}/{lat}/{lon}" } // add {anything} and {lang} flags
-      //add http://umap.openstreetmap.fr/pt/map/testpk_1#13/48.2057/-4.0259
-    ]
+      { ordered: "/map/new/#{zoom}/{lat}/{lon}" },
+    ],
+    extractors: {
+      getAttributesFromPage: (window: Window) => {
+        const url = new URL(window.document.location.href);
+        if (url){
+          const matchArray = url.hash.match(/#([0-9.]+)\/([0-9.-]+)\/([0-9.-]+)/);
+          if (matchArray) {
+            const [, zoom, lat, lon] = matchArray;
+            if (typeof zoom === "string" && typeof lat === "string" && typeof lon === "string") {
+              return { zoom, lat, lon };
+            }
+          }
+        }
+        return {};
+      },
+    },
   },
 
   osmdeephistory: {
@@ -278,17 +292,22 @@ export const Sites: Record<string, SiteConfiguration> = {
     paramOpts: [
       { ordered: "/livemap/directions?latlng={lat}%2C{lon}" },
       { ordered: "/en/livemap/directions?latlng={lat}%2C{lon}" },
-      { ordered: "/editor", unordered: { lat: "lat", lon: "lon", /* zoom: "zoom", not compatible with other websites zoom levels */ } },
+      { ordered: "/editor", unordered: { lat: "lat", lon: "lon", /* zoom: "zoom", not compatible with OSM zoom levels */ } },
     ],
     extractors: {
       getPermalink: getPermalinkBySelector("a#permalink"),
       getAttributesFromPage: (window: Window): Partial<Record<OsmAttribute, string>> => {
         const latLngElement = window.document.querySelector('.wm-attribution-control__latlng');
         if (latLngElement) {
+          // works in "livemap" page i.e. https://www.waze.com/livemap/directions?latlng=52.514%2C13.429
           const latLngText = latLngElement.textContent;
           if (latLngText) {
             const [lat, lon] = latLngText.split(" | ");
-            if (lat && lon) return { lat, lon };
+            if (lat && lon) return {
+              lat,
+              lon,
+              zoom: '15', // zoom level when reloading page (approximately)
+            };
           }
         };
         return {};
