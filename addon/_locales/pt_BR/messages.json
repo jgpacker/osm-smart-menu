@@ -23,7 +23,7 @@
     "message": "ERRO: Não foi possível encontrar ou acessar a página atual. Se isto for inesperado, por favor relate isto em $EXTENSION_SITE$.",
     "placeholders": { "EXTENSION_SITE": { "content": "$1" } }
   },
-  "error_unknownWebsite": {
+  "error_incompatibleWebsite": {
     "message": "ERRO: O site atual não foi reconhecido como compatível com OpenStreetMap. Se isto for inesperado, você pode relatar isto em $EXTENSION_SITE$.",
     "placeholders": { "EXTENSION_SITE": { "content": "$1" } }
   },

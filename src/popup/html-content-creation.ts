@@ -1,7 +1,7 @@
 import { browser } from "webextension-polyfill-ts";
-import { SelectedSite } from "./sites-manipulation-helper";
+import { SiteLink } from "./sites-manipulation-helper";
 
-export function createOptionsList(d: Document, sitesList: SelectedSite[]): HTMLElement {
+export function createOptionsList(d: Document, sitesList: SiteLink[]): HTMLElement {
   const div = d.createElement('div');
 
   sitesList.forEach(function (site) {
@@ -30,7 +30,7 @@ export function getLoadingMessage(d: Document): HTMLElement {
 
 export enum KnownError {
   NO_ACCESS = 'noAccess',
-  UNKNOWN_WEBSITE = 'unknownWebsite',
+  INCOMPATIBLE_WEBSITE = 'incompatibleWebsite',
   NO_INFORMATION_EXTRACTED = 'noInformationExtracted',
 }
 

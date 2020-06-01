@@ -27,15 +27,15 @@ async function tryToExtractAndCreateOptions(document: Document): Promise<HTMLEle
   }
   
   const candidateSiteIds = detectSiteCandidates(currentTab.url, Sites);
-  if (candidateSiteIds.length === 0) {
-    // TODO: even if it is unknown, try to extract some information from site with some generic guesses
-    return getErrorMessage(document, KnownError.UNKNOWN_WEBSITE);
-  }
 
   const contentScriptResult = await getDataFromContentScript(currentTab.id, candidateSiteIds);
   const currentSite = contentScriptResult && pickWinningCandidate(contentScriptResult, currentTab.url);
   if (!currentSite) {
-    return getErrorMessage(document, KnownError.NO_INFORMATION_EXTRACTED);
+    if (candidateSiteIds.length === 0) {
+      return getErrorMessage(document, KnownError.INCOMPATIBLE_WEBSITE);
+    } else {
+      return getErrorMessage(document, KnownError.NO_INFORMATION_EXTRACTED);
+    }
   }
 
   const sitesList = await getRelevantSites(currentSite.siteId, currentSite.attributes);

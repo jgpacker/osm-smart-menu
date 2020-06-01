@@ -30,13 +30,13 @@ export function detectSiteCandidates(url: string, sitesList: Record<string, Site
 }
 
 export function pickWinningCandidate(results: ContentScriptOutputMessage, currentTabUrl: string)
-: { siteId: string, attributes: Record<string, string> } | undefined {
+: { siteId?: string, attributes: Record<string, string> } | undefined {
   if (results.length === 0) {
     return undefined;
   }
   const [head, ...tail] = results;
   const url = head.permalink || currentTabUrl;
-  const extractedAttributes = extractAttributesFromUrl(url, Sites[head.siteId]);
+  const extractedAttributes = head.siteId ? extractAttributesFromUrl(url, Sites[head.siteId]): {};
   const allExtractedAttributes = Object.assign(extractedAttributes, head.additionalAttributes);
 
   if (Object.values(allExtractedAttributes).length === 0) {
@@ -49,12 +49,12 @@ export function pickWinningCandidate(results: ContentScriptOutputMessage, curren
   }
 }
 
-export type SelectedSite = {
+export type SiteLink = {
   id: string;
   url: string;
 }
 
-export async function getRelevantSites(currentSiteId: string, retrievedAttributes: Record<string, string>): Promise<SelectedSite[]> {
+export async function getRelevantSites(currentSiteId: string|undefined, retrievedAttributes: Record<string, string>): Promise<SiteLink[]> {
   return (await Promise.all(Object.entries(Sites).map(async function ([siteId, site]) {
     if (siteId == currentSiteId) return undefined;
 
@@ -82,7 +82,7 @@ export async function getRelevantSites(currentSiteId: string, retrievedAttribute
         url: `${protocol}://${site.link}${path}`,
       };
     }
-  }))).filter((s): s is SelectedSite => Boolean(s));
+  }))).filter((s): s is SiteLink => Boolean(s));
 }
 
 function extractAttributesFromUrl(url: string, siteConfig: SiteConfiguration) {

@@ -28,7 +28,7 @@
       }
     }
   },
-  "error_unknownWebsite": {
+  "error_incompatibleWebsite": {
     "message": "ERROR: Current site was not recognized as compatible with OpenStreetMap. If this is unexpected, you can report it in $EXTENSION_SITE$.",
     "description": "Error shown inside popup when appropriate",
     "placeholders": {
