@@ -187,6 +187,13 @@ export const Sites: Record<string, SiteConfiguration> = {
     ]
   },
 
+  openstreetcam: {
+    link: 'openstreetcam.org',
+    paramOpts: [
+      { ordered: '/map/@{lat},{lon},{zoom}z' },
+    ],
+  },
+
   mapillary: {
     link: "mapillary.com",
     paramOpts: [ // Note: has a decimal zoom and numbers with high precision (15 digits)
