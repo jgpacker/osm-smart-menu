@@ -4,11 +4,6 @@ A browser extension to help the OpenStreetMap community easily access different 
 It's officially supported for [Google Chrome](https://chrome.google.com/webstore/detail/osm-smart-menu/icipmdhgbkejfideagkhdebiaeohfijk) and Mozilla Firefox (for [Desktop](https://addons.mozilla.org/firefox/addon/osm-smart-menu/) and [Android](https://addons.mozilla.org/android/addon/osm-smart-menu/)).
 
 
-## Building
-Run `npm install` and `npm run build:firefox`.
-A file will be created in `./web-ext-artifacts/`.
-(tested with Node 14.x)
-
 ## Contributing
 
 ### Report bugs or request features
@@ -25,3 +20,9 @@ See [Chrome's documentation](https://developer.chrome.com/extensions/i18n#overvi
 Some websites' names should be left untranslated, preserving the original name.
 
 After that's done, you can also translate `addon/_locales/en/long_description.html`. This file's content is used in extension websites.
+
+
+## Building
+Run `npm install` and `npm run build`.
+A file will be created in `./web-ext-artifacts/`.
+(tested with Node 14.x)
