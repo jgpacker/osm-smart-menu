@@ -20,11 +20,7 @@ export function createOptionsList(d: Document, sitesList: SiteLink[]): HTMLEleme
 export function getLoadingMessage(d: Document): HTMLElement {
   const div = d.createElement('div');
   div.id = 'loading';
-  const strong = d.createElement('strong');
-  strong.append(browser.i18n.getMessage('loading_firstLine'));
-  div.append(strong);
-  div.append(d.createElement('br'));
-  div.append(browser.i18n.getMessage('loading_secondLine'));
+  div.append(browser.i18n.getMessage('loading'));
   return div;
 }
 

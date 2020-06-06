@@ -11,24 +11,20 @@
     "message": "Facilita o acesso de contribuidores do OpenStreetMap entre diferentes mapas e ferramentas de análise da comunidade."
   },
 
-  "loading_firstLine": {
-    "message": "Carregando..."
+  "loading": {
+    "message": "Carregando...\nSe não parar de carregar, recarregue a página e tente novamente."
   },
-  "loading_secondLine": {
-    "message": "Se não parar de carregar, recarregue a página e tente novamente."
-  },
-
 
   "error_noAccess": {
-    "message": "ERRO: Não foi possível encontrar ou acessar a página atual. Se isto for inesperado, por favor relate isto em $EXTENSION_SITE$.",
+    "message": "ERRO: Não foi possível encontrar ou acessar a página atual.\nSe isto for inesperado, por favor relate isto em $EXTENSION_SITE$.",
     "placeholders": { "EXTENSION_SITE": { "content": "$1" } }
   },
   "error_incompatibleWebsite": {
-    "message": "ERRO: O site atual não foi reconhecido como compatível com OpenStreetMap. Se isto for inesperado, você pode relatar isto em $EXTENSION_SITE$.",
+    "message": "ERRO: O site atual não foi reconhecido como compatível com OpenStreetMap.\nSe isto for inesperado, você pode relatar isto em $EXTENSION_SITE$.",
     "placeholders": { "EXTENSION_SITE": { "content": "$1" } }
   },
   "error_noInformationExtracted": {
-    "message": "ERRO: O site foi reconhecido, mas seus parâmetros não foram. Se você acredita que isto é um bug, por favor relate em $EXTENSION_SITE$.",
+    "message": "ERRO: O site foi reconhecido, mas seus parâmetros não foram.\nSe você acredita que isto é um bug, por favor relate em $EXTENSION_SITE$.",
     "placeholders": { "EXTENSION_SITE": { "content": "$1" } }
   },
 

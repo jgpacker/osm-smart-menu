@@ -9,6 +9,11 @@ html, body {
   padding: 4px;
   min-width: 150px; /* Chrome adjustment */
   max-width: 600px; /* Desktop Firefox adjustment */
+  white-space: pre-line;
+}
+
+#loading::first-line {
+  font-weight: bold;
 }
 
 .site {

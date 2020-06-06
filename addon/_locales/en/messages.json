@@ -9,17 +9,13 @@
     "message": "Helps OpenStreetMap contributors to easily switch between different maps and analysis tools from the community."
   },
   
-  "loading_firstLine": {
-    "message": "Loading...",
-    "description": "Shown in popup shortly before menu appears"
-  },
-  "loading_secondLine": {
-    "message": "If this does not stop loading, reload the page and try again.",
+  "loading": {
+    "message": "Loading...\nIf this does not stop loading, reload the page and try again.",
     "description": "Shown in popup shortly before menu appears."
   },
-
+ 
   "error_noAccess": {
-    "message": "ERROR: Could not find or access current page. If this is unexpected, please report it in $EXTENSION_SITE$.",
+    "message": "ERROR: Could not find or access current page.\nIf this is unexpected, please report it in $EXTENSION_SITE$.",
     "description": "Error shown inside popup when the current page cannot be accessed (technical exception)",
     "placeholders": {
       "EXTENSION_SITE": {
@@ -29,7 +25,7 @@
     }
   },
   "error_incompatibleWebsite": {
-    "message": "ERROR: Current site was not recognized as compatible with OpenStreetMap. If this is unexpected, you can report it in $EXTENSION_SITE$.",
+    "message": "ERROR: Current site was not recognized as compatible with OpenStreetMap.\nIf this is unexpected, you can report it in $EXTENSION_SITE$.",
     "description": "Error shown inside popup when appropriate",
     "placeholders": {
       "EXTENSION_SITE": {
@@ -39,7 +35,7 @@
     }
   },
   "error_noInformationExtracted": {
-    "message": "ERROR: The website was recognized, but it's parameters were not understood. If you believe this is a bug, please report it in $EXTENSION_SITE$.",
+    "message": "ERROR: The website was recognized, but it's parameters were not understood.\nIf you believe this is a bug, please report it in $EXTENSION_SITE$.",
     "description": "Error shown inside popup when appropriate",
     "placeholders": {
       "EXTENSION_SITE": {
