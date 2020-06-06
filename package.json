@@ -4,7 +4,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "tscompile": "webpack --mode=production",
-    "build": "npm run build && web-ext build --source-dir addon"
+    "build": "npm run tscompile && web-ext build --source-dir addon"
   },
   "repository": {
     "type": "git",
