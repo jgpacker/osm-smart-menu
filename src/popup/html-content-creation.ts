@@ -30,15 +30,20 @@ export enum KnownError {
   NO_INFORMATION_EXTRACTED = 'noInformationExtracted',
 }
 
+const OpenStreetMap = 'OpenStreetMap';
 export function getErrorMessage(d: Document, error: KnownError): HTMLElement {
   const div = d.createElement('div');
   div.id = 'error';
   const linkPlaceholder = '__LINK__';
   const text = browser.i18n.getMessage(`error_${error}`, linkPlaceholder);
   const linkText = 'github.com/jgpacker/osm-smart-menu/';
-  insertLinkInsideText(d, text, linkPlaceholder, `https://${linkText}blob/master/README.md`, linkText).forEach(
-    (x) => div.append(x)
-  )
+  insertLinkInsideText(d, text, linkPlaceholder, `https://${linkText}blob/master/README.md`, linkText).forEach((node) => {
+    if (typeof node === 'string' && node.includes(OpenStreetMap)) {
+      insertLinkInsideText(d, node, OpenStreetMap, 'https://openstreetmap.org', OpenStreetMap).forEach((node) => div.append(node))
+    } else {
+      div.append(node);
+    }
+  });
   return div;
 }
 
