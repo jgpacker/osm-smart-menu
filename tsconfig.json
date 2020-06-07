@@ -9,7 +9,8 @@
     "noFallthroughCasesInSwitch": true,
     "forceConsistentCasingInFileNames": true,
     "allowJs": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "types": ["jest-playwright-preset", "expect-playwright"]
   },
   "include": ["src/**/*"]
 }

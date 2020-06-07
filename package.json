@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "test-sites": "jest",
     "tscompile": "webpack --mode=production",
     "build": "npm run tscompile && web-ext build --source-dir addon"
   },
@@ -17,6 +18,11 @@
     "webextension-polyfill-ts": "^0.17.0"
   },
   "devDependencies": {
+    "@types/jest": "^25.2.3",
+    "jest": "^26.0.1",
+    "jest-playwright-preset": "^0.2.3",
+    "playwright": "^1.0.2",
+    "ts-jest": "^26.1.0",
     "ts-loader": "^7.0.5",
     "typescript": "^3.9.5",
     "web-ext": "^4.2.0",
