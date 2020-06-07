@@ -34,9 +34,10 @@ function attemptExtractionFromUnknownWebsite(): ExtractedData {
   // TODO: search for permalinks e.g. getPermalinkBySelector("a#permalink")
   const url = new URL(window.document.location.href);
 
-  const matchArray = url.hash.match(/#[a-z=]*([0-9.]+)\/([0-9.-]+)\/([0-9.-]+)/);
+  const matchArray =
+    url.hash.match(/#[a-z=]*([0-9.]+)\/([0-9.-]+)\/([0-9.-]+)/) || // example https://www.opengeofiction.net/#map=4/-16.51/-46.93
+    url.hash.match(/#zoom=([0-9.]+)&lat=([0-9.-]+)&lon=([0-9.-]+)/); // example https://www.osmhydrant.org/en/#zoom=16&lat=48.20424&lon=16.36813
   if (matchArray) {
-    // example https://www.opengeofiction.net/#map=4/-16.51/-46.93
     const [, zoom, lat, lon] = matchArray;
     if (typeof zoom === "string" && typeof lat === "string" && typeof lon === "string" && zoom && lat && lon) {
       return {
