@@ -1,6 +1,6 @@
 import { Sites, SiteConfiguration, ParamOpt } from "../sites-configuration";
 import { ContentScriptOutputMessage } from "../injectable-content-script";
-import { getLocalConfig } from "../config-handler";
+import { getLocalConfig, getOrderedSiteIds } from "../config-handler";
 
 const naturalNumberRegExp = "[0-9]+";
 const decimalNumberRegExp = "[0-9.-]+";
@@ -55,8 +55,11 @@ export type SiteLink = {
 }
 
 export async function getRelevantSites(currentSiteId: string|undefined, retrievedAttributes: Record<string, string>): Promise<SiteLink[]> {
-  return (await Promise.all(Object.entries(Sites).map(async function ([siteId, site]) {
+  const orderedSiteIds = await getOrderedSiteIds();
+  return (await Promise.all(orderedSiteIds.map(async function (siteId) {
     if (siteId == currentSiteId) return undefined;
+    const site = Sites[siteId];
+    if (!site) return undefined;
 
     const chosenOption = site.paramOpts.find(function (paramOpt) {
       const [orderedParameters, unorderedParameters] = extractParametersFromParamOpt(paramOpt);

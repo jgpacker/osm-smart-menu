@@ -14,6 +14,8 @@
     "url": "https://github.com/jgpacker/osm-smart-menu/issues"
   },
   "dependencies": {
+    "@types/dragula": "^3.7.0",
+    "dragula": "^3.7.2",
     "webextension-polyfill-ts": "^0.17.0"
   },
   "devDependencies": {
