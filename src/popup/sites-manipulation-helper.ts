@@ -17,8 +17,6 @@ const InfoRegExp: Record<string, string> = {
   zoom: positiveDecimalNumberRegExp, //believe it or not, some websites accept a decimal zoom. TODO: verify if any site has a problem having a decimal zoom as a parameter
   lat: decimalNumberRegExp,
   lon: decimalNumberRegExp,
-  key: "[^#?\/=]+",
-  value: "[^#?\/]+",
 };
 //TODO: should I add support for route information? (start, intermediary and end points, and maybe transport mode)
 

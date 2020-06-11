@@ -21,8 +21,7 @@ export type Extractors = {
 export type OsmAttribute =
   | "nodeId" | "wayId" | "relationId"
   | "userId" | "userName" | "changesetId"
-  | "zoom" | "lat" | "lon"
-  | "tracesId" | "key" | "value"
+  | "zoom" | "lat" | "lon" | "tracesId"
   ;
 
 const urlPattern1: ParamOpt = { ordered: "/", unordered: { zoom: "zoom", lat: "lat", lon: "lon" } };
@@ -380,14 +379,6 @@ export const Sites: Record<string, SiteConfiguration> = {
     },
   },
 
-  osmwiki: {
-    link: "wiki.openstreetmap.org",
-    paramOpts: [
-      { ordered: "/Tag:{key}={value}" },
-      { ordered: "/Key:{key}" }
-    ]
-  },
-
   osmchangeviz: {
     link: "resultmaps.neis-one.org",
     paramOpts: [
@@ -401,14 +392,6 @@ export const Sites: Record<string, SiteConfiguration> = {
     paramOpts: [
       { ordered: "/osm-change-tiles#{zoom}/{lat}/{lon}" },
       { ordered: "/osm-change-tiles.php#{zoom}/{lat}/{lon}" }
-    ]
-  },
-
-  taginfo: {
-    link: "taginfo.openstreetmap.org",
-    paramOpts: [
-      { ordered: "/tags/{key}={value}" },
-      { ordered: "/keys/{key}" }
     ]
   },
 
