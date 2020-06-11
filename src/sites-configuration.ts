@@ -400,7 +400,35 @@ export const Sites: Record<string, SiteConfiguration> = {
     paramOpts: [
       urlPattern1, //TODO: &tilt=45&rotation=168
     ]
-  }
+  },
+
+  openlevelup: {
+    link: "openlevelup.net",
+    paramOpts: [
+      { ordered: "/#{zoom}/{lat}/{lon}" },
+      { ordered: "/?l=0#{zoom}/{lat}/{lon}" },
+      { ordered: "/?l=1#{zoom}/{lat}/{lon}" },
+      { ordered: "/?l=-1#{zoom}/{lat}/{lon}" }, // TODO: use getAttributesFromPage to ignore `?l=X` and get zoom/lat/lon
+      { ordered: "/old/", unordered: { "zoom": "z", "lat": "lat", "lon": "lon" } },
+    ],
+  },
+
+  missingmaps: {
+    link: "www.missingmaps.org",
+    paramOpts: [
+      { ordered: "/users/#/{userName}" },
+      { ordered: "/users/#/{userName}/badges" },
+    ],
+  },
+
+  osmlanevisualizer: {
+    link: "osm.mueschelsoft.de/lanes",
+    paramOpts: [
+      { ordered: "/", unordered: { "relationId": "relid" } },
+      { ordered: "/", unordered: { "wayId": "wayid" } },
+    ],
+    httpOnly: true, // mini-map won't load in HTTPS
+  },
 };
 //http://brouter.de/brouter-web/#zoom=6&lat=50.99&lon=9.86&layer=OpenStreetMap
 //Overpass Turbo Wizard: http://overpass-turbo.eu/?w=%22area%22%3D%22y%22+global

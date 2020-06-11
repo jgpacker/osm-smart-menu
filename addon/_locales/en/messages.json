@@ -158,5 +158,14 @@
   },
   "site_osmbuildings": {
     "message": "OSM Buildings"
+  },
+  "site_openlevelup": {
+    "message": "OpenLevelUp!"
+  },
+  "site_missingmaps": {
+    "message": "Missing Maps"
+  },
+  "site_osmlanevisualizer": {
+    "message": "OSM Lane Visualizer"
   }
 }
