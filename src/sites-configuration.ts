@@ -86,7 +86,15 @@ export const Sites: Record<string, SiteConfiguration> = {
     ]
   },
 
-  /* TODO: change to https://maps.openrouteservice.org/directions?n1=49.409445&n2=8.692953&n3=13&b=0&k1=en-US&k2=km
+  sentinelhub: {
+    link: "apps.sentinel-hub.com",
+    paramOpts: [
+      { ordered: "/sentinel-playground/", unordered: { "lat": "lat", "lon": "lng", "zoom": "zoom" }},
+      { ordered: "/eo-browser/", unordered: { "lat": "lat", "lon": "lng", "zoom": "zoom" }},
+    ],
+  },
+
+  /* TODO: change to https://maps.openrouteservice.org/directions?n1=49.9445&n2=8.692953&n3=13&b=0&k1=en-US&k2=km
     openmapsurfer: {
       link: "korona.geog.uni-heidelberg.de",
       paramOpts: [urlPattern1],
@@ -267,6 +275,7 @@ export const Sites: Record<string, SiteConfiguration> = {
     link: 'osmcha.org',
     paramOpts: [
       { ordered: "/changesets/{changesetId}" },
+      { ordered: "/?filters=%7B%22users%22:[%7B%22label%22:%22%22,%22value%22:%22{userName}%22%7D]%7D" },
     ],
   },
 

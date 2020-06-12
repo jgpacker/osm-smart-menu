@@ -54,6 +54,9 @@
   "site_googlemaps": {
     "message": "Google Maps"
   },
+  "site_sentinelhub": {
+    "message": "Sentinel Hub"
+  },
   "site_openmapsurfer": {
     "message": "OpenMapSurfer"
   },
