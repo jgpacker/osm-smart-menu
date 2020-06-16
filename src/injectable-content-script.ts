@@ -31,8 +31,23 @@ function extractData(siteId: string): ExtractedData {
 }
 
 function attemptExtractionFromUnknownWebsite(): ExtractedData {
-  // TODO: search for permalinks e.g. getPermalinkBySelector("a#permalink")
-  const url = new URL(window.document.location.href);
+  let permalink: Element | null | undefined =
+    document.querySelector('[id*=permalink i]') ||
+    document.querySelector('[class*=permalink i]');
+  if (permalink && !(permalink instanceof HTMLAnchorElement)) {
+    permalink = permalink.querySelector('a');
+  }
+  if (!permalink) {
+    permalink = [...document.querySelectorAll('a')]
+      .find(a => /permalink/i.test(a.textContent || ''));
+  }
+
+  let url: URL;
+  if (permalink && permalink instanceof HTMLAnchorElement) {
+    url = new URL(permalink.href);
+  } else {
+    url = new URL(window.document.location.href);
+  }
 
   const matchArray =
     url.hash.match(/#[a-z=]*([0-9.]+)\/([0-9.-]+)\/([0-9.-]+)/) || // example https://www.opengeofiction.net/#map=4/-16.51/-46.93
