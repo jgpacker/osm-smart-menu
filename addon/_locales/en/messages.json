@@ -69,6 +69,9 @@
   "site_opensnowmap": {
     "message": "OpenSnowMap"
   },
+  "site_opentopomap": {
+    "message": "OpenTopoMap"
+  },
   "site_historicmap": {
     "message": "Historical Objects"
   },

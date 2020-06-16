@@ -131,6 +131,14 @@ export const Sites: Record<string, SiteConfiguration> = {
     },
   },
 
+  opentopomap: {
+    link: "www.opentopomap.org",
+    paramOpts: [
+      { ordered: "/#map={zoom}/{lat}/{lon}" },
+      { ordered: "/#marker={zoom}/{lat}/{lon}" },
+    ],
+  },
+
   historicmap: {
     link: "gk.historic.place/historische_objekte",
     paramOpts: [urlPattern1],
@@ -302,7 +310,7 @@ export const Sites: Record<string, SiteConfiguration> = {
     },
   },
 
-  waze: { // TODO: this website has unique zoom levels, so it might need workarounds
+  waze: {
     link: "www.waze.com",
     paramOpts: [
       { ordered: "/livemap/directions?latlng={lat}%2C{lon}" },
@@ -325,6 +333,16 @@ export const Sites: Record<string, SiteConfiguration> = {
             };
           }
         };
+        const permalink = window.document.querySelector('a.permalink') as HTMLAnchorElement | null;
+        if (permalink) {
+          // works in "editor" page i.e. https://www.waze.com/editor?env=row&lon=-49.24037&lat=-16.68915&s=70749461&zoom=
+          const url = new URL(permalink.href);
+          if (url) {
+            const wazeZoom: number = parseInt(url.searchParams.get('zoom') || '0');
+            const osmZoom = wazeZoom + 12;
+            return { zoom: osmZoom.toString() };
+          }
+        }
         return {};
       },
     },
