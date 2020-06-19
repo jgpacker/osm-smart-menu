@@ -44,8 +44,22 @@ export const Sites: Record<string, SiteConfiguration> = {
       { ordered: "/user/{userName}" },
       { ordered: "/#map={zoom}/{lat}/{lon}" },
       { ordered: "/", unordered: { lat: "mlat", lon: "mlon" } }
-      //TODO: recognize pattern https://www.openstreetmap.org/edit#map=18/-7.57646/110.94519
-    ]
+    ],
+    extractors: {
+      getAttributesFromPage: (window: Window): Partial<Record<OsmAttribute, string>> => {
+        if (window.location.pathname.startsWith('/edit')) {
+          // e.g. https://www.openstreetmap.org/edit?editor=id#map=18/-7.57646/110.94519
+          const matches = window.location.hash.match(/#map=([0-9.]+)\/([0-9.-]+)\/([0-9.-]+)/);
+          if (matches) {
+            const [, zoom, lat, lon ] = matches;
+            if (zoom && typeof zoom === 'string' && lat && typeof lat === 'string' && lon && typeof lon === 'string') {
+              return { zoom, lat, lon };
+            }
+          }
+        }
+        return {}
+      }
+    }
   },
 
   bingmaps: {
@@ -390,10 +404,13 @@ export const Sites: Record<string, SiteConfiguration> = {
   },
 
   mapcompare: {
-    link: "tools.geofabrik.de/mc",
+    link: "mc.bbbike.org",
     paramOpts: [
-      { ordered: "/#{zoom}/{lat}/{lon}" }
-    ]
+      { ordered: "/mc/", unordered: urlPattern1.unordered },
+    ],
+    extractors: {
+      getPermalink: getPermalinkBySelector('[id*=permalink i] a'),
+    },
   },
 
   howdidyoucontribute: {

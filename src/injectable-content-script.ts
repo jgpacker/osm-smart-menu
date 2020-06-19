@@ -2,9 +2,14 @@ import { browser } from 'webextension-polyfill-ts';
 import { Sites, OsmAttribute } from './sites-configuration';
 
 browser.runtime.onMessage.addListener(async (message: ContentScriptInputMessage): Promise<ContentScriptOutputMessage> =>
-  message.candidateSiteIds.length > 0 ?
-    message.candidateSiteIds.map(extractData):
-    [ attemptExtractionFromUnknownWebsite() ]
+  message.candidateSiteIds
+    .map(extractData)
+    .concat(
+      // try to get parameters from (1) unknown websites or (2) unknown pages of known websites
+      // known issue: in the second case, the "known website" will appear as a target option, even though it might be redundant.
+      //              if a user reports this, implement recognition for the unknown page
+      [ attemptExtractionFromUnknownWebsite() ],
+    )
 );
 
 export type ContentScriptOutputMessage = ExtractedData[]
@@ -61,7 +66,7 @@ function attemptExtractionFromUnknownWebsite(): ExtractedData {
     }
   }
 
-  const maybeZoom = url.searchParams.get('zoom')
+  const maybeZoom = url.searchParams.get('zoom') || url.searchParams.get('z');
   const maybeLat = url.searchParams.get('lat');
   const maybeLon = url.searchParams.get('lon') || url.searchParams.get('lng');
   if (typeof maybeZoom === "string" && typeof maybeLat === "string" && typeof maybeLon === "string" && maybeZoom && maybeLat && maybeLon) {
