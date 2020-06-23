@@ -1,8 +1,8 @@
 import { browser } from 'webextension-polyfill-ts'
-import { Sites } from '../sites-configuration'
 import { ContentScriptOutputMessage, ContentScriptInputMessage } from '../injectable-content-script';
-import { getLoadingMessage, createOptionsList, getErrorMessage, KnownError } from './html-content-creation';
-import { detectSiteCandidates, pickWinningCandidate, getRelevantSites } from './sites-manipulation-helper';
+import { getLoadingMessage, createOptionsList, getErrorMessage, KnownError, createBasicOptionCreationButton, CustomUserOption } from './html-content-creation';
+import { findSiteCandidates, pickWinningCandidate, getRelevantSites } from './sites-manipulation-helper';
+import { getOrderedSiteIds, setOrderedSiteIds, setLocalConfig } from '../config-handler';
 
 (async function () {
   document.addEventListener("click", openLink);
@@ -26,10 +26,10 @@ async function tryToExtractAndCreateOptions(document: Document): Promise<HTMLEle
     return getErrorMessage(document, KnownError.NO_ACCESS);
   }
   
-  const candidateSiteIds = detectSiteCandidates(currentTab.url, Sites);
+  const candidateSiteIds = await findSiteCandidates(currentTab.url);
 
   const contentScriptResult = await getDataFromContentScript(currentTab.id, candidateSiteIds);
-  const currentSite = contentScriptResult && pickWinningCandidate(contentScriptResult, currentTab.url);
+  const currentSite = contentScriptResult && (await pickWinningCandidate(contentScriptResult, currentTab.url));
   if (!currentSite) {
     if (candidateSiteIds.length === 0) {
       return getErrorMessage(document, KnownError.INCOMPATIBLE_WEBSITE);
@@ -39,9 +39,36 @@ async function tryToExtractAndCreateOptions(document: Document): Promise<HTMLEle
   }
 
   const sitesList = await getRelevantSites(currentSite.siteId, currentSite.attributes);
+  const htmlSitesList = createOptionsList(document, sitesList)
 
-  return createOptionsList(document, sitesList);
+  if (currentSite.detectedPattern) {
+    const customUserOption: CustomUserOption = {
+      urlPattern: currentSite.detectedPattern,
+      defaultName: currentTab.title || '???',
+    };
+    htmlSitesList.insertBefore(
+      createBasicOptionCreationButton(document, customUserOption, createNewOption),
+      htmlSitesList.firstElementChild
+    );
+  }
+
+  return htmlSitesList;
 }
+
+async function createNewOption(customUserOption: CustomUserOption): Promise<void> {
+  const siteId = encodeURIComponent(customUserOption.urlPattern.url);
+
+  await setLocalConfig(siteId, {
+    isEnabled: true,
+    customName: customUserOption.defaultName,
+    customPattern: customUserOption.urlPattern,
+  })
+
+  await setOrderedSiteIds(
+    [siteId].concat(await getOrderedSiteIds())
+  );
+}
+
 
 async function getDataFromContentScript(tabId: number, candidateSiteIds: string[]): Promise<ContentScriptOutputMessage | undefined> {
   try {

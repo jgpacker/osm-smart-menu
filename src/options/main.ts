@@ -1,7 +1,7 @@
 import { browser } from 'webextension-polyfill-ts'
-import { Sites } from '../sites-configuration'
-import { getLocalConfig, setLocalConfig, getOrderedSiteIds, setOrderedSiteIds } from '../config-handler';
+import { getLocalConfig, getOrderedSiteIds, setOrderedSiteIds, updateLocalConfig } from '../config-handler';
 import dragula from 'dragula';
+import { Sites } from '../sites-configuration';
 
 const dragHandleClass = 'drag-handle';
 (async function () {
@@ -11,8 +11,8 @@ const dragHandleClass = 'drag-handle';
 
   const orderedSiteIds = await getOrderedSiteIds();
   await orderedSiteIds.forEach(async (siteId) => {
-    if (!Sites[siteId]) return;
     const localConfig = await getLocalConfig(siteId);
+    if (!Sites[siteId] && !localConfig.customPattern) return; // should not be possible
 
     const label = document.createElement('label');
     
@@ -29,7 +29,7 @@ const dragHandleClass = 'drag-handle';
     input.checked = localConfig.isEnabled;
     label.appendChild(input);
 
-    label.append(browser.i18n.getMessage(`site_${siteId}`));
+    label.append(localConfig.customName || browser.i18n.getMessage(`site_${siteId}`));
     label.setAttribute('style', 'display: flex; padding: 1px 0 1px; align-items: center;');
 
     div.appendChild(label);
@@ -52,7 +52,7 @@ const dragHandleClass = 'drag-handle';
 async function handleClick(event: Event) {
   if (event.target instanceof HTMLInputElement) {
     const input = event.target;
-    setLocalConfig(input.name, {
+    updateLocalConfig(input.name, {
       isEnabled: input.checked,
     });
   }

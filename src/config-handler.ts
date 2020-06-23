@@ -1,9 +1,13 @@
 import { browser } from "webextension-polyfill-ts";
 import { Sites } from "./sites-configuration";
+import { UrlPattern } from "./popup/sites-manipulation-helper";
 
 export type LocalSiteConfiguration = {
   isEnabled: boolean;
+  customName?: string;
+  customPattern?: UrlPattern;
 }
+
 export async function getLocalConfig(siteId: string): Promise<LocalSiteConfiguration> {
   const defaultSiteConfig: LocalSiteConfiguration = {
     isEnabled: true,
@@ -16,11 +20,21 @@ export async function getLocalConfig(siteId: string): Promise<LocalSiteConfigura
     const s = storedObject[key];
     const localSiteConfig: LocalSiteConfiguration = {
       isEnabled: typeof s.isEnabled !== "undefined"? s.isEnabled: defaultSiteConfig.isEnabled,
-    }
+      customName: s.customName,
+      customPattern: s.customPattern,
+    };
     return localSiteConfig
   } else {
     return defaultSiteConfig;
   }
+}
+
+export async function updateLocalConfig(siteId: string, config: Partial<LocalSiteConfiguration>): Promise<void> {
+  const oldConfig = await getLocalConfig(siteId);
+  await setLocalConfig(siteId, {
+    ...oldConfig,
+    ...config
+  });
 }
 
 export async function setLocalConfig(siteId: string, config: LocalSiteConfiguration): Promise<void> {

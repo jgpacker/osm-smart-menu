@@ -1,5 +1,10 @@
 import { browser } from "webextension-polyfill-ts";
-import { SiteLink } from "./sites-manipulation-helper";
+import { SiteLink, UrlPattern } from "./sites-manipulation-helper";
+
+export type CustomUserOption = {
+  defaultName: string;
+  urlPattern: UrlPattern;
+}
 
 export function createOptionsList(d: Document, sitesList: SiteLink[]): HTMLElement {
   const div = d.createElement('div');
@@ -8,7 +13,7 @@ export function createOptionsList(d: Document, sitesList: SiteLink[]): HTMLEleme
       const anchor = d.createElement('a');
       anchor.id = site.id;
       anchor.href = site.url;
-      anchor.textContent = browser.i18n.getMessage(`site_${site.id}`);
+      anchor.textContent = site.customName || browser.i18n.getMessage(`site_${site.id}`);
       anchor.className = 'site';
 
       div.appendChild(anchor);
@@ -33,7 +38,7 @@ export enum KnownError {
 const OpenStreetMap = 'OpenStreetMap';
 export function getErrorMessage(d: Document, error: KnownError): HTMLElement {
   const div = d.createElement('div');
-  div.id = 'error';
+  div.id = 'info';
   const linkPlaceholder = '__LINK__';
   const text = browser.i18n.getMessage(`error_${error}`, linkPlaceholder);
   const linkText = 'github.com/jgpacker/osm-smart-menu/';
@@ -53,4 +58,34 @@ function insertLinkInsideText(d: Document, text: string, linkPlaceholder: string
   anchor.href = link;
   anchor.textContent = linkText;
   return [firstHalf, anchor, secondHalf];
+}
+
+export function createBasicOptionCreationButton(
+  d: Document,
+  newConfig: CustomUserOption,
+  createNewOption: (option: CustomUserOption) => Promise<void>
+): HTMLElement {
+  const div = d.createElement('div');
+  div.id = 'info';
+  div.append(browser.i18n.getMessage('newOptionDetected_notice'));
+
+  const button = d.createElement('button');
+  button.textContent = browser.i18n.getMessage('newOptionDetected_buttonText');
+  button.setAttribute('data-configuration', JSON.stringify(newConfig));
+  button.setAttribute('style', 'display: block; margin: 4px auto;');
+  button.addEventListener('click', buttonClick(createNewOption));
+  div.append(button);
+
+  return div;
+}
+
+function buttonClick(createNewOption: (option: CustomUserOption) => Promise<void>) {
+  return async function(this: HTMLButtonElement, _ev: MouseEvent) {
+    const customUserOption: CustomUserOption = JSON.parse(this.getAttribute('data-configuration') || '');
+    await createNewOption(customUserOption);
+
+    const div = this.parentElement!;
+    div.textContent = browser.i18n.getMessage('newOptionDetected_added');
+    this.remove();
+  };
 }

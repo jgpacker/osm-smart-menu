@@ -21,20 +21,53 @@ const InfoRegExp: Record<string, string> = {
 //TODO: should I add support for route information? (start, intermediary and end points, and maybe transport mode)
 
 
-export function detectSiteCandidates(url: string, sitesList: Record<string, SiteConfiguration>): string[] {
+export async function findSiteCandidates(url: string): Promise<string[]> {
   const hostname = (new URL(url).hostname).replace("www.", "") // maybe add www in config
   if (!hostname) return [];
-  return Object.keys(sitesList).filter(id => sitesList[id].link.includes(hostname));
+
+  const orderedSiteIds = await getOrderedSiteIds();
+  const siteUrls = await Promise.all(orderedSiteIds.map(async (siteId): Promise<{ id: string, url: string } | undefined> => {
+    if (Sites[siteId]) {
+      return { id: siteId, url: Sites[siteId].link };
+    } else {
+      const localConfig = await getLocalConfig(siteId);
+      if (localConfig.customPattern) { // check if it's a custom user option
+        return { id: siteId, url: localConfig.customPattern.url};
+      } else {
+        return;
+      }
+    }
+  }));
+
+  return siteUrls
+    .filter((site) => site && site.url.includes(hostname))
+    .map(site => site!.id);
 }
 
-export function pickWinningCandidate(results: ContentScriptOutputMessage, currentTabUrl: string)
-: { siteId?: string, attributes: Record<string, string> } | undefined {
+export async function pickWinningCandidate(results: ContentScriptOutputMessage, currentTabUrl: string)
+: Promise<{ siteId?: string, attributes: Record<string, string>, detectedPattern?: UrlPattern } | undefined> {
   if (results.length === 0) {
     return undefined;
   }
   const [head, ...tail] = results;
   const url = head.permalink || currentTabUrl;
-  const extractedAttributes = head.siteId ? extractAttributesFromUrl(url, Sites[head.siteId]): {};
+
+  let extractedAttributes: Record<string, string>;
+  let detectedPattern: UrlPattern | undefined;
+  if (head.siteId) {
+    if (Sites[head.siteId]) {
+      extractedAttributes = extractAttributesFromUrl(url, Sites[head.siteId]);
+    } else {
+      const localSiteConfig = await getLocalConfig(head.siteId);
+      if (localSiteConfig.customPattern) {
+        extractedAttributes = extractAttributesFromUrlPattern(new URL(url), localSiteConfig.customPattern);
+      } else {
+        extractedAttributes = {};
+      }
+    }
+  } else {
+    [detectedPattern, extractedAttributes] = detectAndExtractAttributesFromUrl(url);
+  }
   const allExtractedAttributes = Object.assign(extractedAttributes, head.additionalAttributes);
 
   if (Object.values(allExtractedAttributes).length === 0) {
@@ -43,6 +76,7 @@ export function pickWinningCandidate(results: ContentScriptOutputMessage, curren
     return {
       siteId: head.siteId,
       attributes: allExtractedAttributes,
+      detectedPattern,
     };
   }
 }
@@ -50,43 +84,117 @@ export function pickWinningCandidate(results: ContentScriptOutputMessage, curren
 export type SiteLink = {
   id: string;
   url: string;
+  customName?: string;
 }
 
 export async function getRelevantSites(currentSiteId: string|undefined, retrievedAttributes: Record<string, string>): Promise<SiteLink[]> {
   const orderedSiteIds = await getOrderedSiteIds();
   return (await Promise.all(orderedSiteIds.map(async function (siteId) {
     if (siteId == currentSiteId) return undefined;
-    const site = Sites[siteId];
-    if (!site) return undefined;
 
-    const chosenOption = site.paramOpts.find(function (paramOpt) {
-      const [orderedParameters, unorderedParameters] = extractParametersFromParamOpt(paramOpt);
-      const necessaryParameters = orderedParameters.concat(unorderedParameters);
-      return necessaryParameters.every(param => retrievedAttributes[param] !== undefined);
-    });
+    const localConfig = await getLocalConfig(siteId);
+    if (!localConfig.isEnabled) return undefined;
 
-    let attributes = retrievedAttributes;
-    if (retrievedAttributes.zoom) {
-      attributes = {...retrievedAttributes, zoom: reviewZoom(site, retrievedAttributes.zoom)}
-    }
+    if (Sites[siteId]) {
+      const site = Sites[siteId];
 
-    if (!chosenOption) {
-      return undefined;
+      const chosenOption = site.paramOpts.find(function (paramOpt) {
+        const [orderedParameters, unorderedParameters] = extractParametersFromParamOpt(paramOpt);
+        const necessaryParameters = orderedParameters.concat(unorderedParameters);
+        return necessaryParameters.every(param => retrievedAttributes[param] !== undefined);
+      });
+
+      let attributes = retrievedAttributes;
+      if (retrievedAttributes.zoom) {
+        attributes = {...retrievedAttributes, zoom: reviewZoom(site, retrievedAttributes.zoom)}
+      }
+
+      if (!chosenOption) {
+        return undefined;
+      } else {
+        const path = applyParametersToUrl(chosenOption, attributes);
+        const protocol = site.httpOnly ? 'http': 'https';
+        return {
+          id: siteId,
+          url: `${protocol}://${site.link}${path}`,
+        };
+      }
     } else {
-      const localConfig = await getLocalConfig(siteId);
-      if (!localConfig.isEnabled) return undefined;
-
-      const path = applyParametersToUrl(chosenOption, attributes);
-      const protocol = site.httpOnly ? 'http': 'https';
-      return {
-        id: siteId,
-        url: `${protocol}://${site.link}${path}`,
-      };
+      if (localConfig.customPattern && retrievedAttributes.zoom && retrievedAttributes.lat && retrievedAttributes.lon) {
+        const urlObj = new URL(localConfig.customPattern.url)
+        Object.entries(localConfig.customPattern.querystringSubst).forEach(([osmAttribute, querystringParameter]): void => {
+          urlObj.searchParams.set(querystringParameter, retrievedAttributes[osmAttribute]);
+        })
+        const siteLink: SiteLink = {
+          id: siteId,
+          url: urlObj.toString(),
+          customName: localConfig.customName,
+        };
+        return siteLink;
+      } else {
+        return undefined;
+      }
     }
   }))).filter((s): s is SiteLink => Boolean(s));
 }
 
-function extractAttributesFromUrl(url: string, siteConfig: SiteConfiguration) {
+export type UrlPattern = SimpleQuerystringPattern;
+
+type SimpleQuerystringPattern = { // example https://apps.sentinel-hub.com/eo-browser/?lat=41.718&lng=12.014&zoom=8
+  tag: 'qs',
+  querystringSubst: {
+    zoom: 'zoom' | 'z';
+    lon: 'lon' | 'lng';
+    lat: 'lat';
+  };
+  url: string;
+};
+
+function detectAndExtractAttributesFromUrl(url: string): [UrlPattern | undefined, Record<string, string>] {
+  const urlObj = new URL(url);
+  const matchArray =
+    urlObj.hash.match(/#[a-z=]*([0-9.]+)\/([0-9.-]+)\/([0-9.-]+)/) || // example https://www.opengeofiction.net/#map=4/-16.51/-46.93
+    urlObj.hash.match(/#zoom=([0-9.]+)&lat=([0-9.-]+)&lon=([0-9.-]+)/); // example https://www.osmhydrant.org/en/#zoom=16&lat=48.20424&lon=16.36813
+  if (matchArray) {
+    const [, zoom, lat, lon] = matchArray;
+    if (zoom && lat && lon) {
+      return [, { zoom, lat, lon }];
+    }
+  }
+
+  const sp = urlObj.searchParams;
+  if (sp.has('lat') &&
+    (sp.has('zoom') || sp.has('z')) &&
+    (sp.has('lon') || sp.has('lng'))
+  ) {
+    const qsPattern: SimpleQuerystringPattern = {
+      tag: 'qs',
+      querystringSubst: {
+        lat: 'lat',
+        zoom: sp.has('zoom') ? 'zoom': 'z',
+        lon: sp.has('lon') ? 'lon': 'lng',
+      },
+      url,
+    };
+    return [qsPattern, extractAttributesFromUrlPattern(urlObj, qsPattern)];
+  }
+  return [, {}];
+}
+
+function extractAttributesFromUrlPattern(url: URL, urlPattern: UrlPattern): Record<string, string> {
+  if (urlPattern.tag === 'qs') {
+    const zoom = url.searchParams.get(urlPattern.querystringSubst.zoom);
+    const lat = url.searchParams.get(urlPattern.querystringSubst.lat);
+    const lon = url.searchParams.get(urlPattern.querystringSubst.lon);
+    if (zoom && lat && lon) {
+      return { zoom, lat, lon };
+    }
+  }
+
+  return {};
+}
+
+function extractAttributesFromUrl(url: string, siteConfig: SiteConfiguration): Record<string, string> {
   for (let i = 0; i < siteConfig.paramOpts.length; i++) {
     let extractedAttributes: Record<string, string> = {};
     const [orderedParameters] = extractParametersFromParamOpt(siteConfig.paramOpts[i]);

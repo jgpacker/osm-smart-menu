@@ -13,7 +13,22 @@
     "message": "Loading...\nIf this does not stop loading, reload the page and try again.",
     "description": "Shown in popup shortly before menu appears."
   },
+
+  "newOptionDetected_notice": {
+    "message": "Would you like to add this website in the menu?",
+    "description": "Shown in popup when an unknown website seems compatible with OpenStreetMap. Before the button"
+  },
  
+  "newOptionDetected_buttonText": {
+    "message": "Add option (experimental feature)",
+    "description": "Shown in popup when an unknown website seems compatible with OpenStreetMap. Inside the button"
+  },
+
+  "newOptionDetected_added": {
+    "message": "Added!",
+    "description": "Shown in popup when an unknown website seems compatible with OpenStreetMap. After the button is clicked."
+  },
+
   "error_noAccess": {
     "message": "ERROR: Could not find or access current page.\nIf this is unexpected, please report it in $EXTENSION_SITE$.",
     "description": "Error shown inside popup when the current page cannot be accessed (technical exception)",

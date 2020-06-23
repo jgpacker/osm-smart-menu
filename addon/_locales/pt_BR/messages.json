@@ -15,6 +15,18 @@
     "message": "Carregando...\nSe não parar de carregar, recarregue a página e tente novamente."
   },
 
+  "newOptionDetected_notice": {
+    "message": "Gostaria de adicionar esse site no menu?"
+  },
+ 
+  "newOptionDetected_buttonText": {
+    "message": "Adicionar opção (funcionalidade experimental)"
+  },
+
+  "newOptionDetected_added": {
+    "message": "Adicionado!"
+  },
+
   "error_noAccess": {
     "message": "ERRO: Não foi possível encontrar ou acessar a página atual.\nSe isto for inesperado, por favor relate isto em $EXTENSION_SITE$.",
     "placeholders": { "EXTENSION_SITE": { "content": "$1" } }
