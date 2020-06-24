@@ -122,15 +122,34 @@ export async function getRelevantSites(currentSiteId: string|undefined, retrieve
     } else {
       if (localConfig.customPattern && retrievedAttributes.zoom && retrievedAttributes.lat && retrievedAttributes.lon) {
         const urlObj = new URL(localConfig.customPattern.url)
-        Object.entries(localConfig.customPattern.querystringSubst).forEach(([osmAttribute, querystringParameter]): void => {
-          urlObj.searchParams.set(querystringParameter, retrievedAttributes[osmAttribute]);
-        })
-        const siteLink: SiteLink = {
-          id: siteId,
-          url: urlObj.toString(),
-          customName: localConfig.customName,
-        };
-        return siteLink;
+        if (localConfig.customPattern.tag === 'qs') {
+          Object.entries(localConfig.customPattern.querystringSubst).forEach(([osmAttribute, querystringParameter]): void => {
+            urlObj.searchParams.set(querystringParameter, retrievedAttributes[osmAttribute]);
+          })
+          const siteLink: SiteLink = {
+            id: siteId,
+            url: urlObj.toString(),
+            customName: localConfig.customName,
+          };
+          return siteLink;
+        }
+        else if (localConfig.customPattern.tag === 'hash-1') {
+          const auxUrl = new URL(urlObj.toString());
+          auxUrl.search = '?' + auxUrl.hash.substring(1);
+
+          Object.entries(localConfig.customPattern.hashParametersSubst).forEach(([osmAttribute, hashParameter]): void => {
+            auxUrl.searchParams.set(hashParameter, retrievedAttributes[osmAttribute]);
+          })
+          urlObj.hash = '#' + auxUrl.search.substring(1);
+          const siteLink: SiteLink = {
+            id: siteId,
+            url: urlObj.toString(),
+            customName: localConfig.customName,
+          };
+          return siteLink;
+        }
+        const _exhaustivenessCheck: never = localConfig.customPattern;
+        return _exhaustivenessCheck;
       } else {
         return undefined;
       }
@@ -138,7 +157,7 @@ export async function getRelevantSites(currentSiteId: string|undefined, retrieve
   }))).filter((s): s is SiteLink => Boolean(s));
 }
 
-export type UrlPattern = SimpleQuerystringPattern;
+export type UrlPattern = SimpleQuerystringPattern | HashWithNamedParametersPattern;
 
 type SimpleQuerystringPattern = { // example https://apps.sentinel-hub.com/eo-browser/?lat=41.718&lng=12.014&zoom=8
   tag: 'qs',
@@ -150,11 +169,20 @@ type SimpleQuerystringPattern = { // example https://apps.sentinel-hub.com/eo-br
   url: string;
 };
 
+type HashWithNamedParametersPattern = { // example https://www.osmhydrant.org/en/#zoom=14&lat=48.20168&lon=16.48777
+  tag: 'hash-1',
+  hashParametersSubst: {
+    zoom: 'zoom' | 'z';
+    lon: 'lon' | 'lng';
+    lat: 'lat';
+  };
+  url: string;
+};
+
 function detectAndExtractAttributesFromUrl(url: string): [UrlPattern | undefined, Record<string, string>] {
   const urlObj = new URL(url);
   const matchArray =
-    urlObj.hash.match(/#[a-z=]*([0-9.]+)\/([0-9.-]+)\/([0-9.-]+)/) || // example https://www.opengeofiction.net/#map=4/-16.51/-46.93
-    urlObj.hash.match(/#zoom=([0-9.]+)&lat=([0-9.-]+)&lon=([0-9.-]+)/); // example https://www.osmhydrant.org/en/#zoom=16&lat=48.20424&lon=16.36813
+    urlObj.hash.match(/#[a-z=]*([0-9.]+)\/([0-9.-]+)\/([0-9.-]+)/) // example https://www.opengeofiction.net/#map=4/-16.51/-46.93
   if (matchArray) {
     const [, zoom, lat, lon] = matchArray;
     if (zoom && lat && lon) {
@@ -170,14 +198,34 @@ function detectAndExtractAttributesFromUrl(url: string): [UrlPattern | undefined
     const qsPattern: SimpleQuerystringPattern = {
       tag: 'qs',
       querystringSubst: {
-        lat: 'lat',
         zoom: sp.has('zoom') ? 'zoom': 'z',
+        lat: 'lat',
         lon: sp.has('lon') ? 'lon': 'lng',
       },
       url,
     };
     return [qsPattern, extractAttributesFromUrlPattern(urlObj, qsPattern)];
   }
+
+  const auxUrl = new URL(urlObj.toString());
+  auxUrl.search = '?' + auxUrl.hash.substring(1);
+  const auxSp = auxUrl.searchParams;
+  if (auxSp.has('lat') &&
+    (auxSp.has('zoom') || auxSp.has('z')) &&
+    (auxSp.has('lon') || auxSp.has('lng'))
+  ) {
+    const hashPattern: HashWithNamedParametersPattern = {
+      tag: 'hash-1',
+      hashParametersSubst: {
+        zoom: auxSp.has('zoom') ? 'zoom': 'z',
+        lat: 'lat',
+        lon: auxSp.has('lon') ? 'lon': 'lng',
+      },
+      url,
+    };
+    return [hashPattern, extractAttributesFromUrlPattern(urlObj, hashPattern)];
+  }
+
   return [, {}];
 }
 
@@ -186,6 +234,16 @@ function extractAttributesFromUrlPattern(url: URL, urlPattern: UrlPattern): Reco
     const zoom = url.searchParams.get(urlPattern.querystringSubst.zoom);
     const lat = url.searchParams.get(urlPattern.querystringSubst.lat);
     const lon = url.searchParams.get(urlPattern.querystringSubst.lon);
+    if (zoom && lat && lon) {
+      return { zoom, lat, lon };
+    }
+  }
+  else if (urlPattern.tag === 'hash-1') {
+    const auxUrl = new URL(url.toString());
+    auxUrl.search = '?' + auxUrl.hash.substring(1);
+    const zoom = auxUrl.searchParams.get(urlPattern.hashParametersSubst.zoom);
+    const lat = auxUrl.searchParams.get(urlPattern.hashParametersSubst.lat);
+    const lon = auxUrl.searchParams.get(urlPattern.hashParametersSubst.lon);
     if (zoom && lat && lon) {
       return { zoom, lat, lon };
     }
