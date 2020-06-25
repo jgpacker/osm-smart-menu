@@ -121,8 +121,20 @@ export async function getRelevantSites(currentSiteId: string|undefined, retrieve
       }
     } else {
       if (localConfig.customPattern && retrievedAttributes.zoom && retrievedAttributes.lat && retrievedAttributes.lon) {
-        const urlObj = new URL(localConfig.customPattern.url)
-        if (localConfig.customPattern.tag === 'qs') {
+        const urlObj = new URL(localConfig.customPattern.url);
+        if (localConfig.customPattern.tag === 'hash-2') {
+          const matchArray = urlObj.hash.match(/(#[a-z=]*)([0-9.]+)(\/)([0-9.-]+)(\/)([0-9.-]+)(.*)/);
+          if (!matchArray) return undefined;
+          const [, prefix, /*zoom*/, separator1, /*lat*/, separator2, /*lon*/, suffix] = matchArray;
+          urlObj.hash = `${prefix}${retrievedAttributes.zoom}${separator1}${retrievedAttributes.lat}${separator2}${retrievedAttributes.lon}${suffix}`;
+          const siteLink: SiteLink = {
+            id: siteId,
+            url: urlObj.toString(),
+            customName: localConfig.customName,
+          };
+          return siteLink;
+        }
+        else if (localConfig.customPattern.tag === 'qs') {
           Object.entries(localConfig.customPattern.querystringSubst).forEach(([osmAttribute, querystringParameter]): void => {
             urlObj.searchParams.set(querystringParameter, retrievedAttributes[osmAttribute]);
           })
@@ -157,7 +169,7 @@ export async function getRelevantSites(currentSiteId: string|undefined, retrieve
   }))).filter((s): s is SiteLink => Boolean(s));
 }
 
-export type UrlPattern = SimpleQuerystringPattern | HashWithNamedParametersPattern;
+export type UrlPattern = SimpleQuerystringPattern | HashWithNamedParametersPattern | OsmLikePattern;
 
 type SimpleQuerystringPattern = { // example https://apps.sentinel-hub.com/eo-browser/?lat=41.718&lng=12.014&zoom=8
   tag: 'qs',
@@ -179,15 +191,20 @@ type HashWithNamedParametersPattern = { // example https://www.osmhydrant.org/en
   url: string;
 };
 
+type OsmLikePattern = { // example https://www.opengeofiction.net/#map=4/-16.51/-46.93
+  tag: 'hash-2',
+  url: string;
+};
+
 function detectAndExtractAttributesFromUrl(url: string): [UrlPattern | undefined, Record<string, string>] {
   const urlObj = new URL(url);
-  const matchArray =
-    urlObj.hash.match(/#[a-z=]*([0-9.]+)\/([0-9.-]+)\/([0-9.-]+)/) // example https://www.opengeofiction.net/#map=4/-16.51/-46.93
-  if (matchArray) {
-    const [, zoom, lat, lon] = matchArray;
-    if (zoom && lat && lon) {
-      return [, { zoom, lat, lon }];
-    }
+  const osmLikePatternExtraction = extractOsmPatternExtraction(urlObj);
+  if (osmLikePatternExtraction) {
+    const osmLikePattern: OsmLikePattern = {
+      tag: 'hash-2',
+      url: url,
+    }    
+    return [osmLikePattern, osmLikePatternExtraction];
   }
 
   const sp = urlObj.searchParams;
@@ -230,7 +247,11 @@ function detectAndExtractAttributesFromUrl(url: string): [UrlPattern | undefined
 }
 
 function extractAttributesFromUrlPattern(url: URL, urlPattern: UrlPattern): Record<string, string> {
-  if (urlPattern.tag === 'qs') {
+  if (urlPattern.tag === 'hash-2') {
+    const attributes = extractOsmPatternExtraction(url);
+    if (attributes) return attributes
+  }
+  else if (urlPattern.tag === 'qs') {
     const zoom = url.searchParams.get(urlPattern.querystringSubst.zoom);
     const lat = url.searchParams.get(urlPattern.querystringSubst.lat);
     const lon = url.searchParams.get(urlPattern.querystringSubst.lon);
@@ -290,6 +311,17 @@ function extractAttributesFromUrl(url: string, siteConfig: SiteConfiguration): R
     }
   }
   return {};
+}
+
+function extractOsmPatternExtraction(url: URL): Record<string, string> | undefined {
+  const matchArray = url.hash.match(/#[a-z=]*([0-9.]+)\/([0-9.-]+)\/([0-9.-]+)/);
+  if (matchArray) {
+    const [, zoom, lat, lon] = matchArray;
+    if (zoom && lat && lon) {
+      return { zoom, lat, lon };
+    }
+  }
+  return undefined;
 }
 
 function extractParametersFromParamOpt(paramOpt: ParamOpt) {
