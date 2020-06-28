@@ -5,8 +5,6 @@ import { findSiteCandidates, pickWinningCandidate, getRelevantSites } from './si
 import { getOrderedSiteIds, setOrderedSiteIds, setLocalConfig } from '../config-handler';
 
 (async function () {
-  document.addEventListener("click", openLink);
-
   replaceContent(document.body, getLoadingMessage(document));
 
   const optionsOrError = await tryToExtractAndCreateOptions(document);
@@ -81,13 +79,6 @@ async function getDataFromContentScript(tabId: number, candidateSiteIds: string[
     return;
   }
 }
-
-function openLink(event: Event): void {
-  if (event.target instanceof HTMLAnchorElement) {
-    browser.tabs.create({ url: event.target.href });
-    event.preventDefault();
-  }
-} 
 
 function logUnexpectedError(e: any): void {
   const errorPrefix = 'OSM WebExtension ERROR';

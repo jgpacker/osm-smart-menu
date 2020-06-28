@@ -9,15 +9,25 @@ export type CustomUserOption = {
 export function createOptionsList(d: Document, sitesList: SiteLink[]): HTMLElement {
   const div = d.createElement('div');
 
-  sitesList.forEach(function (site) {
-      const anchor = d.createElement('a');
-      anchor.id = site.id;
-      anchor.href = site.url;
-      anchor.textContent = site.customName || browser.i18n.getMessage(`site_${site.id}`);
-      anchor.className = 'site';
+  const configLink = document.createElement('span');
+  configLink.textContent = browser.i18n.getMessage('configurationLink');
+  configLink.setAttribute('style',
+    'text-transform: lowercase; display: block; text-align: right; cursor: pointer; font-size: smaller; background-color: #f0f0f0');
+  configLink.setAttribute('role', 'link');
+  configLink.addEventListener('click', () => browser.runtime.openOptionsPage());
 
-      div.appendChild(anchor);
-    });
+  div.append(configLink);
+
+  sitesList.forEach(function (site) {
+    const anchor = d.createElement('a');
+    anchor.id = site.id;
+    anchor.href = site.url;
+    anchor.textContent = site.customName || browser.i18n.getMessage(`site_${site.id}`);
+    anchor.className = 'site';
+    anchor.addEventListener('click', openLink);
+
+    div.appendChild(anchor);
+  });
 
   return div;
 }
@@ -57,6 +67,7 @@ function insertLinkInsideText(d: Document, text: string, linkPlaceholder: string
   const anchor = d.createElement('a');
   anchor.href = link;
   anchor.textContent = linkText;
+  anchor.addEventListener('click', openLink);
   return [firstHalf, anchor, secondHalf];
 }
 
@@ -77,6 +88,13 @@ export function createBasicOptionCreationButton(
   div.append(button);
 
   return div;
+}
+
+function openLink(event: Event): void {
+  if (event.target instanceof HTMLAnchorElement) {
+    browser.tabs.create({ url: event.target.href });
+    event.preventDefault();
+  }
 }
 
 function buttonClick(createNewOption: (option: CustomUserOption) => Promise<void>) {

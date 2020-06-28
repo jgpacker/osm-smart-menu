@@ -5,8 +5,6 @@ import { Sites } from '../sites-configuration';
 
 const dragHandleClass = 'drag-handle';
 (async function () {
-  document.addEventListener("click", handleClick);
-
   const div = document.createElement('div');
 
   const orderedSiteIds = await getOrderedSiteIds();
@@ -32,6 +30,8 @@ const dragHandleClass = 'drag-handle';
     label.append(localConfig.customName || browser.i18n.getMessage(`site_${siteId}`));
     label.setAttribute('style', 'display: flex; padding: 1px 0 1px; align-items: center;');
 
+    label.addEventListener('click', labelClick);
+
     div.appendChild(label);
   });
 
@@ -49,7 +49,7 @@ const dragHandleClass = 'drag-handle';
 })();
 
 
-async function handleClick(event: Event) {
+async function labelClick(event: Event) {
   if (event.target instanceof HTMLInputElement) {
     const input = event.target;
     updateLocalConfig(input.name, {

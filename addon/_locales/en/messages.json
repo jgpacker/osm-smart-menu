@@ -29,6 +29,11 @@
     "description": "Shown in popup when an unknown website seems compatible with OpenStreetMap. After the button is clicked."
   },
 
+  "configurationLink": {
+    "message": "Configuration",
+    "description": "Link to configuration page inside main popup."
+  },
+
   "error_noAccess": {
     "message": "ERROR: Could not find or access current page.\nIf this is unexpected, please report it in $EXTENSION_SITE$.",
     "description": "Error shown inside popup when the current page cannot be accessed (technical exception)",
