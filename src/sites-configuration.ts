@@ -62,52 +62,6 @@ export const Sites: Record<string, SiteConfiguration> = {
     }
   },
 
-  bingmaps: {
-    link: "www.bing.com",
-    paramOpts: [
-      { ordered: "/maps?cp={lat}~{lon}&lvl={zoom}" }
-    ],
-    extractors: {
-      getAttributesFromPage: (window: Window) => {
-        // Known bug:
-        // If the user enters into bing.com/maps (i.e. without parameters) and doesn't move the
-        //    map around at least once, this script won't be able to extract any information.
-        if (window.history && window.history.state && window.history.state) {
-          // wrappedJSObject is a security feature from Firefox
-          const whs = window.history.state.wrappedJSObject || window.history.state;
-          if (whs && whs.state && whs.state.MapModeStateHistory) {
-            const m = whs.state.MapModeStateHistory;
-            if (m.level && typeof m.level === "number" && m.centerPoint && m.centerPoint.latitude && m.centerPoint.longitude
-              && typeof m.centerPoint.latitude === "number" && typeof m.centerPoint.longitude === "number") {
-              return {
-                lat: m.centerPoint.latitude.toString(),
-                lon: m.centerPoint.longitude.toString(),
-                zoom: m.level.toString(),
-              };
-            }
-          }
-        }
-        return {};
-      }
-    },
-  },
-
-  googlemaps: { // there is also maps.google.fr and so on
-    link: "www.google.com/maps", //redirected from maps.google.com
-    // TODO: otherDomainsRegExp: /.*.google.*/, // not sure whether that's the best way to go about it, but whatever
-    paramOpts: [
-      { ordered: "/@{lat},{lon},{zoom}z" }
-    ]
-  },
-
-  sentinelhub: {
-    link: "apps.sentinel-hub.com",
-    paramOpts: [
-      { ordered: "/sentinel-playground/", unordered: { "lat": "lat", "lon": "lng", "zoom": "zoom" }},
-      { ordered: "/eo-browser/", unordered: { "lat": "lat", "lon": "lng", "zoom": "zoom" }},
-    ],
-  },
-
   /* TODO: change to https://maps.openrouteservice.org/directions?n1=49.9445&n2=8.692953&n3=13&b=0&k1=en-US&k2=km
     openmapsurfer: {
       link: "korona.geog.uni-heidelberg.de",
@@ -125,6 +79,14 @@ export const Sites: Record<string, SiteConfiguration> = {
     extractors: {
       getPermalink: getPermalinkBySelector("a#permalink")
     },
+  },
+
+  hotmap: {
+    link: "map.hotosm.org",
+    httpOnly: true,
+    paramOpts: [
+      { ordered: "/#{zoom}/{lat}/{lon}" }
+    ]
   },
 
   openseamap: {
@@ -145,20 +107,21 @@ export const Sites: Record<string, SiteConfiguration> = {
     },
   },
 
-  opentopomap: {
-    link: "www.opentopomap.org",
+  sentinelhub: {
+    link: "apps.sentinel-hub.com",
     paramOpts: [
-      { ordered: "/#map={zoom}/{lat}/{lon}" },
-      { ordered: "/#marker={zoom}/{lat}/{lon}" },
+      { ordered: "/sentinel-playground/", unordered: { "lat": "lat", "lon": "lng", "zoom": "zoom" }},
+      { ordered: "/eo-browser/", unordered: { "lat": "lat", "lon": "lng", "zoom": "zoom" }},
     ],
   },
 
-  historicmap: {
-    link: "gk.historic.place/historische_objekte",
-    paramOpts: [urlPattern1],
-    maxZoom: 19,
+  mapcompare: {
+    link: "mc.bbbike.org",
+    paramOpts: [
+      { ordered: "/mc/", unordered: urlPattern1.unordered },
+    ],
     extractors: {
-      getPermalink: getPermalinkBySelector("a#permalink")
+      getPermalink: getPermalinkBySelector('[id*=permalink i] a'),
     },
   },
 
@@ -168,6 +131,75 @@ export const Sites: Record<string, SiteConfiguration> = {
     paramOpts: [
       { ordered: "/#map={zoom}/{lat}/{lon}" },
     ],
+  },
+
+
+  osmcha: {
+    link: 'osmcha.org',
+    paramOpts: [
+      { ordered: "/changesets/{changesetId}" },
+      { ordered: "/?filters=%7B%22users%22:[%7B%22label%22:%22%22,%22value%22:%22{userName}%22%7D]%7D" },
+    ],
+  },
+
+  osmdeephistory: {
+    link: "osmlab.github.io/osm-deep-history",
+    paramOpts: [
+      { ordered: "/#/node/{nodeId}" },
+      { ordered: "/#/way/{wayId}" },
+      { ordered: "/#/relation/{relationId}" }
+    ]
+  },
+
+  deepdiff: {
+    link: "osm.mapki.com",
+    httpOnly: true,
+    paramOpts: [
+      { ordered: "/history/node.php", unordered: { nodeId: "id" } },
+      { ordered: "/history/way.php", unordered: { wayId: "id" } },
+      { ordered: "/history/relation.php", unordered: { relationId: "id" } }
+    ]
+  },
+
+  osmhistoryviewer: {
+    link: "osmhv.openstreetmap.de",
+    paramOpts: [
+      { ordered: "/changeset.jsp", unordered: { changesetId: "id" } },
+      { ordered: "/blame.jsp", unordered: { relationId: "id" } }
+    ],
+    extractors: {
+      //TODO: getValues - we can get userName if it's a changeset analysis and maybe map coordinates on both cases
+    },
+  },
+
+  overpassapi: {
+    link: "overpass-api.de/achavi",
+    paramOpts: [
+      { ordered: "/", unordered: { changesetId: "changeset", zoom: "zoom", lat: "lat", lon: "lon" } },
+      { ordered: "/", unordered: { changesetId: "changeset" } }
+    ],
+    extractors: {
+      getPermalink: openLayers_getPermalink(),
+      //TODO: getValues - we can get userName if it's a changeset analysis and maybe map coordinates on both cases
+    },
+  },
+
+  howdidyoucontribute: {
+    link: "hdyc.neis-one.org",
+    paramOpts: [
+      { ordered: "/?{userName}" }
+    ],
+    extractors: {
+      getPermalink: getPermalinkBySelector('a[href*="//hdyc.neis-one.org/?"]'),
+    },
+  },
+
+  osmchangeviz: {
+    link: "resultmaps.neis-one.org",
+    paramOpts: [
+      { ordered: "/osm-change-viz?c={changesetId}" },
+      { ordered: "/osm-change-viz.php?c={changesetId}" },
+    ]
   },
 
   openptmap: {
@@ -208,37 +240,22 @@ export const Sites: Record<string, SiteConfiguration> = {
     ]
   },
 
-  hotmap: {
-    link: "map.hotosm.org",
-    httpOnly: true,
+  osmbuildings: {
+    link: "osmbuildings.org",
     paramOpts: [
-      { ordered: "/#{zoom}/{lat}/{lon}" }
+      urlPattern1, //TODO: &tilt=45&rotation=168
     ]
   },
 
-  openstreetcam: {
-    link: 'openstreetcam.org',
+  openlevelup: {
+    link: "openlevelup.net",
     paramOpts: [
-      { ordered: '/map/@{lat},{lon},{zoom}z' },
+      { ordered: "/#{zoom}/{lat}/{lon}" },
+      { ordered: "/?l=0#{zoom}/{lat}/{lon}" },
+      { ordered: "/?l=1#{zoom}/{lat}/{lon}" },
+      { ordered: "/?l=-1#{zoom}/{lat}/{lon}" }, // TODO: use getAttributesFromPage to ignore `?l=X` and get zoom/lat/lon
+      { ordered: "/old/", unordered: { "zoom": "z", "lat": "lat", "lon": "lon" } },
     ],
-  },
-
-  mapillary: {
-    link: "mapillary.com",
-    paramOpts: [ // Note: has a decimal zoom and numbers with high precision (15 digits)
-      { ordered: "/app", unordered: { zoom: "z", lat: "lat", lon: "lng" } }
-    ]
-  },
-
-  level0: {
-    link: "level0.osmz.ru",
-    httpOnly: true,
-    paramOpts: [
-      { ordered: "/?url=n{nodeId}" },
-      { ordered: "/?url=w{wayId}!" },
-      { ordered: "/?url=r{relationId}" },
-      //In the future, there might be a permalink for the mini-map: https://github.com/Zverik/Level0/issues/16
-    ]
   },
 
   umap: {
@@ -263,65 +280,73 @@ export const Sites: Record<string, SiteConfiguration> = {
     },
   },
 
-  osmdeephistory: {
-    link: "osmlab.github.io/osm-deep-history",
+  openstreetcam: {
+    link: 'openstreetcam.org',
     paramOpts: [
-      { ordered: "/#/node/{nodeId}" },
-      { ordered: "/#/way/{wayId}" },
-      { ordered: "/#/relation/{relationId}" }
-    ]
-  },
-
-  deepdiff: {
-    link: "osm.mapki.com",
-    httpOnly: true,
-    paramOpts: [
-      { ordered: "/history/node.php", unordered: { nodeId: "id" } },
-      { ordered: "/history/way.php", unordered: { wayId: "id" } },
-      { ordered: "/history/relation.php", unordered: { relationId: "id" } }
-    ]
-  },
-
-  osmhistoryviewer: {
-    link: "osmhv.openstreetmap.de",
-    paramOpts: [
-      { ordered: "/changeset.jsp", unordered: { changesetId: "id" } },
-      { ordered: "/blame.jsp", unordered: { relationId: "id" } }
-    ],
-    extractors: {
-      //TODO: getValues - we can get userName if it's a changeset analysis and maybe map coordinates on both cases
-    },
-  },
-
-  osmcha: {
-    link: 'osmcha.org',
-    paramOpts: [
-      { ordered: "/changesets/{changesetId}" },
-      { ordered: "/?filters=%7B%22users%22:[%7B%22label%22:%22%22,%22value%22:%22{userName}%22%7D]%7D" },
+      { ordered: '/map/@{lat},{lon},{zoom}z' },
     ],
   },
 
-  /* TODO: change to https://simon04.dev.openstreetmap.org/whodidit/
-  whodidit: {
-    link: "zverik.osm.rambler.ru/whodidit",
+  mapillary: {
+    link: "mapillary.com",
+    paramOpts: [ // Note: has a decimal zoom and numbers with high precision (15 digits)
+      { ordered: "/app", unordered: { zoom: "z", lat: "lat", lon: "lng" } }
+    ]
+  },
+
+  opentopomap: {
+    link: "www.opentopomap.org",
+    paramOpts: [
+      { ordered: "/#map={zoom}/{lat}/{lon}" },
+      { ordered: "/#marker={zoom}/{lat}/{lon}" },
+    ],
+  },
+
+  historicmap: {
+    link: "gk.historic.place/historische_objekte",
     paramOpts: [urlPattern1],
+    maxZoom: 19,
     extractors: {
-      //TODO: getValues - we may get an username or changeset info
-      getPermalink: openLayers_getPermalink()
+      getPermalink: getPermalinkBySelector("a#permalink")
     },
   },
-  */
 
-  overpassapi: {
-    link: "overpass-api.de/achavi",
+  bingmaps: {
+    link: "www.bing.com",
     paramOpts: [
-      { ordered: "/", unordered: { changesetId: "changeset", zoom: "zoom", lat: "lat", lon: "lon" } },
-      { ordered: "/", unordered: { changesetId: "changeset" } }
+      { ordered: "/maps?cp={lat}~{lon}&lvl={zoom}" }
     ],
     extractors: {
-      getPermalink: openLayers_getPermalink(),
-      //TODO: getValues - we can get userName if it's a changeset analysis and maybe map coordinates on both cases
+      getAttributesFromPage: (window: Window) => {
+        // Known bug:
+        // If the user enters into bing.com/maps (i.e. without parameters) and doesn't move the
+        //    map around at least once, this script won't be able to extract any information.
+        if (window.history && window.history.state && window.history.state) {
+          // wrappedJSObject is a security feature from Firefox
+          const whs = window.history.state.wrappedJSObject || window.history.state;
+          if (whs && whs.state && whs.state.MapModeStateHistory) {
+            const m = whs.state.MapModeStateHistory;
+            if (m.level && typeof m.level === "number" && m.centerPoint && m.centerPoint.latitude && m.centerPoint.longitude
+              && typeof m.centerPoint.latitude === "number" && typeof m.centerPoint.longitude === "number") {
+              return {
+                lat: m.centerPoint.latitude.toString(),
+                lon: m.centerPoint.longitude.toString(),
+                zoom: m.level.toString(),
+              };
+            }
+          }
+        }
+        return {};
+      }
     },
+  },
+
+  googlemaps: { // there is also maps.google.fr and so on
+    link: "www.google.com/maps", //redirected from maps.google.com
+    // TODO: otherDomainsRegExp: /.*.google.*/, // not sure whether that's the best way to go about it, but whatever
+    paramOpts: [
+      { ordered: "/@{lat},{lon},{zoom}z" }
+    ]
   },
 
   waze: {
@@ -360,6 +385,17 @@ export const Sites: Record<string, SiteConfiguration> = {
         return {};
       },
     },
+  },
+
+  level0: {
+    link: "level0.osmz.ru",
+    httpOnly: true,
+    paramOpts: [
+      { ordered: "/?url=n{nodeId}" },
+      { ordered: "/?url=w{wayId}!" },
+      { ordered: "/?url=r{relationId}" },
+      //In the future, there might be a permalink for the mini-map: https://github.com/Zverik/Level0/issues/16
+    ]
   },
 
   osmrelationanalyzer: {
@@ -403,58 +439,12 @@ export const Sites: Record<string, SiteConfiguration> = {
     },
   },
 
-  mapcompare: {
-    link: "mc.bbbike.org",
-    paramOpts: [
-      { ordered: "/mc/", unordered: urlPattern1.unordered },
-    ],
-    extractors: {
-      getPermalink: getPermalinkBySelector('[id*=permalink i] a'),
-    },
-  },
-
-  howdidyoucontribute: {
-    link: "hdyc.neis-one.org",
-    paramOpts: [
-      { ordered: "/?{userName}" }
-    ],
-    extractors: {
-      getPermalink: getPermalinkBySelector('a[href*="//hdyc.neis-one.org/?"]'),
-    },
-  },
-
-  osmchangeviz: {
-    link: "resultmaps.neis-one.org",
-    paramOpts: [
-      { ordered: "/osm-change-viz?c={changesetId}" },
-      { ordered: "/osm-change-viz.php?c={changesetId}" },
-    ]
-  },
-
   osmchangetiles: {
     link: "resultmaps.neis-one.org",
     paramOpts: [
       { ordered: "/osm-change-tiles#{zoom}/{lat}/{lon}" },
       { ordered: "/osm-change-tiles.php#{zoom}/{lat}/{lon}" }
     ]
-  },
-
-  osmbuildings: {
-    link: "osmbuildings.org",
-    paramOpts: [
-      urlPattern1, //TODO: &tilt=45&rotation=168
-    ]
-  },
-
-  openlevelup: {
-    link: "openlevelup.net",
-    paramOpts: [
-      { ordered: "/#{zoom}/{lat}/{lon}" },
-      { ordered: "/?l=0#{zoom}/{lat}/{lon}" },
-      { ordered: "/?l=1#{zoom}/{lat}/{lon}" },
-      { ordered: "/?l=-1#{zoom}/{lat}/{lon}" }, // TODO: use getAttributesFromPage to ignore `?l=X` and get zoom/lat/lon
-      { ordered: "/old/", unordered: { "zoom": "z", "lat": "lat", "lon": "lon" } },
-    ],
   },
 
   missingmaps: {
@@ -487,6 +477,16 @@ export const Sites: Record<string, SiteConfiguration> = {
     ]
   },
 
+*/
+/* TODO: change to https://simon04.dev.openstreetmap.org/whodidit/
+whodidit: {
+  link: "zverik.osm.rambler.ru/whodidit",
+  paramOpts: [urlPattern1],
+  extractors: {
+    //TODO: getValues - we may get an username or changeset info
+    getPermalink: openLayers_getPermalink()
+  },
+},
 */
 /*
   keepright: {
