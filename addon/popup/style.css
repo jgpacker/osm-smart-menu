@@ -29,6 +29,11 @@ html, body {
   white-space: nowrap;
   text-decoration: inherit;
   color: inherit;
+
+  /* helps to avoid large titles (at least while users cannot rename options) */
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+  max-width: 25ch;
 }
 
 .site:hover {
