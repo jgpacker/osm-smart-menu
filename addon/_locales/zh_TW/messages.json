@@ -1,0 +1,196 @@
+{
+  "extensionName": {
+    "message": "OSM 智慧選單"
+  },
+  "extensionShortName": {
+    "message": "OSMenu"
+  },
+  "extensionDescription": {
+    "message": "幫助開放街圖貢獻者簡單切換社群當中不同的地圖與分析工具。"
+  },
+  
+  "loading": {
+    "message": "載入中...\n如果沒有停止載入，請試著重新整理再試一次。",
+    "description": "在選單出現前很快顯示跳出視窗"
+  },
+
+  "newOptionDetected_notice": {
+    "message": "你想要新增這個網站到選單當中嗎？",
+    "description": "當未知網站與開放街圖相容時跳出視窗。在按鈕之前"
+  },
+ 
+  "newOptionDetected_buttonText": {
+    "message": "新增選項 (實驗性功能)",
+    "description": "當未知網站與開放街圖相容時跳出視窗。在按鈕之中"
+  },
+
+  "newOptionDetected_added": {
+    "message": "新增成功！",
+    "description": "當未知網站與開放街圖相容時跳出視窗。在按鈕按下之後"
+  },
+
+  "configurationLink": {
+    "message": "設定",
+    "description": "在主跳出視客的設定頁面連結。"
+  },
+
+  "error_noAccess": {
+    "message": "錯誤，無法找到或連線到目前頁面。\n如果這是非預期狀況，請到 $EXTENSION_SITE$ 回報。",
+    "description": "目前頁面無法連線時，錯誤訊息顯示在跳出視窗當中 (技術問題)",
+    "placeholders": {
+      "EXTENSION_SITE": {
+        "content": "$1",
+        "example": "github.com/jgpacker/osm-smart-menu/"
+      }
+    }
+  },
+  "error_incompatibleWebsite": {
+    "message": "錯誤：目前的網站與開放街圖並不相容。\n如果這並不是預期的狀況，請到 $EXTENSION_SITE$ 回報狀況。",
+    "description": "如果適當錯誤訊息顯示在跳出視窗當中",
+    "placeholders": {
+      "EXTENSION_SITE": {
+        "content": "$1",
+        "example": "github.com/jgpacker/osm-smart-menu/"
+      }
+    }
+  },
+  "error_noInformationExtracted": {
+    "message": "錯誤：如果網站被認可，但是無法適別參數時。\n如果你認為這是臭蟲的話，請到 $EXTENSION_SITE$ 回報狀況。",
+    "description": "如果適當錯誤訊息顯示在跳出視窗當中",
+    "placeholders": {
+      "EXTENSION_SITE": {
+        "content": "$1",
+        "example": "github.com/jgpacker/osm-smart-menu/"
+      }
+    }
+  },
+
+  "site_openstreetmap": {
+    "message": "開放街圖"
+  },
+  "site_bingmaps": {
+    "message": "Bing 地圖"
+  },
+  "site_googlemaps": {
+    "message": "Google 地圖"
+  },
+  "site_sentinelhub": {
+    "message": "Sentinel Hub"
+  },
+  "site_openmapsurfer": {
+    "message": "OpenMapSurfer"
+  },
+  "site_opencyclemap": {
+    "message": "開放單車地圖"
+  },
+  "site_openseamap": {
+    "message": "開放海洋地圖"
+  },
+  "site_opensnowmap": {
+    "message": "開放雪地地圖"
+  },
+  "site_opentopomap": {
+    "message": "OpenTopoMap"
+  },
+  "site_historicmap": {
+    "message": "歷史物件"
+  },
+  "site_openptmap": {
+    "message": "Open Public Transport Map"
+  },
+  "site_opnvkarte": {
+    "message": "ÖPNVKarte"
+  },
+  "site_stamen": {
+    "message": "Stamen Maps"
+  },
+  "site_f4map": {
+    "message": "F4 Map (3D 展示)"
+  },
+  "site_hotmap": {
+    "message": "人道救援開放街圖小組"
+  },
+  "site_openstreetcam": {
+    "message": "OpenStreetCam"
+  },
+  "site_mapillary": {
+    "message": "Mapillary"
+  },
+  "site_josm": {
+    "message": "JOSM 編輯器遠端啟用"
+  },
+  "site_level0": {
+    "message": "Level0 編輯器"
+  },
+  "site_umap": {
+    "message": "uMap"
+  },
+  "site_osmdeephistory": {
+    "message": "OSM Deep History"
+  },
+  "site_deepdiff": {
+    "message": "Deep Diff"
+  },
+  "site_osmhistoryviewer": {
+    "message": "OSM History Viewer"
+  },
+  "site_whodidit": {
+    "message": "WHODIDIT (Zverik)"
+  },
+  "site_overpassapi": {
+    "message": "Augmented OSM Change Viewer"
+  },
+  "site_osmrelationanalyzer": {
+    "message": "OSM Relation Analyzer"
+  },
+  "site_osmroutemanager": {
+    "message": "OSM Route Manager"
+  },
+  "site_osmose": {
+    "message": "Osmose"
+  },
+  "site_osminspector": {
+    "message": "OSM Inspector"
+  },
+  "site_mapcompare": {
+    "message": "Map Compare"
+  },
+  "site_keepright": {
+    "message": "keep right!"
+  },
+  "site_howdidyoucontribute": {
+    "message": "How did you contribute to OSM?"
+  },
+  "site_osmwiki": {
+    "message": "OpenStreetMap Wiki"
+  },
+  "site_taginfo": {
+    "message": "Taginfo"
+  },
+  "site_osmchangeviz": {
+    "message": "Changeset by Comparison (Neis)"
+  },
+  "site_osmchangetiles": {
+    "message": "Latest OSM Edits (Neis)"
+  },
+  "site_waze": {
+    "message": "Waze"
+  },
+  "site_openstreetbrowser": {
+    "message": "OpenStreetBrowser"
+  },
+  "site_osmcha": {
+    "message": "OSMCha"
+  },
+  "site_osmbuildings": {
+    "message": "OSM Buildings"
+  },
+  "site_openlevelup": {
+    "message": "OpenLevelUp!"
+  },
+  "site_missingmaps": {
+    "message": "Missing Maps"
+  },
+  "site_osmlanevisualizer": {
+    "message": "OSM Lane Visualizer"
+  }
