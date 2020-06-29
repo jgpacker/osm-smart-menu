@@ -12,7 +12,7 @@ export function createOptionsList(d: Document, sitesList: SiteLink[]): HTMLEleme
   const configLink = document.createElement('span');
   configLink.textContent = browser.i18n.getMessage('configurationLink');
   configLink.setAttribute('style',
-    'text-transform: lowercase; display: block; text-align: right; cursor: pointer; font-size: smaller; background-color: #f0f0f0');
+    `text-transform: lowercase; display: block; text-align: ${browser.i18n.getMessage('@@bidi_end_edge')}; cursor: pointer; font-size: smaller; background-color: #f0f0f0`);
   configLink.setAttribute('role', 'link');
   configLink.addEventListener('click', () => browser.runtime.openOptionsPage());
 
@@ -45,7 +45,7 @@ export enum KnownError {
   NO_INFORMATION_EXTRACTED = 'noInformationExtracted',
 }
 
-const OpenStreetMap = 'OpenStreetMap';
+const OpenStreetMap = browser.i18n.getMessage('site_openstreetmap');
 export function getErrorMessage(d: Document, error: KnownError): HTMLElement {
   const div = d.createElement('div');
   div.id = 'info';
