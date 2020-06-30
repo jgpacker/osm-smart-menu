@@ -22,7 +22,7 @@ const InfoRegExp: Record<string, string> = {
 
 
 export async function findSiteCandidates(url: string): Promise<string[]> {
-  const hostname = (new URL(url).hostname).replace("www.", "") // maybe add www in config
+  const hostname = (new URL(url).hostname)
   if (!hostname) return [];
 
   const orderedSiteIds = await getOrderedSiteIds();
@@ -173,22 +173,20 @@ export type UrlPattern = SimpleQuerystringPattern | HashWithNamedParametersPatte
 
 type SimpleQuerystringPattern = { // example https://apps.sentinel-hub.com/eo-browser/?lat=41.718&lng=12.014&zoom=8
   tag: 'qs',
-  querystringSubst: {
-    zoom: 'zoom' | 'z';
-    lon: 'lon' | 'lng';
-    lat: 'lat';
-  };
+  querystringSubst: NamedMapParameters;
   url: string;
 };
 
 type HashWithNamedParametersPattern = { // example https://www.osmhydrant.org/en/#zoom=14&lat=48.20168&lon=16.48777
   tag: 'hash-1',
-  hashParametersSubst: {
-    zoom: 'zoom' | 'z';
-    lon: 'lon' | 'lng';
-    lat: 'lat';
-  };
+  hashParametersSubst: NamedMapParameters;
   url: string;
+};
+
+type NamedMapParameters = {
+  zoom: 'zoom' | 'z';
+  lat: 'lat' | 'y';
+  lon: 'lon' | 'lng' | 'x';
 };
 
 type OsmLikePattern = { // example https://www.opengeofiction.net/#map=4/-16.51/-46.93
@@ -207,18 +205,16 @@ function detectAndExtractAttributesFromUrl(url: string): [UrlPattern | undefined
     return [osmLikePattern, osmLikePatternExtraction];
   }
 
+  let { zoom, lat, lon }: Partial<NamedMapParameters> = {};
   const sp = urlObj.searchParams;
-  if (sp.has('lat') &&
-    (sp.has('zoom') || sp.has('z')) &&
-    (sp.has('lon') || sp.has('lng'))
+  if (
+    (sp.has(zoom='zoom') || sp.has(zoom='z')) &&
+    (sp.has(lat='lat') || sp.has(lat='y')) &&
+    (sp.has(lon='lon') || sp.has(lon='lng') || sp.has(lon='x'))
   ) {
     const qsPattern: SimpleQuerystringPattern = {
       tag: 'qs',
-      querystringSubst: {
-        zoom: sp.has('zoom') ? 'zoom': 'z',
-        lat: 'lat',
-        lon: sp.has('lon') ? 'lon': 'lng',
-      },
+      querystringSubst: { zoom, lat, lon },
       url,
     };
     return [qsPattern, extractAttributesFromUrlPattern(urlObj, qsPattern)];
@@ -227,17 +223,14 @@ function detectAndExtractAttributesFromUrl(url: string): [UrlPattern | undefined
   const auxUrl = new URL(urlObj.toString());
   auxUrl.search = '?' + auxUrl.hash.substring(1);
   const auxSp = auxUrl.searchParams;
-  if (auxSp.has('lat') &&
-    (auxSp.has('zoom') || auxSp.has('z')) &&
-    (auxSp.has('lon') || auxSp.has('lng'))
+  if (
+    (auxSp.has(zoom='zoom') || auxSp.has(zoom='z')) &&
+    (auxSp.has(lat='lat') || auxSp.has(lat='y')) &&
+    (auxSp.has(lon='lon') || auxSp.has(lon='lng') || auxSp.has(lon='x'))
   ) {
     const hashPattern: HashWithNamedParametersPattern = {
       tag: 'hash-1',
-      hashParametersSubst: {
-        zoom: auxSp.has('zoom') ? 'zoom': 'z',
-        lat: 'lat',
-        lon: auxSp.has('lon') ? 'lon': 'lng',
-      },
+      hashParametersSubst: { zoom, lat, lon },
       url,
     };
     return [hashPattern, extractAttributesFromUrlPattern(urlObj, hashPattern)];

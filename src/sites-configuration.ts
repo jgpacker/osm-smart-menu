@@ -28,7 +28,7 @@ const urlPattern1: ParamOpt = { ordered: "/", unordered: { zoom: "zoom", lat: "l
 
 export const Sites: Record<string, SiteConfiguration> = {
   openstreetmap: {
-    link: "openstreetmap.org",
+    link: "www.openstreetmap.org",
     //icon: "www.openstreetmap.org/favicon.ico", // TODO: I will need to pre-download this because otherwise I need additional security permissions in the CSP
     paramOpts: [ // TODO: should I add {domain} at the start? it may be useful for sites that add something in a subdomain
       { ordered: "/node/{nodeId}#map={zoom}/{lat}/{lon}" },
@@ -288,7 +288,7 @@ export const Sites: Record<string, SiteConfiguration> = {
   },
 
   mapillary: {
-    link: "mapillary.com",
+    link: "www.mapillary.com",
     paramOpts: [ // Note: has a decimal zoom and numbers with high precision (15 digits)
       { ordered: "/app", unordered: { zoom: "z", lat: "lat", lon: "lng" } }
     ]
