@@ -47,17 +47,15 @@ export const Sites: Record<string, SiteConfiguration> = {
     ],
     extractors: {
       getAttributesFromPage: (window: Window): Partial<Record<OsmAttribute, string>> => {
-        if (window.location.pathname.startsWith('/edit')) {
-          // e.g. https://www.openstreetmap.org/edit?editor=id#map=18/-7.57646/110.94519
-          const matches = window.location.hash.match(/#map=([0-9.]+)\/([0-9.-]+)\/([0-9.-]+)/);
-          if (matches) {
-            const [, zoom, lat, lon ] = matches;
-            if (zoom && typeof zoom === 'string' && lat && typeof lat === 'string' && lon && typeof lon === 'string') {
-              return { zoom, lat, lon };
-            }
+        // e.g. https://www.openstreetmap.org/edit?editor=id#map=18/-7.57646/110.94519 or http://www.openstreetmap.org/way/263290462?locale=pt#map=17/-26.30144/-48.84531
+        const matches = window.location.hash.match(/#map=([0-9.]+)\/([0-9.-]+)\/([0-9.-]+)/);
+        if (matches) {
+          const [, zoom, lat, lon ] = matches;
+          if (zoom && lat && lon) {
+            return { zoom, lat, lon };
           }
         }
-        return {}
+        return {};
       }
     }
   },
