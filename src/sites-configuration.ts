@@ -255,6 +255,13 @@ export const Sites: Record<string, SiteConfiguration> = {
       { ordered: "/old/", unordered: { "zoom": "z", "lat": "lat", "lon": "lon" } },
     ],
   },
+    
+  indoorequal: {
+    link: "indoorequal.org",
+    paramOpts: [
+      urlPattern1,
+    ]
+  },
 
   umap: {
     link: "umap.openstreetmap.fr",
