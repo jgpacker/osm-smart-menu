@@ -82,9 +82,8 @@ export function createBasicOptionCreationButton(
 
   const button = d.createElement('button');
   button.textContent = browser.i18n.getMessage('newOptionDetected_buttonText');
-  button.setAttribute('data-configuration', JSON.stringify(newConfig));
   button.setAttribute('style', 'display: block; margin: 4px auto;');
-  button.addEventListener('click', buttonClick(createNewOption));
+  button.addEventListener('click', buttonClick(newConfig, createNewOption));
   div.append(button);
 
   return div;
@@ -97,10 +96,9 @@ function openLink(event: Event): void {
   }
 }
 
-function buttonClick(createNewOption: (option: CustomUserOption) => Promise<void>) {
+function buttonClick(newConfig: CustomUserOption, createNewOption: (option: CustomUserOption) => Promise<void>) {
   return async function(this: HTMLButtonElement, _ev: MouseEvent) {
-    const customUserOption: CustomUserOption = JSON.parse(this.getAttribute('data-configuration') || '');
-    await createNewOption(customUserOption);
+    await createNewOption(newConfig);
 
     const div = this.parentElement!;
     div.textContent = browser.i18n.getMessage('newOptionDetected_added');
