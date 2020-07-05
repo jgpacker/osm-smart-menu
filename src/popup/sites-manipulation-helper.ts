@@ -21,7 +21,8 @@ const InfoRegExp: Record<string, string> = {
 //TODO: should I add support for route information? (start, intermediary and end points, and maybe transport mode)
 
 export function findSiteCandidates(sitesConfiguration: SiteConfiguration[], url: string): string[] {
-  const hostname = (new URL(url).hostname)
+  if (!url) return [];
+  const hostname = (new URL(url).hostname);
   if (!hostname) return [];
 
   return sitesConfiguration
