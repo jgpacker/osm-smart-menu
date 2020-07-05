@@ -1,5 +1,5 @@
 import { browser } from "webextension-polyfill-ts";
-import { Sites } from "./sites-configuration";
+import { Sites, DefaultSiteConfiguration } from "./sites-configuration";
 import { UrlPattern } from "./popup/sites-manipulation-helper";
 
 export type LocalSiteConfiguration = {
@@ -67,4 +67,21 @@ export async function setOrderedSiteIds(orderedSiteIds: string[]): Promise<void>
   await browser.storage.local.set({
     [siteIdsOrderKey]: orderedSiteIds,
   });
+}
+
+export type SiteConfiguration = LocalSiteConfiguration & {
+  id: string;
+  defaultConfiguration?: DefaultSiteConfiguration;
+}
+
+export async function getSitesConfiguration(): Promise<SiteConfiguration[]> {
+  const orderedSiteIds = await getOrderedSiteIds();
+  return await Promise.all(orderedSiteIds.map(async (siteId): Promise<SiteConfiguration> => {
+    const localConfig = await getLocalConfig(siteId);
+    return {
+      id: siteId,
+      ...localConfig,
+      defaultConfiguration: Sites[siteId],
+    };
+  }));
 }

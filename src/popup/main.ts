@@ -2,7 +2,7 @@ import { browser } from 'webextension-polyfill-ts'
 import { ContentScriptOutputMessage, ContentScriptInputMessage } from '../injectable-content-script';
 import { getLoadingMessage, createOptionsList, getErrorMessage, KnownError, createBasicOptionCreationButton, CustomUserOption } from './html-content-creation';
 import { findSiteCandidates, pickWinningCandidate, getRelevantSites } from './sites-manipulation-helper';
-import { getOrderedSiteIds, setOrderedSiteIds, setLocalConfig } from '../config-handler';
+import { getOrderedSiteIds, setOrderedSiteIds, setLocalConfig, getSitesConfiguration } from '../config-handler';
 
 (async function () {
   replaceContent(document.body, getLoadingMessage(document));
@@ -23,11 +23,13 @@ async function tryToExtractAndCreateOptions(document: Document): Promise<HTMLEle
   if (!currentTab || !currentTab.url || !currentTab.id) {
     return getErrorMessage(document, KnownError.NO_ACCESS);
   }
+
+  const config = await getSitesConfiguration();
   
-  const candidateSiteIds = await findSiteCandidates(currentTab.url);
+  const candidateSiteIds = findSiteCandidates(config, currentTab.url);
 
   const contentScriptResult = await getDataFromContentScript(currentTab.id, candidateSiteIds);
-  const currentSite = contentScriptResult && (await pickWinningCandidate(contentScriptResult, currentTab.url));
+  const currentSite = contentScriptResult && pickWinningCandidate(config, contentScriptResult, currentTab.url);
   if (!currentSite) {
     if (candidateSiteIds.length === 0) {
       return getErrorMessage(document, KnownError.INCOMPATIBLE_WEBSITE);
@@ -36,7 +38,7 @@ async function tryToExtractAndCreateOptions(document: Document): Promise<HTMLEle
     }
   }
 
-  const sitesList = await getRelevantSites(currentSite.siteId, currentSite.attributes);
+  const sitesList = getRelevantSites(config, currentSite.siteId, currentSite.attributes);
   const htmlSitesList = createOptionsList(document, sitesList)
 
   if (currentSite.detectedPattern) {

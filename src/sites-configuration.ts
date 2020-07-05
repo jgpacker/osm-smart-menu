@@ -1,4 +1,4 @@
-export type SiteConfiguration = {
+export type DefaultSiteConfiguration = {
   link: string;
   paramOpts: ParamOpt[];
   extractors?: Extractors;
@@ -26,7 +26,7 @@ export type OsmAttribute =
 
 const urlPattern1: ParamOpt = { ordered: "/", unordered: { zoom: "zoom", lat: "lat", lon: "lon" } };
 
-export const Sites: Record<string, SiteConfiguration> = {
+export const Sites: Record<string, DefaultSiteConfiguration> = {
   openstreetmap: {
     link: "www.openstreetmap.org",
     //icon: "www.openstreetmap.org/favicon.ico", // TODO: I will need to pre-download this because otherwise I need additional security permissions in the CSP
