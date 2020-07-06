@@ -259,7 +259,7 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
   indoorequal: {
     link: "indoorequal.org",
     paramOpts: [
-      urlPattern1,
+      { ordered: "/#map={zoom}/{lat}/{lon}" },
     ]
   },
 

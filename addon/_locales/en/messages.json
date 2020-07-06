@@ -191,6 +191,9 @@
   "site_openlevelup": {
     "message": "OpenLevelUp!"
   },
+  "site_indoorequal": {
+    "message": "indoor="
+  },
   "site_missingmaps": {
     "message": "Missing Maps"
   },
