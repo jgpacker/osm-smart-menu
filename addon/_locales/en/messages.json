@@ -95,6 +95,9 @@
   "site_historicmap": {
     "message": "Historical Objects"
   },
+  "site_openinframap": {
+    "message": "Open Infrastructure Map "
+  },
   "site_openptmap": {
     "message": "Open Public Transport Map"
   },

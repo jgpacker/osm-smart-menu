@@ -309,6 +309,13 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
     },
   },
 
+  openinframap: { // TODO: adjust zoom level
+    link: 'openinframap.org',
+    paramOpts: [
+      { ordered: '/#{zoom}/{lat}/{lon}' },
+    ],
+  },
+
   bingmaps: {
     link: "www.bing.com",
     paramOpts: [
