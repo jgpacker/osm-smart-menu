@@ -6,17 +6,19 @@ export type CustomUserOption = {
   urlPattern: UrlPattern;
 }
 
-export function createOptionsList(d: Document, sitesList: SiteLink[]): HTMLElement {
-  const div = d.createElement('div');
-
-  const configLink = document.createElement('span');
+export function createConfigurationLink(d: Document): HTMLElement {
+  const configLink = d.createElement('span');
   configLink.textContent = browser.i18n.getMessage('configurationLink');
   configLink.setAttribute('style',
     `text-transform: lowercase; display: block; text-align: ${browser.i18n.getMessage('@@bidi_end_edge')}; cursor: pointer; font-size: smaller; background-color: #f0f0f0`);
   configLink.setAttribute('role', 'link');
   configLink.addEventListener('click', () => browser.runtime.openOptionsPage());
 
-  div.append(configLink);
+  return configLink;
+}
+
+export function createOptionsList(d: Document, sitesList: SiteLink[]): HTMLElement {
+  const div = d.createElement('div');
 
   sitesList.forEach(function (site) {
     const anchor = d.createElement('a');

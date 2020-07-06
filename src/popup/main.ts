@@ -1,20 +1,22 @@
 import { browser } from 'webextension-polyfill-ts'
 import { ContentScriptOutputMessage, ContentScriptInputMessage } from '../injectable-content-script';
-import { getLoadingMessage, createOptionsList, getErrorMessage, KnownError, createBasicOptionCreationButton, CustomUserOption } from './html-content-creation';
+import { getLoadingMessage, createOptionsList, getErrorMessage, KnownError, createBasicOptionCreationButton, CustomUserOption, createConfigurationLink } from './html-content-creation';
 import { findSiteCandidates, pickWinningCandidate, getRelevantSites } from './sites-manipulation-helper';
 import { getOrderedSiteIds, setOrderedSiteIds, setLocalConfig, getSitesConfiguration } from '../config-handler';
 
-(async function () {
-  replaceContent(document.body, getLoadingMessage(document));
+(function () {
+  const configLink = createConfigurationLink(document);
+  replaceContent(document.body, [configLink, getLoadingMessage(document)]);
 
-  const optionsOrError = await tryToExtractAndCreateOptions(document);
-  replaceContent(document.body, optionsOrError);
+  tryToExtractAndCreateOptions(document).then(optionsOrError =>
+    replaceContent(document.body, [configLink, optionsOrError])
+  );
 })();
 
-function replaceContent(parent: HTMLElement, child: HTMLElement): void {
+function replaceContent(parent: HTMLElement, children: HTMLElement[]): void {
   while (parent.firstChild) parent.firstChild.remove();
   parent.textContent = '';
-  parent.append(child);
+  children.forEach(child => parent.append(child));
 }
 
 async function tryToExtractAndCreateOptions(document: Document): Promise<HTMLElement> {
