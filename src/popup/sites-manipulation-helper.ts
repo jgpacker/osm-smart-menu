@@ -11,7 +11,6 @@ const InfoRegExp: Record<string, string> = {
   wayId: naturalNumberRegExp,
   relationId: naturalNumberRegExp,
   tracesId: naturalNumberRegExp,
-  userId: naturalNumberRegExp,
   userName: "[^#?\/]+", // any character except URL separator characters
   changesetId: naturalNumberRegExp,
   zoom: positiveDecimalNumberRegExp, //believe it or not, some websites accept a decimal zoom. TODO: verify if any site has a problem having a decimal zoom as a parameter

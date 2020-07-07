@@ -1,5 +1,6 @@
 import { browser } from "webextension-polyfill-ts";
-import { SiteLink, UrlPattern } from "./sites-manipulation-helper";
+import { SiteLink, UrlPattern, getRelevantSites } from "./sites-manipulation-helper";
+import { SiteConfiguration } from "../config-handler";
 
 export type CustomUserOption = {
   defaultName: string;
@@ -32,6 +33,21 @@ export function createOptionsList(d: Document, sitesList: SiteLink[]): HTMLEleme
   });
 
   return div;
+}
+
+export function createShowAllSitesButton(document: Document, sites: SiteConfiguration[]): HTMLElement {
+  const button = document.createElement('button');
+  button.setAttribute('style', 'margin: 5px; text-align: center;');
+  button.textContent = browser.i18n.getMessage('button_showEnabledLinks');
+  button.addEventListener('click', () => {
+    const basicData: Record<string, string> = {
+      zoom: '3',
+      lat: '23.00',
+      lon: '24.43',
+    };
+    button.replaceWith(createOptionsList(document, getRelevantSites(sites, undefined, basicData)));
+  });
+  return button;
 }
 
 export function getLoadingMessage(d: Document): HTMLElement {

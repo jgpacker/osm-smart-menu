@@ -65,6 +65,11 @@
     }
   },
 
+  "button_showEnabledLinks": {
+    "message": "Show enabled links using basic parameters",
+    "description": "Shown below some errors to allow user to see enabled websites."
+  },
+
   "site_openstreetmap": {
     "message": "OpenStreetMap"
   },

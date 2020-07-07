@@ -1,6 +1,6 @@
 import { browser } from 'webextension-polyfill-ts'
 import { ContentScriptOutputMessage, ContentScriptInputMessage } from '../injectable-content-script';
-import { getLoadingMessage, createOptionsList, getErrorMessage, KnownError, createBasicOptionCreationButton, CustomUserOption, createConfigurationLink } from './html-content-creation';
+import { getLoadingMessage, createOptionsList, getErrorMessage, KnownError, createBasicOptionCreationButton, CustomUserOption, createConfigurationLink, createShowAllSitesButton } from './html-content-creation';
 import { findSiteCandidates, pickWinningCandidate, getRelevantSites } from './sites-manipulation-helper';
 import { getOrderedSiteIds, setOrderedSiteIds, setLocalConfig, getSitesConfiguration } from '../config-handler';
 
@@ -9,7 +9,7 @@ import { getOrderedSiteIds, setOrderedSiteIds, setLocalConfig, getSitesConfigura
   replaceContent(document.body, [configLink, getLoadingMessage(document)]);
 
   tryToExtractAndCreateOptions(document).then(optionsOrError =>
-    replaceContent(document.body, [configLink, optionsOrError])
+    replaceContent(document.body, [configLink].concat(optionsOrError))
   );
 })();
 
@@ -19,24 +19,25 @@ function replaceContent(parent: HTMLElement, children: HTMLElement[]): void {
   children.forEach(child => parent.append(child));
 }
 
-async function tryToExtractAndCreateOptions(document: Document): Promise<HTMLElement> {
+async function tryToExtractAndCreateOptions(document: Document): Promise<HTMLElement[]> {
   const tabs = await browser.tabs.query({ active: true, currentWindow: true });
   const currentTab = tabs[0];
   if (!currentTab || !currentTab.url || !currentTab.id) {
-    return getErrorMessage(document, KnownError.NO_ACCESS);
+    return [getErrorMessage(document, KnownError.NO_ACCESS)];
   }
 
   const config = await getSitesConfiguration();
   
   const candidateSiteIds = findSiteCandidates(config, currentTab.url);
 
-  const contentScriptResult = await getDataFromContentScript(currentTab.id, candidateSiteIds);
+  const contentScriptResult = await getDataFromContentScript(currentTab.id, candidateSiteIds) ;
   const currentSite = contentScriptResult && pickWinningCandidate(config, contentScriptResult, currentTab.url);
   if (!currentSite) {
+    const button = createShowAllSitesButton(document, config)
     if (candidateSiteIds.length === 0) {
-      return getErrorMessage(document, KnownError.INCOMPATIBLE_WEBSITE);
+      return [getErrorMessage(document, KnownError.INCOMPATIBLE_WEBSITE), button];
     } else {
-      return getErrorMessage(document, KnownError.NO_INFORMATION_EXTRACTED);
+      return [getErrorMessage(document, KnownError.NO_INFORMATION_EXTRACTED), button];
     }
   }
 
@@ -48,13 +49,13 @@ async function tryToExtractAndCreateOptions(document: Document): Promise<HTMLEle
       urlPattern: currentSite.detectedPattern,
       defaultName: currentTab.title || '???',
     };
-    htmlSitesList.insertBefore(
+    return [
       createBasicOptionCreationButton(document, customUserOption, createNewOption),
-      htmlSitesList.firstElementChild
-    );
+      htmlSitesList,
+    ];
+  } else {
+    return [htmlSitesList];
   }
-
-  return htmlSitesList;
 }
 
 async function createNewOption(customUserOption: CustomUserOption): Promise<void> {
