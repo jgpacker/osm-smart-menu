@@ -25,7 +25,7 @@ export function createOptionsList(d: Document, sitesList: SiteLink[]): HTMLEleme
     const anchor = d.createElement('a');
     anchor.id = site.id;
     anchor.href = site.url;
-    anchor.textContent = site.customName || browser.i18n.getMessage(`site_${site.id}`);
+    anchor.textContent = site.customName || browser.i18n.getMessage(`site_${site.id}`) || '???';
     anchor.className = 'site';
     anchor.addEventListener('click', openLink);
 
@@ -37,7 +37,7 @@ export function createOptionsList(d: Document, sitesList: SiteLink[]): HTMLEleme
 
 export function createShowAllSitesButton(document: Document, sites: SiteConfiguration[]): HTMLElement {
   const button = document.createElement('button');
-  button.setAttribute('style', 'margin: 5px; text-align: center;');
+  button.setAttribute('style', 'margin: 5px; text-align: center; display: block;');
   button.textContent = browser.i18n.getMessage('button_showEnabledLinks');
   button.addEventListener('click', () => {
     const basicData: Record<string, string> = {

@@ -78,7 +78,7 @@ export function pickWinningCandidate(
 export type SiteLink = {
   id: string;
   url: string;
-  customName?: string;
+  customName: string | undefined;
 }
 
 export function getRelevantSites(
@@ -89,6 +89,7 @@ export function getRelevantSites(
   return sitesConfiguration.map(function (site): SiteLink | undefined {
     if (site.id == currentSiteId || !site.isEnabled) return undefined;
 
+    const { id, customName } = site;
     if (site.defaultConfiguration) {
       const chosenOption = site.defaultConfiguration.paramOpts.find(function (paramOpt) {
         const [orderedParameters, unorderedParameters] = extractParametersFromParamOpt(paramOpt);
@@ -105,7 +106,8 @@ export function getRelevantSites(
         const path = applyParametersToUrl(chosenOption, attributes);
         const protocol = site.defaultConfiguration.httpOnly ? 'http' : 'https';
         return {
-          id: site.id,
+          id,
+          customName,
           url: `${protocol}://${site.defaultConfiguration.link}${path}`,
         };
       }
@@ -114,7 +116,6 @@ export function getRelevantSites(
         const { zoom, lat, lon } = retrievedAttributes;
         const url = applyParametersToUrlPattern(site.customPattern, { zoom, lat, lon });
         if (url) {
-          const { id, customName } = site;
           return { id, customName, url };
         }
       }

@@ -31,6 +31,14 @@
     "message": "Configurações"
   },
 
+  "config_editButton": {
+    "message": "Editar"
+  },
+
+  "config_saveButton": {
+    "message": "Salvar"
+  },
+
   "error_noAccess": {
     "message": "ERRO: Não foi possível encontrar ou acessar a página atual.\nSe isto for inesperado, por favor relate isto em $EXTENSION_SITE$.",
     "placeholders": { "EXTENSION_SITE": { "content": "$1" } }

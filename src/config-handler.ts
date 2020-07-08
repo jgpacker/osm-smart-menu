@@ -8,7 +8,7 @@ export type LocalSiteConfiguration = {
   customPattern?: UrlPattern;
 }
 
-export async function getLocalConfig(siteId: string): Promise<LocalSiteConfiguration> {
+async function getLocalConfig(siteId: string): Promise<LocalSiteConfiguration> {
   const defaultSiteConfig: LocalSiteConfiguration = {
     isEnabled: true,
   }
@@ -76,12 +76,16 @@ export type SiteConfiguration = LocalSiteConfiguration & {
 
 export async function getSitesConfiguration(): Promise<SiteConfiguration[]> {
   const orderedSiteIds = await getOrderedSiteIds();
-  return await Promise.all(orderedSiteIds.map(async (siteId): Promise<SiteConfiguration> => {
-    const localConfig = await getLocalConfig(siteId);
-    return {
-      id: siteId,
-      ...localConfig,
-      defaultConfiguration: Sites[siteId],
-    };
-  }));
+  return await Promise.all(orderedSiteIds.map(async (siteId): Promise<SiteConfiguration> =>
+    getSiteConfiguration(siteId)
+  ));
+}
+
+export async function getSiteConfiguration(siteId: string): Promise<SiteConfiguration> {
+  const localConfig = await getLocalConfig(siteId);
+  return {
+    id: siteId,
+    ...localConfig,
+    defaultConfiguration: Sites[siteId],
+  };
 }
