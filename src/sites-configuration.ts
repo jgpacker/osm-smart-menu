@@ -6,6 +6,8 @@ export type DefaultSiteConfiguration = {
   // it's only necessary to specify `maxZoom` if the website
   // doesn't handle gracefully a `zoom` parameter above their range
   maxZoom?: number;
+  // how much should be added to make this link's zoom level equivalent to OpenStreetMap's zoom level ?
+  zoomAdjustment?: number;
 }
 
 export type ParamOpt = {
@@ -242,7 +244,8 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
     link: "osmbuildings.org",
     paramOpts: [
       urlPattern1, //TODO: &tilt=45&rotation=168
-    ]
+    ],
+    // Obs: minZoom=15
   },
 
   openlevelup: {
@@ -260,7 +263,8 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
     link: "indoorequal.org",
     paramOpts: [
       { ordered: "/#map={zoom}/{lat}/{lon}" },
-    ]
+    ],
+    zoomAdjustment: +1,
   },
 
   umap: {
@@ -290,13 +294,15 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
     paramOpts: [
       { ordered: '/map/@{lat},{lon},{zoom}z' },
     ],
+    zoomAdjustment: +1,
   },
 
   mapillary: {
     link: "www.mapillary.com",
-    paramOpts: [ // Note: has a decimal zoom and numbers with high precision (15 digits)
+    paramOpts: [
       { ordered: "/app", unordered: { zoom: "z", lat: "lat", lon: "lng" } }
-    ]
+    ],
+    zoomAdjustment: +1,
   },
 
   opentopomap: {
@@ -316,11 +322,12 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
     },
   },
 
-  openinframap: { // TODO: adjust zoom level
+  openinframap: {
     link: 'openinframap.org',
     paramOpts: [
       { ordered: '/#{zoom}/{lat}/{lon}' },
     ],
+    zoomAdjustment: +1,
   },
 
   bingmaps: {
@@ -366,10 +373,11 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
     paramOpts: [
       { ordered: "/livemap/directions?latlng={lat}%2C{lon}" },
       { ordered: "/en/livemap/directions?latlng={lat}%2C{lon}" },
-      { ordered: "/editor", unordered: { lat: "lat", lon: "lon", /* zoom: "zoom", not compatible with OSM zoom levels */ } },
+      { ordered: "/editor", unordered: { lat: "lat", lon: "lon", zoom: "zoom" } },
     ],
+    zoomAdjustment: +12,
     extractors: {
-      getPermalink: getPermalinkBySelector("a#permalink"),
+      getPermalink: getPermalinkBySelector("a.permalink"), // works in "editor" page i.e. https://www.waze.com/editor?env=row&lon=-49.24037&lat=-16.68915&s=70749461&zoom=
       getAttributesFromPage: (window: Window): Partial<Record<OsmAttribute, string>> => {
         const latLngElement = window.document.querySelector('.wm-attribution-control__latlng');
         if (latLngElement) {
@@ -380,20 +388,10 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
             if (lat && lon) return {
               lat,
               lon,
-              zoom: '15', // zoom level when reloading page (approximately)
+              zoom: '3', // zoom level when reloading page (approximately), minus `zoomAdjustment` attribute
             };
           }
         };
-        const permalink = window.document.querySelector('a.permalink') as HTMLAnchorElement | null;
-        if (permalink) {
-          // works in "editor" page i.e. https://www.waze.com/editor?env=row&lon=-49.24037&lat=-16.68915&s=70749461&zoom=
-          const url = new URL(permalink.href);
-          if (url) {
-            const wazeZoom: number = parseInt(url.searchParams.get('zoom') || '0');
-            const osmZoom = wazeZoom + 12;
-            return { zoom: osmZoom.toString() };
-          }
-        }
         return {};
       },
     },

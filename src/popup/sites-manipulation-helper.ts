@@ -50,7 +50,11 @@ export function pickWinningCandidate(
 
   let extractedAttributes: Record<string, string>;
   let detectedPattern: UrlPattern | undefined;
-  const site = head.siteId && sitesConfiguration.find((site) => head.siteId === site.id);
+  let site: SiteConfiguration | undefined;
+  if (head.siteId) {
+    site = sitesConfiguration.find((site) => head.siteId === site.id);
+  } else site = undefined;
+
   if (site) {
     if (site.defaultConfiguration) {
       extractedAttributes = extractAttributesFromUrl(url, site.defaultConfiguration);
@@ -69,9 +73,21 @@ export function pickWinningCandidate(
   } else {
     return {
       siteId: head.siteId,
-      attributes: allExtractedAttributes,
+      attributes: adjustZoom(site, allExtractedAttributes),
       detectedPattern,
     };
+  }
+}
+
+function adjustZoom(config: SiteConfiguration | undefined, extractedAttributes: Record<string, string>): Record<string, string> {
+  if (extractedAttributes.zoom && config && config.defaultConfiguration && config.defaultConfiguration.zoomAdjustment) {
+    const nZoom = Number(extractedAttributes.zoom);
+    return {
+      ...extractedAttributes,
+      zoom: (nZoom + config.defaultConfiguration.zoomAdjustment).toString(),
+    }
+  } else {
+    return extractedAttributes;
   }
 }
 
@@ -343,9 +359,16 @@ function applyParametersToUrl(option: ParamOpt, retrievedAttributes: Record<stri
 }
 
 function reviewZoom(site: DefaultSiteConfiguration, zoom: string): string {
-  const maxZoom = site && site.maxZoom;
-  if (maxZoom) {
-    return Math.min(Number(zoom), maxZoom).toString()
+  if (site) {
+    const { maxZoom, zoomAdjustment } = site;
+    let nZoom = Number(zoom);
+    if (zoomAdjustment) {
+      nZoom = nZoom - zoomAdjustment;
+    }
+    if (maxZoom) {
+      nZoom = Math.min(nZoom, maxZoom);
+    }
+    return nZoom.toString();
   } else {
     return zoom;
   }

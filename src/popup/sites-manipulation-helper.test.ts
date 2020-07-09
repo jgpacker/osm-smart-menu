@@ -34,14 +34,102 @@ describe(pickWinningCandidate.name, () => {
     const expectedOutput = { siteId: aDefaultSiteConfig.id, attributes: inputAttributes[0].additionalAttributes };
     expect(pickWinningCandidate([aDefaultSiteConfig], inputAttributes, 'https://example.com/')).toEqual(expectedOutput);
   });
+  describe('zoom', () => {
+    test('with zoomAdjustment=1', () => {
+      const inputAttributes = [{siteId:aDefaultSiteConfig.id, additionalAttributes: { zoom: '1', lat: '2', lon: '3'}}];
+      const siteConfigWithAdjustment: SiteConfiguration = {
+        ...aDefaultSiteConfig,
+        defaultConfiguration: { ...aDefaultSiteConfig.defaultConfiguration!, zoomAdjustment: 1 },
+      };
+      const expectedOutput = {
+        siteId: aDefaultSiteConfig.id,
+        attributes: { ...inputAttributes[0].additionalAttributes, zoom: '2' },
+      };
+      expect(pickWinningCandidate([siteConfigWithAdjustment], inputAttributes, 'https://example.com/')).toEqual(expectedOutput);
+    });
+    test('with zoomAdjustment=12', () => {
+      const inputAttributes = [{siteId:aDefaultSiteConfig.id, additionalAttributes: { zoom: '5', lat: '6', lon: '7'}}];
+      const siteConfigWithAdjustment: SiteConfiguration = {
+        ...aDefaultSiteConfig,
+        defaultConfiguration: { ...aDefaultSiteConfig.defaultConfiguration!, zoomAdjustment: 12 },
+      };
+      const expectedOutput = {
+        siteId: aDefaultSiteConfig.id,
+        attributes: { ...inputAttributes[0].additionalAttributes, zoom: '17' },
+      };
+      expect(pickWinningCandidate([siteConfigWithAdjustment], inputAttributes, 'https://example.com/')).toEqual(expectedOutput);
+    });
+  });
 });
 
 describe(getRelevantSites.name, () => {
+  const zll567_attributes = { zoom: '5', lat: '6', lon: '7'};
+
   test('empty input gives empty output', () => {
     expect(getRelevantSites([], '', {})).toEqual([]);
   });
   test('applies zoom,lat,lon to a site', () => {
-    const expectedOutput = [{ id: aDefaultSiteConfig.id, url: 'https://example.com/#map=1/2/3' }];
-    expect(getRelevantSites([aDefaultSiteConfig], '', { zoom: '1', lat: '2', lon: '3'})).toEqual(expectedOutput);
+    const expectedOutput = [{ id: aDefaultSiteConfig.id, url: 'https://example.com/#map=5/6/7' }];
+    expect(getRelevantSites([aDefaultSiteConfig], '', zll567_attributes)).toEqual(expectedOutput);
+  });
+  describe('zoom', () => {
+    test('with zoomAdjustment=1', () => {
+      const expectedOutput = [{ id: aDefaultSiteConfig.id, url: 'https://example.com/#map=4/6/7' }];
+      const siteConfigWithAdjustment: SiteConfiguration = {
+        ...aDefaultSiteConfig,
+        defaultConfiguration: { ...aDefaultSiteConfig.defaultConfiguration!, zoomAdjustment: 1 },
+      };
+      expect(getRelevantSites([siteConfigWithAdjustment], '', zll567_attributes)).toEqual(expectedOutput);
+    });
+    test('with zoomAdjustment=3', () => {
+      const expectedOutput = [{ id: aDefaultSiteConfig.id, url: 'https://example.com/#map=2/6/7' }];
+      const siteConfigWithAdjustment: SiteConfiguration = {
+        ...aDefaultSiteConfig,
+        defaultConfiguration: { ...aDefaultSiteConfig.defaultConfiguration!, zoomAdjustment: 3 },
+      };
+      expect(getRelevantSites([siteConfigWithAdjustment], '', zll567_attributes)).toEqual(expectedOutput);
+    });
+    test('with maxZoom smaller than zoom', () => {
+      const expectedOutput = [{ id: aDefaultSiteConfig.id, url: 'https://example.com/#map=3/6/7' }];
+      const siteConfigWithAdjustment: SiteConfiguration = {
+        ...aDefaultSiteConfig,
+        defaultConfiguration: { ...aDefaultSiteConfig.defaultConfiguration!, maxZoom: 3 },
+      };
+      expect(getRelevantSites([siteConfigWithAdjustment], '', zll567_attributes)).toEqual(expectedOutput);
+    });
+    test('with maxZoom greater than zoom', () => {
+      const expectedOutput = [{ id: aDefaultSiteConfig.id, url: 'https://example.com/#map=5/6/7' }];
+      const siteConfigWithAdjustment: SiteConfiguration = {
+        ...aDefaultSiteConfig,
+        defaultConfiguration: { ...aDefaultSiteConfig.defaultConfiguration!, maxZoom: 6 },
+      };
+      expect(getRelevantSites([siteConfigWithAdjustment], '', zll567_attributes)).toEqual(expectedOutput);
+    });
+    test('with maxZoom greater than a decimal zoom', () => {
+      const expectedOutput = [{ id: aDefaultSiteConfig.id, url: 'https://example.com/#map=9.2109/6/7' }];
+      const siteConfigWithAdjustment: SiteConfiguration = {
+        ...aDefaultSiteConfig,
+        defaultConfiguration: { ...aDefaultSiteConfig.defaultConfiguration!, maxZoom: 10 },
+      };
+      const input = { ...zll567_attributes, zoom: '9.2109' };
+      expect(getRelevantSites([siteConfigWithAdjustment], '', input)).toEqual(expectedOutput);
+    });
+
+    test('with maxZoom equal to zoom', () => {
+      const expectedOutput = [{ id: aDefaultSiteConfig.id, url: 'https://example.com/#map=5/6/7' }];
+      const siteConfigWithAdjustment: SiteConfiguration = {
+        ...aDefaultSiteConfig,
+        defaultConfiguration: { ...aDefaultSiteConfig.defaultConfiguration!, maxZoom: 5 },
+      };
+      expect(getRelevantSites([siteConfigWithAdjustment], '', zll567_attributes)).toEqual(expectedOutput);
+    });
+    test('with maxZoom greater than zoom AND zoomAdjustment', () => {
+      const expectedOutput = [{ id: aDefaultSiteConfig.id, url: 'https://example.com/#map=2/6/7' }];
+      const siteConfigWithAdjustment: SiteConfiguration = {
+        ...aDefaultSiteConfig,
+        defaultConfiguration: { ...aDefaultSiteConfig.defaultConfiguration!, maxZoom: 3, zoomAdjustment: 3 },
+      };
+      expect(getRelevantSites([siteConfigWithAdjustment], '', zll567_attributes)).toEqual(expectedOutput);
+    });
   });
 });
