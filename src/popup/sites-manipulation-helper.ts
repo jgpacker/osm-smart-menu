@@ -29,8 +29,12 @@ export function findSiteCandidates(sitesConfiguration: SiteConfiguration[], url:
       if (site.customPattern && site.customPattern.url) {
         return site.customPattern.url.includes(hostname);
       }
-      else if (site.defaultConfiguration && site.defaultConfiguration.link) {
-        return site.defaultConfiguration.link.includes(hostname);
+      else if (site.defaultConfiguration) {
+        if (site.defaultConfiguration.domainRegexp) {
+          return site.defaultConfiguration.domainRegexp.test(hostname);
+        } else {
+          return site.defaultConfiguration.link.includes(hostname);
+        }
       }
       else return false;
     })

@@ -1,5 +1,6 @@
 export type DefaultSiteConfiguration = {
   link: string;
+  domainRegexp?: RegExp,
   paramOpts: ParamOpt[];
   extractors?: Extractors;
   httpOnly?: boolean;
@@ -360,8 +361,9 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
     },
   },
 
-  googlemaps: { // there is also maps.google.fr and so on
+  googlemaps: {
     link: "www.google.com/maps", //redirected from maps.google.com
+    domainRegexp: /\.google\.(com?|cat|xxx|(com?\.)?[a-z]{2})$/,
     // TODO: otherDomainsRegExp: /.*.google.*/, // not sure whether that's the best way to go about it, but whatever
     paramOpts: [
       { ordered: "/@{lat},{lon},{zoom}z" }
