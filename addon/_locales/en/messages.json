@@ -45,7 +45,7 @@
   },
 
   "error_noAccess": {
-    "message": "ERROR: Could not find or access current page.\nIf this is unexpected, please report it in $EXTENSION_SITE$.",
+    "message": "ERROR: Could not find or access current page.\nIf this page is still loading, try again.\nIf this is unexpected, please report it in $EXTENSION_SITE$.",
     "description": "Error shown inside popup when the current page cannot be accessed (technical exception)",
     "placeholders": {
       "EXTENSION_SITE": {
@@ -55,7 +55,7 @@
     }
   },
   "error_incompatibleWebsite": {
-    "message": "ERROR: Current site was not recognized as compatible with OpenStreetMap.\nIf this is unexpected, you can report it in $EXTENSION_SITE$.",
+    "message": "No map or OpenStreetMap parameters were found.\nIf this is unexpected, you can report it in $EXTENSION_SITE$.",
     "description": "Error shown inside popup when appropriate",
     "placeholders": {
       "EXTENSION_SITE": {
@@ -65,7 +65,7 @@
     }
   },
   "error_noInformationExtracted": {
-    "message": "ERROR: The website was recognized, but it's parameters were not understood.\nIf you believe this is a bug, please report it in $EXTENSION_SITE$.",
+    "message": "The website was recognized, but no parameters were found.\nIf this is a map, try to move it a little to initialize it's parameters.\nIf this looks like a bug, please report it in $EXTENSION_SITE$.",
     "description": "Error shown inside popup when appropriate",
     "placeholders": {
       "EXTENSION_SITE": {

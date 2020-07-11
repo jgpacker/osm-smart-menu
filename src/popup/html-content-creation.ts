@@ -69,8 +69,8 @@ export function getErrorMessage(d: Document, error: KnownError): HTMLElement {
   div.id = 'info';
   const linkPlaceholder = '__LINK__';
   const text = browser.i18n.getMessage(`error_${error}`, linkPlaceholder);
-  const linkText = 'github.com/jgpacker/osm-smart-menu/';
-  insertLinkInsideText(d, text, linkPlaceholder, `https://${linkText}blob/master/README.md`, linkText).forEach((node) => {
+  const linkText = 'jgpacker/osm-smart-menu';
+  insertLinkInsideText(d, text, linkPlaceholder, `https://github.com/${linkText}/blob/master/README.md#osm-smart-menu`, linkText).forEach((node) => {
     if (typeof node === 'string' && node.includes(OpenStreetMap)) {
       insertLinkInsideText(d, node, OpenStreetMap, 'https://openstreetmap.org', OpenStreetMap).forEach((node) => div.append(node))
     } else {

@@ -40,15 +40,15 @@
   },
 
   "error_noAccess": {
-    "message": "ERRO: Não foi possível encontrar ou acessar a página atual.\nSe isto for inesperado, por favor relate isto em $EXTENSION_SITE$.",
+    "message": "ERRO: Não foi possível encontrar ou acessar a página atual.\nSe a página ainda está carregando, tente novamente.\nSe isto for inesperado, por favor relate isto em $EXTENSION_SITE$.",
     "placeholders": { "EXTENSION_SITE": { "content": "$1" } }
   },
   "error_incompatibleWebsite": {
-    "message": "ERRO: O site atual não foi reconhecido como compatível com OpenStreetMap.\nSe isto for inesperado, você pode relatar isto em $EXTENSION_SITE$.",
+    "message": "Não foram encontrados parâmetros de mapa ou do OpenStreetMap.\nSe isto parece ser um bug, por favor relate em $EXTENSION_SITE$.",
     "placeholders": { "EXTENSION_SITE": { "content": "$1" } }
   },
   "error_noInformationExtracted": {
-    "message": "ERRO: O site foi reconhecido, mas seus parâmetros não foram.\nSe você acredita que isto é um bug, por favor relate em $EXTENSION_SITE$.",
+    "message": "O site foi reconhecido, mas seus parâmetros não foram encontrados.\nSe isto é um mapa, tente mexer nele um pouco para inicializar seus parâmetros.\nSe isto parece ser um bug, por favor relate em $EXTENSION_SITE$.",
     "placeholders": { "EXTENSION_SITE": { "content": "$1" } }
   },
 
