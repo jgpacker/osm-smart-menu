@@ -38,6 +38,18 @@
   "config_saveButton": {
     "message": "Salvar"
   },
+  "config_pattern_formTitle": {
+    "message": "Criação avançada de opção (experimental)"
+  },
+  "config_pattern_name": {
+    "message": "Nome"
+  },
+  "config_pattern_urlTemplate": {
+    "message": "Padrão de URL"
+  },
+  "config_pattern_createOption": {
+    "message": "Criar opção"
+  },
 
   "error_noAccess": {
     "message": "ERRO: Não foi possível encontrar ou acessar a página atual.\nSe a página ainda está carregando, tente novamente.\nSe isto for inesperado, por favor relate isto em $EXTENSION_SITE$.",

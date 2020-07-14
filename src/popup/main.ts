@@ -2,7 +2,7 @@ import { browser } from 'webextension-polyfill-ts'
 import { ContentScriptOutputMessage, ContentScriptInputMessage } from '../injectable-content-script';
 import { getLoadingMessage, createOptionsList, getErrorMessage, KnownError, createBasicOptionCreationButton, CustomUserOption, createConfigurationLink, createShowAllSitesButton } from './html-content-creation';
 import { findSiteCandidates, pickWinningCandidate, getRelevantSites } from './sites-manipulation-helper';
-import { getOrderedSiteIds, setOrderedSiteIds, setLocalConfig, getSitesConfiguration } from '../config-handler';
+import { getSitesConfiguration, addNewUrlPattern } from '../config-handler';
 
 (function () {
   const configLink = createConfigurationLink(document);
@@ -16,7 +16,7 @@ import { getOrderedSiteIds, setOrderedSiteIds, setLocalConfig, getSitesConfigura
 function replaceContent(parent: HTMLElement, children: HTMLElement[]): void {
   while (parent.firstChild) parent.firstChild.remove();
   parent.textContent = '';
-  children.forEach(child => parent.append(child));
+  parent.append(...children);
 }
 
 async function tryToExtractAndCreateOptions(document: Document): Promise<HTMLElement[]> {
@@ -49,6 +49,8 @@ async function tryToExtractAndCreateOptions(document: Document): Promise<HTMLEle
       urlPattern: currentSite.detectedPattern,
       defaultName: currentTab.title || '???',
     };
+    const createNewOption = async ({ defaultName, urlPattern }: CustomUserOption) =>
+      await addNewUrlPattern(defaultName, urlPattern);
     return [
       createBasicOptionCreationButton(document, customUserOption, createNewOption),
       htmlSitesList,
@@ -57,21 +59,6 @@ async function tryToExtractAndCreateOptions(document: Document): Promise<HTMLEle
     return [htmlSitesList];
   }
 }
-
-async function createNewOption(customUserOption: CustomUserOption): Promise<void> {
-  const siteId = encodeURIComponent(customUserOption.urlPattern.url);
-
-  await setLocalConfig(siteId, {
-    isEnabled: true,
-    customName: customUserOption.defaultName,
-    customPattern: customUserOption.urlPattern,
-  })
-
-  await setOrderedSiteIds(
-    [siteId].concat(await getOrderedSiteIds())
-  );
-}
-
 
 async function getDataFromContentScript(tabId: number, candidateSiteIds: string[]): Promise<ContentScriptOutputMessage | undefined> {
   try {

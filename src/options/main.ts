@@ -1,9 +1,10 @@
 import { getSitesConfiguration } from '../config-handler';
-import { createConfigurableSitesList } from './html-content-creation';
+import { createConfigurableSitesList, createUrlPatternInput } from './html-content-creation';
 
 (async function () {
   const sitesConfig = await getSitesConfiguration();
   const optionsLayout = createConfigurableSitesList(document, sitesConfig);
+  const urlPatternInput = createUrlPatternInput(document);
 
-  document.body.append(optionsLayout);
+  document.body.append(optionsLayout, urlPatternInput);
 })();

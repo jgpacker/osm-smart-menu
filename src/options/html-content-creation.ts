@@ -1,6 +1,7 @@
-import { SiteConfiguration, updateLocalConfig, setOrderedSiteIds, getSiteConfiguration } from "../config-handler";
+import { SiteConfiguration, updateLocalConfig, setOrderedSiteIds, getSiteConfiguration, addNewUrlPattern } from "../config-handler";
 import { browser } from "webextension-polyfill-ts";
 import dragula from 'dragula';
+import { UrlPattern } from "../popup/sites-manipulation-helper";
 
 const dragHandleClass = 'drag-handle';
 
@@ -96,4 +97,60 @@ async function saveNewTitle(siteId: string, newTitle: string): Promise<SiteConfi
     customName: newTitle,
   });
   return getSiteConfiguration(siteId);
+}
+
+export function createUrlPatternInput(d: Document): HTMLElement {
+  const form = d.createElement('form');
+  form.action = '#';
+  form.setAttribute('style', 'margin-top: 10px;');
+  const fieldset = d.createElement('fieldset');
+  form.append(fieldset);
+
+  const sectionTitle = d.createElement('legend');
+  sectionTitle.textContent = browser.i18n.getMessage('config_pattern_formTitle');
+  fieldset.append(sectionTitle);
+
+  const inputStyle = 'display: block; margin-bottom: 5px';
+
+  const nameLabel = d.createElement('label');
+  nameLabel.textContent = browser.i18n.getMessage('config_pattern_name');
+  nameLabel.setAttribute('style', ';');
+  fieldset.append(nameLabel);
+
+  const nameInput = d.createElement('input');
+  nameInput.type = 'text';
+  nameInput.setAttribute('style', inputStyle);
+  nameInput.required = true;
+  nameLabel.append(nameInput);
+
+  const urlLabel = d.createElement('label');
+  urlLabel.textContent = browser.i18n.getMessage('config_pattern_urlTemplate');
+  fieldset.append(urlLabel);
+  const urlInput = d.createElement('input');
+  urlInput.type = 'url';
+  urlInput.placeholder = 'https://www.openstreetmap.org/#map={zoom}/{latitude}/{longitude}';
+  urlInput.setAttribute('style', inputStyle);
+  urlInput.required = true;
+  urlInput.pattern = // must contain curly braces; but only with known parameters
+    /([^{}]+\{(zoom|latitude|longitude|osm_(user_name|(changeset|node|way|relation)_id))\})+[^{}]*/.source;
+  urlLabel.append(urlInput);
+
+  const submitButton = d.createElement('input');
+  submitButton.type = 'submit'
+  submitButton.value = browser.i18n.getMessage('config_pattern_createOption');
+
+  fieldset.append(submitButton);
+
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault(); // needed to ensure this async function executes completely
+    await addNewUserUrl(nameInput.value, urlInput.value);
+    window.location.reload();
+  });
+
+  return form;
+}
+
+async function addNewUserUrl(name: string, url: string) {
+  const urlPattern: UrlPattern = { tag: 'user-v1', url };
+  await addNewUrlPattern(name, urlPattern);
 }

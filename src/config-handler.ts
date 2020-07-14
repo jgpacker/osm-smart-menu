@@ -44,6 +44,21 @@ export async function setLocalConfig(siteId: string, config: LocalSiteConfigurat
   await browser.storage.local.set(newConfig);
 }
 
+export async function addNewUrlPattern(name: string, urlPattern: UrlPattern): Promise<void> {
+  const timestamp = Date.now();
+  const siteId = encodeURIComponent(`${timestamp}_${urlPattern.url}`);
+
+  await setLocalConfig(siteId, {
+    isEnabled: true,
+    customName: name,
+    customPattern: urlPattern,
+  })
+
+  await setOrderedSiteIds(
+    [siteId].concat(await getOrderedSiteIds())
+  );
+};
+
 const siteIdsOrderKey = 'sites-order';
 const defaultSiteIdsOrder = Object.keys(Sites);
 export async function getOrderedSiteIds(): Promise<string[]> {

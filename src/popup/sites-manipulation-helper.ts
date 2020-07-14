@@ -1,4 +1,4 @@
-import { DefaultSiteConfiguration, ParamOpt } from "../sites-configuration";
+import { DefaultSiteConfiguration, ParamOpt, OsmAttribute } from "../sites-configuration";
 import { ContentScriptOutputMessage } from "../injectable-content-script";
 import { SiteConfiguration } from "../config-handler";
 
@@ -132,9 +132,8 @@ export function getRelevantSites(
         };
       }
     } else {
-      if (site.customPattern && retrievedAttributes.zoom && retrievedAttributes.lat && retrievedAttributes.lon) {
-        const { zoom, lat, lon } = retrievedAttributes;
-        const url = applyParametersToUrlPattern(site.customPattern, { zoom, lat, lon });
+      if (site.customPattern) {
+        const url = applyParametersToUrlPattern(site.customPattern, retrievedAttributes);
         if (url) {
           return { id, customName, url };
         }
@@ -144,7 +143,28 @@ export function getRelevantSites(
   }).filter((s): s is SiteLink => Boolean(s));
 }
 
+const userUrlParametersMap: Record<string, OsmAttribute> = {
+  zoom: 'zoom', latitude: 'lat',  longitude: 'lon', osm_changeset_id: 'changesetId',
+  osm_user_name: 'userName', osm_node_id: 'nodeId', osm_way_id: 'wayId', osm_relation_id: 'relationId',
+};
+
 function applyParametersToUrlPattern(urlPattern: UrlPattern, retrievedAttributes: Record<string, string>): string | undefined {
+  const { zoom, lat, lon } = retrievedAttributes;
+  if (urlPattern.tag === 'user-v1') {
+    let url = urlPattern.url.toLowerCase();
+    const parameters = extractBracetParameters(url);
+    const hasNecessaryParameters = parameters.every(key => userUrlParametersMap[key] in retrievedAttributes);
+    if (!hasNecessaryParameters) return undefined;
+
+    parameters.forEach(function (key: string) {
+      url = url.replace('{' + key + '}', retrievedAttributes[userUrlParametersMap[key]]);
+    });
+    return url;
+  }
+  else if (!zoom || !lat || !lon) {
+    return undefined;
+  }
+
   const urlObj = new URL(urlPattern.url);
   if (urlPattern.tag === 'hash-2') {
     const matchArray = urlObj.hash.match(/(#[a-z=]*)([0-9.]+)(\/)([0-9.-]+)(\/)([0-9.-]+)(.*)/);
@@ -173,16 +193,16 @@ function applyParametersToUrlPattern(urlPattern: UrlPattern, retrievedAttributes
   return _exhaustivenessCheck;
 }
 
-export type UrlPattern = SimpleQuerystringPattern | HashWithNamedParametersPattern | OsmLikePattern;
+export type UrlPattern = SimpleQuerystringPattern | HashWithNamedParametersPattern | OsmLikePattern | UserUrlPattern;
 
 type SimpleQuerystringPattern = { // example https://apps.sentinel-hub.com/eo-browser/?lat=41.718&lng=12.014&zoom=8
-  tag: 'qs',
+  tag: 'qs';
   querystringSubst: NamedMapParameters;
   url: string;
 };
 
 type HashWithNamedParametersPattern = { // example https://www.osmhydrant.org/en/#zoom=14&lat=48.20168&lon=16.48777
-  tag: 'hash-1',
+  tag: 'hash-1';
   hashParametersSubst: NamedMapParameters;
   url: string;
 };
@@ -194,7 +214,12 @@ type NamedMapParameters = {
 };
 
 type OsmLikePattern = { // example https://www.opengeofiction.net/#map=4/-16.51/-46.93
-  tag: 'hash-2',
+  tag: 'hash-2';
+  url: string;
+};
+
+type UserUrlPattern = {
+  tag: 'user-v1';
   url: string;
 };
 
@@ -246,7 +271,7 @@ function detectAndExtractAttributesFromUrl(url: string): [UrlPattern | undefined
 function extractAttributesFromUrlPattern(url: URL, urlPattern: UrlPattern): Record<string, string> {
   if (urlPattern.tag === 'hash-2') {
     const attributes = extractOsmPatternExtraction(url);
-    if (attributes) return attributes
+    return attributes || {};
   }
   else if (urlPattern.tag === 'qs') {
     const zoom = url.searchParams.get(urlPattern.querystringSubst.zoom);
@@ -254,7 +279,7 @@ function extractAttributesFromUrlPattern(url: URL, urlPattern: UrlPattern): Reco
     const lon = url.searchParams.get(urlPattern.querystringSubst.lon);
     if (zoom && lat && lon) {
       return { zoom, lat, lon };
-    }
+    } else return {};
   }
   else if (urlPattern.tag === 'hash-1') {
     const auxUrl = new URL(url.toString());
@@ -264,10 +289,14 @@ function extractAttributesFromUrlPattern(url: URL, urlPattern: UrlPattern): Reco
     const lon = auxUrl.searchParams.get(urlPattern.hashParametersSubst.lon);
     if (zoom && lat && lon) {
       return { zoom, lat, lon };
-    }
+    } else return {};
+  }
+  else if (urlPattern.tag === 'user-v1') {
+    return {}; // not implemented yet
   }
 
-  return {};
+  const _exhaustivenessCheck: never = urlPattern;
+  return _exhaustivenessCheck;
 }
 
 function extractAttributesFromUrl(url: string, siteConfig: DefaultSiteConfiguration): Record<string, string> {
@@ -321,24 +350,22 @@ function extractOsmPatternExtraction(url: URL): Record<string, string> | undefin
   return undefined;
 }
 
-function extractParametersFromParamOpt(paramOpt: ParamOpt) {
-  const necessaryParameters = [];
+function extractParametersFromParamOpt(paramOpt: ParamOpt): [string[], string[]] {
+  return [
+    extractBracetParameters(paramOpt.ordered),
+    paramOpt.unordered ? Object.keys(paramOpt.unordered): [],
+  ];
+}
+
+function extractBracetParameters(s: string): string[] {
   const fieldGetterRegExp = /\{([^\}]+)\}/g;
-  const orderedParameters = []
-  let match;
-  while (match = fieldGetterRegExp.exec(paramOpt.ordered)) {
+  const parametersFound = [];
+  let match: RegExpExecArray | null;
+  while (match = fieldGetterRegExp.exec(s)) {
     const attributeNameWithoutBraces = match[1];
-    orderedParameters.push(attributeNameWithoutBraces);
+    parametersFound.push(attributeNameWithoutBraces);
   }
-  necessaryParameters.push(orderedParameters);
-
-  if (paramOpt.unordered) {
-    necessaryParameters.push(Object.keys(paramOpt.unordered));
-  } else {
-    necessaryParameters.push([]);
-  }
-
-  return necessaryParameters;
+  return parametersFound;
 }
 
 /* gets an "interpolable" string and applies the parameters from an object into it, returning a new string */

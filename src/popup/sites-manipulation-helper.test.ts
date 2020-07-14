@@ -110,6 +110,13 @@ describe(getRelevantSites.name, () => {
     const expectedOutput = [{ id: aDefaultSiteConfig.id, url: 'https://example.com/#map=5/6/7' }];
     expect(getRelevantSites([aDefaultSiteConfig], '', zll567_attributes)).toEqual(expectedOutput);
   });
+  test('applies zoom,lat,lon to a user-v1 pattern', () => {
+    const basicPattern: SiteConfiguration =
+      {id: 'an-id', isEnabled: true, customName: 'a-name', customPattern:
+        {tag: 'user-v1', url: 'https://www.openstreetmap.org/#map={zoom}/{latitude}/{longitude}'}};
+    const expectedOutput = [{ id: basicPattern.id, customName: basicPattern.customName, url: 'https://www.openstreetmap.org/#map=5/6/7'}];
+    expect(getRelevantSites([basicPattern], '', zll567_attributes)).toEqual(expectedOutput);
+  });
   describe('zoom', () => {
     test('with zoomAdjustment=1', () => {
       const expectedOutput = [{ id: aDefaultSiteConfig.id, url: 'https://example.com/#map=4/6/7' }];
