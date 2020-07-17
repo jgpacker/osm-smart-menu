@@ -110,6 +110,12 @@ describe(getRelevantSites.name, () => {
     const expectedOutput = [{ id: aDefaultSiteConfig.id, url: 'https://example.com/#map=5/6/7' }];
     expect(getRelevantSites([aDefaultSiteConfig], '', zll567_attributes)).toEqual(expectedOutput);
   });
+  test('applies changeset id to osm site', () => {
+    const basicPattern: SiteConfiguration =
+      {id: 'an-id', isEnabled: true, customName: 'a-name', defaultConfiguration: Sites.openstreetmap};
+    const expectedOutput = [{ id: basicPattern.id, customName: basicPattern.customName, url: 'https://www.openstreetmap.org/changeset/83729'}];
+    expect(getRelevantSites([basicPattern], '', { changesetId: '83729'})).toEqual(expectedOutput);
+  });
   test('applies zoom,lat,lon to a user-v1 pattern', () => {
     const basicPattern: SiteConfiguration =
       {id: 'an-id', isEnabled: true, customName: 'a-name', customPattern:
@@ -117,6 +123,14 @@ describe(getRelevantSites.name, () => {
     const expectedOutput = [{ id: basicPattern.id, customName: basicPattern.customName, url: 'https://www.openstreetmap.org/#map=5/6/7'}];
     expect(getRelevantSites([basicPattern], '', zll567_attributes)).toEqual(expectedOutput);
   });
+  test('user-v1 pattern is case-sensitive', () => {
+    const basicPattern: SiteConfiguration =
+      {id: 'an-id', isEnabled: true, customName: 'a-name', customPattern:
+        {tag: 'user-v1', url: 'https://www.waze.com/pt-BR/editor?env=row&lon={longitude}&lat={latitude}&zoom=7'}};
+    const expectedOutput = [{ id: basicPattern.id, customName: basicPattern.customName, url: 'https://www.waze.com/pt-BR/editor?env=row&lon=7&lat=6&zoom=7'}];
+    expect(getRelevantSites([basicPattern], '', zll567_attributes)).toEqual(expectedOutput);
+  });
+
   describe('zoom', () => {
     test('with zoomAdjustment=1', () => {
       const expectedOutput = [{ id: aDefaultSiteConfig.id, url: 'https://example.com/#map=4/6/7' }];

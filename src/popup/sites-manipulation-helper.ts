@@ -151,8 +151,8 @@ const userUrlParametersMap: Record<string, OsmAttribute> = {
 function applyParametersToUrlPattern(urlPattern: UrlPattern, retrievedAttributes: Record<string, string>): string | undefined {
   const { zoom, lat, lon } = retrievedAttributes;
   if (urlPattern.tag === 'user-v1') {
-    let url = urlPattern.url.toLowerCase();
-    const parameters = extractBracetParameters(url);
+    let { url } = urlPattern;
+    const parameters = extractBracetParameters(url.toLowerCase());
     const hasNecessaryParameters = parameters.every(key => userUrlParametersMap[key] in retrievedAttributes);
     if (!hasNecessaryParameters) return undefined;
 
