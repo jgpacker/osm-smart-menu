@@ -77,13 +77,13 @@ export function pickWinningCandidate(
   } else {
     return {
       siteId: head.siteId,
-      attributes: adjustZoom(site, allExtractedAttributes),
+      attributes: withAdjustedZoom(site, allExtractedAttributes),
       detectedPattern,
     };
   }
 }
 
-function adjustZoom(config: SiteConfiguration | undefined, extractedAttributes: Record<string, string>): Record<string, string> {
+function withAdjustedZoom(config: SiteConfiguration | undefined, extractedAttributes: Record<string, string>): Record<string, string> {
   if (extractedAttributes.zoom && config && config.defaultConfiguration && config.defaultConfiguration.zoomAdjustment) {
     const nZoom = Number(extractedAttributes.zoom);
     return {
@@ -220,7 +220,7 @@ type OsmLikePattern = { // example https://www.opengeofiction.net/#map=4/-16.51/
 
 type UserUrlPattern = {
   tag: 'user-v1';
-  url: string;
+  url: string; // template with bracet parameters
 };
 
 function detectAndExtractAttributesFromUrl(url: string): [UrlPattern | undefined, Record<string, string>] {

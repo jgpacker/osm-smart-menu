@@ -1,4 +1,4 @@
-import { SiteConfiguration, updateLocalConfig, setOrderedSiteIds, getSiteConfiguration, addNewUrlPattern } from "../config-handler";
+import { SiteConfiguration, updateStoredConfig, setOrderedSiteIds, getSiteConfiguration, addNewUrlPattern, deleteUrlPattern } from "../config-handler";
 import { browser } from "webextension-polyfill-ts";
 import dragula from 'dragula';
 import { UrlPattern } from "../popup/sites-manipulation-helper";
@@ -17,15 +17,16 @@ export function createConfigurableSitesList(d: Document, sitesConfig: SiteConfig
 
   d.body.append(div);
 
-  const dragAndDropHandler = dragula([div], {
-    moves: (_el, _container, handle) => Boolean(handle && handle.classList.contains(dragHandleClass))
-  });
-  dragAndDropHandler.on('drop', (_el, _target, _source, _sibling) => {
+  const updateSiteIdsOrder = async () => {
     const orderedSitesWithId = [
       ...d.querySelectorAll('div input[type=checkbox]'),
     ].map((input: Element) => (input as HTMLInputElement).name)
-    setOrderedSiteIds(orderedSitesWithId);
+    await setOrderedSiteIds(orderedSitesWithId);
+  };
+  const dragAndDropHandler = dragula([div], {
+    moves: (_el, _container, handle) => Boolean(handle && handle.classList.contains(dragHandleClass))
   });
+  dragAndDropHandler.on('drop', updateSiteIdsOrder);
 
   return div;
 }
@@ -54,6 +55,7 @@ function createConfigurableLine(d: Document, siteConfig: SiteConfiguration, edit
     titleInput.type = 'text';
     titleInput.setAttribute('style', 'width: 100%; margin-right: 2px;');
     titleInput.value = siteTitle;
+    label.append(titleInput)
 
     const saveButton = d.createElement('button');
     saveButton.setAttribute('style', 'margin-left: auto;');
@@ -62,17 +64,36 @@ function createConfigurableLine(d: Document, siteConfig: SiteConfiguration, edit
       const newConfig = await saveNewTitle(siteConfig.id, titleInput.value);
       label.replaceWith(createConfigurableLine(d, newConfig, !editable));
     });
-
-    label.append(titleInput)
     label.append(saveButton);
+
+    if (siteConfig.customPattern) {
+      const deleteButton = d.createElement('button');
+      deleteButton.setAttribute('style', 'margin-left: 2px;');
+      deleteButton.textContent = browser.i18n.getMessage('config_deleteButton');
+      deleteButton.addEventListener('click', async () => {
+        await deleteUrlPattern(siteConfig.id);
+        const deletedMessage = d.createElement('div');
+        deletedMessage.textContent = browser.i18n.getMessage('config_linkDeleted', siteTitle);
+        deletedMessage.setAttribute('style',
+          'text-align: center; background-color: #f0f0f0; border-radius: 2px; cursor: pointer; padding: 3px; margin: 1px 0;'
+        );
+        deletedMessage.setAttribute('role', 'link');
+        deletedMessage.addEventListener('click', async () => {
+          await addNewUrlPattern(siteConfig.customName || '???', siteConfig.customPattern!, siteConfig.isEnabled);
+          window.location.reload();
+        });
+        label.replaceWith(deletedMessage);
+      });
+      label.append(deleteButton);
+    }
   } else {
     label.append(siteTitle);
 
     const editButton = d.createElement('button');
     editButton.textContent = browser.i18n.getMessage('config_editButton');
     editButton.setAttribute('style', 'margin-left: auto;');
-    editButton.addEventListener('click', () => 
-      label.replaceWith(createConfigurableLine(d, siteConfig, !editable))
+    editButton.addEventListener('click', async () => 
+      label.replaceWith(createConfigurableLine(d, (await getSiteConfiguration(siteConfig.id)), !editable))
     );
   
     label.append(editButton);
@@ -86,14 +107,14 @@ function createConfigurableLine(d: Document, siteConfig: SiteConfiguration, edit
 async function labelClick(event: Event) {
   if (event.target instanceof HTMLInputElement) {
     const input = event.target;
-    updateLocalConfig(input.name, {
+    await updateStoredConfig(input.name, {
       isEnabled: input.checked,
     });
   }
 }
 
 async function saveNewTitle(siteId: string, newTitle: string): Promise<SiteConfiguration> {
-  await updateLocalConfig(siteId, {
+  await updateStoredConfig(siteId, {
     customName: newTitle,
   });
   return getSiteConfiguration(siteId);

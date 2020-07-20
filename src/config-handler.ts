@@ -2,62 +2,71 @@ import { browser } from "webextension-polyfill-ts";
 import { Sites, DefaultSiteConfiguration } from "./sites-configuration";
 import { UrlPattern } from "./popup/sites-manipulation-helper";
 
-export type LocalSiteConfiguration = {
+export type StoredConfiguration = {
   isEnabled: boolean;
   customName?: string;
   customPattern?: UrlPattern;
 }
 
-async function getLocalConfig(siteId: string): Promise<LocalSiteConfiguration> {
-  const defaultSiteConfig: LocalSiteConfiguration = {
+const getConfigKey = (siteId: string) => `site_${siteId}`;
+
+async function getStoredConfig(siteId: string): Promise<StoredConfiguration> {
+  const defaultSiteConfig: StoredConfiguration = {
     isEnabled: true,
   }
-  const key = `site_${siteId}`;
+  const key = getConfigKey(siteId);
   const storedObject = await browser.storage.local.get(key);
   if (typeof storedObject === "object" && storedObject &&
     typeof storedObject[key] === "object" && storedObject[key]
   ) {
     const s = storedObject[key];
-    const localSiteConfig: LocalSiteConfiguration = {
+    const siteConfig: StoredConfiguration = {
       isEnabled: typeof s.isEnabled !== "undefined"? s.isEnabled: defaultSiteConfig.isEnabled,
       customName: s.customName,
       customPattern: s.customPattern,
     };
-    return localSiteConfig
+    return siteConfig
   } else {
     return defaultSiteConfig;
   }
 }
 
-export async function updateLocalConfig(siteId: string, config: Partial<LocalSiteConfiguration>): Promise<void> {
-  const oldConfig = await getLocalConfig(siteId);
-  await setLocalConfig(siteId, {
+export async function updateStoredConfig(siteId: string, config: Partial<StoredConfiguration>): Promise<void> {
+  const oldConfig = await getStoredConfig(siteId);
+  await setStoredConfig(siteId, {
     ...oldConfig,
     ...config
   });
 }
 
-export async function setLocalConfig(siteId: string, config: LocalSiteConfiguration): Promise<void> {
+export async function setStoredConfig(siteId: string, config: StoredConfiguration): Promise<void> {
   const newConfig = {
-    [`site_${siteId}`]: config,
+    [getConfigKey(siteId)]: config,
   };
   await browser.storage.local.set(newConfig);
 }
 
-export async function addNewUrlPattern(name: string, urlPattern: UrlPattern): Promise<void> {
+export async function addNewUrlPattern(name: string, urlPattern: UrlPattern, isEnabled: boolean = true): Promise<void> {
   const timestamp = Date.now();
   const siteId = encodeURIComponent(`${timestamp}_${urlPattern.url}`);
 
-  await setLocalConfig(siteId, {
-    isEnabled: true,
+  await setStoredConfig(siteId, {
+    isEnabled,
     customName: name,
     customPattern: urlPattern,
-  })
+  });
 
   await setOrderedSiteIds(
     [siteId].concat(await getOrderedSiteIds())
   );
 };
+
+export async function deleteUrlPattern(siteId: string): Promise<void> {
+  await setOrderedSiteIds(
+    (await getOrderedSiteIds()).filter(id => id !== siteId)
+  );
+  await browser.storage.local.remove(getConfigKey(siteId));
+}
 
 const siteIdsOrderKey = 'sites-order';
 const defaultSiteIdsOrder = Object.keys(Sites);
@@ -68,13 +77,13 @@ export async function getOrderedSiteIds(): Promise<string[]> {
     const newSites = defaultSiteIdsOrder.filter((s) => !storedSitesIdOrder.includes(s))
     if (newSites.length > 0) {
       const newOrder = storedSitesIdOrder.concat(newSites);
-      setOrderedSiteIds(newOrder);
+      await setOrderedSiteIds(newOrder);
       return newOrder;
     } else {
       return storedSitesIdOrder;
     }
   } else {
-    setOrderedSiteIds(defaultSiteIdsOrder);
+    await setOrderedSiteIds(defaultSiteIdsOrder);
     return defaultSiteIdsOrder;
   }
 }
@@ -84,7 +93,7 @@ export async function setOrderedSiteIds(orderedSiteIds: string[]): Promise<void>
   });
 }
 
-export type SiteConfiguration = LocalSiteConfiguration & {
+export type SiteConfiguration = StoredConfiguration & {
   id: string;
   defaultConfiguration?: DefaultSiteConfiguration;
 }
@@ -97,10 +106,10 @@ export async function getSitesConfiguration(): Promise<SiteConfiguration[]> {
 }
 
 export async function getSiteConfiguration(siteId: string): Promise<SiteConfiguration> {
-  const localConfig = await getLocalConfig(siteId);
+  const storedConfig = await getStoredConfig(siteId);
   return {
     id: siteId,
-    ...localConfig,
+    ...storedConfig,
     defaultConfiguration: Sites[siteId],
   };
 }

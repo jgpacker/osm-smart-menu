@@ -38,10 +38,23 @@
     "message": "Edit",
     "description": "Text inside 'edit button' in configuration page"
   },
-
   "config_saveButton": {
     "message": "Save",
     "description": "Text inside 'save button' in configuration page"
+  },
+  "config_deleteButton": {
+    "message": "Delete",
+    "description": "Text inside 'delete button' in configuration page"
+  },
+  "config_linkDeleted": {
+    "message": "Link $LINK_NAME$ deleted. Click here to undo.",
+    "description": "Shown inline when a link is deleted inside configuration page",
+    "placeholders": {
+      "LINK_NAME": {
+        "content": "$1",
+        "example": "OpenStreetMap"
+      }
+    }
   },
 
   "config_pattern_formTitle": {

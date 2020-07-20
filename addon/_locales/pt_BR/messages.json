@@ -38,6 +38,18 @@
   "config_saveButton": {
     "message": "Salvar"
   },
+  "config_deleteButton": {
+    "message": "Excluir"
+  },
+  "config_linkDeleted": {
+    "message": "Link $LINK_NAME$ excluído. Clique aqui para restaurá-lo.",
+    "placeholders": {
+      "LINK_NAME": {
+        "content": "$1",
+        "example": "OpenStreetMap"
+      }
+    }
+  },
   "config_pattern_formTitle": {
     "message": "Criação avançada de opção (experimental)"
   },
