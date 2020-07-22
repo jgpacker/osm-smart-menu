@@ -1,6 +1,7 @@
 import { DefaultSiteConfiguration, ParamOpt, OsmAttribute } from "../sites-configuration";
 import { ContentScriptOutputMessage } from "../injectable-content-script";
 import { SiteConfiguration } from "../config-handler";
+import escaperegexp from 'lodash.escaperegexp';
 
 const naturalNumberRegExp = "[0-9]+";
 const decimalNumberRegExp = "[0-9.-]+";
@@ -292,7 +293,22 @@ function extractAttributesFromUrlPattern(url: URL, urlPattern: UrlPattern): Reco
     } else return {};
   }
   else if (urlPattern.tag === 'user-v1') {
-    return {}; // not implemented yet
+    const parameters = extractBracetParameters(urlPattern.url);
+    let wipRegexp = escaperegexp(urlPattern.url);
+    parameters.forEach((parameter) => {
+      const targetRegexp = InfoRegExp[userUrlParametersMap[parameter]];
+      wipRegexp = wipRegexp.replace(`\\{${parameter}\\}`, `(${targetRegexp})`);
+    });
+    const regexp = new RegExp(wipRegexp);
+    const match = regexp.exec(url.toString());
+    if (match) {
+      const extractedAttributes: Record<string, string> = {};
+      parameters.forEach(function (parameter, index) {
+        extractedAttributes[userUrlParametersMap[parameter]] = match[index + 1];
+      });
+      return extractedAttributes;
+    }
+    return {};
   }
 
   const _exhaustivenessCheck: never = urlPattern;

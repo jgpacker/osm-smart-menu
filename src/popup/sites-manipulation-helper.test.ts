@@ -1,6 +1,6 @@
 import { findSiteCandidates, getRelevantSites, pickWinningCandidate } from "./sites-manipulation-helper";
 import { SiteConfiguration } from "../config-handler";
-import { Sites } from "../sites-configuration";
+import { Sites, OsmAttribute } from "../sites-configuration";
 
 const aDefaultSiteConfig: SiteConfiguration = {
   id: 'test1',
@@ -18,7 +18,7 @@ describe(findSiteCandidates.name, () => {
   test('empty url finds nothing', () => {
     expect(findSiteCandidates([aDefaultSiteConfig], '')).toEqual([]);
   });
-  test('chrome//:home url finds nothing', () => {
+  test('chrome://home url finds nothing', () => {
     expect(findSiteCandidates([aDefaultSiteConfig], 'chrome://home/')).toEqual([]);
   });
   test('finds a site with same domain', () => {
@@ -37,6 +37,14 @@ describe(findSiteCandidates.name, () => {
       defaultConfiguration: { ...aDefaultSiteConfig.defaultConfiguration!, domainRegexp: /www\.example\.com$/ },
     };
     expect(findSiteCandidates([siteConfigWithAdjustment], 'http://example.com/map?zoom=1&lat=2&lon=3')).toEqual([]);
+  });
+  test('get user url template that that includes domain', () => {
+    const configUrlPat: SiteConfiguration = {
+      id: 'url-pat',
+      isEnabled: true,
+      customPattern: { tag: 'user-v1', url: 'https://www.example.com/map?zoom={zoom}&lat={latitude}&lon={longitude}' },
+    };
+    expect(findSiteCandidates([configUrlPat], 'http://example.com/map?zoom=1&lat=2&lon=3')).toEqual([configUrlPat.id]);
   });
   const knownGoogleDomains = [
     '.com', '.ad', '.ae', '.com.af', '.com.ag', '.com.ai', '.am', '.co.ao', '.com.ar', '.as', '.com.uy', '.com.na',
@@ -72,6 +80,36 @@ describe(pickWinningCandidate.name, () => {
     const expectedOutput = { siteId: aDefaultSiteConfig.id, attributes: inputAttributes[0].additionalAttributes };
     expect(pickWinningCandidate([aDefaultSiteConfig], inputAttributes, 'https://example.com/')).toEqual(expectedOutput);
   });
+  const userUrlTemplateTests: { exampleUrl: string; urlTemplate: string; expectedAttrs: Partial<Record<OsmAttribute, string>>; }[] = [
+    {
+      exampleUrl: 'https://geohack.toolforge.org/geohack.php?params=23.00_N_24.43_E',
+      urlTemplate: 'https://geohack.toolforge.org/geohack.php?params={latitude}_N_{longitude}_E',
+      expectedAttrs: { lon: '24.43', lat: '23.00' },
+    },
+    {
+      exampleUrl: 'https://hiking.waymarkedtrails.org/#route?id=2966504&map=3!23.0!24.1',
+      urlTemplate: 'https://hiking.waymarkedtrails.org/#route?id={osm_relation_id}',
+      expectedAttrs: { relationId: '2966504' },
+    },
+    {
+      exampleUrl: 'https://hiking.waymarkedtrails.org/#route?id=10534456&map=14!58.4593!11.4308',
+      urlTemplate: 'https://hiking.waymarkedtrails.org/#route?id={osm_relation_id}&map={zoom}!{latitude}!{longitude}',
+      expectedAttrs: { relationId: '10534456', zoom: '14', lat: '58.4593', lon: '11.4308' },
+    },
+    {
+      exampleUrl: 'https://disfactory.tw/#map=16.00/120.1/23.23400000000001',
+      urlTemplate: 'https://disfactory.tw/#map={zoom}/{longitude}/{latitude}',
+      expectedAttrs: { zoom: '16.00', lon: '120.1', lat: '23.23400000000001' },
+    },
+  ];
+  userUrlTemplateTests.forEach((testParams) => {
+    test(`get parameters from url ${testParams.exampleUrl}`, () => {
+      const inputConfig: SiteConfiguration = { id: 'user-pattern', isEnabled: true, customPattern: { tag: 'user-v1', url: testParams.urlTemplate} };
+      const expectedOutput = { siteId: inputConfig.id, attributes: testParams.expectedAttrs };
+      expect(pickWinningCandidate([inputConfig], [{ siteId: inputConfig.id}], testParams.exampleUrl)).toEqual(expectedOutput);
+    });
+  });
+
   describe('zoom', () => {
     test('with zoomAdjustment=1', () => {
       const inputAttributes = [{ siteId: aDefaultSiteConfig.id, additionalAttributes: { zoom: '1', lat: '2', lon: '3' } }];
