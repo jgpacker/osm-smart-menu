@@ -23,7 +23,7 @@ export type Extractors = {
 
 export type OsmAttribute =
   | "nodeId" | "wayId" | "relationId"
-  | "userName" | "changesetId"
+  | "userName" | "changesetId" | "key" | "value"
   | "zoom" | "lat" | "lon" | "tracesId"
   ;
 

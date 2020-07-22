@@ -17,6 +17,8 @@ const InfoRegExp: Record<string, string> = {
   zoom: positiveDecimalNumberRegExp, //believe it or not, some websites accept a decimal zoom. TODO: verify if any site has a problem having a decimal zoom as a parameter
   lat: decimalNumberRegExp,
   lon: decimalNumberRegExp,
+  key: "[^#?\/=]+",
+  value: "[^#?\/]+",
 };
 //TODO: should I add support for route information? (start, intermediary and end points, and maybe transport mode)
 
@@ -51,9 +53,7 @@ export function pickWinningCandidate(
     return undefined;
   }
   const [head, ...tail] = results;
-  const url = head.permalink || currentTabUrl;
-
-  let extractedAttributes: Record<string, string>;
+  let extractedAttributes: Record<string, string> = {};
   let detectedPattern: UrlPattern | undefined;
   let site: SiteConfiguration | undefined;
   if (head.siteId) {
@@ -61,15 +61,14 @@ export function pickWinningCandidate(
   } else site = undefined;
 
   if (site) {
-    if (site.defaultConfiguration) {
-      extractedAttributes = extractAttributesFromUrl(url, site.defaultConfiguration);
-    } else if (site.customPattern) {
-      extractedAttributes = extractAttributesFromUrlPattern(new URL(url), site.customPattern);
-    } else {
-      extractedAttributes = {};
-    }
+      if (head.permalink) {
+        extractedAttributes = extractAttributesFromUrl(head.permalink, site);
+      }
+      if (Object.keys(extractedAttributes).length === 0) {
+        extractedAttributes = extractAttributesFromUrl(currentTabUrl, site);
+      }
   } else {
-    [detectedPattern, extractedAttributes] = detectAndExtractAttributesFromUrl(url);
+    [detectedPattern, extractedAttributes] = detectAndExtractAttributesFromUrl(head.permalink || currentTabUrl);
   }
   const allExtractedAttributes = Object.assign(extractedAttributes, head.additionalAttributes);
 
@@ -145,8 +144,8 @@ export function getRelevantSites(
 }
 
 const userUrlParametersMap: Record<string, OsmAttribute> = {
-  zoom: 'zoom', latitude: 'lat',  longitude: 'lon', osm_changeset_id: 'changesetId',
-  osm_user_name: 'userName', osm_node_id: 'nodeId', osm_way_id: 'wayId', osm_relation_id: 'relationId',
+  zoom: 'zoom', latitude: 'lat',  longitude: 'lon', osm_changeset_id: 'changesetId', osm_user_name: 'userName',
+  osm_tag_key: 'key', osm_tag_value: 'value', osm_node_id: 'nodeId', osm_way_id: 'wayId', osm_relation_id: 'relationId',
 };
 
 function applyParametersToUrlPattern(urlPattern: UrlPattern, retrievedAttributes: Record<string, string>): string | undefined {
@@ -315,40 +314,46 @@ function extractAttributesFromUrlPattern(url: URL, urlPattern: UrlPattern): Reco
   return _exhaustivenessCheck;
 }
 
-function extractAttributesFromUrl(url: string, siteConfig: DefaultSiteConfiguration): Record<string, string> {
-  for (let i = 0; i < siteConfig.paramOpts.length; i++) {
-    let extractedAttributes: Record<string, string> = {};
-    const [orderedParameters] = extractParametersFromParamOpt(siteConfig.paramOpts[i]);
-
-    let partialUrl = siteConfig.paramOpts[i].ordered;
-    partialUrl = partialUrl.replace(/([.?^$])/g, '\\$1'); // escape regex special characters TODO: add more and review location in code
-    orderedParameters.forEach(function (parameter) {
-      partialUrl = partialUrl.replace(`{${parameter}}`, `(${InfoRegExp[parameter]})`);
-    });
-    const orderedPartRegExp = new RegExp(partialUrl);
-
-    const orderedMatch = orderedPartRegExp.exec(url);
-    if (orderedMatch) {
-      const unorderedParametersMap = siteConfig.paramOpts[i].unordered || {};
-      const matchesUnordered = Object.entries(unorderedParametersMap).every(function ([key, value]: [string, string?]) {
-        const unorderedPartXRegExp = new RegExp(
-          `${value}=(${InfoRegExp[key]})`
-        )
-        const unorderedMatch = unorderedPartXRegExp.exec(url)
-        if (!unorderedMatch) {
-          return false;
+function extractAttributesFromUrl(url: string, siteConfig: SiteConfiguration): Record<string, string> {
+  if (siteConfig.customPattern) {
+    return extractAttributesFromUrlPattern(new URL(url), siteConfig.customPattern);
+  }
+  else if (siteConfig.defaultConfiguration) {
+    const config = siteConfig.defaultConfiguration;
+    for (let i = 0; i < config.paramOpts.length; i++) {
+      let extractedAttributes: Record<string, string> = {};
+      const [orderedParameters] = extractParametersFromParamOpt(config.paramOpts[i]);
+  
+      let partialUrl = config.paramOpts[i].ordered;
+      partialUrl = partialUrl.replace(/([.?^$])/g, '\\$1'); // escape regex special characters TODO: add more and review location in code
+      orderedParameters.forEach(function (parameter) {
+        partialUrl = partialUrl.replace(`{${parameter}}`, `(${InfoRegExp[parameter]})`);
+      });
+      const orderedPartRegExp = new RegExp(partialUrl);
+  
+      const orderedMatch = orderedPartRegExp.exec(url);
+      if (orderedMatch) {
+        const unorderedParametersMap = config.paramOpts[i].unordered || {};
+        const matchesUnordered = Object.entries(unorderedParametersMap).every(function ([key, value]: [string, string?]) {
+          const unorderedPartXRegExp = new RegExp(
+            `${value}=(${InfoRegExp[key]})`
+          )
+          const unorderedMatch = unorderedPartXRegExp.exec(url)
+          if (!unorderedMatch) {
+            return false;
+          } else {
+            extractedAttributes[key] = unorderedMatch[1];
+            return true;
+          }
+        })
+        if (matchesUnordered) {
+          orderedParameters.forEach(function (orderedParameter, index) {
+            extractedAttributes[orderedParameter] = orderedMatch[index + 1];
+          });
+          return extractedAttributes;
         } else {
-          extractedAttributes[key] = unorderedMatch[1];
-          return true;
+          extractedAttributes = {};
         }
-      })
-      if (matchesUnordered) {
-        orderedParameters.forEach(function (orderedParameter, index) {
-          extractedAttributes[orderedParameter] = orderedMatch[index + 1];
-        });
-        return extractedAttributes;
-      } else {
-        extractedAttributes = {};
       }
     }
   }

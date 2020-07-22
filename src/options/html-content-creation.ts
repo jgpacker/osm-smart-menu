@@ -153,7 +153,7 @@ export function createUrlPatternInput(d: Document): HTMLElement {
   urlInput.setAttribute('style', inputStyle);
   urlInput.required = true;
   urlInput.pattern = // must contain curly braces; but only with known parameters
-    /([^{}]+\{(zoom|latitude|longitude|osm_(user_name|(changeset|node|way|relation)_id))\})+[^{}]*/.source;
+    /([^{}]+\{(zoom|latitude|longitude|osm_(user_name|tag_key|tag_value|(changeset|node|way|relation)_id))\})+[^{}]*/.source;
   urlLabel.append(urlInput);
 
   const submitButton = d.createElement('input');

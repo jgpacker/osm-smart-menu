@@ -101,13 +101,39 @@ describe(pickWinningCandidate.name, () => {
       urlTemplate: 'https://disfactory.tw/#map={zoom}/{longitude}/{latitude}',
       expectedAttrs: { zoom: '16.00', lon: '120.1', lat: '23.23400000000001' },
     },
+    {
+      exampleUrl: 'https://taginfo.openstreetmap.org/keys/ref:isil',
+      urlTemplate: 'https://taginfo.openstreetmap.org/keys/{osm_tag_key}',
+      expectedAttrs: { key: 'ref:isil' },
+    },
+    {
+      exampleUrl: 'https://taginfo.openstreetmap.org/tags/parking=surface',
+      urlTemplate: 'https://taginfo.openstreetmap.org/tags/{osm_tag_key}={osm_tag_value}',
+      expectedAttrs: { key: 'parking', value: 'surface' },
+    },
+    {
+      exampleUrl: 'https://wiki.openstreetmap.org/wiki/Key:amenity',
+      urlTemplate: 'https://wiki.openstreetmap.org/wiki/Key:{osm_tag_key}',
+      expectedAttrs: { key: 'amenity' },
+    },
+    {
+      exampleUrl: 'https://wiki.openstreetmap.org/wiki/Tag:amenity%3Ddrinking_water',
+      urlTemplate: 'https://wiki.openstreetmap.org/wiki/Tag:{osm_tag_key}%3D{osm_tag_value}',
+      expectedAttrs: { key: 'amenity', value: 'drinking_water' },
+    },
   ];
   userUrlTemplateTests.forEach((testParams) => {
     test(`get parameters from url ${testParams.exampleUrl}`, () => {
       const inputConfig: SiteConfiguration = { id: 'user-pattern', isEnabled: true, customPattern: { tag: 'user-v1', url: testParams.urlTemplate} };
       const expectedOutput = { siteId: inputConfig.id, attributes: testParams.expectedAttrs };
-      expect(pickWinningCandidate([inputConfig], [{ siteId: inputConfig.id}], testParams.exampleUrl)).toEqual(expectedOutput);
+      expect(pickWinningCandidate([inputConfig], [{ siteId: inputConfig.id }], testParams.exampleUrl)).toEqual(expectedOutput);
     });
+  });
+  test(`get parameters from a url and not the permalink`, () => {
+    const inputConfig: SiteConfiguration = { id: 'url-not-permalink', isEnabled: true, customPattern: { tag: 'user-v1', url: 'https://wiki.openstreetmap.org/wiki/Key:{osm_tag_key}' } };
+    const pageInput = [{ siteId: inputConfig.id, permalink: 'https://wiki.openstreetmap.org/w/index.php?title=Key:name&oldid=2013483' }];
+    const expectedOutput = { siteId: inputConfig.id, attributes: { key: 'name'} };
+    expect(pickWinningCandidate([inputConfig], pageInput, 'https://wiki.openstreetmap.org/wiki/Key:name')).toEqual(expectedOutput);
   });
 
   describe('zoom', () => {

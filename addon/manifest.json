@@ -8,7 +8,7 @@
 
   "author": "João Guilherme Packer",
   "homepage_url": "https://github.com/jgpacker/osm-smart-menu",
-  "version": "0.14.1",
+  "version": "0.14.2",
 
   "permissions": [
     "storage",
