@@ -63,16 +63,6 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
     }
   },
 
-  /* TODO: change to https://maps.openrouteservice.org/directions?n1=49.9445&n2=8.692953&n3=13&b=0&k1=en-US&k2=km
-    openmapsurfer: {
-      link: "korona.geog.uni-heidelberg.de",
-      paramOpts: [urlPattern1],
-      extractors: {
-        getPermalink: openLayers_getPermalink()
-      }
-    },
-  */
-
   opencyclemap: {
     link: "www.opencyclemap.org",
     paramOpts: [urlPattern1],
@@ -86,8 +76,9 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
     link: "map.hotosm.org",
     httpOnly: true,
     paramOpts: [
-      { ordered: "/#{zoom}/{lat}/{lon}" }
-    ]
+      { ordered: "/#{zoom}/{lat}/{lon}" },
+      { ordered: "#{zoom}/{lat}/{lon}" }, // input-only
+    ],
   },
 
   openseamap: {
@@ -131,6 +122,7 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
     maxZoom: 20,
     paramOpts: [
       { ordered: "/#map={zoom}/{lat}/{lon}" },
+      { ordered: "map={zoom}/{lat}/{lon}" }, // input-only
     ],
   },
 
@@ -231,6 +223,7 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
       { ordered: "/#toner/{zoom}/{lat}/{lon}" }, // Did not find a generic URL (without choosing theme). This theme was chosen because it seems to have the highest zoom capacity
       { ordered: "/#terrain/{zoom}/{lat}/{lon}" },
       { ordered: "/#watercolor/{zoom}/{lat}/{lon}" },
+      { ordered: "/{zoom}/{lat}/{lon}" }, // input-only
     ]
   },
 
@@ -253,10 +246,8 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
     link: "openlevelup.net",
     paramOpts: [
       { ordered: "/#{zoom}/{lat}/{lon}" },
-      { ordered: "/?l=0#{zoom}/{lat}/{lon}" },
-      { ordered: "/?l=1#{zoom}/{lat}/{lon}" },
-      { ordered: "/?l=-1#{zoom}/{lat}/{lon}" }, // TODO: use getAttributesFromPage to ignore `?l=X` and get zoom/lat/lon
       { ordered: "/old/", unordered: { "zoom": "z", "lat": "lat", "lon": "lon" } },
+      { ordered: "#{zoom}/{lat}/{lon}" }, // input-only
     ],
   },
     
@@ -264,6 +255,7 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
     link: "indoorequal.org",
     paramOpts: [
       { ordered: "/#map={zoom}/{lat}/{lon}" },
+      { ordered: "map={zoom}/{lat}/{lon}" }, // input-only
     ],
     zoomAdjustment: +1,
   },
@@ -272,6 +264,7 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
     link: "umap.openstreetmap.fr",
     paramOpts: [
       { ordered: "/map/new/#{zoom}/{lat}/{lon}" },
+      { ordered: "#{zoom}/{lat}/{lon}" }, // input-only
     ],
     extractors: {
       getAttributesFromPage: (window: Window) => {
@@ -294,6 +287,7 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
     link: 'openstreetcam.org',
     paramOpts: [
       { ordered: '/map/@{lat},{lon},{zoom}z' },
+      { ordered: '@{lat},{lon},{zoom}z' }, // input-only
     ],
     zoomAdjustment: +1,
   },
@@ -311,6 +305,7 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
     paramOpts: [
       { ordered: "/#map={zoom}/{lat}/{lon}" },
       { ordered: "/#marker={zoom}/{lat}/{lon}" },
+      { ordered: "{zoom}/{lat}/{lon}" }, // input-only
     ],
   },
 
@@ -327,6 +322,7 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
     link: 'openinframap.org',
     paramOpts: [
       { ordered: '/#{zoom}/{lat}/{lon}' },
+      { ordered: '#{zoom}/{lat}/{lon}' }, // input-only
     ],
     zoomAdjustment: +1,
   },
@@ -334,7 +330,8 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
   bingmaps: {
     link: "www.bing.com",
     paramOpts: [
-      { ordered: "/maps?cp={lat}~{lon}&lvl={zoom}" }
+      { ordered: "/maps?cp={lat}~{lon}&lvl={zoom}" },
+      { ordered: "cp={lat}~{lon}&lvl={zoom}" }, // input-only
     ],
     extractors: {
       getAttributesFromPage: (window: Window) => {
@@ -364,9 +361,10 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
   googlemaps: {
     link: "www.google.com/maps", //redirected from maps.google.com
     domainRegexp: /\.google\.(com?|cat|xxx|(com?\.)?[a-z]{2})$/,
-    // TODO: otherDomainsRegExp: /.*.google.*/, // not sure whether that's the best way to go about it, but whatever
     paramOpts: [
-      { ordered: "/@{lat},{lon},{zoom}z" }
+      { ordered: "/@{lat},{lon},{zoom}z" },
+      { ordered: "@{lat},{lon},{zoom}z" }, // input-only
+      { ordered: "/maps/search/{lat},{lon}" },
     ]
   },
 
@@ -375,6 +373,7 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
     paramOpts: [
       { ordered: "/livemap/directions?latlng={lat}%2C{lon}" },
       { ordered: "/en/livemap/directions?latlng={lat}%2C{lon}" },
+      { ordered: "latlng={lat}%2C{lon}" }, // input-only
       { ordered: "/editor", unordered: { lat: "lat", lon: "lon", zoom: "zoom" } },
     ],
     zoomAdjustment: +12,
@@ -455,7 +454,7 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
     link: "resultmaps.neis-one.org",
     paramOpts: [
       { ordered: "/osm-change-tiles#{zoom}/{lat}/{lon}" },
-      { ordered: "/osm-change-tiles.php#{zoom}/{lat}/{lon}" }
+      { ordered: "#{zoom}/{lat}/{lon}" }, // input-only
     ]
   },
 
@@ -476,41 +475,6 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
     httpOnly: true, // mini-map won't load in HTTPS
   },
 };
-//http://brouter.de/brouter-web/#zoom=6&lat=50.99&lon=9.86&layer=OpenStreetMap
-//Overpass Turbo Wizard: http://overpass-turbo.eu/?w=%22area%22%3D%22y%22+global
-//http://maproulette.org/
-//http://ris.dev.openstreetmap.org/tsbp-proto/{tracesId}/6/1/  from http://wiki.openstreetmap.org/wiki/That_Shouldnt_Be_Possible
-
-/*
-  josm: {
-    link: "localhost:8111",
-    paramOpts: [
-      {ordered:"/load_and_zoom", unordered: {minLon:"left", minLat:"bottom", maxLon:"right", maxLat:"top"}} //TODO: that's not supported yet...
-    ]
-  },
-
-*/
-/* TODO: change to https://simon04.dev.openstreetmap.org/whodidit/
-whodidit: {
-  link: "zverik.osm.rambler.ru/whodidit",
-  paramOpts: [urlPattern1],
-  extractors: {
-    //TODO: getValues - we may get an username or changeset info
-    getPermalink: openLayers_getPermalink()
-  },
-},
-*/
-/*
-  keepright: {
-    link: "keepright.at",
-    paramOpts: [
-      { ordered: "/report_map.php" }, //TODO: parameters...
-    ],
-    extractors: {
-      getPermalink: openLayers_getPermalink()
-    },
-  },
-*/
 
 function getPermalinkBySelector(selector: string) {
   return function (document: Document) {
@@ -519,15 +483,6 @@ function getPermalinkBySelector(selector: string) {
   }
 }
 
-
 function openLayers_getPermalink() {
   return getPermalinkBySelector("[id*=Permalink] a");
 }
-
-// function getPermalinkByValue(){
-//   return function(document: Document){
-//     const permalinkAnchor = [...(document.querySelectorAll('a'))]
-//                             .find(a => a.textContent && /permalink/i.test(a.textContent));
-//     return permalinkAnchor && permalinkAnchor.href;
-//   }
-// }

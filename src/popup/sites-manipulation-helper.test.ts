@@ -129,6 +129,20 @@ describe(pickWinningCandidate.name, () => {
       expect(pickWinningCandidate([inputConfig], [{ siteId: inputConfig.id }], testParams.exampleUrl)).toEqual(expectedOutput);
     });
   });
+  test('get osmchangetiles from weird url', () => {
+    const expectedSiteId = 'osmchangetiles';
+    const inputConfig = { isEnabled: true, id: expectedSiteId, defaultConfiguration: Sites[expectedSiteId]}
+    const inputUrl = 'https://resultmaps.neis-one.org/osm-change-tiles?quadkey=1202200110303320#16/48.7537/2.3536';
+    const expectedOutput = { siteId: expectedSiteId, attributes:{ zoom: '16', lat: '48.7537', lon: '2.3536' } };
+    expect(pickWinningCandidate([inputConfig], [{ siteId: expectedSiteId }], inputUrl)).toEqual(expectedOutput);
+  });
+  test('get google from weird url', () => {
+    const expectedSiteId = 'googlemaps';
+    const inputConfig = { isEnabled: true, id: expectedSiteId, defaultConfiguration: Sites[expectedSiteId]}
+    const inputUrl = "https://www.google.com.tw/maps/place/24%C2%B010'54.1%22N+120%C2%B051'58.2%22E/@24.18169,120.86617,17z/data=!3m1!4b1!4m5!3m4!1s0x0:0x0!8m2!3d24.18169!4d120.86617";
+    const expectedOutput = { siteId: expectedSiteId, attributes: { zoom: '17', lat: '24.18169', lon: '120.86617' } };
+    expect(pickWinningCandidate([inputConfig], [{ siteId: expectedSiteId }], inputUrl)).toEqual(expectedOutput);
+  });
   test(`get parameters from a url and not the permalink`, () => {
     const inputConfig: SiteConfiguration = { id: 'url-not-permalink', isEnabled: true, customPattern: { tag: 'user-v1', url: 'https://wiki.openstreetmap.org/wiki/Key:{osm_tag_key}' } };
     const pageInput = [{ siteId: inputConfig.id, permalink: 'https://wiki.openstreetmap.org/w/index.php?title=Key:name&oldid=2013483' }];
