@@ -2,7 +2,7 @@ import { browser } from 'webextension-polyfill-ts'
 import { ContentScriptOutputMessage, ContentScriptInputMessage } from '../injectable-content-script';
 import { getLoadingMessage, createOptionsList, getErrorMessage, KnownError, createBasicOptionCreationButton, CustomUserOption, createConfigurationLink, createShowAllSitesButton } from './html-content-creation';
 import { findSiteCandidates, pickWinningCandidate, getRelevantSites } from './sites-manipulation-helper';
-import { getSitesConfiguration, addNewUrlPattern } from '../config-handler';
+import { getSitesConfiguration, addNewUrlPattern } from '../storage/config-handler';
 
 (function () {
   const configLink = createConfigurationLink(document);

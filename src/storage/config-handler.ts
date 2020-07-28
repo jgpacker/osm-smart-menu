@@ -1,12 +1,15 @@
-import { browser } from "webextension-polyfill-ts";
-import { Sites, DefaultSiteConfiguration } from "./sites-configuration";
-import { UrlPattern } from "./popup/sites-manipulation-helper";
+import { browser, Storage } from "webextension-polyfill-ts";
+import { Sites, DefaultSiteConfiguration } from "../sites-configuration";
+import { UrlPattern } from "../popup/sites-manipulation-helper";
 
 export type StoredConfiguration = {
   isEnabled: boolean;
   customName?: string;
   customPattern?: UrlPattern;
 }
+
+// needs fallback https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/storage/sync#Browser_compatibility
+const storage: Storage.StorageArea = browser.storage.sync || browser.storage.local;
 
 const getConfigKey = (siteId: string) => `site_${siteId}`;
 
@@ -15,7 +18,7 @@ async function getStoredConfig(siteId: string): Promise<StoredConfiguration> {
     isEnabled: true,
   }
   const key = getConfigKey(siteId);
-  const storedObject = await browser.storage.local.get(key);
+  const storedObject = await storage.get(key);
   if (typeof storedObject === "object" && storedObject &&
     typeof storedObject[key] === "object" && storedObject[key]
   ) {
@@ -43,7 +46,7 @@ export async function setStoredConfig(siteId: string, config: StoredConfiguratio
   const newConfig = {
     [getConfigKey(siteId)]: config,
   };
-  await browser.storage.local.set(newConfig);
+  await storage.set(newConfig);
 }
 
 export async function addNewUrlPattern(name: string, urlPattern: UrlPattern, isEnabled: boolean = true): Promise<void> {
@@ -65,13 +68,13 @@ export async function deleteUrlPattern(siteId: string): Promise<void> {
   await setOrderedSiteIds(
     (await getOrderedSiteIds()).filter(id => id !== siteId)
   );
-  await browser.storage.local.remove(getConfigKey(siteId));
+  await storage.remove(getConfigKey(siteId));
 }
 
 const siteIdsOrderKey = 'sites-order';
 const defaultSiteIdsOrder = Object.keys(Sites);
 export async function getOrderedSiteIds(): Promise<string[]> {
-  const storedObject = await browser.storage.local.get(siteIdsOrderKey);
+  const storedObject = await storage.get(siteIdsOrderKey);
   if (typeof storedObject === 'object' && storedObject && storedObject[siteIdsOrderKey] instanceof Array) {
     const storedSitesIdOrder: string[] = storedObject[siteIdsOrderKey];
     const newSites = defaultSiteIdsOrder.filter((s) => !storedSitesIdOrder.includes(s))
@@ -88,7 +91,7 @@ export async function getOrderedSiteIds(): Promise<string[]> {
   }
 }
 export async function setOrderedSiteIds(orderedSiteIds: string[]): Promise<void> {
-  await browser.storage.local.set({
+  await storage.set({
     [siteIdsOrderKey]: orderedSiteIds,
   });
 }

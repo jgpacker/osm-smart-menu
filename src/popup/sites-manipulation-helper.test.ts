@@ -1,5 +1,5 @@
 import { findSiteCandidates, getRelevantSites, pickWinningCandidate } from "./sites-manipulation-helper";
-import { SiteConfiguration } from "../config-handler";
+import { SiteConfiguration } from "../storage/config-handler";
 import { Sites, OsmAttribute } from "../sites-configuration";
 
 const aDefaultSiteConfig: SiteConfiguration = {

@@ -8,7 +8,8 @@ module.exports = {
   entry: {
     "injectable-content-script": "./src/injectable-content-script.ts",
     "options/script": "./src/options/main.ts",
-    "popup/script": "./src/popup/main.ts"
+    "popup/script": "./src/popup/main.ts",
+    "background": "./src/setup.ts"
   },
   output: {
     path: path.resolve(__dirname, "addon"),

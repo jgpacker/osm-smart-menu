@@ -4,6 +4,7 @@
   "scripts": {
     "test": "jest",
     "tscompile": "webpack --mode=production",
+    "watch": "npm run tscompile -- --watch",
     "build": "npm run tscompile && web-ext build --source-dir addon"
   },
   "repository": {

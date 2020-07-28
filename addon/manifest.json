@@ -8,7 +8,13 @@
 
   "author": "João Guilherme Packer",
   "homepage_url": "https://github.com/jgpacker/osm-smart-menu",
-  "version": "0.14.3",
+  "version": "0.15.0",
+
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "osm-smart-menu@jgpacker.me.br"
+    }
+  },
 
   "permissions": [
     "storage",
@@ -19,6 +25,10 @@
     "48": "icons/osm48x48.png",
     "96": "icons/osm96x96.png",
     "128": "icons/osm128x128.png"
+  },
+
+  "background": {
+    "scripts": ["background.js"]
   },
 
   "browser_action": {

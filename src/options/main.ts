@@ -1,4 +1,4 @@
-import { getSitesConfiguration } from '../config-handler';
+import { getSitesConfiguration } from '../storage/config-handler';
 import { createConfigurableSitesList, createUrlPatternInput } from './html-content-creation';
 
 (async function () {

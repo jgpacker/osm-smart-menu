@@ -1,6 +1,6 @@
 import { browser } from "webextension-polyfill-ts";
 import { SiteLink, UrlPattern, getRelevantSites } from "./sites-manipulation-helper";
-import { SiteConfiguration } from "../config-handler";
+import { SiteConfiguration } from "../storage/config-handler";
 
 export type CustomUserOption = {
   defaultName: string;

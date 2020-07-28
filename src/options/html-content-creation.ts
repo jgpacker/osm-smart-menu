@@ -1,4 +1,4 @@
-import { SiteConfiguration, updateStoredConfig, setOrderedSiteIds, getSiteConfiguration, addNewUrlPattern, deleteUrlPattern } from "../config-handler";
+import { SiteConfiguration, updateStoredConfig, setOrderedSiteIds, getSiteConfiguration, addNewUrlPattern, deleteUrlPattern } from "../storage/config-handler";
 import { browser } from "webextension-polyfill-ts";
 import dragula from 'dragula';
 import { UrlPattern } from "../popup/sites-manipulation-helper";
