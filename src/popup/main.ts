@@ -1,63 +1,54 @@
 import { browser } from 'webextension-polyfill-ts'
 import { ContentScriptOutputMessage, ContentScriptInputMessage } from '../injectable-content-script';
-import { getLoadingMessage, createOptionsList, getErrorMessage, KnownError, createBasicOptionCreationButton, CustomUserOption, createConfigurationLink, createShowAllSitesButton } from './html-content-creation';
-import { findSiteCandidates, pickWinningCandidate, getRelevantSites } from './sites-manipulation-helper';
-import { getSitesConfiguration, addNewUrlPattern } from '../storage/config-handler';
+import { KnownError, CustomUserOption } from './utils';
+import { findSiteCandidates, pickWinningCandidate, getRelevantSites, SiteLink } from './sites-manipulation-helper';
+import { getSitesConfiguration } from '../storage/config-handler';
+// @ts-expect-error
+import App from './App.svelte';
 
-(function () {
-  const configLink = createConfigurationLink(document);
-  replaceContent(document.body, [configLink, getLoadingMessage(document)]);
+export type EventualSitesOrError = Promise<{
+  sitesList: SiteLink[];
+  customUserOption?: CustomUserOption;
+} | KnownError>;
 
-  tryToExtractAndCreateOptions(document).then(optionsOrError =>
-    replaceContent(document.body, [configLink].concat(optionsOrError))
-  );
-})();
+const eventualSitesOrError: EventualSitesOrError = getSitesOrError();
+new App({
+	target: document.body,
+	props: { eventualSitesOrError },
+});
 
-function replaceContent(parent: HTMLElement, children: HTMLElement[]): void {
-  while (parent.firstChild) parent.firstChild.remove();
-  parent.textContent = '';
-  parent.append(...children);
-}
-
-async function tryToExtractAndCreateOptions(document: Document): Promise<HTMLElement[]> {
+async function getSitesOrError(): EventualSitesOrError {
   const tabs = await browser.tabs.query({ active: true, currentWindow: true });
   const currentTab = tabs[0];
   if (!currentTab || !currentTab.url || !currentTab.id) {
-    return [getErrorMessage(document, KnownError.NO_ACCESS)];
+    return KnownError.NO_ACCESS;
   }
 
   const config = await getSitesConfiguration();
-  
   const candidateSiteIds = findSiteCandidates(config, currentTab.url);
-
   const contentScriptResult = await getDataFromContentScript(currentTab.id, candidateSiteIds) ;
   const currentSite = contentScriptResult && pickWinningCandidate(config, contentScriptResult, currentTab.url);
   if (!currentSite) {
-    const button = createShowAllSitesButton(document, config)
     if (candidateSiteIds.length === 0) {
-      return [getErrorMessage(document, KnownError.INCOMPATIBLE_WEBSITE), button];
+      return KnownError.INCOMPATIBLE_WEBSITE;
     } else {
-      return [getErrorMessage(document, KnownError.NO_INFORMATION_EXTRACTED), button];
+      return KnownError.NO_INFORMATION_EXTRACTED;
     }
   }
 
-  const sitesList = getRelevantSites(config, currentSite.siteId, currentSite.attributes);
-  const htmlSitesList = createOptionsList(document, sitesList)
-
+  let customUserOption: CustomUserOption | undefined;
   if (currentSite.detectedPattern) {
-    const customUserOption: CustomUserOption = {
+    customUserOption = {
       urlPattern: currentSite.detectedPattern,
       defaultName: currentTab.title || '???',
     };
-    const createNewOption = async ({ defaultName, urlPattern }: CustomUserOption) =>
-      await addNewUrlPattern(defaultName, urlPattern);
-    return [
-      createBasicOptionCreationButton(document, customUserOption, createNewOption),
-      htmlSitesList,
-    ];
-  } else {
-    return [htmlSitesList];
   }
+
+  const sitesList = getRelevantSites(config, currentSite.siteId, currentSite.attributes);
+  return {
+    sitesList,
+    customUserOption,
+  };
 }
 
 async function getDataFromContentScript(tabId: number, candidateSiteIds: string[]): Promise<ContentScriptOutputMessage | undefined> {

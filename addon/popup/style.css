@@ -4,38 +4,3 @@ html, body {
   font-size: 15px;
   overflow-x: hidden;
 }
-
-#loading, #info {
-  text-align: center;
-  padding: 4px;
-  min-width: 200px; /* Chrome adjustment */
-  max-width: 600px; /* Desktop Firefox adjustment */
-  white-space: pre-line;
-}
-
-#info {
-  border-bottom: 1px solid lightgray; /* add "separator" line before other elements */
-}
-#info:only-child {
-  border-bottom: none;
-}
-
-#loading::first-line {
-  font-weight: bold;
-}
-
-.site {
-  padding: 4px 16px;
-  display: block;
-  white-space: nowrap;
-  text-decoration: inherit;
-  color: inherit;
-}
-
-.site:hover {
-  background-color: rgba(51, 7, 7, 0.08);
-}
-
-.site:active {
-  background-color: rgba(0, 0, 0, 0.1);
-}

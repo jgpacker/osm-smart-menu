@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "test": "jest",
-    "tscompile": "webpack --mode=production",
+    "tscompile": "svelte-check && webpack --mode=production",
     "watch": "npm run tscompile -- --watch",
     "build": "npm run tscompile && web-ext build --source-dir addon"
   },
@@ -24,6 +24,10 @@
   "devDependencies": {
     "@types/jest": "^26.0.5",
     "jest": "^26.1.0",
+    "svelte": "^3.24.0",
+    "svelte-check": "^0.1.59",
+    "svelte-loader": "^2.13.6",
+    "svelte-preprocess": "^4.0.8",
     "ts-jest": "^26.1.3",
     "ts-loader": "^8.0.1",
     "typescript": "^3.9.7",

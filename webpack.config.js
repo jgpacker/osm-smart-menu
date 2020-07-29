@@ -22,9 +22,21 @@ module.exports = {
         use: 'ts-loader',
         exclude: /node_modules/,
       },
+      {
+        test: /\.(html|svelte)$/,
+        use: {
+          loader: 'svelte-loader',
+          options: {
+            preprocess: require('svelte-preprocess')({}), // TypeScript support
+          },
+        },
+        exclude: /node_modules/,
+      },
     ],
   },
   resolve: {
-    extensions: ['.tsx', '.ts', '.js'],
+    extensions: ['.tsx', '.ts', '.js', '.svelte', '.mjs'],
+    alias: { svelte: path.resolve('node_modules', 'svelte') },
+    mainFields: ['svelte', 'browser', 'module', 'main'],
   },
 };
