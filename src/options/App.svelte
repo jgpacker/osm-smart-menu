@@ -1,14 +1,16 @@
 <script lang="ts">
   import UrlTemplateForm from "./components/UrlTemplateForm.svelte";
   import ConfigurableLine from "./components/ConfigurableLine.svelte";
-  import { SiteConfiguration } from "../storage/config-handler";
+  import type { SiteConfiguration } from "../storage/config-handler";
 
   export let sitesConfig: SiteConfiguration[];
+
+  let currentEditableLinkById: string | undefined;
 </script>
 
 <div>
   {#each sitesConfig as siteConfig (siteConfig.id)}
-    <ConfigurableLine {siteConfig} />
+    <ConfigurableLine bind:currentEditableLinkById {siteConfig} />
   {/each}
 </div>
 <UrlTemplateForm />

@@ -1,17 +1,17 @@
 <script lang="ts">
   import {
-    SiteConfiguration,
     addNewUrlPattern,
     updateStoredConfig,
     getSiteConfiguration,
     deleteUrlPattern,
   } from "../../storage/config-handler";
+  import type { SiteConfiguration } from "../../storage/config-handler";
   import { browser } from "webextension-polyfill-ts";
   import { dragHandleClass } from "../utils";
   export let siteConfig: SiteConfiguration;
+  export let currentEditableLinkById: string | undefined;
 
   let deleted = false;
-  let editable = false;
   let siteTitle = getSiteTitle(siteConfig);
 
   const dragHandleSrc = "/icons/drag_indicator-black.svg"; // from https://fonts.gstatic.com/s/i/materialicons/drag_indicator/v5/24px.svg?download=true
@@ -30,7 +30,7 @@
       siteConfig.id
     );
     siteConfig = newConfig;
-    editable = false;
+    currentEditableLinkById = undefined;
   }
   async function toggleIsEnabled() {
     await updateStoredConfig(siteConfig.id, {
@@ -100,9 +100,11 @@
         name={siteConfig.id}
         checked={siteConfig.isEnabled}
         on:click={toggleIsEnabled} />
-      {#if !editable}
+      {#if siteConfig.id !== currentEditableLinkById}
         {getSiteTitle(siteConfig)}
-        <button class="edit" on:click|preventDefault={() => (editable = true)}>
+        <button
+          class="edit"
+          on:click|preventDefault={() => (currentEditableLinkById = siteConfig.id)}>
           {browser.i18n.getMessage('config_editButton')}
         </button>
       {:else}
