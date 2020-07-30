@@ -359,10 +359,10 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
   },
 
   googlemaps: {
-    link: "www.google.com/maps", //redirected from maps.google.com
+    link: "www.google.com", //redirected from maps.google.com
     domainRegexp: /\.google\.(com?|cat|xxx|(com?\.)?[a-z]{2})$/,
     paramOpts: [
-      { ordered: "/@{lat},{lon},{zoom}z" },
+      { ordered: "/maps/@{lat},{lon},{zoom}z" },
       { ordered: "@{lat},{lon},{zoom}z" }, // input-only
       { ordered: "/maps/search/{lat},{lon}" },
     ]

@@ -1,10 +1,18 @@
-import { getSitesConfiguration } from '../storage/config-handler';
-import { createConfigurableSitesList, createUrlPatternInput } from './html-content-creation';
+import {
+  getSitesConfiguration,
+  SiteConfiguration,
+} from "../storage/config-handler";
+import { setupDragAndDrop } from "./utils";
+// @ts-expect-error
+import App from "./App.svelte";
 
-(async function () {
-  const sitesConfig = await getSitesConfiguration();
-  const optionsLayout = createConfigurableSitesList(document, sitesConfig);
-  const urlPatternInput = createUrlPatternInput(document);
+getSitesConfiguration().then((sitesConfig: SiteConfiguration[]) => {
+  new App({
+    target: document.body,
+    props: {
+      sitesConfig,
+    },
+  });
 
-  document.body.append(optionsLayout, urlPatternInput);
-})();
+  setupDragAndDrop(document);
+});

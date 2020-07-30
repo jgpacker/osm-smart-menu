@@ -22,7 +22,7 @@
 <div>
   {#await eventualSitesOrError}
     <InfoBox>
-      <span class="loading">{browser.i18n.getMessage('loading')}</span>
+      <div class="loading">{browser.i18n.getMessage('loading')}</div>
     </InfoBox>
   {:then sitesListOrError}
     {#if typeof sitesListOrError === 'object'}
