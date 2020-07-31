@@ -3,6 +3,7 @@ export type DefaultSiteConfiguration = {
   domainRegexp?: RegExp,
   paramOpts: ParamOpt[];
   extractors?: Extractors;
+  disabledByDefault?: boolean;
   httpOnly?: boolean;
   // it's only necessary to specify `maxZoom` if the website
   // doesn't handle gracefully a `zoom` parameter above their range
@@ -126,7 +127,6 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
     ],
   },
 
-
   osmcha: {
     link: 'osmcha.org',
     paramOpts: [
@@ -239,7 +239,7 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
     paramOpts: [
       urlPattern1, //TODO: &tilt=45&rotation=168
     ],
-    // Obs: minZoom=15
+    disabledByDefault: true, // zoom starts only at level 15
   },
 
   openlevelup: {
@@ -406,7 +406,8 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
       { ordered: "/?url=w{wayId}!" },
       { ordered: "/?url=r{relationId}" },
       //In the future, there might be a permalink for the mini-map: https://github.com/Zverik/Level0/issues/16
-    ]
+    ],
+    disabledByDefault: true, // not recommended for beginners
   },
 
   osmrelationanalyzer: {
@@ -428,6 +429,7 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
     extractors: {
       //TODO: getValues - get user that change this relation for the last time
     },
+    disabledByDefault: true, // doesn't work for most relations
   },
 
   osmose: { // Note: has support for languages
@@ -473,6 +475,7 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
       { ordered: "/", unordered: { "wayId": "wayid" } },
     ],
     httpOnly: true, // mini-map won't load in HTTPS
+    disabledByDefault: true, // doesn't work for most relations
   },
 };
 

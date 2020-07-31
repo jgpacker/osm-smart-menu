@@ -13,10 +13,15 @@ const storage: Storage.StorageArea = browser.storage.sync || browser.storage.loc
 
 const getConfigKey = (siteId: string) => `site_${siteId}`;
 
-async function getStoredConfig(siteId: string): Promise<StoredConfiguration> {
-  const defaultSiteConfig: StoredConfiguration = {
-    isEnabled: true,
+function getDefaultEnabledAttribute(siteId: string) {
+  if (Sites[siteId] && Sites[siteId].disabledByDefault) {
+    return false;
+  } else {
+    return true;
   }
+}
+
+async function getStoredConfig(siteId: string): Promise<StoredConfiguration> {
   const key = getConfigKey(siteId);
   const storedObject = await storage.get(key);
   if (typeof storedObject === "object" && storedObject &&
@@ -24,13 +29,15 @@ async function getStoredConfig(siteId: string): Promise<StoredConfiguration> {
   ) {
     const s = storedObject[key];
     const siteConfig: StoredConfiguration = {
-      isEnabled: typeof s.isEnabled !== "undefined"? s.isEnabled: defaultSiteConfig.isEnabled,
+      isEnabled: typeof s.isEnabled !== "undefined"? s.isEnabled: getDefaultEnabledAttribute(siteId),
       customName: s.customName,
       customPattern: s.customPattern,
     };
     return siteConfig
   } else {
-    return defaultSiteConfig;
+    return {
+      isEnabled: getDefaultEnabledAttribute(siteId),
+    };
   }
 }
 
