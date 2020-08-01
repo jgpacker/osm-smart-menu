@@ -75,6 +75,9 @@
     "message": "O site foi reconhecido, mas seus parâmetros não foram encontrados.\nSe isto é um mapa, tente mexer nele um pouco para inicializar seus parâmetros.\nSe isto parece ser um bug, por favor relate em $EXTENSION_SITE$.",
     "placeholders": { "EXTENSION_SITE": { "content": "$1" } }
   },
+  "noEnabledCompatibleLinksFound": {
+    "message": "Nenhum link ativado é compatível com os parâmetros encontrados nesta página."
+  },
 
   "button_showEnabledLinks": {
     "message": "Exibir links habilitados usando parâmetros básicos"

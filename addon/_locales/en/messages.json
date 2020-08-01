@@ -103,6 +103,10 @@
       }
     }
   },
+  "noEnabledCompatibleLinksFound": {
+    "message": "None of the enabled links are compatible with the parameters found in this page.",
+    "description": "Shown in popup when there aren't any enabled links that support the parameters found in the current page."
+  },
 
   "button_showEnabledLinks": {
     "message": "Show enabled links using basic parameters",

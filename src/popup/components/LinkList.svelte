@@ -2,6 +2,7 @@
   import { SiteLink } from "../sites-manipulation-helper";
   import { browser } from "webextension-polyfill-ts";
   import { openLink } from "../utils";
+  import InfoBox from "./InfoBox.svelte";
 
   export let siteLinks: SiteLink[];
 </script>
@@ -28,4 +29,6 @@
   <a id={site.id} href={site.url} class="site" on:click={openLink}>
     {site.customName || browser.i18n.getMessage(`site_${site.id}`) || '???'}
   </a>
+{:else}
+  <InfoBox>{browser.i18n.getMessage('noEnabledCompatibleLinksFound')}</InfoBox>
 {/each}
