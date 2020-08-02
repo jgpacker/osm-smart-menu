@@ -80,7 +80,10 @@
   },
 
   "button_showEnabledLinks": {
-    "message": "Exibir links habilitados usando parâmetros básicos"
+    "message": "Exibir links ativados usando parâmetros adicionais"
+  },
+  "button_showOtherEnabledLinks": {
+    "message": "Exibir o resto dos links ativados usando parâmetros adicionais"
   },
 
   "site_historicmap": {

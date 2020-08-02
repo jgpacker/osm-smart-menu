@@ -25,14 +25,19 @@
       <div class="loading">{browser.i18n.getMessage('loading')}</div>
     </InfoBox>
   {:then sitesListOrError}
-    {#if typeof sitesListOrError === 'object'}
+    {#if 'sitesList' in sitesListOrError}
       <BasicLinkCreationDialog
         customUserOption={sitesListOrError.customUserOption} />
       <LinkList siteLinks={sitesListOrError.sitesList} />
+      <ShowEnabledLinksButton
+        config={sitesListOrError.config}
+        currentSiteId={sitesListOrError.currentSiteId}
+        currentlyShownLinks={sitesListOrError.sitesList}
+        extractedParameters={sitesListOrError.extractedParameters} />
     {:else}
-      <ErrorMessage error={sitesListOrError} />
-      {#if sitesListOrError === KnownError.INCOMPATIBLE_WEBSITE || sitesListOrError === KnownError.NO_INFORMATION_EXTRACTED}
-        <ShowEnabledLinksButton />
+      <ErrorMessage error={sitesListOrError.error} />
+      {#if sitesListOrError.error === KnownError.INCOMPATIBLE_WEBSITE || sitesListOrError.error === KnownError.NO_INFORMATION_EXTRACTED}
+        <ShowEnabledLinksButton config={sitesListOrError.config} />
       {/if}
     {/if}
   {/await}

@@ -109,8 +109,12 @@
   },
 
   "button_showEnabledLinks": {
-    "message": "Show enabled links using basic parameters",
-    "description": "Shown below some errors to allow user to see enabled websites."
+    "message": "Show enabled links using additional parameters",
+    "description": "Shown in popup below some errors to allow users to see enabled links."
+  },
+  "button_showOtherEnabledLinks": {
+    "message": "Show the rest of the enabled links using additional parameters",
+    "description": "Shown in popup below the list of links; to see other enabled links with additional parameters."
   },
 
   "site_openstreetmap": {

@@ -2,38 +2,49 @@ import { browser } from 'webextension-polyfill-ts'
 import { ContentScriptOutputMessage, ContentScriptInputMessage } from '../injectable-content-script';
 import { KnownError, CustomUserOption } from './utils';
 import { findSiteCandidates, pickWinningCandidate, getRelevantSites, SiteLink } from './sites-manipulation-helper';
-import { getSitesConfiguration } from '../storage/config-handler';
+import { getSitesConfiguration, SiteConfiguration } from '../storage/config-handler';
 // @ts-expect-error
 import App from './App.svelte';
+import { OsmAttribute } from "../sites-configuration";
 
-export type EventualSitesOrError = Promise<{
-  sitesList: SiteLink[];
-  customUserOption?: CustomUserOption;
-} | KnownError>;
+export type EventualSitesOrError = Promise<
+  | {
+      config: SiteConfiguration[];
+      currentSiteId: string | undefined;
+      sitesList: SiteLink[];
+      extractedParameters: Partial<Record<OsmAttribute, string>>;
+      customUserOption?: CustomUserOption;
+    }
+  | {
+      config: SiteConfiguration[];
+      error: KnownError;
+    }
+>;
 
 const eventualSitesOrError: EventualSitesOrError = getSitesOrError();
 new App({
-	target: document.body,
-	props: { eventualSitesOrError },
+  target: document.body,
+  props: { eventualSitesOrError },
 });
 
 async function getSitesOrError(): EventualSitesOrError {
+  const config = await getSitesConfiguration();
   const tabs = await browser.tabs.query({ active: true, currentWindow: true });
   const currentTab = tabs[0];
   if (!currentTab || !currentTab.url || !currentTab.id) {
-    return KnownError.NO_ACCESS;
+    const error = KnownError.NO_ACCESS;
+    return { config, error };
   }
 
-  const config = await getSitesConfiguration();
   const candidateSiteIds = findSiteCandidates(config, currentTab.url);
   const contentScriptResult = await getDataFromContentScript(currentTab.id, candidateSiteIds) ;
   const currentSite = contentScriptResult && pickWinningCandidate(config, contentScriptResult, currentTab.url);
   if (!currentSite) {
-    if (candidateSiteIds.length === 0) {
-      return KnownError.INCOMPATIBLE_WEBSITE;
-    } else {
-      return KnownError.NO_INFORMATION_EXTRACTED;
-    }
+    const error =
+      candidateSiteIds.length === 0
+        ? KnownError.INCOMPATIBLE_WEBSITE
+        : KnownError.NO_INFORMATION_EXTRACTED;
+    return { config, error };
   }
 
   let customUserOption: CustomUserOption | undefined;
@@ -46,8 +57,11 @@ async function getSitesOrError(): EventualSitesOrError {
 
   const sitesList = getRelevantSites(config, currentSite.siteId, currentSite.attributes);
   return {
+    config,
+    currentSiteId: currentSite.siteId,
     sitesList,
     customUserOption,
+    extractedParameters: currentSite.attributes,
   };
 }
 
