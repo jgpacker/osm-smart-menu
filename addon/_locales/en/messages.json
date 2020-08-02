@@ -16,17 +16,23 @@
 
   "newOptionDetected_notice": {
     "message": "Would you like to add this website in the menu?",
-    "description": "Shown in popup when an unknown website seems compatible with OpenStreetMap. Before the button"
+    "description": "Shown in popup (before the button) when an unknown website seems compatible with OpenStreetMap"
   },
 
   "newOptionDetected_buttonText": {
-    "message": "Add option (experimental feature)",
-    "description": "Shown in popup when an unknown website seems compatible with OpenStreetMap. Inside the button"
+    "message": "Add link",
+    "description": "Shown in popup (inside the button) when an unknown website seems compatible with OpenStreetMap"
   },
 
   "newOptionDetected_added": {
-    "message": "Added!",
-    "description": "Shown in popup when an unknown website seems compatible with OpenStreetMap. After the button is clicked."
+    "message": "Added as $PAGE_TITLE$",
+    "description": "Shown in popup when an unknown website seems compatible with OpenStreetMap. After the button is clicked.",
+    "placeholders": {
+      "PAGE_TITLE": {
+        "content": "$1",
+        "example": "OpenStreetMap"
+      }
+    }
   },
 
   "configurationLink": {

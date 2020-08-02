@@ -20,11 +20,17 @@
   },
  
   "newOptionDetected_buttonText": {
-    "message": "Adicionar opção (funcionalidade experimental)"
+    "message": "Adicionar link"
   },
 
   "newOptionDetected_added": {
-    "message": "Adicionado!"
+    "message": "Adicionado como $PAGE_TITLE$",
+    "placeholders": {
+      "PAGE_TITLE": {
+        "content": "$1",
+        "example": "OpenStreetMap"
+      }
+    }
   },
 
   "configurationLink": {

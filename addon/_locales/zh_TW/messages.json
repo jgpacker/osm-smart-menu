@@ -20,13 +20,19 @@
   },
  
   "newOptionDetected_buttonText": {
-    "message": "新增選項 (實驗性功能)",
+    "message": "新增選項",
     "description": "當未知網站與開放街圖相容時跳出視窗。在按鈕之中"
   },
 
-  "newOptionDetected_added": {
+  "REVIEW_newOptionDetected_added": {
     "message": "新增成功！",
-    "description": "當未知網站與開放街圖相容時跳出視窗。在按鈕按下之後"
+    "description": "當未知網站與開放街圖相容時跳出視窗。在按鈕按下之後",
+    "placeholders": {
+      "PAGE_TITLE": {
+        "content": "$1",
+        "example": "OpenStreetMap"
+      }
+    }
   },
 
   "configurationLink": {

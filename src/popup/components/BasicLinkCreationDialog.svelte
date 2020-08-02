@@ -30,6 +30,6 @@
       <button on:click={buttonClick}>
         {browser.i18n.getMessage('newOptionDetected_buttonText')}
       </button>
-    {:else}{browser.i18n.getMessage('newOptionDetected_added')}{/if}
+    {:else}{browser.i18n.getMessage('newOptionDetected_added', customUserOption && customUserOption.defaultName)}{/if}
   </InfoBox>
 {/if}
