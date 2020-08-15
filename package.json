@@ -28,7 +28,7 @@
     "svelte-check": "^1.0.15",
     "svelte-loader": "^2.13.6",
     "svelte-preprocess": "^4.0.12",
-    "ts-jest": "^26.1.4",
+    "ts-jest": "^26.2.0",
     "ts-loader": "^8.0.2",
     "typescript": "^3.9.7",
     "web-ext": "^5.0.0",
