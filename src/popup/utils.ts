@@ -12,9 +12,6 @@ export enum KnownError {
   NO_INFORMATION_EXTRACTED = 'noInformationExtracted',
 }
 
-export function openLink(event: Event): void {
-  if (event.target instanceof HTMLAnchorElement) {
-    browser.tabs.create({ url: event.target.href });
-    event.preventDefault();
-  }
+export function openLink(url: string): void {
+  browser.tabs.create({ url });
 }

@@ -26,7 +26,7 @@
 </style>
 
 {#each siteLinks as site}
-  <a id={site.id} href={site.url} class="site" on:click={openLink}>
+  <a id={site.id} href={site.url} class="site" on:click|preventDefault={() => openLink(site.url)}>
     {site.customName || browser.i18n.getMessage(`site_${site.id}`) || '???'}
   </a>
 {:else}
