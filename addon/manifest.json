@@ -28,7 +28,7 @@
   },
 
   "background": {
-    "scripts": ["background.js"]
+    "scripts": ["background-listeners-setup.js"]
   },
 
   "browser_action": {

@@ -7,9 +7,9 @@ module.exports = {
   devtool: false, // related to optimization.minimize=false and https://bugzilla.mozilla.org/show_bug.cgi?id=1437937
   entry: {
     "injectable-content-script": "./src/injectable-content-script.ts",
-    "options/script": "./src/options/main.ts",
-    "popup/script": "./src/popup/main.ts",
-    "background": "./src/setup.ts"
+    "options/main": "./src/options/main.ts",
+    "popup/main": "./src/popup/main.ts",
+    "background-listeners-setup": "./src/background-listeners-setup.ts"
   },
   output: {
     path: path.resolve(__dirname, "addon"),
