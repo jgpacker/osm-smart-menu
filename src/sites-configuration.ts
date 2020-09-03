@@ -250,7 +250,7 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
       { ordered: "#{zoom}/{lat}/{lon}" }, // input-only
     ],
   },
-    
+
   indoorequal: {
     link: "indoorequal.org",
     paramOpts: [
@@ -436,6 +436,7 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
     link: "osmose.openstreetmap.fr/map",
     paramOpts: [
       { ordered: "/#zoom={zoom}&lat={lat}&lon={lon}" },
+      { ordered: "zoom={zoom}&lat={lat}&lon={lon}" }, // input-only
     ],
     extractors: {
       getPermalink: getPermalinkBySelector("[class*=permalink] a"),

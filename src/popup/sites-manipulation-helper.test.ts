@@ -149,6 +149,12 @@ describe(pickWinningCandidate.name, () => {
     const expectedOutput = { siteId: inputConfig.id, attributes: { key: 'name'} };
     expect(pickWinningCandidate([inputConfig], pageInput, 'https://wiki.openstreetmap.org/wiki/Key:name')).toEqual(expectedOutput);
   });
+  test(`recognize parameters from 'osmose'`, () => {
+    const id = 'osmose'
+    const inputConfig: SiteConfiguration = { id, isEnabled: true, defaultConfiguration: Sites[id] };
+    const expectedOutputAttributes = { zoom: '18', lat: '48.439383', lon: '-4.416006'};
+    expect(pickWinningCandidate([inputConfig], [{}], 'http://osmose.openstreetmap.fr/en/map/#item=7130&zoom=18&lat=48.439383&lon=-4.416006&level=1%2C2%2C3&tags=&fixable=')!.attributes).toEqual(expectedOutputAttributes);
+  });
 
   describe('zoom', () => {
     test('with zoomAdjustment=1', () => {
