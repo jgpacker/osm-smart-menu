@@ -176,9 +176,6 @@
   "site_mapillary": {
     "message": "Mapillary"
   },
-  "site_josm": {
-    "message": "JOSM 編輯器遠端啟用"
-  },
   "site_level0": {
     "message": "Level0 編輯器"
   },
@@ -223,9 +220,6 @@
   },
   "site_osmwiki": {
     "message": "開放街圖 Wiki"
-  },
-  "site_taginfo": {
-    "message": "Taginfo"
   },
   "site_osmchangeviz": {
     "message": "變更集的比較 (Neis)"
