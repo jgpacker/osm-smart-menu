@@ -1,1 +1,113 @@
-{}
+{
+    "site_f4map": {
+        "message": "F4 Map (3D демо)"
+    },
+    "site_historicmap": {
+        "message": "Исторические объекты"
+    },
+    "newOptionDetected_notice": {
+        "message": "Хотите добавить этот сайт в меню?",
+        "description": "Shown in popup (before the button) when an unknown website seems compatible with OpenStreetMap"
+    },
+    "site_osmcha": {
+        "message": "OSMCha"
+    },
+    "site_openstreetbrowser": {
+        "message": "OpenStreetBrowser"
+    },
+    "site_waze": {
+        "message": "Waze"
+    },
+    "site_osmwiki": {
+        "message": "OpenStreetMap вики"
+    },
+    "site_umap": {
+        "message": "uMap"
+    },
+    "site_level0": {
+        "message": "Редактор Level0"
+    },
+    "site_mapillary": {
+        "message": "Mapillary"
+    },
+    "site_openstreetcam": {
+        "message": "OpenStreetCam"
+    },
+    "site_stamen": {
+        "message": "Stamen Maps"
+    },
+    "site_opnvkarte": {
+        "message": "ÖPNVKarte"
+    },
+    "site_opentopomap": {
+        "message": "OpenTopoMap"
+    },
+    "site_opensnowmap": {
+        "message": "OpenSnowMap"
+    },
+    "site_openseamap": {
+        "message": "OpenSeaMap"
+    },
+    "site_opencyclemap": {
+        "message": "OpenCycleMap"
+    },
+    "site_openmapsurfer": {
+        "message": "OpenMapSurfer"
+    },
+    "site_sentinelhub": {
+        "message": "Sentinel Hub"
+    },
+    "site_googlemaps": {
+        "message": "Карты Google"
+    },
+    "site_bingmaps": {
+        "message": "Bing Maps"
+    },
+    "site_openstreetmap": {
+        "message": "OpenStreetMap"
+    },
+    "config_pattern_urlTemplate": {
+        "message": "Шаблон URL-адреса",
+        "description": "Input label"
+    },
+    "config_pattern_name": {
+        "message": "Название",
+        "description": "Input label"
+    },
+    "config_deleteButton": {
+        "message": "Удалить",
+        "description": "Text inside 'delete button' in configuration page"
+    },
+    "config_saveButton": {
+        "message": "Сохранить",
+        "description": "Text inside 'save button' in configuration page"
+    },
+    "config_editButton": {
+        "message": "Редактировать",
+        "description": "Text inside 'edit button' in configuration page"
+    },
+    "configurationLink": {
+        "message": "Конфигурация",
+        "description": "Link to configuration page inside main popup."
+    },
+    "newOptionDetected_added": {
+        "message": "Добавлено как $PAGE_TITLE$",
+        "description": "Shown in popup when an unknown website seems compatible with OpenStreetMap. After the button is clicked.",
+        "placeholders": {
+            "PAGE_TITLE": {
+                "content": "$1",
+                "example": "OpenStreetMap"
+            }
+        }
+    },
+    "newOptionDetected_buttonText": {
+        "message": "Добавить ссылку",
+        "description": "Shown in popup (inside the button) when an unknown website seems compatible with OpenStreetMap"
+    },
+    "extensionShortName": {
+        "message": "OSMenu"
+    },
+    "extensionName": {
+        "message": "OSM Smart Menu"
+    }
+}
