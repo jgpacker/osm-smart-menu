@@ -8,6 +8,10 @@
     "extensionDescription": {
         "message": "Helps OpenStreetMap contributors to easily switch between different maps and analysis tools from the community."
     },
+    "extensionStoreDescription": {
+        "message": "When you click the menu's button, this extension will <strong>detect</strong> OpenStreetMap parameters inside the current page and will <strong>generate</strong> a list of related maps and tools with these parameters.\n\nRecognized parameters include:\n<ul>\n<li>Map coordinates (zoom, latitude and longitude)</li>\n<li>OSM elements (node id, way id, relation id and changeset id)</li>\n<li>User names and GPS traces id</li>\n</ul>\nIf you are not sure which website will be recognized, try going to https://www.openstreetmap.org/ before clicking on the menu.\n\n<em>The OpenStreetMap logo is a trademark of the OpenStreetMap Foundation, and is used with their permission. This project is not endorsed by or affiliated with the OpenStreetMap Foundation.</em>",
+        "description": "Description shown in Chrome and Firefox's extension download page"
+    },
     "loading": {
         "message": "Loading...\nIf this does not stop loading, reload the page and try again.",
         "description": "Shown in popup shortly before menu appears."

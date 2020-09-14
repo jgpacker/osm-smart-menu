@@ -6,7 +6,9 @@
   "extensionShortName": {
     "message": "Menu OSM"
   },
-
+  "extensionStoreDescription": {
+    "message": "Quando você clicar no botão do menu, esta extensão irá <strong>detectar</strong> parâmetros OpenStreetMap dentro da sua página atual e irá <strong>gerar</strong> uma lista de mapas e ferramentas relacionadas que utilizam esses parâmetros.\n\nParâmetros reconhecidos incluem:\n<ul>\n<li>Coordenadas de mapa (zoom, latitude e longitude)</li>\n<li>Elementos OSM (id de nó, linha, relação e conjunto de alterações)</li>\n<li>Nome de usuário e id de rastros GPS</li>\n</ul>\nSe você não tem certeza qual site será reconhecido, vá para https://www.openstreetmap.org/ antes de clicar no menu.\n\n<em>O logotipo OpenStreetMap é uma marca registrada da OpenStreetMap Foundation, e é utilizado com sua permissão. Este projeto não é endossado ou afiliado com a OpenStreetMap Foundation.</em>"
+  },
   "extensionDescription": {
     "message": "Facilita o acesso de contribuidores do OpenStreetMap entre diferentes mapas e ferramentas de análise da comunidade."
   },
