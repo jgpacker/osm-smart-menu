@@ -17,9 +17,4 @@ User documentation is available at the [OpenStreetMap Wiki](https://wiki.openstr
 You can [open a new issue](https://github.com/jgpacker/osm-smart-menu/issues/new)  in Github or [send a message](https://www.openstreetmap.org/message/new/jgpacker) to the author's OpenStreetMap account.
 
 ### Translations
-Add a file called `messages.json` in the folder `addon/_locales/<LANGUAGE_CODE>/`.
-See [Chrome's documentation](https://developer.chrome.com/extensions/i18n#overview-locales) for more details.
-
-Some websites' names should be left untranslated, preserving the original name.
-
-After that's done, you can also translate `addon/_locales/en/long_description.html`. This file's content is used in extension websites.
+Translate this extensions' interface using [Weblate](https://hosted.weblate.org/engage/osm-smart-menu/).
