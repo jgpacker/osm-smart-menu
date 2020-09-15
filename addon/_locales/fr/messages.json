@@ -4,7 +4,7 @@
         "description": "Button"
     },
     "config_pattern_urlTemplate": {
-        "message": "Modèle URL",
+        "message": "Modèle d'URL",
         "description": "Input label"
     },
     "config_pattern_name": {
@@ -46,5 +46,26 @@
     },
     "extensionName": {
         "message": "OSM Smart Menu"
+    },
+    "config_linkDeleted": {
+        "message": "Lien $LINK_NAME$ supprimé. Cliquez ici pour annuler.",
+        "description": "Shown inline when a link is deleted inside configuration page",
+        "placeholders": {
+            "LINK_NAME": {
+                "content": "$1",
+                "example": "OpenStreetMap"
+            }
+        }
+    },
+    "newOptionDetected_notice": {
+        "message": "Souhaitez-vous ajouter ce site Web au menu ?",
+        "description": "Shown in popup (before the button) when an unknown website seems compatible with OpenStreetMap"
+    },
+    "loading": {
+        "message": "Chargement…\nSi le chargement ne s'arrête pas, rechargez la page et réessayez.",
+        "description": "Shown in popup shortly before menu appears."
+    },
+    "extensionDescription": {
+        "message": "Aide les contributeurs d'OpenStreetMap à passer facilement d'une carte à l'autre et d'un outil d'analyse à l'autre de la communauté."
     }
 }
