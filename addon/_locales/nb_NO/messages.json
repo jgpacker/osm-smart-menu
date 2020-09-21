@@ -242,5 +242,9 @@
     },
     "extensionName": {
         "message": "OSM-smartmeny"
+    },
+    "extensionStoreDescription": {
+        "message": "Når du klikker på menyknappen, vil denne utvidelsen <strong>oppdage</strong> OpenStreetMap-parametre i nåværende side og <strong>generere</strong> en liste over relaterte kart og verktøy med disse parameterne.\n\nDisse parameterne gjenkjennes:\n<ul>\n<li>Kart-koordinater (forstørrelse, breddegrad og lengdegrad)</li>\n<li>OSM-elementer (node-ID, vei-ID, relasjons-ID, og endringssett-ID)</li>\n<li>Brukernavn og GPS-spor-ID</li>\n</ul>\nHvis du ikke er sikker på hvilken nettside som vil bli gjenkjent, prøv å gå til https://www.openstreetmap.org/ før du klikker på menyen.\n\n<em>OpenStreetMap-logoen er et varemerke som tilhører OpenStreetMap-stiftelsen, og brukes med tillatelse. Dette prosjektet er ikke støttet av eller tilknyttet OpenStreetMap-stiftelsen.</em>",
+        "description": "Description shown in Chrome and Firefox's extension download page"
     }
 }
