@@ -84,7 +84,7 @@
         }
     },
     "config_deleteButton": {
-        "message": "Excluir",
+        "message": "Apagar",
         "description": "Text inside 'delete button' in configuration page"
     },
     "config_saveButton": {
