@@ -25,7 +25,7 @@
     "@types/jest": "^26.0.9",
     "jest": "^26.4.2",
     "svelte": "^3.24.1",
-    "svelte-check": "^1.0.32",
+    "svelte-check": "^1.0.54",
     "svelte-loader": "^2.13.6",
     "svelte-preprocess": "^4.2.0",
     "ts-jest": "^26.3.0",
