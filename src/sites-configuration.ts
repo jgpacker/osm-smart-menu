@@ -146,6 +146,15 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
     ],
   },
 
+  pewuosmhistory: {
+    link: 'pewu.github.io',
+    paramOpts: [
+      { ordered: '/osm-history/#/node/{nodeId}' },
+      { ordered: '/osm-history/#/way/{wayId}' },
+      { ordered: '/osm-history/#/relation/{relationId}' },
+    ]
+  },
+
   osmdeephistory: {
     link: "osmlab.github.io/osm-deep-history",
     paramOpts: [

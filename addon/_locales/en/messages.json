@@ -190,6 +190,9 @@
     "site_osmhistoryviewer": {
         "message": "OSM History Viewer"
     },
+    "site_pewuosmhistory": {
+        "message": "OSM History Viewer (PeWu)"
+    },
     "site_whodidit": {
         "message": "WHODIDIT (Zverik)"
     },
