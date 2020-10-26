@@ -63,6 +63,17 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
       }
     }
   },
+    
+  iDeditor: {
+    link: "www.openstreetmap.org/edit",
+    paramOpts: [
+      { ordered: "#map={zoom}/{lat}/{lon}" },
+      { ordered: "?way/{osm_way_id}" },
+      { ordered: "?node/{osm_node_id}" },
+      { ordered: "?relation/{osm_relation_id}" },
+      { ordered: "?changeset/{osm_changeset_id}" },
+      ],
+  },
 
   opencyclemap: {
     link: "www.opencyclemap.org",
@@ -405,7 +416,7 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
       { ordered: "/?url=n{nodeId}" },
       { ordered: "/?url=w{wayId}!" },
       { ordered: "/?url=r{relationId}" },
-      { ordered: "/?url=map={zoom}/{latitude}/{longitude}" },
+      { ordered: "/?url=map={zoom}/{lat}/{long}" },
       //In the future, there might be a permalink for the mini-map: https://github.com/Zverik/Level0/issues/16
     ],
     disabledByDefault: true, // not recommended for beginners
