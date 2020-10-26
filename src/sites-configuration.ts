@@ -405,6 +405,7 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
       { ordered: "/?url=n{nodeId}" },
       { ordered: "/?url=w{wayId}!" },
       { ordered: "/?url=r{relationId}" },
+      { ordered: "/?url=map={zoom}/{latitude}/{longitude}" },
       //In the future, there might be a permalink for the mini-map: https://github.com/Zverik/Level0/issues/16
     ],
     disabledByDefault: true, // not recommended for beginners
