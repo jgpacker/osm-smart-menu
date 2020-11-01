@@ -1,0 +1,250 @@
+{
+    "site_osmhistoryviewer": {
+        "message": "OSM History Viewer"
+    },
+    "site_osmlanevisualizer": {
+        "message": "OSM Lane Visualizer"
+    },
+    "site_missingmaps": {
+        "message": "Missing Maps"
+    },
+    "site_indoorequal": {
+        "message": "indoor="
+    },
+    "site_openlevelup": {
+        "message": "OpenLevelUp!"
+    },
+    "site_osmbuildings": {
+        "message": "OSM Buildings"
+    },
+    "site_osmcha": {
+        "message": "OSMCha"
+    },
+    "site_openstreetbrowser": {
+        "message": "OpenStreetBrowser"
+    },
+    "site_waze": {
+        "message": "Waze"
+    },
+    "site_osmchangetiles": {
+        "message": "Latest OSM Edits (Neis)"
+    },
+    "site_osmchangeviz": {
+        "message": "Changeset by Comparison (Neis)"
+    },
+    "site_osmwiki": {
+        "message": "OpenStreetMap wiki"
+    },
+    "site_howdidyoucontribute": {
+        "message": "How did you contribute to OSM?"
+    },
+    "site_keepright": {
+        "message": "keep right!"
+    },
+    "site_mapcompare": {
+        "message": "Map Compare"
+    },
+    "site_osminspector": {
+        "message": "OSM Inspector"
+    },
+    "site_osmose": {
+        "message": "Osmose"
+    },
+    "site_osmroutemanager": {
+        "message": "OSM Route Manager"
+    },
+    "site_osmrelationanalyzer": {
+        "message": "OSM Relation Analyzer"
+    },
+    "site_overpassapi": {
+        "message": "AChaVi"
+    },
+    "site_whodidit": {
+        "message": "WHODIDIT (Zverik)"
+    },
+    "site_deepdiff": {
+        "message": "Deep Diff"
+    },
+    "site_osmdeephistory": {
+        "message": "OSM Deep History"
+    },
+    "site_umap": {
+        "message": "uMap"
+    },
+    "site_level0": {
+        "message": "Level0 Editor"
+    },
+    "site_mapillary": {
+        "message": "Mapillary"
+    },
+    "site_openstreetcam": {
+        "message": "OpenStreetCam"
+    },
+    "site_hotmap": {
+        "message": "Humanitarian OSM Team Map"
+    },
+    "site_f4map": {
+        "message": "F4 Map (3D demo)"
+    },
+    "site_stamen": {
+        "message": "Stamen Maps"
+    },
+    "site_opnvkarte": {
+        "message": "ÖPNVKarte"
+    },
+    "site_openptmap": {
+        "message": "Open Public Transport Map"
+    },
+    "site_openinframap": {
+        "message": "Open Infrastructure Map "
+    },
+    "site_historicmap": {
+        "message": "Historical Objects"
+    },
+    "site_opentopomap": {
+        "message": "OpenTopoMap"
+    },
+    "site_opensnowmap": {
+        "message": "OpenSnowMap"
+    },
+    "site_openseamap": {
+        "message": "OpenSeaMap"
+    },
+    "site_opencyclemap": {
+        "message": "OpenCycleMap"
+    },
+    "site_openmapsurfer": {
+        "message": "OpenMapSurfer"
+    },
+    "site_sentinelhub": {
+        "message": "Sentinel Hub"
+    },
+    "site_googlemaps": {
+        "message": "Google Maps"
+    },
+    "site_bingmaps": {
+        "message": "Bing Maps"
+    },
+    "site_openstreetmap": {
+        "message": "OpenStreetMap"
+    },
+    "button_showOtherEnabledLinks": {
+        "message": "Mostra il resto dei collegamenti abilitati utilizzando parametri aggiuntivi",
+        "description": "Shown in popup below the list of links; to see other enabled links with additional parameters."
+    },
+    "button_showEnabledLinks": {
+        "message": "Mostra i link abilitati utilizzando parametri aggiuntivi",
+        "description": "Shown in popup below some errors to allow users to see enabled links."
+    },
+    "noEnabledCompatibleLinksFound": {
+        "message": "Nessuno dei link abilitati è compatibile con i parametri che si trovano in questa pagina.",
+        "description": "Shown in popup when there aren't any enabled links that support the parameters found in the current page."
+    },
+    "error_noInformationExtracted": {
+        "message": "Il sito web è stato riconosciuto, ma non è stato trovato alcun parametro.\nSe si tratta di una mappa, provate a spostarla un po' per inizializzare i suoi parametri.\nSe sembra un bug, segnalatelo in $EXTENSION_SITE$.",
+        "description": "Error shown inside popup when appropriate",
+        "placeholders": {
+            "EXTENSION_SITE": {
+                "content": "$1",
+                "example": "github.com/jgpacker/osm-smart-menu/"
+            }
+        }
+    },
+    "error_incompatibleWebsite": {
+        "message": "Non sono stati trovati né mappa né parametri OpenStreetMap.\nSe questo è inaspettato, potete segnalarlo in $EXTENSION_SITE$.",
+        "description": "Error shown inside popup when appropriate",
+        "placeholders": {
+            "EXTENSION_SITE": {
+                "content": "$1",
+                "example": "github.com/jgpacker/osm-smart-menu/"
+            }
+        }
+    },
+    "error_noAccess": {
+        "message": "ERRORE: impossibile trovare o accedere alla pagina corrente.\nSe questa pagina è ancora in fase di caricamento, riprova.\nSe ciò è imprevisto, segnalalo in $EXTENSION_SITE$.",
+        "description": "Error shown inside popup when the current page cannot be accessed (technical exception)",
+        "placeholders": {
+            "EXTENSION_SITE": {
+                "content": "$1",
+                "example": "github.com/jgpacker/osm-smart-menu/"
+            }
+        }
+    },
+    "config_pattern_createOption": {
+        "message": "Crea opzione",
+        "description": "Button"
+    },
+    "config_pattern_urlTemplate": {
+        "message": "URL modello",
+        "description": "Input label"
+    },
+    "config_pattern_name": {
+        "message": "Nome",
+        "description": "Input label"
+    },
+    "config_pattern_formTitle": {
+        "message": "Creazione di opzioni avanzate (sperimentale)",
+        "description": "Form Legend/Title"
+    },
+    "config_linkDeleted": {
+        "message": "Collegamento $LINK_NAME$ eliminato. Clicca qui per annullare.",
+        "description": "Shown inline when a link is deleted inside configuration page",
+        "placeholders": {
+            "LINK_NAME": {
+                "content": "$1",
+                "example": "OpenStreetMap"
+            }
+        }
+    },
+    "config_deleteButton": {
+        "message": "Elimina",
+        "description": "Text inside 'delete button' in configuration page"
+    },
+    "config_saveButton": {
+        "message": "Salva",
+        "description": "Text inside 'save button' in configuration page"
+    },
+    "config_editButton": {
+        "message": "Modifica",
+        "description": "Text inside 'edit button' in configuration page"
+    },
+    "configurationLink": {
+        "message": "Conﬁgurazione",
+        "description": "Link to configuration page inside main popup."
+    },
+    "newOptionDetected_added": {
+        "message": "Aggiunto come $PAGE_TITLE$",
+        "description": "Shown in popup when an unknown website seems compatible with OpenStreetMap. After the button is clicked.",
+        "placeholders": {
+            "PAGE_TITLE": {
+                "content": "$1",
+                "example": "OpenStreetMap"
+            }
+        }
+    },
+    "newOptionDetected_buttonText": {
+        "message": "Aggiungi link",
+        "description": "Shown in popup (inside the button) when an unknown website seems compatible with OpenStreetMap"
+    },
+    "newOptionDetected_notice": {
+        "message": "Vuoi aggiungere questo sito web al menu?",
+        "description": "Shown in popup (before the button) when an unknown website seems compatible with OpenStreetMap"
+    },
+    "loading": {
+        "message": "Caricamento in corso...\nSe il caricamento non si interrompe, ricarica la pagina e riprova.",
+        "description": "Shown in popup shortly before menu appears."
+    },
+    "extensionStoreDescription": {
+        "message": "Quando clicchi sul pulsante del menu, questa estensione <strong>riconoscerà</strong> i parametri OpenStreetMap all'interno della pagina corrente e <strong>genererà</strong> una lista di mappe e strumenti correlati con questi parametri.\n\nI parametri riconosciuti includono:\n<ul>\n<li>coordinate della mappa (zoom, latitudine e longitudine)</li>\n<li>elementi OSM (id di nodi, way, relazioni e gruppi di modifiche)</li>\n<li>nomi utente e id delle tracce GPS</li>\n</ul>\nSe non sei sicuro quale sito verrà riconosciuto, vai su https://www.openstreetmap.org/ e clicca sul menu.\n\n<em>Il logo OpenStreetMap è un marchio registrato dalla OpenStreetMap Foundation ed è utilizzato con il loro permesso. Questo progetto non è supportato o affiliato alla OpenStreetMap Foundation.</em>",
+        "description": "Description shown in Chrome and Firefox's extension download page"
+    },
+    "extensionDescription": {
+        "message": "Aiuta gli utenti OpenStreetMap a passare facilmente tra diverse mappe e strumenti di analisi della comunità."
+    },
+    "extensionShortName": {
+        "message": "OSMenu"
+    },
+    "extensionName": {
+        "message": "OSM Smart Menu"
+    }
+}

@@ -1,0 +1,250 @@
+{
+    "extensionStoreDescription": {
+        "message": "בלחיצה על כפתור התפריט, הרחבה זו <strong>תזהה</strong> את המשתנים של OpenStreetMap בתוך העמוד הנוכחי ו<strong>תייצר</strong> רשימה של מפות וכלים קשורים עם המשתנים האלו.\n\nבין המשתנים שמזוהים:\n<ul>\n<li>נקודות ציון במפה (תקריב, קו אורך וקו רוחב)</li>\n<li>רכיבי OSM (מזהה נקודה, מזהה דרך, מזהה יחס ומזהה ערכת שינויים)</li>\n<li>שמות משתמשים ומשתני עקבות GPS</li>\n</ul>\nאם לא ברור לך איזה אתר יזוהה, כדאי לנסות לפנות אל https://www.openstreetmap.org/‎ בטרם לחיצה על התפריט.\n\n<em>הלוגו של OpenStreetMap הוא סימן מסחר של OpenStreetMap Foundation והשימוש בו הוא בהסכמתם. מיזם זה אינו בעידוד או משתייך ל־OpenStreetMap Foundation.</em>",
+        "description": "Description shown in Chrome and Firefox's extension download page"
+    },
+    "site_osmbuildings": {
+        "message": "OSM Buildings"
+    },
+    "site_osmcha": {
+        "message": "OSMCha"
+    },
+    "site_mapcompare": {
+        "message": "Map Compare"
+    },
+    "site_osminspector": {
+        "message": "OSM Inspector"
+    },
+    "site_osmose": {
+        "message": "Osmose"
+    },
+    "site_osmroutemanager": {
+        "message": "OSM Route Manager"
+    },
+    "site_osmrelationanalyzer": {
+        "message": "OSM Relation Analyzer"
+    },
+    "site_openstreetbrowser": {
+        "message": "OpenStreetBrowser"
+    },
+    "site_osmchangeviz": {
+        "message": "Changeset by Comparison (Neis)"
+    },
+    "site_keepright": {
+        "message": "keep right!‎"
+    },
+    "site_howdidyoucontribute": {
+        "message": "איך תרמת ל־OSM?"
+    },
+    "site_waze": {
+        "message": "Waze"
+    },
+    "site_osmchangetiles": {
+        "message": "Latest OSM Edits (Neis)"
+    },
+    "site_openlevelup": {
+        "message": "OpenLevelUp!‎"
+    },
+    "site_indoorequal": {
+        "message": "indoor=‎"
+    },
+    "site_osmlanevisualizer": {
+        "message": "OSM Lane Visualizer"
+    },
+    "site_overpassapi": {
+        "message": "Augmented OSM Change Viewer"
+    },
+    "site_osmhistoryviewer": {
+        "message": "OSM History Viewer"
+    },
+    "site_deepdiff": {
+        "message": "Deep Diff"
+    },
+    "site_level0": {
+        "message": "Level0 Editor"
+    },
+    "site_mapillary": {
+        "message": "Mapillary"
+    },
+    "site_hotmap": {
+        "message": "Humanitarian OSM Team Map"
+    },
+    "site_f4map": {
+        "message": "F4 Map (3D demo)"
+    },
+    "site_stamen": {
+        "message": "Stamen Maps"
+    },
+    "site_opnvkarte": {
+        "message": "ÖPNVKarte"
+    },
+    "site_openinframap": {
+        "message": "Open Infrastructure Map "
+    },
+    "site_historicmap": {
+        "message": "Historical Objects"
+    },
+    "site_opentopomap": {
+        "message": "OpenTopoMap"
+    },
+    "site_openptmap": {
+        "message": "Open Public Transport Map"
+    },
+    "site_openstreetcam": {
+        "message": "OpenStreetCam"
+    },
+    "site_osmdeephistory": {
+        "message": "OSM Deep History"
+    },
+    "site_umap": {
+        "message": "uMap"
+    },
+    "site_whodidit": {
+        "message": "WHODIDIT (Zverik)"
+    },
+    "site_osmwiki": {
+        "message": "הוויקי של OpenStreetMap"
+    },
+    "site_missingmaps": {
+        "message": "Missing Maps"
+    },
+    "site_opensnowmap": {
+        "message": "OpenSnowMap"
+    },
+    "site_openseamap": {
+        "message": "OpenSeaMap"
+    },
+    "site_opencyclemap": {
+        "message": "OpenCycleMap"
+    },
+    "site_openmapsurfer": {
+        "message": "OpenMapSurfer"
+    },
+    "site_sentinelhub": {
+        "message": "Sentinel Hub"
+    },
+    "site_googlemaps": {
+        "message": "מפות Google"
+    },
+    "site_bingmaps": {
+        "message": "מפות Bing"
+    },
+    "site_openstreetmap": {
+        "message": "OpenStreetMap"
+    },
+    "button_showOtherEnabledLinks": {
+        "message": "להציג את שאר הקישורים הפעילים באמצעות משתנים נוספים",
+        "description": "Shown in popup below the list of links; to see other enabled links with additional parameters."
+    },
+    "button_showEnabledLinks": {
+        "message": "הצגת קישורים פעילים באמצעות משתנים נוספים",
+        "description": "Shown in popup below some errors to allow users to see enabled links."
+    },
+    "noEnabledCompatibleLinksFound": {
+        "message": "אף אחד מהקישורים הפעילים לא תואם למשתנים שנמצאו בעמוד הזה.",
+        "description": "Shown in popup when there aren't any enabled links that support the parameters found in the current page."
+    },
+    "error_noInformationExtracted": {
+        "message": "האתר זוהה, אך לא נמצאו משתניפ.\nאם זו מפה, כדאי לנסות לזוז בה מעט כדי לאתחל את המשתנים שלה.\nאם זאת נראית כמו תקלה, נא לדווח עליה אל $EXTENSION_SITE$.",
+        "description": "Error shown inside popup when appropriate",
+        "placeholders": {
+            "EXTENSION_SITE": {
+                "content": "$1",
+                "example": "github.com/jgpacker/osm-smart-menu/"
+            }
+        }
+    },
+    "error_noAccess": {
+        "message": "שגיאה: לא ניתן לאתר או לגשת לעמוד הנוכחי.\nאם העמוד הזה עדיין נטען, נא לנסות שוב.\nאם זו תופעה לא צפויה, נא לדווח עליה אל $EXTENSION_SITE$.",
+        "description": "Error shown inside popup when the current page cannot be accessed (technical exception)",
+        "placeholders": {
+            "EXTENSION_SITE": {
+                "content": "$1",
+                "example": "github.com/jgpacker/osm-smart-menu/"
+            }
+        }
+    },
+    "error_incompatibleWebsite": {
+        "message": "לא נמצאו מפה או משתני OpenStreetMap.\nאם זו תופעה בלתי צפויה, ניתן לדווח עליה אל $EXTENSION_SITE$.",
+        "description": "Error shown inside popup when appropriate",
+        "placeholders": {
+            "EXTENSION_SITE": {
+                "content": "$1",
+                "example": "github.com/jgpacker/osm-smart-menu/"
+            }
+        }
+    },
+    "config_pattern_createOption": {
+        "message": "יצירת אפשרות",
+        "description": "Button"
+    },
+    "config_pattern_urlTemplate": {
+        "message": "תבנית כתובת",
+        "description": "Input label"
+    },
+    "config_pattern_name": {
+        "message": "שם",
+        "description": "Input label"
+    },
+    "config_pattern_formTitle": {
+        "message": "יצירת אפשרויות מתקדמות (ניסיוני)",
+        "description": "Form Legend/Title"
+    },
+    "config_linkDeleted": {
+        "message": "הקישור $LINK_NAME$ נמחק. ישוחזר בלחיצה כאן.",
+        "description": "Shown inline when a link is deleted inside configuration page",
+        "placeholders": {
+            "LINK_NAME": {
+                "content": "$1",
+                "example": "OpenStreetMap"
+            }
+        }
+    },
+    "config_deleteButton": {
+        "message": "מחיקה",
+        "description": "Text inside 'delete button' in configuration page"
+    },
+    "config_saveButton": {
+        "message": "שמירה",
+        "description": "Text inside 'save button' in configuration page"
+    },
+    "config_editButton": {
+        "message": "עריכה",
+        "description": "Text inside 'edit button' in configuration page"
+    },
+    "configurationLink": {
+        "message": "הגדרות",
+        "description": "Link to configuration page inside main popup."
+    },
+    "newOptionDetected_added": {
+        "message": "נוסף בתור $PAGE_TITLE$",
+        "description": "Shown in popup when an unknown website seems compatible with OpenStreetMap. After the button is clicked.",
+        "placeholders": {
+            "PAGE_TITLE": {
+                "content": "$1",
+                "example": "OpenStreetMap"
+            }
+        }
+    },
+    "newOptionDetected_buttonText": {
+        "message": "הוספת קישור",
+        "description": "Shown in popup (inside the button) when an unknown website seems compatible with OpenStreetMap"
+    },
+    "newOptionDetected_notice": {
+        "message": "להוסיף את האתר הזה לתפריט?",
+        "description": "Shown in popup (before the button) when an unknown website seems compatible with OpenStreetMap"
+    },
+    "loading": {
+        "message": "בטעינה…\nאם התהליך הזה לא נשלם, יש לרענן את העמוד ולנסות שוב.",
+        "description": "Shown in popup shortly before menu appears."
+    },
+    "extensionDescription": {
+        "message": "מסייע למתנדבי OpenStreetMap לעבור בקלות בין מפות וכלי ניתוח שונים מתוצרת הקהילה."
+    },
+    "extensionShortName": {
+        "message": "OSMenu"
+    },
+    "extensionName": {
+        "message": "תפריט חכם ל־OSM"
+    }
+}

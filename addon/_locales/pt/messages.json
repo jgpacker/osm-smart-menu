@@ -28,7 +28,7 @@
         "description": "Shown in popup when there aren't any enabled links that support the parameters found in the current page."
     },
     "error_noInformationExtracted": {
-        "message": "O site foi reconhecido, mas nenhuns parâmetros foi encontrado.\nSe isto é um mapa, tente mexer nele um pouco para inicializar os  parâmetros dele.\nSe isto parece ser um bug, por favor relate em $EXTENSION_SITE$.",
+        "message": "O site foi reconhecido, mas nenhuns parâmetros foram encontrados.\nSe isto é um mapa, tente mexer nele um pouco para inicializar os parâmetros dele.\nSe isto parece ser um bug, por favor relate-o em $EXTENSION_SITE$.",
         "description": "Error shown inside popup when appropriate",
         "placeholders": {
             "EXTENSION_SITE": {
