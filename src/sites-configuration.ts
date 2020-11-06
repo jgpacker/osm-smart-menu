@@ -67,11 +67,15 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
   ideditor: {
     link: "www.openstreetmap.org/edit",
     paramOpts: [
-      { ordered: "#map={zoom}/{lat}/{lon}" },
-      { ordered: "?way/{wayId}" },
-      { ordered: "?node/{nodeId}" },
-      { ordered: "?relation/{relationId}" },
-      { ordered: "?changeset/{changesetId}" },
+      { ordered: "?editor=id#map={zoom}/{lat}/{lon}" },
+      { ordered: "?editor=id&way={wayId}" },
+      { ordered: "way={wayId}" },
+      { ordered: "?editor=id&node={nodeId}" },
+      { ordered: "node={nodeId}" },
+      { ordered: "?editor=id&relation={relationId}" },
+      { ordered: "relation={relationId}" },
+      { ordered: "?editor=id&changeset={changesetId}" },
+      { ordered: "changeset={changesetId}" },
       ],
   },
 
