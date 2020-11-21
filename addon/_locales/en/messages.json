@@ -252,5 +252,8 @@
     },
     "site_osmlanevisualizer": {
         "message": "OSM Lane Visualizer"
-    }
+    },
+	"site_stavaglobal": {
+		"message": "Strava Global Heatmap"
+	},
 }
