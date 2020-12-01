@@ -19,7 +19,7 @@
     "dragula": "^3.7.2",
     "@types/lodash.escaperegexp": "^4.1.6",
     "lodash.escaperegexp": "^4.1.2",
-    "webextension-polyfill-ts": "^0.19.0"
+    "webextension-polyfill-ts": "^0.22.0"
   },
   "devDependencies": {
     "@types/jest": "^26.0.14",
