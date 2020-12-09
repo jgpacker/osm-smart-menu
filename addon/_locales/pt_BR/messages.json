@@ -20,7 +20,7 @@
   "newOptionDetected_notice": {
     "message": "Gostaria de adicionar esse site no menu?"
   },
- 
+
   "newOptionDetected_buttonText": {
     "message": "Adicionar link"
   },
@@ -108,5 +108,8 @@
   },
   "site_osmchangetiles": {
     "message": "Últimas Edições OSM (Neis)"
+  },
+  "site_stravaglobal": {
+    "message": "Strava Mapa de Calor Global"
   }
 }
