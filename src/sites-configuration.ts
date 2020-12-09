@@ -389,6 +389,7 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
       { ordered: "/maps/@{lat},{lon},{zoom}z" },
       { ordered: "@{lat},{lon},{zoom}z" }, // input-only
       { ordered: "/maps/search/{lat},{lon}" },
+      { ordered: "@{lat},{lon}," }, // input-only; recognize pattern @-8.5275,119.7458151,642m ignoring unknown zoom
     ]
   },
 
