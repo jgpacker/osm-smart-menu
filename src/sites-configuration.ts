@@ -513,13 +513,6 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
     httpOnly: true, // mini-map won't load in HTTPS
     disabledByDefault: true, // doesn't work for most relations
   },
-
-  stavaglobal: {
-    link: "www.strava.com/heatmap",
-    paramOpts: [
-      { ordered: "#{zoom}/{lon}/{lat}/hot/all" },
-    ]
-  },
 };
 
 function getPermalinkBySelector(selector: string) {
