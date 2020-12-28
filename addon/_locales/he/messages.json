@@ -246,5 +246,11 @@
     },
     "extensionName": {
         "message": "תפריט חכם ל־OSM"
+    },
+    "site_pewuosmhistory": {
+        "message": "מציג ההיסטוריה של OSM‏ (PeWu)"
+    },
+    "site_ideditor": {
+        "message": "העורך iD"
     }
 }
