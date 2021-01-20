@@ -252,5 +252,8 @@
     },
     "site_ideditor": {
         "message": "iD-redigereren"
+    },
+    "site_stravaglobal": {
+        "message": "Bruksfargediagram for Strava"
     }
 }
