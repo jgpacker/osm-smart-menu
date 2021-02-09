@@ -30,8 +30,8 @@
     "site_mapillary": {
         "message": "Mapillary"
     },
-    "site_openstreetcam": {
-        "message": "OpenStreetCam"
+    "site_kartaview": {
+        "message": "KartaView"
     },
     "site_stamen": {
         "message": "Stamen Maps"
