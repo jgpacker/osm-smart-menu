@@ -90,8 +90,8 @@
     "site_openptmap": {
         "message": "Open Public Transport Map"
     },
-    "site_openstreetcam": {
-        "message": "OpenStreetCam"
+    "site_kartaview": {
+        "message": "KartaView"
     },
     "site_osmdeephistory": {
         "message": "OSM Deep History"

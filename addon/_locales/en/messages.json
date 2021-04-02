@@ -166,8 +166,8 @@
     "site_hotmap": {
         "message": "Humanitarian OSM Team Map"
     },
-    "site_openstreetcam": {
-        "message": "OpenStreetCam"
+    "site_kartaview": {
+        "message": "KartaView"
     },
     "site_mapillary": {
         "message": "Mapillary"
