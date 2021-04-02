@@ -1,1 +1,62 @@
-{}
+{
+    "noEnabledCompatibleLinksFound": {
+        "message": "Keine der aktivierten Verknüpfungen sind mit den Parametern der Seite kompatibel.",
+        "description": "Shown in popup when there aren't any enabled links that support the parameters found in the current page."
+    },
+    "error_incompatibleWebsite": {
+        "message": "Keine OpenStreerMap Parameter gefunden.\nWenn dies unerwartet ist, können sie es unter $EXTENSION_SITE$ melden",
+        "description": "Error shown inside popup when appropriate",
+        "placeholders": {
+            "EXTENSION_SITE": {
+                "content": "$1",
+                "example": "github.com/jgpacker/osm-smart-menu/"
+            }
+        }
+    },
+    "config_pattern_urlTemplate": {
+        "message": "URL Vorlage",
+        "description": "Input label"
+    },
+    "config_pattern_name": {
+        "message": "Name",
+        "description": "Input label"
+    },
+    "config_pattern_formTitle": {
+        "message": "Erweiterte Optionen hinzufügen (experimentell)",
+        "description": "Form Legend/Title"
+    },
+    "config_deleteButton": {
+        "message": "Löschen",
+        "description": "Text inside 'delete button' in configuration page"
+    },
+    "config_saveButton": {
+        "message": "Speichern",
+        "description": "Text inside 'save button' in configuration page"
+    },
+    "config_editButton": {
+        "message": "Bearbeiten",
+        "description": "Text inside 'edit button' in configuration page"
+    },
+    "configurationLink": {
+        "message": "Konfiguration",
+        "description": "Link to configuration page inside main popup."
+    },
+    "newOptionDetected_added": {
+        "message": "Hinzugefügt als $PAGE_TITLE$",
+        "description": "Shown in popup when an unknown website seems compatible with OpenStreetMap. After the button is clicked.",
+        "placeholders": {
+            "PAGE_TITLE": {
+                "content": "$1",
+                "example": "OpenStreetMap"
+            }
+        }
+    },
+    "newOptionDetected_buttonText": {
+        "message": "Link hinzufügen",
+        "description": "Shown in popup (inside the button) when an unknown website seems compatible with OpenStreetMap"
+    },
+    "newOptionDetected_notice": {
+        "message": "Möchten sie diese Website ins Menü hinzufügen?",
+        "description": "Shown in popup (before the button) when an unknown website seems compatible with OpenStreetMap"
+    }
+}

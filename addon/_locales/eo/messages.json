@@ -1,1 +1,182 @@
-{}
+{
+    "config_pattern_formTitle": {
+        "message": "Kreo de Altnivelaj Opcioj (eksperimenta)",
+        "description": "Form Legend/Title"
+    },
+    "site_osmchangetiles": {
+        "message": "Lastaj OSM-Redaktoj (Neis)"
+    },
+    "site_missingmaps": {
+        "message": "Mankantaj Mapoj"
+    },
+    "site_ideditor": {
+        "message": "iD-Redaktilo"
+    },
+    "site_mapcompare": {
+        "message": "Mapo-Komparo"
+    },
+    "site_osmbuildings": {
+        "message": "OSM-Konstruaĵoj"
+    },
+    "site_indoorequal": {
+        "message": "indoor="
+    },
+    "site_openlevelup": {
+        "message": "OpenLevelUp!"
+    },
+    "site_osmcha": {
+        "message": "OSMCha"
+    },
+    "site_osmroutemanager": {
+        "message": "OSM-Vojo-Administrilo"
+    },
+    "site_osmrelationanalyzer": {
+        "message": "OSM-Rilato-Analizilo"
+    },
+    "site_pewuosmhistory": {
+        "message": "Historio-Vidigilo de OSM (PeWu)"
+    },
+    "site_osmhistoryviewer": {
+        "message": "Historio-Vidigilo de OSM"
+    },
+    "site_deepdiff": {
+        "message": "Profunda Diferenco"
+    },
+    "site_osmdeephistory": {
+        "message": "Profunda Historio OSM"
+    },
+    "site_openinframap": {
+        "message": "Open Infrastructure Map "
+    },
+    "extensionShortName": {
+        "message": "OSMenu"
+    },
+    "extensionName": {
+        "message": "OSM-Saĝmenuo"
+    },
+    "site_openmapsurfer": {
+        "message": "OpenMapSurfer"
+    },
+    "site_howdidyoucontribute": {
+        "message": "Kiel vi kontribuis al OSM?"
+    },
+    "site_keepright": {
+        "message": "restu dekstre!"
+    },
+    "site_osminspector": {
+        "message": "OSM-Inspektilo"
+    },
+    "site_osmose": {
+        "message": "Osmose"
+    },
+    "site_umap": {
+        "message": "uMap"
+    },
+    "site_mapillary": {
+        "message": "Mapillary"
+    },
+    "site_openstreetcam": {
+        "message": "OpenStreetCam"
+    },
+    "site_stamen": {
+        "message": "Stamen-Mapoj"
+    },
+    "site_opnvkarte": {
+        "message": "ÖPNVKarte"
+    },
+    "site_openptmap": {
+        "message": "Open Public Transport Map"
+    },
+    "site_historicmap": {
+        "message": "Historiaĵoj"
+    },
+    "site_opentopomap": {
+        "message": "OpenTopoMap"
+    },
+    "site_opensnowmap": {
+        "message": "OpenSnowMap"
+    },
+    "site_openseamap": {
+        "message": "OpenSeaMap"
+    },
+    "site_opencyclemap": {
+        "message": "OpenCycleMap"
+    },
+    "config_linkDeleted": {
+        "message": "Ligilo $LINK_NAME$ forviŝita. Alklaku ĉi tie por malfari.",
+        "description": "Shown inline when a link is deleted inside configuration page",
+        "placeholders": {
+            "LINK_NAME": {
+                "content": "$1",
+                "example": "OpenStreetMap"
+            }
+        }
+    },
+    "newOptionDetected_notice": {
+        "message": "Ĉu vi ŝatus aldoni ĉi tiun retejon en la menuon?",
+        "description": "Shown in popup (before the button) when an unknown website seems compatible with OpenStreetMap"
+    },
+    "site_googlemaps": {
+        "message": "Google-Mapoj"
+    },
+    "site_bingmaps": {
+        "message": "Bing-Mapoj"
+    },
+    "config_pattern_urlTemplate": {
+        "message": "Ŝablono de retpaĝa adreso",
+        "description": "Input label"
+    },
+    "site_osmwiki": {
+        "message": "vikio de OpenStreetMap"
+    },
+    "site_openstreetbrowser": {
+        "message": "OpenStreetBrowser"
+    },
+    "site_whodidit": {
+        "message": "WHODIDIT (Zverik)"
+    },
+    "site_waze": {
+        "message": "Waze"
+    },
+    "site_openstreetmap": {
+        "message": "OpenStreetMap"
+    },
+    "newOptionDetected_added": {
+        "message": "Aldonite kiel $PAGE_TITLE$",
+        "description": "Shown in popup when an unknown website seems compatible with OpenStreetMap. After the button is clicked.",
+        "placeholders": {
+            "PAGE_TITLE": {
+                "content": "$1",
+                "example": "OpenStreetMap"
+            }
+        }
+    },
+    "newOptionDetected_buttonText": {
+        "message": "Aldoni ligilon",
+        "description": "Shown in popup (inside the button) when an unknown website seems compatible with OpenStreetMap"
+    },
+    "configurationLink": {
+        "message": "Agordo",
+        "description": "Link to configuration page inside main popup."
+    },
+    "config_pattern_createOption": {
+        "message": "Krei opcion",
+        "description": "Button"
+    },
+    "config_pattern_name": {
+        "message": "Nomo",
+        "description": "Input label"
+    },
+    "config_deleteButton": {
+        "message": "Forviŝi",
+        "description": "Text inside 'delete button' in configuration page"
+    },
+    "config_saveButton": {
+        "message": "Konservi",
+        "description": "Text inside 'save button' in configuration page"
+    },
+    "config_editButton": {
+        "message": "Redakti",
+        "description": "Text inside 'edit button' in configuration page"
+    }
+}

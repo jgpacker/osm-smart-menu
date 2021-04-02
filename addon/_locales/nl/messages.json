@@ -1,24 +1,21 @@
 {
-    "site_osmwiki": {
-        "message": "OpenStreetMap-wiki"
+    "site_stravaglobal": {
+        "message": "Strava Global Heatmap"
     },
-    "site_keepright": {
-        "message": "keep right!"
-    },
-    "site_indoorequal": {
-        "message": "indoor="
+    "site_osmlanevisualizer": {
+        "message": "OSM Lane Visualizer"
     },
     "site_missingmaps": {
         "message": "Missing Maps"
     },
-    "site_osmlanevisualizer": {
-        "message": "OSM-kjørefeltsvisualisator"
+    "site_indoorequal": {
+        "message": "indoor="
     },
     "site_openlevelup": {
         "message": "OpenLevelUp!"
     },
     "site_osmbuildings": {
-        "message": "OSM-bygninger"
+        "message": "OSM Buildings"
     },
     "site_osmcha": {
         "message": "OSMCha"
@@ -30,49 +27,61 @@
         "message": "Waze"
     },
     "site_osmchangetiles": {
-        "message": "Siste OSM-redigeringer (Neis)"
+        "message": "Latest OSM Edits (Neis)"
     },
     "site_osmchangeviz": {
-        "message": "Endringsett ved sammenligning (Neis)"
+        "message": "Changeset by Comparison (Neis)"
+    },
+    "site_osmwiki": {
+        "message": "OpenStreetMap-wiki"
     },
     "site_howdidyoucontribute": {
-        "message": "Hvordan bidro du til OSM?"
+        "message": "How did you contribute to OSM?"
+    },
+    "site_keepright": {
+        "message": "keep right!"
     },
     "site_mapcompare": {
-        "message": "Kartsammenligning"
+        "message": "Map Compare"
     },
     "site_osminspector": {
-        "message": "OSM-inspektøren"
+        "message": "OSM Inspector"
     },
     "site_osmose": {
         "message": "Osmose"
     },
     "site_osmroutemanager": {
-        "message": "OSM-rutehåndterer"
+        "message": "OSM Route Manager"
     },
     "site_osmrelationanalyzer": {
-        "message": "OSM-relasjonsanalysator"
+        "message": "OSM Relation Analyzer"
     },
     "site_overpassapi": {
-        "message": "Augmentert OSM-endringsviser"
+        "message": "Augmented OSM Change Viewer"
     },
     "site_whodidit": {
         "message": "WHODIDIT (Zverik)"
     },
+    "site_pewuosmhistory": {
+        "message": "OSM History Viewer (PeWu)"
+    },
     "site_osmhistoryviewer": {
-        "message": "OSM-historikkviser"
+        "message": "OSM History Viewer"
     },
     "site_deepdiff": {
-        "message": "Deep-diff"
+        "message": "Deep Diff"
     },
     "site_osmdeephistory": {
-        "message": "OSM-dyphistorikk"
+        "message": "OSM Deep History"
     },
     "site_umap": {
         "message": "uMap"
     },
+    "site_ideditor": {
+        "message": "iD-bewerker"
+    },
     "site_level0": {
-        "message": "Level0-redigerer"
+        "message": "Level0-bewerker"
     },
     "site_mapillary": {
         "message": "Mapillary"
@@ -81,25 +90,25 @@
         "message": "OpenStreetCam"
     },
     "site_hotmap": {
-        "message": "Humanitarian OSM-lagkart"
+        "message": "Humanitarian OSM Team Map"
     },
     "site_f4map": {
         "message": "F4 Map (3D-demo)"
     },
     "site_stamen": {
-        "message": "Stamen-kart"
+        "message": "Stamen Maps"
     },
     "site_opnvkarte": {
         "message": "ÖPNVKarte"
     },
     "site_openptmap": {
-        "message": "Open Public Transport-kart"
+        "message": "Open Public Transport Map"
     },
     "site_openinframap": {
-        "message": "Open Infrastructure-kart "
+        "message": "Open Infrastructure Map "
     },
     "site_historicmap": {
-        "message": "Historiske objekter"
+        "message": "Historical Objects"
     },
     "site_opentopomap": {
         "message": "OpenTopoMap"
@@ -123,25 +132,25 @@
         "message": "Google Maps"
     },
     "site_bingmaps": {
-        "message": "Bing-kart"
+        "message": "Bing Kaarten"
     },
     "site_openstreetmap": {
         "message": "OpenStreetMap"
     },
     "button_showOtherEnabledLinks": {
-        "message": "Vis resten av de påskrudde lenkene ved bruk av ytterligere parametre",
+        "message": "Overige ingeschakelde links met aanvullende opties tonen",
         "description": "Shown in popup below the list of links; to see other enabled links with additional parameters."
     },
     "button_showEnabledLinks": {
-        "message": "Vis påskrudde lenker ved bruk av ytterligere parametre",
+        "message": "Ingeschakelde links met aanvullende opties tonen",
         "description": "Shown in popup below some errors to allow users to see enabled links."
     },
     "noEnabledCompatibleLinksFound": {
-        "message": "Ingen av de påskrudde lenkene er kompatible med parameterne på siden.",
+        "message": "Geen van de ingeschakelde links zijn compatibel met de op deze pagina aangetroffen opties.",
         "description": "Shown in popup when there aren't any enabled links that support the parameters found in the current page."
     },
     "error_noInformationExtracted": {
-        "message": "Nettsiden ble gjenkjent, men ingen parametre ble funnet.\nHvis dette er et kart, prøv å flytt det litt for å igangsette dets parametre.\nHvis dette ser ut til å være en feil, innrapporter det på $EXTENSION_SITE$.",
+        "message": "De website werd herkend, maar er zijn geen opties aangetroffen.\nAls het om een kaart gaat, probeer hem dan een stukje te verschuiven.\nAls dit onverwachts was, meld de fout dan op $EXTENSION_SITE$.",
         "description": "Error shown inside popup when appropriate",
         "placeholders": {
             "EXTENSION_SITE": {
@@ -151,7 +160,7 @@
         }
     },
     "error_incompatibleWebsite": {
-        "message": "Fant ingen kart eller OpenStreetMap-parametre.\nHvis dette er uventet, innrapporter det på $EXTENSION_SITE$.",
+        "message": "Geen kaart of OpenStreetMap-opties aangetroffen.\nAls dit onverwachts was, meld deze fout dan op $EXTENSION_SITE$.",
         "description": "Error shown inside popup when appropriate",
         "placeholders": {
             "EXTENSION_SITE": {
@@ -161,7 +170,7 @@
         }
     },
     "error_noAccess": {
-        "message": "Feil: Fikk ikke tilgang til, eller fant ikke nåværende side.\nHvis siden fremdeles lastes inn, prøv igjen.\nHvis dette er uventet, innrapporter det til $EXTENSION_SITE$.",
+        "message": "FOUTMELDING: de huidige pagina is niet beschikbaar.\nAls de pagina nog wordt geladen, probeer het dan opnieuw.\nAls dit onverwachts was, meld de fout dan op $EXTENSION_SITE$.",
         "description": "Error shown inside popup when the current page cannot be accessed (technical exception)",
         "placeholders": {
             "EXTENSION_SITE": {
@@ -171,23 +180,23 @@
         }
     },
     "config_pattern_createOption": {
-        "message": "Opprett alternativ",
+        "message": "Optie aanmaken",
         "description": "Button"
     },
     "config_pattern_urlTemplate": {
-        "message": "Nettadressemal",
+        "message": "URL-sjabloon",
         "description": "Input label"
     },
     "config_pattern_name": {
-        "message": "Navn",
+        "message": "Naam",
         "description": "Input label"
     },
     "config_pattern_formTitle": {
-        "message": "Avansert alternativsopprettelse (eksperimentelt)",
+        "message": "Geavanceerde opties (experimenteel)",
         "description": "Form Legend/Title"
     },
     "config_linkDeleted": {
-        "message": "Lenken $LINK_NAME$ ble slettet. Klikk her for å angre.",
+        "message": "$LINK_NAME$ is verwijderd - klik om ongedaan te maken.",
         "description": "Shown inline when a link is deleted inside configuration page",
         "placeholders": {
             "LINK_NAME": {
@@ -197,23 +206,23 @@
         }
     },
     "config_deleteButton": {
-        "message": "Slett",
+        "message": "Verwijderen",
         "description": "Text inside 'delete button' in configuration page"
     },
     "config_saveButton": {
-        "message": "Lagre",
+        "message": "Opslaan",
         "description": "Text inside 'save button' in configuration page"
     },
     "config_editButton": {
-        "message": "Rediger",
+        "message": "Bewerken",
         "description": "Text inside 'edit button' in configuration page"
     },
     "configurationLink": {
-        "message": "Oppsett",
+        "message": "Instellingen",
         "description": "Link to configuration page inside main popup."
     },
     "newOptionDetected_added": {
-        "message": "Lagt til som $PAGE_TITLE$",
+        "message": "Toegevoegd als $PAGE_TITLE$",
         "description": "Shown in popup when an unknown website seems compatible with OpenStreetMap. After the button is clicked.",
         "placeholders": {
             "PAGE_TITLE": {
@@ -223,37 +232,28 @@
         }
     },
     "newOptionDetected_buttonText": {
-        "message": "Legg til lenke",
+        "message": "Link toevoegen",
         "description": "Shown in popup (inside the button) when an unknown website seems compatible with OpenStreetMap"
     },
     "newOptionDetected_notice": {
-        "message": "Ønsker du å legge denne nettsiden til i menyen?",
+        "message": "Wilt u deze website toevoegen aan het menu?",
         "description": "Shown in popup (before the button) when an unknown website seems compatible with OpenStreetMap"
     },
     "loading": {
-        "message": "Laster inn …\nHvis innlastingen ikke fullføres, gjeninnlast siden og prøv igjen.",
+        "message": "Bezig met laden...\nAls er niks wordt geladen, herlaad dan de pagina en probeer het opnieuw.",
         "description": "Shown in popup shortly before menu appears."
     },
+    "extensionStoreDescription": {
+        "message": "Als u de menuknop aanklikt, <strong>detecteert</strong> deze extensie automatisch OpenStreetMap-opties op de huidige pagina en <strong>genereert</strong> op basis hiervan een lijst met vergelijkbare kaarten en hulpmiddelen.\n\nOndersteunde opties:\n<ul>\n<li>Kaartcoördinaten (zoom, lengtegraad en breedtegraad)</li>\n<li>OSM-elementen (node-id, weg-id, relatie-id en wijzigingsid)</li>\n<li>Gebruikersnamen en gps-sporen-id</li>\n</ul>\nAls u niet zeker weet welke website herkend gaat worden, ga dan op voorhand naar https://www.openstreetmap.org/.\n\n<em>Het OpenStreetMap-logo is een handelsmerk van de OpenStreetMap Foundation en wordt met hun instemming gebruikt. Dit project is niet afkomstig van of betrokken bij de OpenStreetMap Foundation.</em>",
+        "description": "Description shown in Chrome and Firefox's extension download page"
+    },
     "extensionDescription": {
-        "message": "Hjelper OpenStreetMap-bidragsytere å bytte mellom forskjellige kart og analyseverktøy fra gemenskapen"
+        "message": "Hiermee kunnen OpenStreetMap-bijdragers eenvoudig schakelen tussen kaartsoorten en analysehulpmiddelen."
     },
     "extensionShortName": {
         "message": "OSMenu"
     },
     "extensionName": {
-        "message": "OSM-smartmeny"
-    },
-    "extensionStoreDescription": {
-        "message": "Når du klikker på menyknappen, vil denne utvidelsen <strong>oppdage</strong> OpenStreetMap-parametre i nåværende side og <strong>generere</strong> en liste over relaterte kart og verktøy med disse parameterne.\n\nDisse parameterne gjenkjennes:\n<ul>\n<li>Kart-koordinater (forstørrelse, breddegrad og lengdegrad)</li>\n<li>OSM-elementer (node-ID, vei-ID, relasjons-ID, og endringssett-ID)</li>\n<li>Brukernavn og GPS-spor-ID</li>\n</ul>\nHvis du ikke er sikker på hvilken nettside som vil bli gjenkjent, prøv å gå til https://www.openstreetmap.org/ før du klikker på menyen.\n\n<em>OpenStreetMap-logoen er et varemerke som tilhører OpenStreetMap-stiftelsen, og brukes med tillatelse. Dette prosjektet er ikke støttet av eller tilknyttet OpenStreetMap-stiftelsen.</em>",
-        "description": "Description shown in Chrome and Firefox's extension download page"
-    },
-    "site_pewuosmhistory": {
-        "message": "OSM-historikkviser (PeWu)"
-    },
-    "site_ideditor": {
-        "message": "iD-redigereren"
-    },
-    "site_stravaglobal": {
-        "message": "Bruksfargediagram for Strava"
+        "message": "OSM - slim menu"
     }
 }

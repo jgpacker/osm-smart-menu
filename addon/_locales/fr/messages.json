@@ -67,5 +67,37 @@
     },
     "extensionDescription": {
         "message": "Aide les contributeurs d'OpenStreetMap à passer facilement d'une carte à l'autre et d'un outil d'analyse à l'autre de la communauté."
+    },
+    "noEnabledCompatibleLinksFound": {
+        "message": "Aucun des liens activés n'est compatible avec les paramètres trouvés sur cette page.",
+        "description": "Shown in popup when there aren't any enabled links that support the parameters found in the current page."
+    },
+    "error_incompatibleWebsite": {
+        "message": "Aucune carte ou paramètre OpenStreetMap n'a été trouvé.\nSi ceci était inattendu, vous pouvez le signaler dans $EXTENSION_SITE$.",
+        "description": "Error shown inside popup when appropriate",
+        "placeholders": {
+            "EXTENSION_SITE": {
+                "content": "$1",
+                "example": "github.com/jgpacker/osm-smart-menu/"
+            }
+        }
+    },
+    "button_showOtherEnabledLinks": {
+        "message": "Afficher le reste des liens activés en utilisant des paramètres supplémentaires",
+        "description": "Shown in popup below the list of links; to see other enabled links with additional parameters."
+    },
+    "button_showEnabledLinks": {
+        "message": "Afficher les liens activés en utilisant des paramètres supplémentaires",
+        "description": "Shown in popup below some errors to allow users to see enabled links."
+    },
+    "error_noAccess": {
+        "message": "ERREUR : Impossible de trouver ou d'accéder à cette page.\nSi cette page se charge encore, réessayez.\nSi c'était inattendu, merci de le signaler dans $EXTENSION_SITE$.",
+        "description": "Error shown inside popup when the current page cannot be accessed (technical exception)",
+        "placeholders": {
+            "EXTENSION_SITE": {
+                "content": "$1",
+                "example": "github.com/jgpacker/osm-smart-menu/"
+            }
+        }
     }
 }
