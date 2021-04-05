@@ -307,7 +307,7 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
     },
   },
 
-  kartaview: {
+  openstreetcam: {
     link: 'kartaview.org',
     paramOpts: [
       { ordered: '/map/@{lat},{lon},{zoom}z' },
