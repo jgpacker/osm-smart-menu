@@ -58,5 +58,8 @@
     "newOptionDetected_notice": {
         "message": "Möchten sie diese Website ins Menü hinzufügen?",
         "description": "Shown in popup (before the button) when an unknown website seems compatible with OpenStreetMap"
+    },
+    "extensionDescription": {
+        "message": "Hilft OpenStreetMap-Mitwirkenden, einfach zwischen verschiedenen Karten und Analysewerkzeugen aus der Community zu wechseln."
     }
 }
