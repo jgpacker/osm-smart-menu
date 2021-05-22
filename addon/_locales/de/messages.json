@@ -61,5 +61,17 @@
     },
     "extensionDescription": {
         "message": "Hilft OpenStreetMap-Mitwirkenden, einfach zwischen verschiedenen Karten und Analysewerkzeugen aus der Community zu wechseln."
+    },
+    "config_pattern_createOption": {
+        "message": "Option erstellen",
+        "description": "Button"
+    },
+    "loading": {
+        "message": "Laden...\nWenn dies das Laden nicht stoppt, lade die Seite neu und versuche es erneut.",
+        "description": "Shown in popup shortly before menu appears."
+    },
+    "extensionStoreDescription": {
+        "message": "Wenn Sie auf die Schaltfläche des Menüs klicken, <strong>erkennt</strong> diese Erweiterung die OpenStreetMap-Parameter innerhalb der aktuellen Seite und <strong>generiert</strong> eine Liste von verwandten Karten und Tools mit diesen Parametern.\n\nZu den erkannten Parametern gehören:\n<ul>\n<li>Kartenkoordinaten (Zoom, Breitengrad und Längengrad)</li>\n<li>OSM-Elemente (Node-ID, Way-ID, Relation-ID und Changeset-ID)</li>\n<li>Benutzernamen und GPS-Traces id</li>\n</ul>\nWenn Sie sich nicht sicher sind, welche Website erkannt wird, versuchen Sie, https://www.openstreetmap.org/ aufzurufen, bevor Sie auf das Menü klicken.\n\n<em>Das OpenStreetMap-Logo ist eine Marke der OpenStreetMap Foundation und wird mit deren Genehmigung verwendet. Dieses Projekt wird nicht von der OpenStreetMap Foundation unterstützt oder ist mit ihr verbunden.</em>",
+        "description": "Description shown in Chrome and Firefox's extension download page"
     }
 }
