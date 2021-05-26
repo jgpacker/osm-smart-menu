@@ -513,6 +513,13 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
     httpOnly: true, // mini-map won't load in HTTPS
     disabledByDefault: true, // doesn't work for most relations
   },
+  
+  osmosebyuser : {
+    link: "osmose.openstreetmap.fr",
+    paramOpts: [
+      { ordered: "/en/byuser/{userName}" },
+    ],
+  },
 };
 
 function getPermalinkBySelector(selector: string) {
