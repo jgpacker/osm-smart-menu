@@ -1,1 +1,259 @@
-{}
+{
+    "extensionStoreDescription": {
+        "message": "Kun klikkaat valikon painiketta, tämä laajennus <strong>havaitsee</strong> OpenStreetMap-parametrit nykyisellä sivulla ja <strong>luo</strong> luettelon näihin parametreihin liittyvistä kartoista ja työkaluista.\n\nTunnistettuja parametreja ovat muun muassa:\n<ul>\n<li>Karttakoordinaatit (zoom, leveys- ja pituusasteet)</li>\n<li>OSM-elementit (solmun id, väylän id, suhteen id ja muutosjoukon id)</li>\n<li>Käyttäjänimet ja GPS-jäljen id</li>\n</ul>\nJos et ole varma, mikä verkkosivusto tunnistetaan, kokeile siirtyä osoitteeseen https://www.openstreetmap.org/ ennen valikon napsauttamista.\n\n<em>OpenStreetMap-logo on OpenStreetMap-säätiön tavaramerkki, ja sitä käytetään sen luvalla. Tämä projekti ei ole OpenStreetMap-säätiön tukema tai siihen sidoksissa.</em>",
+        "description": "Description shown in Chrome and Firefox's extension download page"
+    },
+    "site_pewuosmhistory": {
+        "message": "OSM-historiakatselin (PeWu)"
+    },
+    "site_osmhistoryviewer": {
+        "message": "OSM-historiakatselin"
+    },
+    "site_osmdeephistory": {
+        "message": "OSM-syvä historia"
+    },
+    "site_openptmap": {
+        "message": "Avoin Joukkoliikennekartta"
+    },
+    "site_openinframap": {
+        "message": "Avoin Infrastruktuurikartta "
+    },
+    "site_osmlanevisualizer": {
+        "message": "OSM-kaistavisualisoija"
+    },
+    "site_missingmaps": {
+        "message": "Puuttuvat Kartat"
+    },
+    "site_osmbuildings": {
+        "message": "OSM-rakennukset"
+    },
+    "site_osmchangetiles": {
+        "message": "Viimeisimmät OSM-muutokset (Neis)"
+    },
+    "site_osmchangeviz": {
+        "message": "Muutosjoukko vertailun mukaan (Neis)"
+    },
+    "site_howdidyoucontribute": {
+        "message": "Kuinka osallistuit OSM:ään?"
+    },
+    "site_keepright": {
+        "message": "Pysy Oikealla!"
+    },
+    "site_mapcompare": {
+        "message": "Map Compare"
+    },
+    "site_osminspector": {
+        "message": "OSM-tarkastaja"
+    },
+    "site_osmose": {
+        "message": "Osmose"
+    },
+    "site_osmroutemanager": {
+        "message": "OSM-reittimanageri"
+    },
+    "site_osmrelationanalyzer": {
+        "message": "OSM-suhdeanalysaattori"
+    },
+    "site_overpassapi": {
+        "message": "Lisätty OSM-muutosten katselija"
+    },
+    "site_deepdiff": {
+        "message": "Deep Diff"
+    },
+    "site_level0": {
+        "message": "Level0-editori"
+    },
+    "site_ideditor": {
+        "message": "iD-editori"
+    },
+    "site_openstreetcam": {
+        "message": "KartaView"
+    },
+    "site_hotmap": {
+        "message": "Humanitaarisen OSM-tiimin kartta"
+    },
+    "site_f4map": {
+        "message": "F4 Map (3D-demo)"
+    },
+    "site_historicmap": {
+        "message": "Historialliset esineet"
+    },
+    "extensionShortName": {
+        "message": "OSValikko"
+    },
+    "extensionName": {
+        "message": "OSM Älyvalikko"
+    },
+    "site_osmwiki": {
+        "message": "OpenStreetMap-wiki"
+    },
+    "site_stravaglobal": {
+        "message": "Strava Global Heatmap"
+    },
+    "site_indoorequal": {
+        "message": "indoor="
+    },
+    "site_openlevelup": {
+        "message": "OpenLevelUp!"
+    },
+    "site_osmcha": {
+        "message": "OSMCha"
+    },
+    "site_openstreetbrowser": {
+        "message": "OpenStreetBrowser"
+    },
+    "site_waze": {
+        "message": "Waze"
+    },
+    "site_whodidit": {
+        "message": "WHODIDIT (Zverik)"
+    },
+    "site_umap": {
+        "message": "uMap"
+    },
+    "site_mapillary": {
+        "message": "Mapillary"
+    },
+    "site_stamen": {
+        "message": "Stamen kartat"
+    },
+    "site_opnvkarte": {
+        "message": "ÖPNVKarte"
+    },
+    "site_opentopomap": {
+        "message": "OpenTopoMap"
+    },
+    "site_opensnowmap": {
+        "message": "OpenSnowMap"
+    },
+    "site_openseamap": {
+        "message": "OpenSeaMap"
+    },
+    "site_opencyclemap": {
+        "message": "OpenCycleMap"
+    },
+    "site_openmapsurfer": {
+        "message": "OpenMapSurfer"
+    },
+    "site_sentinelhub": {
+        "message": "Sentinel Hub"
+    },
+    "site_googlemaps": {
+        "message": "Google Maps"
+    },
+    "site_bingmaps": {
+        "message": "Bing Kartat"
+    },
+    "site_openstreetmap": {
+        "message": "OpenStreetMap"
+    },
+    "button_showOtherEnabledLinks": {
+        "message": "Näytä loput käytössä olevat linkit lisäparametreilla",
+        "description": "Shown in popup below the list of links; to see other enabled links with additional parameters."
+    },
+    "button_showEnabledLinks": {
+        "message": "Näytä käytössä olevat linkit lisäparametreilla",
+        "description": "Shown in popup below some errors to allow users to see enabled links."
+    },
+    "error_incompatibleWebsite": {
+        "message": "Kartta- tai OpenStreetMap-parametreja ei löytynyt.\nJos tämä on odottamatonta, voit ilmoittaa siitä verkkosivulla $EXTENSION_SITE$.",
+        "description": "Error shown inside popup when appropriate",
+        "placeholders": {
+            "EXTENSION_SITE": {
+                "content": "$1",
+                "example": "github.com/jgpacker/osm-smart-menu/"
+            }
+        }
+    },
+    "error_noAccess": {
+        "message": "VIRHE: Nykyistä sivua ei löytynyt tai sitä ei voitu käyttää.\nJos tämä sivu latautuu edelleen, yritä uudelleen.\nJos tämä on odottamatonta, ilmoita siitä verkkosivulla $EXTENSION_SITE$.",
+        "description": "Error shown inside popup when the current page cannot be accessed (technical exception)",
+        "placeholders": {
+            "EXTENSION_SITE": {
+                "content": "$1",
+                "example": "github.com/jgpacker/osm-smart-menu/"
+            }
+        }
+    },
+    "noEnabledCompatibleLinksFound": {
+        "message": "Mikään käytössä olevista linkeistä ei ole yhteensopiva tällä sivulla olevien parametrien kanssa.",
+        "description": "Shown in popup when there aren't any enabled links that support the parameters found in the current page."
+    },
+    "error_noInformationExtracted": {
+        "message": "Verkkosivusto tunnistettiin, mutta parametreja ei löytynyt.\nJos tämä on kartta, yritä siirtää sitä hieman alustaaksesi sen parametrit.\nJos tämä näyttää virheeltä, ilmoita siitä verkkosivulla $EXTENSION_SITE$.",
+        "description": "Error shown inside popup when appropriate",
+        "placeholders": {
+            "EXTENSION_SITE": {
+                "content": "$1",
+                "example": "github.com/jgpacker/osm-smart-menu/"
+            }
+        }
+    },
+    "config_pattern_createOption": {
+        "message": "Luo vaihtoehto",
+        "description": "Button"
+    },
+    "config_pattern_urlTemplate": {
+        "message": "URL-malli",
+        "description": "Input label"
+    },
+    "config_pattern_formTitle": {
+        "message": "Edistynyt vaihtoehtojen luominen (kokeellinen)",
+        "description": "Form Legend/Title"
+    },
+    "config_linkDeleted": {
+        "message": "Linkki $LINK_NAME$ poistettu. Kumoa klikkaamalla tästä.",
+        "description": "Shown inline when a link is deleted inside configuration page",
+        "placeholders": {
+            "LINK_NAME": {
+                "content": "$1",
+                "example": "OpenStreetMap"
+            }
+        }
+    },
+    "newOptionDetected_added": {
+        "message": "Lisätty nimellä $PAGE_TITLE$",
+        "description": "Shown in popup when an unknown website seems compatible with OpenStreetMap. After the button is clicked.",
+        "placeholders": {
+            "PAGE_TITLE": {
+                "content": "$1",
+                "example": "OpenStreetMap"
+            }
+        }
+    },
+    "newOptionDetected_buttonText": {
+        "message": "Lisää linkki",
+        "description": "Shown in popup (inside the button) when an unknown website seems compatible with OpenStreetMap"
+    },
+    "newOptionDetected_notice": {
+        "message": "Haluatko lisätä tämän verkkosivun valikkoon?",
+        "description": "Shown in popup (before the button) when an unknown website seems compatible with OpenStreetMap"
+    },
+    "loading": {
+        "message": "Ladataan…\nJos lataaminen ei lopu, lataa sivu uudelleen ja yritä uudelleen.",
+        "description": "Shown in popup shortly before menu appears."
+    },
+    "extensionDescription": {
+        "message": "Auttaa OpenStreetMapin tekijöitä vaihtamaan helposti yhteisön eri karttojen ja analyysityökalujen välillä."
+    },
+    "config_pattern_name": {
+        "message": "Nimi",
+        "description": "Input label"
+    },
+    "config_deleteButton": {
+        "message": "Poista",
+        "description": "Text inside 'delete button' in configuration page"
+    },
+    "config_saveButton": {
+        "message": "Tallenna",
+        "description": "Text inside 'save button' in configuration page"
+    },
+    "config_editButton": {
+        "message": "Muokkaa",
+        "description": "Text inside 'edit button' in configuration page"
+    },
+    "configurationLink": {
+        "message": "Asetukset",
+        "description": "Link to configuration page inside main popup."
+    }
+}
