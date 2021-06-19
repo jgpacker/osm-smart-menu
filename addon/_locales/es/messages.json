@@ -150,5 +150,14 @@
     },
     "extensionName": {
         "message": "Menú inteligente de OSM"
+    },
+    "site_osminspector": {
+        "message": "Inspector de OSM"
+    },
+    "site_missingmaps": {
+        "message": "Mapas faltantes"
+    },
+    "site_historicmap": {
+        "message": "Objetos históricos"
     }
 }

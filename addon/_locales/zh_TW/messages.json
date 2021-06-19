@@ -1,256 +1,258 @@
 {
-  "extensionName": {
-    "message": "OSM 智慧選單"
-  },
-  "extensionShortName": {
-    "message": "OSMenu"
-  },
-  "extensionDescription": {
-    "message": "幫助開放街圖貢獻者簡單切換社群當中不同的地圖與分析工具。"
-  },
-  "extensionStoreDescription": {
-    "message": "當你點選單按鈕時，這個套件會<strong>偵測</strong>目前頁面的開放街圖參數，並且會<strong>產生</strong>相關地圖與對應參數清單。\n\n認可的參數包括:\n<ul>\n<li>地圖經緯度 (縮放、經度、緯度)</li>\n<li>OSM 元素 (節點 id、路徑 id、關聯 id 與變更組合 id)</li>\n<li>使用者名稱與 GPS 軌跡 id</li>\n</ul>\n如果你不確定那些網站能被認可，在點選單之前請瀏覽 https://www.openstreetmap.org/ 網站。\n\n<em>開放街圖的 logo 是開放街圖基金會的註冊商標，已經經由他們同意來使用。這個專案並沒有被開放街圖基金會認可或是有相關聯。</em>\n"
-  },
-  "loading": {
-    "message": "載入中...\n如果沒有停止載入，請試著重新整理再試一次。",
-    "description": "在選單出現前很快顯示跳出視窗"
-  },
-
-  "newOptionDetected_notice": {
-    "message": "你想要新增這個網站到選單當中嗎？",
-    "description": "當未知網站與開放街圖相容時跳出視窗。在按鈕之前"
-  },
- 
-  "newOptionDetected_buttonText": {
-    "message": "新增選項",
-    "description": "當未知網站與開放街圖相容時跳出視窗。在按鈕之中"
-  },
-
-  "newOptionDetected_added": {
-    "message": "新增 $PAGE_TITLE$",
-    "description": "當未知網站與開放街圖相容時跳出視窗。在按鈕按下之後",
-    "placeholders": {
-      "PAGE_TITLE": {
-        "content": "$1",
-        "example": "OpenStreetMap"
-      }
-    }
-  },
-
-  "configurationLink": {
-    "message": "設定",
-    "description": "在主跳出視窗的設定頁面連結。"
-  },
+    "extensionName": {
+        "message": "OSM 智慧選單"
+    },
+    "extensionShortName": {
+        "message": "OSMenu"
+    },
+    "extensionDescription": {
+        "message": "幫助開放街圖貢獻者簡單切換社群當中不同的地圖與分析工具。"
+    },
+    "extensionStoreDescription": {
+        "message": "當你點選單按鈕時，這個套件會<strong>偵測</strong>目前頁面的開放街圖參數，並且會<strong>產生</strong>相關地圖與對應參數清單。\n\n認可的參數包括:\n<ul>\n<li>地圖經緯度 (縮放、經度、緯度)</li>\n<li>OSM 元素 (節點 id、路徑 id、關聯 id 與變更組合 id)</li>\n<li>使用者名稱與 GPS 軌跡 id</li>\n</ul>\n如果你不確定那些網站能被認可，在點選單之前請瀏覽 https://www.openstreetmap.org/ 網站。\n\n<em>開放街圖的 logo 是開放街圖基金會的註冊商標，已經經由他們同意來使用。這個專案並沒有被開放街圖基金會認可或是有相關聯。</em>\n"
+    },
+    "loading": {
+        "message": "載入中...\n如果沒有停止載入，請試著重新整理再試一次。",
+        "description": "在選單出現前很快顯示跳出視窗"
+    },
+    "newOptionDetected_notice": {
+        "message": "你想要新增這個網站到選單當中嗎？",
+        "description": "當未知網站與開放街圖相容時跳出視窗。在按鈕之前"
+    },
+    "newOptionDetected_buttonText": {
+        "message": "新增選項",
+        "description": "當未知網站與開放街圖相容時跳出視窗。在按鈕之中"
+    },
+    "newOptionDetected_added": {
+        "message": "新增 $PAGE_TITLE$",
+        "description": "當未知網站與開放街圖相容時跳出視窗。在按鈕按下之後",
+        "placeholders": {
+            "PAGE_TITLE": {
+                "content": "$1",
+                "example": "OpenStreetMap"
+            }
+        }
+    },
+    "configurationLink": {
+        "message": "設定",
+        "description": "在主跳出視窗的設定頁面連結。"
+    },
     "config_editButton": {
-    "message": "編輯",
-    "description": "在設定頁面'編輯按鈕'中的文字"
-  },
-  "config_saveButton": {
-    "message": "儲存",
-    "description": "在設定頁面'儲存按鈕'中的文字"
-  },
-  "config_deleteButton": {
-    "message": "刪除",
-    "description": "在設定頁面'刪除按鈕'中的文字"
-  },
-  "config_linkDeleted": {
-    "message": "連結 $LINK_NAME$ 已經刪除。點這邊來復原。",
-    "description": "當線內的連結在設定頁面已經刪除",
-    "placeholders": {
-      "LINK_NAME": {
-        "content": "$1",
-        "example": "OpenStreetMap"
-      }
-    }
-  },
-
-  "config_pattern_formTitle": {
-    "message": "創建進階選項 (實驗性)",
-    "description": "從圖徵/標籤"
-  },
-  "config_pattern_name": {
-    "message": "名稱",
-    "description": "輸入標籤"
-  },
-  "config_pattern_urlTemplate": {
-    "message": "網址模版",
-    "description": "輸入標籤"
-  },
-  "config_pattern_createOption": {
-    "message": "創建選項",
-    "description": "按鈕"
-  },
-  "error_noAccess": {
-    "message": "錯誤，無法找到或連線到目前頁面。\n如果這是非預期狀況，請到 $EXTENSION_SITE$ 回報。",
-    "description": "目前頁面無法連線時，錯誤訊息顯示在跳出視窗當中 (技術問題)",
-    "placeholders": {
-      "EXTENSION_SITE": {
-        "content": "$1",
-        "example": "github.com/jgpacker/osm-smart-menu/"
-      }
-    }
-  },
-  "error_incompatibleWebsite": {
-    "message": "錯誤：目前的網站與開放街圖並不相容。\n如果這並不是預期的狀況，請到 $EXTENSION_SITE$ 回報狀況。",
-    "description": "如果適當錯誤訊息顯示在跳出視窗當中",
-    "placeholders": {
-      "EXTENSION_SITE": {
-        "content": "$1",
-        "example": "github.com/jgpacker/osm-smart-menu/"
-      }
-    }
-  },
-  "error_noInformationExtracted": {
-    "message": "錯誤：如果網站被認可，但是無法適別參數時。\n如果你認為這是臭蟲的話，請到 $EXTENSION_SITE$ 回報狀況。",
-    "description": "如果適當錯誤訊息顯示在跳出視窗當中",
-    "placeholders": {
-      "EXTENSION_SITE": {
-        "content": "$1",
-        "example": "github.com/jgpacker/osm-smart-menu/"
-      }
-    }
-  },
-  "noEnabledCompatibleLinksFound": {
-    "message": "目前有的連結都沒有與目前頁面的參數相容。",
-    "description": "當目前頁面中的參數都沒有支援的連結時，顯示在跳出視窗當中。"
-  },
-
-  "button_showEnabledLinks": {
-    "message": "使用額外參數來顯示可用連結",
-    "description": "允許使用者看到可用連結，顯示在錯誤下面跳出視窗當中。"
-  },
-  "button_showOtherEnabledLinks": {
-    "message": "使用額外參數顯示其餘可用的連結",
-    "description": "看到其他額外參數的可用連結，顯示在連結清單下的跳出視窗當中。"
-  },
-
-  "site_openstreetmap": {
-    "message": "開放街圖"
-  },
-  "site_bingmaps": {
-    "message": "Bing 地圖"
-  },
-  "site_googlemaps": {
-    "message": "Google 地圖"
-  },
-  "site_sentinelhub": {
-    "message": "Sentinel Hub"
-  },
-  "site_openmapsurfer": {
-    "message": "OpenMapSurfer"
-  },
-  "site_opencyclemap": {
-    "message": "開放單車地圖"
-  },
-  "site_openseamap": {
-    "message": "開放海洋地圖"
-  },
-  "site_opensnowmap": {
-    "message": "開放雪地地圖"
-  },
-  "site_opentopomap": {
-    "message": "OpenTopoMap"
-  },
-  "site_historicmap": {
-    "message": "歷史物件"
-  },
-  "site_openinframap": {
-    "message": "開放設施地圖"
-  },
-  "site_openptmap": {
-    "message": "開放大眾運輸地圖"
-  },
-  "site_opnvkarte": {
-    "message": "ÖPNVKarte"
-  },
-  "site_stamen": {
-    "message": "Stamen 地圖"
-  },
-  "site_f4map": {
-    "message": "F4 Map (3D 展示)"
-  },
-  "site_hotmap": {
-    "message": "人道救援開放街圖小組"
-  },
-  "site_openstreetcam": {
-    "message": "Karta景"
-  },
-  "site_mapillary": {
-    "message": "Mapillary"
-  },
-  "site_level0": {
-    "message": "Level0 編輯器"
-  },
-  "site_umap": {
-    "message": "uMap"
-  },
-  "site_osmdeephistory": {
-    "message": "OSM 深度歷史"
-  },
-  "site_deepdiff": {
-    "message": "Deep Diff"
-  },
-  "site_osmhistoryviewer": {
-    "message": "OSM 歷史檢視器"
-  },
-  "site_whodidit": {
-    "message": "WHODIDIT (Zverik)"
-  },
-  "site_overpassapi": {
-    "message": "Augmented OSM 變動檢視器"
-  },
-  "site_osmrelationanalyzer": {
-    "message": "OSM 關聯分析器"
-  },
-  "site_osmroutemanager": {
-    "message": "OSM 導航管理器"
-  },
-  "site_osmose": {
-    "message": "Osmose"
-  },
-  "site_osminspector": {
-    "message": "OSM 偵側器"
-  },
-  "site_mapcompare": {
-    "message": "地圖比較"
-  },
-  "site_keepright": {
-    "message": "keep right!"
-  },
-  "site_howdidyoucontribute": {
-    "message": "你如何貢獻 OSM?"
-  },
-  "site_osmwiki": {
-    "message": "開放街圖 Wiki"
-  },
-  "site_osmchangeviz": {
-    "message": "變更集的比較 (Neis)"
-  },
-  "site_osmchangetiles": {
-    "message": "最新 OSM 編輯 (Neis)"
-  },
-  "site_waze": {
-    "message": "Waze"
-  },
-  "site_openstreetbrowser": {
-    "message": "開放街道瀏覽器"
-  },
-  "site_osmcha": {
-    "message": "OSMCha"
-  },
-  "site_osmbuildings": {
-    "message": "OSM 建築"
-  },
-  "site_openlevelup": {
-    "message": "OpenLevelUp!"
-  },
+        "message": "編輯",
+        "description": "在設定頁面'編輯按鈕'中的文字"
+    },
+    "config_saveButton": {
+        "message": "儲存",
+        "description": "在設定頁面'儲存按鈕'中的文字"
+    },
+    "config_deleteButton": {
+        "message": "刪除",
+        "description": "在設定頁面'刪除按鈕'中的文字"
+    },
+    "config_linkDeleted": {
+        "message": "連結 $LINK_NAME$ 已經刪除。點這邊來復原。",
+        "description": "當線內的連結在設定頁面已經刪除",
+        "placeholders": {
+            "LINK_NAME": {
+                "content": "$1",
+                "example": "OpenStreetMap"
+            }
+        }
+    },
+    "config_pattern_formTitle": {
+        "message": "創建進階選項 (實驗性)",
+        "description": "從圖徵/標籤"
+    },
+    "config_pattern_name": {
+        "message": "名稱",
+        "description": "輸入標籤"
+    },
+    "config_pattern_urlTemplate": {
+        "message": "網址模版",
+        "description": "輸入標籤"
+    },
+    "config_pattern_createOption": {
+        "message": "創建選項",
+        "description": "按鈕"
+    },
+    "error_noAccess": {
+        "message": "錯誤，無法找到或連線到目前頁面。\n如果這是非預期狀況，請到 $EXTENSION_SITE$ 回報。",
+        "description": "目前頁面無法連線時，錯誤訊息顯示在跳出視窗當中 (技術問題)",
+        "placeholders": {
+            "EXTENSION_SITE": {
+                "content": "$1",
+                "example": "github.com/jgpacker/osm-smart-menu/"
+            }
+        }
+    },
+    "error_incompatibleWebsite": {
+        "message": "錯誤：目前的網站與開放街圖並不相容。\n如果這並不是預期的狀況，請到 $EXTENSION_SITE$ 回報狀況。",
+        "description": "如果適當錯誤訊息顯示在跳出視窗當中",
+        "placeholders": {
+            "EXTENSION_SITE": {
+                "content": "$1",
+                "example": "github.com/jgpacker/osm-smart-menu/"
+            }
+        }
+    },
+    "error_noInformationExtracted": {
+        "message": "錯誤：如果網站被認可，但是無法適別參數時。\n如果你認為這是臭蟲的話，請到 $EXTENSION_SITE$ 回報狀況。",
+        "description": "如果適當錯誤訊息顯示在跳出視窗當中",
+        "placeholders": {
+            "EXTENSION_SITE": {
+                "content": "$1",
+                "example": "github.com/jgpacker/osm-smart-menu/"
+            }
+        }
+    },
+    "noEnabledCompatibleLinksFound": {
+        "message": "目前有的連結都沒有與目前頁面的參數相容。",
+        "description": "當目前頁面中的參數都沒有支援的連結時，顯示在跳出視窗當中。"
+    },
+    "button_showEnabledLinks": {
+        "message": "使用額外參數來顯示可用連結",
+        "description": "允許使用者看到可用連結，顯示在錯誤下面跳出視窗當中。"
+    },
+    "button_showOtherEnabledLinks": {
+        "message": "使用額外參數顯示其餘可用的連結",
+        "description": "看到其他額外參數的可用連結，顯示在連結清單下的跳出視窗當中。"
+    },
+    "site_openstreetmap": {
+        "message": "開放街圖"
+    },
+    "site_bingmaps": {
+        "message": "Bing 地圖"
+    },
+    "site_googlemaps": {
+        "message": "Google 地圖"
+    },
+    "site_sentinelhub": {
+        "message": "Sentinel Hub"
+    },
+    "site_openmapsurfer": {
+        "message": "OpenMapSurfer"
+    },
+    "site_opencyclemap": {
+        "message": "開放單車地圖"
+    },
+    "site_openseamap": {
+        "message": "開放海洋地圖"
+    },
+    "site_opensnowmap": {
+        "message": "開放雪地地圖"
+    },
+    "site_opentopomap": {
+        "message": "OpenTopoMap"
+    },
+    "site_historicmap": {
+        "message": "歷史物件"
+    },
+    "site_openinframap": {
+        "message": "開放設施地圖"
+    },
+    "site_openptmap": {
+        "message": "開放大眾運輸地圖"
+    },
+    "site_opnvkarte": {
+        "message": "ÖPNVKarte"
+    },
+    "site_stamen": {
+        "message": "Stamen 地圖"
+    },
+    "site_f4map": {
+        "message": "F4 Map (3D 展示)"
+    },
+    "site_hotmap": {
+        "message": "人道救援開放街圖小組"
+    },
+    "site_openstreetcam": {
+        "message": "Karta景"
+    },
+    "site_mapillary": {
+        "message": "Mapillary"
+    },
+    "site_level0": {
+        "message": "Level0 編輯器"
+    },
+    "site_umap": {
+        "message": "uMap"
+    },
+    "site_osmdeephistory": {
+        "message": "OSM 深度歷史"
+    },
+    "site_deepdiff": {
+        "message": "Deep Diff"
+    },
+    "site_osmhistoryviewer": {
+        "message": "OSM 歷史檢視器"
+    },
+    "site_whodidit": {
+        "message": "WHODIDIT (Zverik)"
+    },
+    "site_overpassapi": {
+        "message": "Augmented OSM 變動檢視器"
+    },
+    "site_osmrelationanalyzer": {
+        "message": "OSM 關聯分析器"
+    },
+    "site_osmroutemanager": {
+        "message": "OSM 導航管理器"
+    },
+    "site_osmose": {
+        "message": "Osmose"
+    },
+    "site_osminspector": {
+        "message": "OSM 偵側器"
+    },
+    "site_mapcompare": {
+        "message": "地圖比較"
+    },
+    "site_keepright": {
+        "message": "keep right!"
+    },
+    "site_howdidyoucontribute": {
+        "message": "你如何貢獻 OSM?"
+    },
+    "site_osmwiki": {
+        "message": "開放街圖 Wiki"
+    },
+    "site_osmchangeviz": {
+        "message": "變更集的比較 (Neis)"
+    },
+    "site_osmchangetiles": {
+        "message": "最新 OSM 編輯 (Neis)"
+    },
+    "site_waze": {
+        "message": "Waze"
+    },
+    "site_openstreetbrowser": {
+        "message": "開放街道瀏覽器"
+    },
+    "site_osmcha": {
+        "message": "OSMCha"
+    },
+    "site_osmbuildings": {
+        "message": "OSM 建築"
+    },
+    "site_openlevelup": {
+        "message": "OpenLevelUp!"
+    },
     "site_indoorequal": {
-    "message": "indoor="
-  },
-  "site_missingmaps": {
-    "message": "遺失地圖"
-  },
-  "site_osmlanevisualizer": {
-    "message": "OSM 車道視覺化"
-  }
+        "message": "indoor="
+    },
+    "site_missingmaps": {
+        "message": "遺失地圖"
+    },
+    "site_osmlanevisualizer": {
+        "message": "OSM 車道視覺化"
+    },
+    "site_stravaglobal": {
+        "message": "Strava 全球熱力圖"
+    },
+    "site_pewuosmhistory": {
+        "message": "OSM 歷史檢視器 (PeWu)"
+    },
+    "site_ideditor": {
+        "message": "iD 編輯器"
+    }
 }

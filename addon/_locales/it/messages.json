@@ -246,5 +246,14 @@
     },
     "extensionName": {
         "message": "OSM Smart Menu"
+    },
+    "site_stravaglobal": {
+        "message": "Strava Global Heatmap"
+    },
+    "site_pewuosmhistory": {
+        "message": "OSM History Viewer (PeWu)"
+    },
+    "site_ideditor": {
+        "message": "iD Editor"
     }
 }
