@@ -1,1 +1,259 @@
-{}
+{
+    "site_osmlanevisualizer": {
+        "message": "OSM Lane Visualizer"
+    },
+    "site_openlevelup": {
+        "message": "OpenLevelUp!"
+    },
+    "site_osmcha": {
+        "message": "OSMCha"
+    },
+    "site_openstreetbrowser": {
+        "message": "OpenStreetBrowser"
+    },
+    "site_waze": {
+        "message": "Waze"
+    },
+    "site_osmchangetiles": {
+        "message": "Останні зміни OSM (Neis)"
+    },
+    "site_howdidyoucontribute": {
+        "message": "Який ви зробили внесок в OSM?"
+    },
+    "site_keepright": {
+        "message": "keep right!"
+    },
+    "site_mapcompare": {
+        "message": "Map Compare"
+    },
+    "site_osminspector": {
+        "message": "OSM Inspector"
+    },
+    "site_osmose": {
+        "message": "Osmose"
+    },
+    "site_osmroutemanager": {
+        "message": "OSM Route Manager"
+    },
+    "site_osmrelationanalyzer": {
+        "message": "OSM Relation Analyzer"
+    },
+    "site_overpassapi": {
+        "message": "Augmented OSM Change Viewer"
+    },
+    "site_whodidit": {
+        "message": "WHODIDIT (Zverik)"
+    },
+    "extensionStoreDescription": {
+        "message": "Коли ви натискаєте кнопку меню, це розширення <strong>виявляє</strong> параметри OpenStreetMap всередині поточної сторінки й <strong>утворює</strong> список відповідних мап та інструментів з цими параметрами.\n\nДо розпізнаваних параметрів належать:\n<ul>\n<li>Координати мапи (масштаб, широта та довгота) </li>\n<li>Елементи OSM (ідентифікатор вузла, ідентифікатор шляху, ідентифікатор відношення та ідентифікатор набору змін)</li>\n<li>Імена користувачів та ідентифікатори слідів GPS </li>\n</ul>\nЯкщо ви не впевнені, який вебсайт буде розпізнаний, спробуйте перейти на https://www.openstreetmap.org/, перш ніж натиснути на меню.\n\n<em>Логотип OpenStreetMap є товарним знаком Фонду OpenStreetMap і використовується з їх дозволу. Цей проєкт не схвалений та не пов'язаний з OpenStreetMap Foundation.</em>",
+        "description": "Description shown in Chrome and Firefox's extension download page"
+    },
+    "extensionDescription": {
+        "message": "Допомагає учасникам OpenStreetMap легко перемикатися між різними мапами та інструментами аналізу від спільноти."
+    },
+    "extensionShortName": {
+        "message": "OSMenu"
+    },
+    "site_stravaglobal": {
+        "message": "Strava Global Heatmap"
+    },
+    "site_missingmaps": {
+        "message": "Missing Maps"
+    },
+    "site_indoorequal": {
+        "message": "indoor="
+    },
+    "site_osmbuildings": {
+        "message": "OSM Buildings"
+    },
+    "site_osmchangeviz": {
+        "message": "Changeset by Comparison (Neis)"
+    },
+    "site_osmwiki": {
+        "message": "Вікі OpenStreetMap"
+    },
+    "site_pewuosmhistory": {
+        "message": "OSM History Viewer (PeWu)"
+    },
+    "site_osmhistoryviewer": {
+        "message": "OSM History Viewer"
+    },
+    "site_deepdiff": {
+        "message": "Deep Diff"
+    },
+    "site_osmdeephistory": {
+        "message": "OSM Deep History"
+    },
+    "site_umap": {
+        "message": "uMap"
+    },
+    "site_ideditor": {
+        "message": "Редактор iD"
+    },
+    "site_level0": {
+        "message": "Редактор Level0"
+    },
+    "site_mapillary": {
+        "message": "Mapillary"
+    },
+    "site_openstreetcam": {
+        "message": "KartaView"
+    },
+    "site_hotmap": {
+        "message": "Humanitarian OSM Team Map"
+    },
+    "site_f4map": {
+        "message": "F4 Map (3D демо)"
+    },
+    "site_stamen": {
+        "message": "Stamen Maps"
+    },
+    "site_opnvkarte": {
+        "message": "ÖPNVKarte"
+    },
+    "site_openptmap": {
+        "message": "Відкрити мапу громадського транспорту"
+    },
+    "site_openinframap": {
+        "message": "Відкрити мапу інфраструктури "
+    },
+    "site_historicmap": {
+        "message": "Історичні об'єкти"
+    },
+    "site_opentopomap": {
+        "message": "OpenTopoMap"
+    },
+    "site_opensnowmap": {
+        "message": "OpenSnowMap"
+    },
+    "site_openseamap": {
+        "message": "OpenSeaMap"
+    },
+    "site_opencyclemap": {
+        "message": "OpenCycleMap"
+    },
+    "site_openmapsurfer": {
+        "message": "OpenMapSurfer"
+    },
+    "site_sentinelhub": {
+        "message": "Sentinel Hub"
+    },
+    "site_googlemaps": {
+        "message": "Карти Google"
+    },
+    "site_bingmaps": {
+        "message": "Bing Maps"
+    },
+    "site_openstreetmap": {
+        "message": "OpenStreetMap"
+    },
+    "button_showOtherEnabledLinks": {
+        "message": "Показати решту увімкнених посилань за допомогою додаткових параметрів",
+        "description": "Shown in popup below the list of links; to see other enabled links with additional parameters."
+    },
+    "button_showEnabledLinks": {
+        "message": "Показувати увімкнені посилання за допомогою додаткових параметрів",
+        "description": "Shown in popup below some errors to allow users to see enabled links."
+    },
+    "noEnabledCompatibleLinksFound": {
+        "message": "Жодне з увімкнених посилань не сумісне з параметрами, знайденими на цій сторінці.",
+        "description": "Shown in popup when there aren't any enabled links that support the parameters found in the current page."
+    },
+    "error_noInformationExtracted": {
+        "message": "Вебсайт розпізнано, але параметри не знайдено.\nЯкщо це мапа, спробуйте трохи перемістити її, щоб ініціалізувати її параметри.\nЯкщо це виглядає як помилка, будь ласка, повідомте про це в $EXTENSION_SITE$.",
+        "description": "Error shown inside popup when appropriate",
+        "placeholders": {
+            "EXTENSION_SITE": {
+                "content": "$1",
+                "example": "github.com/jgpacker/osm-smart-menu/"
+            }
+        }
+    },
+    "error_incompatibleWebsite": {
+        "message": "Не знайдено жодної мапи або параметрів OpenStreetMap.\nЯкщо це неочікувано, ви можете повідомити про це в $EXTENSION_SITE$.",
+        "description": "Error shown inside popup when appropriate",
+        "placeholders": {
+            "EXTENSION_SITE": {
+                "content": "$1",
+                "example": "github.com/jgpacker/osm-smart-menu/"
+            }
+        }
+    },
+    "error_noAccess": {
+        "message": "ПОМИЛКА: Не вдалося знайти поточну сторінку або отримати до неї доступ.\nЯкщо ця сторінка все ще завантажується, повторіть спробу.\nЯкщо це неочікувано, будь ласка, повідомте про це в $EXTENSION_SITE$.",
+        "description": "Error shown inside popup when the current page cannot be accessed (technical exception)",
+        "placeholders": {
+            "EXTENSION_SITE": {
+                "content": "$1",
+                "example": "github.com/jgpacker/osm-smart-menu/"
+            }
+        }
+    },
+    "config_pattern_createOption": {
+        "message": "Створити опцію",
+        "description": "Button"
+    },
+    "config_pattern_urlTemplate": {
+        "message": "Шаблон URL-адреси",
+        "description": "Input label"
+    },
+    "config_pattern_name": {
+        "message": "Назва",
+        "description": "Input label"
+    },
+    "config_pattern_formTitle": {
+        "message": "Розширене створення опцій (експериментально)",
+        "description": "Form Legend/Title"
+    },
+    "config_linkDeleted": {
+        "message": "Посилання $LINK_NAME$ видалено. Клацніть тут, щоб скасувати дію.",
+        "description": "Shown inline when a link is deleted inside configuration page",
+        "placeholders": {
+            "LINK_NAME": {
+                "content": "$1",
+                "example": "OpenStreetMap"
+            }
+        }
+    },
+    "config_deleteButton": {
+        "message": "Видалити",
+        "description": "Text inside 'delete button' in configuration page"
+    },
+    "config_saveButton": {
+        "message": "Зберегти",
+        "description": "Text inside 'save button' in configuration page"
+    },
+    "config_editButton": {
+        "message": "Редагувати",
+        "description": "Text inside 'edit button' in configuration page"
+    },
+    "configurationLink": {
+        "message": "Конфігурація",
+        "description": "Link to configuration page inside main popup."
+    },
+    "newOptionDetected_added": {
+        "message": "Додано як $PAGE_TITLE$",
+        "description": "Shown in popup when an unknown website seems compatible with OpenStreetMap. After the button is clicked.",
+        "placeholders": {
+            "PAGE_TITLE": {
+                "content": "$1",
+                "example": "OpenStreetMap"
+            }
+        }
+    },
+    "newOptionDetected_buttonText": {
+        "message": "Додати посилання",
+        "description": "Shown in popup (inside the button) when an unknown website seems compatible with OpenStreetMap"
+    },
+    "newOptionDetected_notice": {
+        "message": "Додати цей вебсайт до меню?",
+        "description": "Shown in popup (before the button) when an unknown website seems compatible with OpenStreetMap"
+    },
+    "loading": {
+        "message": "Завантаження...\nЯкщо завантаження не припиняється, перезавантажте сторінку та повторіть спробу.",
+        "description": "Shown in popup shortly before menu appears."
+    },
+    "extensionName": {
+        "message": "OSM Smart Menu"
+    }
+}
