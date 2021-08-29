@@ -45,7 +45,7 @@
         "message": "OSMenu"
     },
     "extensionName": {
-        "message": "OSM Smart Menu"
+        "message": "Menu Intelligent OSM"
     },
     "config_linkDeleted": {
         "message": "Lien $LINK_NAME$ supprimé. Cliquez ici pour annuler.",
@@ -66,7 +66,7 @@
         "description": "Shown in popup shortly before menu appears."
     },
     "extensionDescription": {
-        "message": "Aide les contributeurs d'OpenStreetMap à passer facilement d'une carte à l'autre et d'un outil d'analyse à l'autre de la communauté."
+        "message": "Aide les contributeurs d'OpenStreetMap à jongler entre les cartes et outils d'analyse de la communauté."
     },
     "noEnabledCompatibleLinksFound": {
         "message": "Aucun des liens activés n'est compatible avec les paramètres trouvés sur cette page.",
@@ -249,11 +249,11 @@
         }
     },
     "config_pattern_formTitle": {
-        "message": "Option de Création Avancé (Expérimental)",
+        "message": "Option de Création Avancée (Expérimental)",
         "description": "Form Legend/Title"
     },
     "extensionStoreDescription": {
-        "message": "En cliquant sur l’icône dans le menu, cette extension <strong>détectera</strong> les paramètres OpenStreetMap de la page actuelle pour <strong>générer</strong> une liste de cartes et outils les utilisant.\n\nParmi les paramètres pris en charge sont inclus :\n<ul>\n<li>Les coordonnées (zoom, latitude et longitude) ;</li>\n<li>Les objets OSM (identifiant nœud, chemin, relation et groupe de modifications) ;</li>\n<li>Les noms d’utilisateurs et les identifiants de traces GPS.</li>\n</ul>\nPour une liste complète des sites reconnu, vérifier à partir de https://www.openstreetmap.org/.\n\n<em>Le logo OpenStreetMap est une marque déposée de la Fondation OpenStreetMap et est utilisée avec son accord. Ce projet n’est ni approuvé ni affilié ni financé à la Fondation OpenStreetMap.</em>",
+        "message": "En cliquant sur l’icône dans le menu, l’extension <strong>détectera</strong> les paramètres OpenStreetMap de la page actuelle pour <strong>générer</strong> une liste de cartes et outils les utilisant.\n\nParmi les paramètres pris en charge sont inclus :\n<ul>\n<li>Les coordonnées (zoom, latitude et longitude) ;</li>\n<li>Les objets OSM (identifiant nœud, chemin, relation et groupe de modifications) ;</li>\n<li>Les noms d’utilisateurs et les identifiants de traces GPS.</li>\n</ul>\nPour une liste complète des sites reconnus, vérifier à partir de https://www.openstreetmap.org/.\n\n<em>Le logo OpenStreetMap est une marque déposée de la Fondation OpenStreetMap et est utilisée avec son accord. Ce projet n’est ni approuvé ni affilié ni financé à la Fondation OpenStreetMap.</em>",
         "description": "Description shown in Chrome and Firefox's extension download page"
     }
 }
