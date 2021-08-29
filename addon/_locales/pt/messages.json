@@ -129,5 +129,131 @@
     },
     "extensionName": {
         "message": "Menu Inteligente OSM"
+    },
+    "site_stravaglobal": {
+        "message": "Strava Mapa de Calor Global"
+    },
+    "site_osmlanevisualizer": {
+        "message": "OSM Lane Visualizer"
+    },
+    "site_missingmaps": {
+        "message": "Missing Maps"
+    },
+    "site_indoorequal": {
+        "message": "indoor="
+    },
+    "site_openlevelup": {
+        "message": "OpenLevelUp!"
+    },
+    "site_osmbuildings": {
+        "message": "OSM Buildings"
+    },
+    "site_osmcha": {
+        "message": "OSMCha"
+    },
+    "site_openstreetbrowser": {
+        "message": "OpenStreetBrowser"
+    },
+    "site_waze": {
+        "message": "Waze"
+    },
+    "site_osmwiki": {
+        "message": "Wiki do OpenStreetMap"
+    },
+    "site_keepright": {
+        "message": "keep right!"
+    },
+    "site_mapcompare": {
+        "message": "Map Compare"
+    },
+    "site_osminspector": {
+        "message": "OSM Inspector"
+    },
+    "site_osmose": {
+        "message": "Osmose"
+    },
+    "site_osmroutemanager": {
+        "message": "OSM Route Manager"
+    },
+    "site_osmrelationanalyzer": {
+        "message": "OSM Relation Analyzer"
+    },
+    "site_overpassapi": {
+        "message": "Augmented OSM Change Viewer"
+    },
+    "site_whodidit": {
+        "message": "WHODIDIT (Zverik)"
+    },
+    "site_pewuosmhistory": {
+        "message": "OSM History Viewer (PeWu)"
+    },
+    "site_osmhistoryviewer": {
+        "message": "OSM History Viewer"
+    },
+    "site_deepdiff": {
+        "message": "Deep Diff"
+    },
+    "site_osmdeephistory": {
+        "message": "OSM Deep History"
+    },
+    "site_umap": {
+        "message": "uMap"
+    },
+    "site_ideditor": {
+        "message": "iD Editor"
+    },
+    "site_level0": {
+        "message": "Level0 Editor"
+    },
+    "site_mapillary": {
+        "message": "Mapillary"
+    },
+    "site_openstreetcam": {
+        "message": "KartaView"
+    },
+    "site_hotmap": {
+        "message": "Humanitarian OSM Team Map"
+    },
+    "site_f4map": {
+        "message": "F4 Map (3D demo)"
+    },
+    "site_stamen": {
+        "message": "Stamen Maps"
+    },
+    "site_opnvkarte": {
+        "message": "ÖPNVKarte"
+    },
+    "site_openptmap": {
+        "message": "Open Public Transport Map"
+    },
+    "site_openinframap": {
+        "message": "Open Infrastructure Map "
+    },
+    "site_opentopomap": {
+        "message": "OpenTopoMap"
+    },
+    "site_opensnowmap": {
+        "message": "OpenSnowMap"
+    },
+    "site_openseamap": {
+        "message": "OpenSeaMap"
+    },
+    "site_opencyclemap": {
+        "message": "OpenCycleMap"
+    },
+    "site_openmapsurfer": {
+        "message": "OpenMapSurfer"
+    },
+    "site_sentinelhub": {
+        "message": "Sentinel Hub"
+    },
+    "site_googlemaps": {
+        "message": "Google Maps"
+    },
+    "site_bingmaps": {
+        "message": "Bing Maps"
+    },
+    "site_openstreetmap": {
+        "message": "OpenStreetMap"
     }
 }
