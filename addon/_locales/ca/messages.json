@@ -1,5 +1,196 @@
 {
     "extensionName": {
         "message": "OSM Smart Menu"
+    },
+    "loading": {
+        "message": "Carregant...\nSi no para de carregar, recarregueu la pàgina i torneu-ho a provar.",
+        "description": "Shown in popup shortly before menu appears."
+    },
+    "newOptionDetected_notice": {
+        "message": "Voleu afegir aquest lloc web al menú?",
+        "description": "Shown in popup (before the button) when an unknown website seems compatible with OpenStreetMap"
+    },
+    "newOptionDetected_buttonText": {
+        "message": "Afegeix enllaç",
+        "description": "Shown in popup (inside the button) when an unknown website seems compatible with OpenStreetMap"
+    },
+    "newOptionDetected_added": {
+        "message": "Afegit com a $PAGE_TITLE$",
+        "description": "Shown in popup when an unknown website seems compatible with OpenStreetMap. After the button is clicked.",
+        "placeholders": {
+            "PAGE_TITLE": {
+                "content": "$1",
+                "example": "OpenStreetMap"
+            }
+        }
+    },
+    "configurationLink": {
+        "message": "Configuració",
+        "description": "Link to configuration page inside main popup."
+    },
+    "config_editButton": {
+        "message": "Editar",
+        "description": "Text inside 'edit button' in configuration page"
+    },
+    "config_saveButton": {
+        "message": "Guardar",
+        "description": "Text inside 'save button' in configuration page"
+    },
+    "config_deleteButton": {
+        "message": "Esborrar",
+        "description": "Text inside 'delete button' in configuration page"
+    },
+    "config_linkDeleted": {
+        "message": "Enllaç $LINK_NAME$ esborrat. Feu clic aquí per desfer.",
+        "description": "Shown inline when a link is deleted inside configuration page",
+        "placeholders": {
+            "LINK_NAME": {
+                "content": "$1",
+                "example": "OpenStreetMap"
+            }
+        }
+    },
+    "config_pattern_formTitle": {
+        "message": "Creació d’opcions avançades (experimental)",
+        "description": "Form Legend/Title"
+    },
+    "config_pattern_name": {
+        "message": "Nom",
+        "description": "Input label"
+    },
+    "config_pattern_urlTemplate": {
+        "message": "Plantilla d'URL",
+        "description": "Input label"
+    },
+    "config_pattern_createOption": {
+        "message": "Crear opció",
+        "description": "Button"
+    },
+    "error_noAccess": {
+        "message": "ERROR: No s'ha pogut trobar o accedir a la pàgina actual.\nSi aquesta pàgina encara s'està carregant, torneu-ho a provar.\nSi això és inesperat, informeu-ne a $EXTENSION_SITE$.",
+        "description": "Error shown inside popup when the current page cannot be accessed (technical exception)",
+        "placeholders": {
+            "EXTENSION_SITE": {
+                "content": "$1",
+                "example": "github.com/jgpacker/osm-smart-menu/"
+            }
+        }
+    },
+    "error_incompatibleWebsite": {
+        "message": "No s'ha trobat cap mapa ni paràmetre d'OpenStreetMap.\nSi això és inesperat, podeu informar-ne a $EXTENSION_SITE$.",
+        "description": "Error shown inside popup when appropriate",
+        "placeholders": {
+            "EXTENSION_SITE": {
+                "content": "$1",
+                "example": "github.com/jgpacker/osm-smart-menu/"
+            }
+        }
+    },
+    "error_noInformationExtracted": {
+        "message": "El lloc web ha estat reconegut, però no s'han trobat paràmetres.\nSi es tracta d'un mapa, intenteu moure'l una mica per inicialitzar els seus paràmetres.\nSi sembla un error, informeu-ne a $EXTENSION_SITE$.",
+        "description": "Error shown inside popup when appropriate",
+        "placeholders": {
+            "EXTENSION_SITE": {
+                "content": "$1",
+                "example": "github.com/jgpacker/osm-smart-menu/"
+            }
+        }
+    },
+    "noEnabledCompatibleLinksFound": {
+        "message": "Cap dels enllaços activats és compatible amb els paràmetres trobats en aquesta pàgina.",
+        "description": "Shown in popup when there aren't any enabled links that support the parameters found in the current page."
+    },
+    "button_showEnabledLinks": {
+        "message": "Mostra enllaços activats mitjançant paràmetres addicionals",
+        "description": "Shown in popup below some errors to allow users to see enabled links."
+    },
+    "site_openstreetmap": {
+        "message": "OpenStreetMap"
+    },
+    "site_bingmaps": {
+        "message": "Bing Maps"
+    },
+    "site_googlemaps": {
+        "message": "Google Maps"
+    },
+    "site_openmapsurfer": {
+        "message": "OpenMapSurfer"
+    },
+    "site_opencyclemap": {
+        "message": "OpenCycleMap"
+    },
+    "site_opensnowmap": {
+        "message": "OpenSnowMap"
+    },
+    "site_historicmap": {
+        "message": "Objectes històrics"
+    },
+    "site_opnvkarte": {
+        "message": "ÖPNVKarte"
+    },
+    "site_stamen": {
+        "message": "Stamen Maps"
+    },
+    "site_mapillary": {
+        "message": "Mapillary"
+    },
+    "site_umap": {
+        "message": "uMap"
+    },
+    "site_osmhistoryviewer": {
+        "message": "Visualitzador d'historial de l'OSM"
+    },
+    "site_pewuosmhistory": {
+        "message": "Visualitzador d'historial de l'OSM (PeWu)"
+    },
+    "site_osmroutemanager": {
+        "message": "Gestor de rutes d'OSM"
+    },
+    "site_osmose": {
+        "message": "Osmose"
+    },
+    "site_osmchangetiles": {
+        "message": "Últimes modificacions d'OSM (Neis)"
+    },
+    "site_waze": {
+        "message": "Waze"
+    },
+    "site_osmcha": {
+        "message": "OSMCha"
+    },
+    "site_opentopomap": {
+        "message": "OpenTopoMap"
+    },
+    "site_openseamap": {
+        "message": "OpenSeaMap"
+    },
+    "site_mapcompare": {
+        "message": "Compara el mapa"
+    },
+    "extensionDescription": {
+        "message": "Ajuda els contribuïdors d’OpenStreetMap a canviar fàcilment entre diferents mapes i eines d’anàlisi de la comunitat."
+    },
+    "extensionShortName": {
+        "message": "OSMenu"
+    },
+    "extensionStoreDescription": {
+        "message": "Quan feu clic al botó del menú, aquesta extensió <strong>detectarà</strong> els paràmetres d'OpenStreetMap de la pàgina actual i <strong>generarà</strong> una llista de mapes i eines en relació amb aquests paràmetres.\n\nEls paràmetres reconeguts inclouen:\n<ul>\n<li>Coordenades cartogràfiques (zoom, latitud i longitud)</li>\n<li>Elements d'OSM (id. de node, id. de via, id. de relació i id. de conjunt de canvis)</li>\n<li>Noms d'usuari i id. de senyals GPS</li>\n</ul>\nSi no esteu segur de quin lloc web es reconeixerà, proveu de visitar https://www.openstreetmap.org/ abans de fer clic en el menú.\n\n<em>El logotip d'OpenStreetMap és una marca registrada d'OpenStreetMap Foundation i s'utilitza amb el seu permís. Aquest projecte no és sostingut ni està afiliat amb l'OpenStreetMap Foundation.</em>",
+        "description": "Description shown in Chrome and Firefox's extension download page"
+    },
+    "button_showOtherEnabledLinks": {
+        "message": "Mostra la resta d'enllaços activats mitjançant paràmetres addicionals",
+        "description": "Shown in popup below the list of links; to see other enabled links with additional parameters."
+    },
+    "site_osmrelationanalyzer": {
+        "message": "Analitzador de relacions d'OSM"
+    },
+    "site_howdidyoucontribute": {
+        "message": "Com heu contribuït a OSM?"
+    },
+    "site_osmwiki": {
+        "message": "Wiki d'OpenStreetMap"
+    },
+    "site_openstreetbrowser": {
+        "message": "OpenStreetBrowser"
     }
 }

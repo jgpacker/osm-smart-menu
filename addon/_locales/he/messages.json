@@ -252,5 +252,8 @@
     },
     "site_ideditor": {
         "message": "העורך iD"
+    },
+    "site_stravaglobal": {
+        "message": "Strava Global Heatmap"
     }
 }

@@ -109,5 +109,20 @@
     },
     "extensionName": {
         "message": "OSM Smart Menu"
+    },
+    "site_openlevelup": {
+        "message": "OpenLevelUp!"
+    },
+    "site_osminspector": {
+        "message": "OSM Inspector"
+    },
+    "site_osmose": {
+        "message": "Osmose"
+    },
+    "site_ideditor": {
+        "message": "Редактор iD"
+    },
+    "site_hotmap": {
+        "message": "Humanitarian OSM Team Map"
     }
 }
