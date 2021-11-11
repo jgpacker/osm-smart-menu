@@ -9,7 +9,7 @@
         "message": "幫助開放街圖貢獻者簡單切換社群當中不同的地圖與分析工具。"
     },
     "extensionStoreDescription": {
-        "message": "當你點選單按鈕時，這個套件會<strong>偵測</strong>目前頁面的開放街圖參數，並且會<strong>產生</strong>相關地圖與對應參數清單。\n\n認可的參數包括:\n<ul>\n<li>地圖經緯度 (縮放、經度、緯度)</li>\n<li>OSM 元素 (節點 id、路徑 id、關聯 id 與變更組合 id)</li>\n<li>使用者名稱與 GPS 軌跡 id</li>\n</ul>\n如果你不確定那些網站能被認可，在點選單之前請瀏覽 https://www.openstreetmap.org/ 網站。\n\n<em>開放街圖的 logo 是開放街圖基金會的註冊商標，已經經由他們同意來使用。這個專案並沒有被開放街圖基金會認可或是有相關聯。</em>\n"
+        "message": "當你點選單按鈕時，這個套件會<strong>偵測</strong>目前頁面的開放街圖參數，並且會<strong>產生</strong>相關地圖與對應參數清單。\n\n認可的參數包括:\n<ul>\n<li>地圖經緯度 (縮放、經度、緯度)</li>\n<li>OSM 元素 (節點 id、路徑 id、關聯 id 與變更組合 id)</li>\n<li>使用者名稱與 GPS 軌跡 id</li>\n</ul>\n如果你不確定那些網站能被認可，在點選單之前請瀏覽 https://www.openstreetmap.org/ 網站。\n\n<em>開放街圖的 logo 是開放街圖基金會的註冊商標，已經經由他們同意來使用。這個專案並沒有被開放街圖基金會認可或是有相關聯。</em>"
     },
     "loading": {
         "message": "載入中...\n如果沒有停止載入，請試著重新整理再試一次。",
@@ -76,7 +76,7 @@
         "description": "按鈕"
     },
     "error_noAccess": {
-        "message": "錯誤，無法找到或連線到目前頁面。\n如果這是非預期狀況，請到 $EXTENSION_SITE$ 回報。",
+        "message": "錯誤，無法找到或連線到目前頁面。\n如果頁面仍在載入，請再試一次。\n如果這是非預期狀況，請到 $EXTENSION_SITE$ 回報。",
         "description": "目前頁面無法連線時，錯誤訊息顯示在跳出視窗當中 (技術問題)",
         "placeholders": {
             "EXTENSION_SITE": {
@@ -96,7 +96,7 @@
         }
     },
     "error_noInformationExtracted": {
-        "message": "錯誤：如果網站被認可，但是無法適別參數時。\n如果你認為這是臭蟲的話，請到 $EXTENSION_SITE$ 回報狀況。",
+        "message": "錯誤：如果網站被認可，但是無法適別參數時。\n如果這是地圖的話，請稍微移動地圖來啟始其參數。\n如果你認為這是臭蟲的話，請到 $EXTENSION_SITE$ 回報狀況。",
         "description": "如果適當錯誤訊息顯示在跳出視窗當中",
         "placeholders": {
             "EXTENSION_SITE": {
@@ -148,7 +148,7 @@
         "message": "歷史物件"
     },
     "site_openinframap": {
-        "message": "開放設施地圖"
+        "message": "開放設施地圖 "
     },
     "site_openptmap": {
         "message": "開放大眾運輸地圖"
