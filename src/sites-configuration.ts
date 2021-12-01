@@ -159,6 +159,13 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
     ]
   },
 
+  osmchangesetmap: {
+    link: 'osmlab.github.io/changeset-map',
+    paramOpts: [
+      { ordered: '/#{changesetId}' },
+    ],
+  },
+
   osmdeephistory: {
     link: "osmlab.github.io/osm-deep-history",
     paramOpts: [
