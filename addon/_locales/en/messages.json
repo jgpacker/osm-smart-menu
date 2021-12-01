@@ -181,6 +181,9 @@
     "site_umap": {
         "message": "uMap"
     },
+    "site_osmchangesetmap": {
+        "message": "OSM Changeset Viewer on a GL Map",
+    },
     "site_osmdeephistory": {
         "message": "OSM Deep History"
     },
