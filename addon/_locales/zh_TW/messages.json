@@ -127,10 +127,10 @@
         "message": "Google 地圖"
     },
     "site_sentinelhub": {
-        "message": "Sentinel Hub"
+        "message": "哨兵衛星"
     },
     "site_openmapsurfer": {
-        "message": "OpenMapSurfer"
+        "message": "開放衝浪地圖"
     },
     "site_opencyclemap": {
         "message": "開放單車地圖"
@@ -142,7 +142,7 @@
         "message": "開放雪地地圖"
     },
     "site_opentopomap": {
-        "message": "OpenTopoMap"
+        "message": "開放地景地圖"
     },
     "site_historicmap": {
         "message": "歷史物件"
@@ -154,7 +154,7 @@
         "message": "開放大眾運輸地圖"
     },
     "site_opnvkarte": {
-        "message": "ÖPNVKarte"
+        "message": "ÖPNVKarte (大眾運輸地圖)"
     },
     "site_stamen": {
         "message": "Stamen 地圖"
@@ -175,19 +175,19 @@
         "message": "Level0 編輯器"
     },
     "site_umap": {
-        "message": "uMap"
+        "message": "uMap (自製地圖)"
     },
     "site_osmdeephistory": {
         "message": "OSM 深度歷史"
     },
     "site_deepdiff": {
-        "message": "Deep Diff"
+        "message": "Deep Diff (深度差異)"
     },
     "site_osmhistoryviewer": {
         "message": "OSM 歷史檢視器"
     },
     "site_whodidit": {
-        "message": "WHODIDIT (Zverik)"
+        "message": "WHODIDIT (Zverik) (誰編輯什麼)"
     },
     "site_overpassapi": {
         "message": "Augmented OSM 變動檢視器"
@@ -199,7 +199,7 @@
         "message": "OSM 導航管理器"
     },
     "site_osmose": {
-        "message": "Osmose"
+        "message": "Osmose (分析工具)"
     },
     "site_osminspector": {
         "message": "OSM 偵側器"
@@ -208,7 +208,7 @@
         "message": "地圖比較"
     },
     "site_keepright": {
-        "message": "keep right!"
+        "message": "keep right! (維持正確!)"
     },
     "site_howdidyoucontribute": {
         "message": "你如何貢獻 OSM?"
@@ -223,22 +223,22 @@
         "message": "最新 OSM 編輯 (Neis)"
     },
     "site_waze": {
-        "message": "Waze"
+        "message": "Waze (群眾地圖)"
     },
     "site_openstreetbrowser": {
         "message": "開放街道瀏覽器"
     },
     "site_osmcha": {
-        "message": "OSMCha"
+        "message": "OSMCha (OSM變更集分析器)"
     },
     "site_osmbuildings": {
         "message": "OSM 建築"
     },
     "site_openlevelup": {
-        "message": "OpenLevelUp!"
+        "message": "OpenLevelUp! (開放樓層吧！)"
     },
     "site_indoorequal": {
-        "message": "indoor="
+        "message": "indoor= (室內)"
     },
     "site_missingmaps": {
         "message": "遺失地圖"
