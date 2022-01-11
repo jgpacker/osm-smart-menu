@@ -255,5 +255,8 @@
     },
     "site_stravaglobal": {
       "message": "Strava Global Heatmap"
+    },
+    "site_osmosebyuser": {
+      "message": "Osmose error by user"
     }
 }
