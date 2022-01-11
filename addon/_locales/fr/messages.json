@@ -45,7 +45,7 @@
         "message": "OSMenu"
     },
     "extensionName": {
-        "message": "OSM Smart Menu"
+        "message": "Menu Intelligent OSM"
     },
     "config_linkDeleted": {
         "message": "Lien $LINK_NAME$ supprimé. Cliquez ici pour annuler.",
@@ -66,7 +66,7 @@
         "description": "Shown in popup shortly before menu appears."
     },
     "extensionDescription": {
-        "message": "Aide les contributeurs d'OpenStreetMap à passer facilement d'une carte à l'autre et d'un outil d'analyse à l'autre de la communauté."
+        "message": "Aide les contributeurs d'OpenStreetMap à jongler entre les cartes et outils d'analyse de la communauté."
     },
     "noEnabledCompatibleLinksFound": {
         "message": "Aucun des liens activés n'est compatible avec les paramètres trouvés sur cette page.",
@@ -99,5 +99,161 @@
                 "example": "github.com/jgpacker/osm-smart-menu/"
             }
         }
+    },
+    "site_osmlanevisualizer": {
+        "message": "OSM Lane Visualizer"
+    },
+    "site_missingmaps": {
+        "message": "Missing Maps"
+    },
+    "site_indoorequal": {
+        "message": "indoor="
+    },
+    "site_openlevelup": {
+        "message": "OpenLevelUp!"
+    },
+    "site_osmbuildings": {
+        "message": "OSM Buildings"
+    },
+    "site_osmcha": {
+        "message": "OSMCha"
+    },
+    "site_openstreetbrowser": {
+        "message": "OpenStreetBrowser"
+    },
+    "site_waze": {
+        "message": "Waze"
+    },
+    "site_osmchangetiles": {
+        "message": "Latest OSM Edits (Neis)"
+    },
+    "site_osmchangeviz": {
+        "message": "Changeset by Comparison (Neis)"
+    },
+    "site_howdidyoucontribute": {
+        "message": "How did you contribute to OSM?"
+    },
+    "site_keepright": {
+        "message": "keep right!"
+    },
+    "site_mapcompare": {
+        "message": "Map Compare"
+    },
+    "site_osminspector": {
+        "message": "Inspecteur OSM"
+    },
+    "site_osmose": {
+        "message": "Osmose"
+    },
+    "site_osmroutemanager": {
+        "message": "OSM Route Manager"
+    },
+    "site_osmrelationanalyzer": {
+        "message": "OSM Relation Analyzer"
+    },
+    "site_whodidit": {
+        "message": "WHODIDIT (Zverik)"
+    },
+    "site_pewuosmhistory": {
+        "message": "OSM History Viewer (PeWu)"
+    },
+    "site_osmhistoryviewer": {
+        "message": "OSM History Viewer"
+    },
+    "site_deepdiff": {
+        "message": "Deep Diff"
+    },
+    "site_osmdeephistory": {
+        "message": "OSM Deep History"
+    },
+    "site_umap": {
+        "message": "uMap"
+    },
+    "site_mapillary": {
+        "message": "Mapillary"
+    },
+    "site_openstreetcam": {
+        "message": "OpenStreetCam"
+    },
+    "site_opnvkarte": {
+        "message": "ÖPNVKarte"
+    },
+    "site_openptmap": {
+        "message": "Open Public Transport Map"
+    },
+    "site_historicmap": {
+        "message": "Historical Objects"
+    },
+    "site_opentopomap": {
+        "message": "OpenTopoMap"
+    },
+    "site_opensnowmap": {
+        "message": "OpenSnowMap"
+    },
+    "site_openseamap": {
+        "message": "OpenSeaMap"
+    },
+    "site_opencyclemap": {
+        "message": "OpenCycleMap"
+    },
+    "site_openmapsurfer": {
+        "message": "OpenMapSurfer"
+    },
+    "site_sentinelhub": {
+        "message": "Sentinel Hub"
+    },
+    "site_googlemaps": {
+        "message": "Google Maps"
+    },
+    "site_openstreetmap": {
+        "message": "OpenStreetMap"
+    },
+    "site_stravaglobal": {
+        "message": "Carte d’activité Globale Strava"
+    },
+    "site_osmwiki": {
+        "message": "Wiki OpenStreetMap"
+    },
+    "site_overpassapi": {
+        "message": "Achavi"
+    },
+    "site_ideditor": {
+        "message": "Éditeur iD"
+    },
+    "site_level0": {
+        "message": "Éditeur Level0"
+    },
+    "site_hotmap": {
+        "message": "Carte HOT"
+    },
+    "site_f4map": {
+        "message": "Carte F4 (demo 3D)"
+    },
+    "site_stamen": {
+        "message": "Cartes Stamen"
+    },
+    "site_openinframap": {
+        "message": "Open Infrastructure Map "
+    },
+    "site_bingmaps": {
+        "message": "Bing Cartes"
+    },
+    "error_noInformationExtracted": {
+        "message": "Le site a été reconnu mais aucun paramètre n’a été trouvé.\nPour une carte, essayer de la déplacer pour générer des paramètres.\nSi c’est un bug, merci de le signaler dans $EXTENSION_SITE$.",
+        "description": "Error shown inside popup when appropriate",
+        "placeholders": {
+            "EXTENSION_SITE": {
+                "content": "$1",
+                "example": "github.com/jgpacker/osm-smart-menu/"
+            }
+        }
+    },
+    "config_pattern_formTitle": {
+        "message": "Option de Création Avancée (Expérimental)",
+        "description": "Form Legend/Title"
+    },
+    "extensionStoreDescription": {
+        "message": "En cliquant sur l’icône dans le menu, l’extension <strong>détectera</strong> les paramètres OpenStreetMap de la page actuelle pour <strong>générer</strong> une liste de cartes et outils les utilisant.\n\nParmi les paramètres pris en charge sont inclus :\n<ul>\n<li>Les coordonnées (zoom, latitude et longitude) ;</li>\n<li>Les objets OSM (identifiant nœud, chemin, relation et groupe de modifications) ;</li>\n<li>Les noms d’utilisateurs et les identifiants de traces GPS.</li>\n</ul>\nPour une liste complète des sites reconnus, vérifier à partir de https://www.openstreetmap.org/.\n\n<em>Le logo OpenStreetMap est une marque déposée de la Fondation OpenStreetMap et est utilisée avec son accord. Ce projet n’est ni approuvé ni affilié ni financé à la Fondation OpenStreetMap.</em>",
+        "description": "Description shown in Chrome and Firefox's extension download page"
     }
 }
