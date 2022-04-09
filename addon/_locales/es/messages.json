@@ -243,5 +243,17 @@
     },
     "site_openstreetbrowser": {
         "message": "OpenStreetBrowser"
+    },
+    "site_level0": {
+        "message": "Editor Nivel 0"
+    },
+    "site_deepdiff": {
+        "message": "Diferencia profunda"
+    },
+    "site_openlevelup": {
+        "message": "OpenLevelUp!"
+    },
+    "site_osmcha": {
+        "message": "OSMCha"
     }
 }
