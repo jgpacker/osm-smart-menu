@@ -1,1 +1,27 @@
-{}
+{
+    "newOptionDetected_notice": {
+        "message": "Chcete přidat tuto webovou stránku do nabídky?",
+        "description": "Shown in popup (before the button) when an unknown website seems compatible with OpenStreetMap"
+    },
+    "extensionName": {
+        "message": "OSM Smart Menu"
+    },
+    "extensionShortName": {
+        "message": "OSMenu"
+    },
+    "newOptionDetected_buttonText": {
+        "message": "Přidat odkaz",
+        "description": "Shown in popup (inside the button) when an unknown website seems compatible with OpenStreetMap"
+    },
+    "extensionDescription": {
+        "message": "Pomáhá přispěvatelům OpenStreetMap snadno přepínat mezi různými mapami a analytickými nástroji komunity."
+    },
+    "loading": {
+        "message": "Načítání...\nPokud se načítání nezastaví, načtěte stránku znovu a zkuste to znovu.",
+        "description": "Shown in popup shortly before menu appears."
+    },
+    "extensionStoreDescription": {
+        "message": "Když kliknete na tlačítko nabídky, toto rozšíření <strong>detekuje</strong> parametry OpenStreetMap na aktuální stránce a <strong>vygeneruje</strong> seznam souvisejících map a nástrojů s těmito parametry.\n\nMezi uznávané parametry patří:\n<ul>\n<li>Souřadnice mapy (přiblížení, zeměpisná šířka a délka)</li>\n<li>Prvky OSM (id uzlu, id cesty, id vztahu a id sady změn)</li>\n<li>Uživatelská jména a ID trasování GPS</li>\n</ul>\nPokud si nejste jisti, který web bude rozpoznán, zkuste před kliknutím na nabídku přejít na https://www.openstreetmap.org/.\n\n<em>Logo OpenStreetMap je ochranná známka společnosti OpenStreetMap Foundation a používá se s jejím svolením. Tento projekt není podporován ani není spojen s OpenStreetMap Foundation.</em>",
+        "description": "Description shown in Chrome and Firefox's extension download page"
+    }
+}
