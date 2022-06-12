@@ -1,1 +1,59 @@
-{}
+{
+    "extensionDescription": {
+        "message": "Pomaga współtwórcom OpenStreetMap w łatwym przełączaniu się między różnymi mapami i narzędziami analitycznymi społeczności."
+    },
+    "newOptionDetected_buttonText": {
+        "message": "Dodaj link",
+        "description": "Shown in popup (inside the button) when an unknown website seems compatible with OpenStreetMap"
+    },
+    "loading": {
+        "message": "Ładowanie...\nJeśli to się nie zatrzyma, odśwież stronę i spróbuj ponownie.",
+        "description": "Shown in popup shortly before menu appears."
+    },
+    "configurationLink": {
+        "message": "Konfiguracja",
+        "description": "Link to configuration page inside main popup."
+    },
+    "config_editButton": {
+        "message": "Edycja",
+        "description": "Text inside 'edit button' in configuration page"
+    },
+    "config_saveButton": {
+        "message": "Zapisz",
+        "description": "Text inside 'save button' in configuration page"
+    },
+    "config_deleteButton": {
+        "message": "Usuń",
+        "description": "Text inside 'delete button' in configuration page"
+    },
+    "config_pattern_name": {
+        "message": "Nazwa",
+        "description": "Input label"
+    },
+    "config_pattern_urlTemplate": {
+        "message": "Szablon URL",
+        "description": "Input label"
+    },
+    "config_pattern_createOption": {
+        "message": "Utwórz opcję",
+        "description": "Button"
+    },
+    "noEnabledCompatibleLinksFound": {
+        "message": "Żadne z włączonych łączy nie jest zgodne z parametrami podanymi na tej stronie.",
+        "description": "Shown in popup when there aren't any enabled links that support the parameters found in the current page."
+    },
+    "newOptionDetected_notice": {
+        "message": "Chcesz dodać tę stronę do menu?",
+        "description": "Shown in popup (before the button) when an unknown website seems compatible with OpenStreetMap"
+    },
+    "newOptionDetected_added": {
+        "message": "Dodano jako $PAGE_TITLE$",
+        "description": "Shown in popup when an unknown website seems compatible with OpenStreetMap. After the button is clicked.",
+        "placeholders": {
+            "PAGE_TITLE": {
+                "content": "$1",
+                "example": "OpenStreetMap"
+            }
+        }
+    }
+}
