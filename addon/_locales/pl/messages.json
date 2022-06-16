@@ -55,5 +55,32 @@
                 "example": "OpenStreetMap"
             }
         }
+    },
+    "extensionName": {
+        "message": "Inteligentne Menu OSM"
+    },
+    "config_linkDeleted": {
+        "message": "Link $LINK_NAME$ usunięty. Kliknij tutaj, aby cofnąć.",
+        "description": "Shown inline when a link is deleted inside configuration page",
+        "placeholders": {
+            "LINK_NAME": {
+                "content": "$1",
+                "example": "OpenStreetMap"
+            }
+        }
+    },
+    "config_pattern_formTitle": {
+        "message": "Zaawansowane tworzenie opcji (eksperymentalne)",
+        "description": "Form Legend/Title"
+    },
+    "error_noAccess": {
+        "message": "BŁĄD: nie można znaleźć lub uzyskać dostępu do bieżącej strony.\nJeśli ta strona nadal się ładuje, spróbuj ponownie.\nJeśli jest to nieoczekiwane, zgłoś to w $EXTENSION_SITE$.",
+        "description": "Error shown inside popup when the current page cannot be accessed (technical exception)",
+        "placeholders": {
+            "EXTENSION_SITE": {
+                "content": "$1",
+                "example": "github.com/jgpacker/osm-smart-menu/"
+            }
+        }
     }
 }
