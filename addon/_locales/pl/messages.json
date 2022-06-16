@@ -82,5 +82,105 @@
                 "example": "github.com/jgpacker/osm-smart-menu/"
             }
         }
+    },
+    "error_noInformationExtracted": {
+        "message": "Strona została rozpoznana, ale nie znaleziono parametrów.\nJeśli to jest mapa, spróbuj ją trochę przesunąć, aby zainicjować jej parametry.\nJeśli wygląda to na błąd, zgłoś go w $EXTENSION_SITE$.",
+        "description": "Error shown inside popup when appropriate",
+        "placeholders": {
+            "EXTENSION_SITE": {
+                "content": "$1",
+                "example": "github.com/jgpacker/osm-smart-menu/"
+            }
+        }
+    },
+    "button_showEnabledLinks": {
+        "message": "Wyświetlanie włączonych łączy przy użyciu dodatkowych parametrów",
+        "description": "Shown in popup below some errors to allow users to see enabled links."
+    },
+    "site_openstreetmap": {
+        "message": "OpenStreetMap"
+    },
+    "site_bingmaps": {
+        "message": "Mapy Bing"
+    },
+    "site_googlemaps": {
+        "message": "Mapy Google"
+    },
+    "site_sentinelhub": {
+        "message": "Centrum Sentinel"
+    },
+    "site_openmapsurfer": {
+        "message": "OpenMapSurfer"
+    },
+    "site_opencyclemap": {
+        "message": "OpenCycleMap"
+    },
+    "site_openseamap": {
+        "message": "OpenSeaMap"
+    },
+    "site_opensnowmap": {
+        "message": "OpenSnowMap"
+    },
+    "site_historicmap": {
+        "message": "Obiekty historyczne"
+    },
+    "site_openptmap": {
+        "message": "Otwarta mapa transportu publicznego"
+    },
+    "site_mapillary": {
+        "message": "Mapillary"
+    },
+    "site_ideditor": {
+        "message": "Edytor iD"
+    },
+    "site_osmhistoryviewer": {
+        "message": "Przeglądarka historii OSM"
+    },
+    "site_pewuosmhistory": {
+        "message": "Przeglądarka historii OSM (PeWu)"
+    },
+    "error_incompatibleWebsite": {
+        "message": "Nie znaleziono mapy ani parametrów OpenStreetMap.\nJeśli jest to nieoczekiwane, możesz to zgłosić w $EXTENSION_SITE$.",
+        "description": "Error shown inside popup when appropriate",
+        "placeholders": {
+            "EXTENSION_SITE": {
+                "content": "$1",
+                "example": "github.com/jgpacker/osm-smart-menu/"
+            }
+        }
+    },
+    "site_keepright": {
+        "message": "trzymaj się prawej!"
+    },
+    "button_showOtherEnabledLinks": {
+        "message": "Wyświetlanie pozostałych włączonych łączy przy użyciu dodatkowych parametrów",
+        "description": "Shown in popup below the list of links; to see other enabled links with additional parameters."
+    },
+    "site_osmrelationanalyzer": {
+        "message": "Analizator relacji OSM"
+    },
+    "site_osmbuildings": {
+        "message": "Budynki OSM"
+    },
+    "site_osmroutemanager": {
+        "message": "Menedżer tras OSM"
+    },
+    "site_osmlanevisualizer": {
+        "message": "Wizualizacja pasów ruchu OSM"
+    },
+    "site_osmchangeviz": {
+        "message": "Zestaw zmian przez porównanie (Neis)"
+    },
+    "site_missingmaps": {
+        "message": "Brakujące mapy"
+    },
+    "site_howdidyoucontribute": {
+        "message": "W jaki sposób przyczyniłeś się do rozwoju OSM?"
+    },
+    "site_osmwiki": {
+        "message": "Wiki OpenStreetMap"
+    },
+    "site_osmchangetiles": {
+        "message": "Najnowsze edycje OSM (Neis)"
     }
 }
