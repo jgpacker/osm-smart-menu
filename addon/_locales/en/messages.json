@@ -151,6 +151,9 @@
     "site_openinframap": {
         "message": "Open Infrastructure Map "
     },
+    "site_americana": {
+        "message": "OSM Americana"
+    },
     "site_openptmap": {
         "message": "Open Public Transport Map"
     },
