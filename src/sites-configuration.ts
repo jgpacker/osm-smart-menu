@@ -351,6 +351,15 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
     zoomAdjustment: +1,
   },
 
+  americana: {
+    link: 'zelonewolf.github.io',
+    paramOpts: [
+      { ordered: '/openstreetmap-americana/#{zoom}/{lat}/{lon}' },
+      { ordered: '/openstreetmap-americana#{zoom}/{lat}/{lon}' }, // input-only
+    ],
+    zoomAdjustment: +1,
+  },
+    
   bingmaps: {
     link: "www.bing.com",
     paramOpts: [
