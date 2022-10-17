@@ -194,7 +194,7 @@
         "message": "Visor de historial de OSM"
     },
     "site_openstreetcam": {
-        "message": "KartaView"
+        "message": "Vista de Karta"
     },
     "site_stravaglobal": {
         "message": "Mapa de calor global de Strava"
@@ -242,7 +242,7 @@
         "message": "Últimas ediciones OSM (Neis)"
     },
     "site_openstreetbrowser": {
-        "message": "OpenStreetBrowser"
+        "message": "Navegador OpenStreet"
     },
     "site_level0": {
         "message": "Editor Nivel 0"
