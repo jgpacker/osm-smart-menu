@@ -182,5 +182,8 @@
     },
     "site_osmchangetiles": {
         "message": "Najnowsze edycje OSM (Neis)"
+    },
+    "extensionShortName": {
+        "message": "Menu OS"
     }
 }
