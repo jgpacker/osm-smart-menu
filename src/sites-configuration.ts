@@ -513,6 +513,48 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
     httpOnly: true, // mini-map won't load in HTTPS
     disabledByDefault: true, // doesn't work for most relations
   },
+
+  waymarkedtrailsHiking: {
+    link: "hiking.waymarkedtrails.org",
+    paramOpts: [
+      { ordered: "/#?map={zoom}/{lat}/{lon}" },
+    ],
+  },
+
+  waymarkedtrailsCycling: {
+    link: "cycling.waymarkedtrails.org",
+    paramOpts: [
+      { ordered: "/#?map={zoom}/{lat}/{lon}" },
+    ],
+  },
+
+  waymarkedtrailsMtb: {
+    link: "mtb.waymarkedtrails.org",
+    paramOpts: [
+      { ordered: "/#?map={zoom}/{lat}/{lon}" },
+    ],
+  },
+
+  waymarkedtrailsSkating: {
+    link: "skating.waymarkedtrails.org",
+    paramOpts: [
+      { ordered: "/#?map={zoom}/{lat}/{lon}" },
+    ],
+  },
+
+  waymarkedtrailsRiding: {
+    link: "riding.waymarkedtrails.org",
+    paramOpts: [
+      { ordered: "/#?map={zoom}/{lat}/{lon}" },
+    ],
+  },
+
+  waymarkedtrailsSlopes: {
+    link: "slopes.waymarkedtrails.org",
+    paramOpts: [
+      { ordered: "/#?map={zoom}/{lat}/{lon}" },
+    ],
+  },
 };
 
 function getPermalinkBySelector(selector: string) {
