@@ -1,1 +1,51 @@
-{}
+{
+    "extensionShortName": {
+        "message": "OSMenüü"
+    },
+    "extensionName": {
+        "message": "Nutikas OSM menüü"
+    },
+    "newOptionDetected_buttonText": {
+        "message": "Lisa link",
+        "description": "Shown in popup (inside the button) when an unknown website seems compatible with OpenStreetMap"
+    },
+    "newOptionDetected_added": {
+        "message": "Lisatud kui $PAGE_TITLE$",
+        "description": "Shown in popup when an unknown website seems compatible with OpenStreetMap. After the button is clicked.",
+        "placeholders": {
+            "PAGE_TITLE": {
+                "content": "$1",
+                "example": "OpenStreetMap"
+            }
+        }
+    },
+    "configurationLink": {
+        "message": "Seadistused",
+        "description": "Link to configuration page inside main popup."
+    },
+    "config_editButton": {
+        "message": "Muuda",
+        "description": "Text inside 'edit button' in configuration page"
+    },
+    "config_saveButton": {
+        "message": "Salvesta",
+        "description": "Text inside 'save button' in configuration page"
+    },
+    "config_deleteButton": {
+        "message": "Kustuta",
+        "description": "Text inside 'delete button' in configuration page"
+    },
+    "config_linkDeleted": {
+        "message": "$LINK_NAME$ link on kustutatud. Muudatuse tagasipööramiseks klõpsi siin.",
+        "description": "Shown inline when a link is deleted inside configuration page",
+        "placeholders": {
+            "LINK_NAME": {
+                "content": "$1",
+                "example": "OpenStreetMap"
+            }
+        }
+    },
+    "extensionDescription": {
+        "message": "Lihtne tarvik, mis võimaldab OpenStreetMap'i kaasautoritel mugavasti vahetada erinevaid kaardivaateid ja kogukonna poolt loodud anaalüüsitarvikuid."
+    }
+}
