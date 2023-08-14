@@ -64,6 +64,20 @@ export const Sites: Record<string, DefaultSiteConfiguration> = {
     }
   },
 
+  rapideditor: {
+    link: "rapideditor.org",
+    paramOpts: [
+      { ordered: "/edit#map={zoom}/{lat}/{lon}" },   // set params
+      { ordered: "/edit#id=n{nodeId}" },             // set params
+      { ordered: "/edit#id=w{wayId}" },              // set params
+      { ordered: "/edit#id=r{relationId}" },         // set params
+      { ordered: "map={zoom}/{lat}/{lon}" },         // gather params
+      { ordered: "id=n{nodeId}" },                   // gather params
+      { ordered: "id=w{wayId}" },                    // gather params
+      { ordered: "id=r{relationId}" }                // gather params
+    ],
+  },
+
   ideditor: {
     link: "www.openstreetmap.org/edit",
     paramOpts: [

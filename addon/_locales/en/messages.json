@@ -175,6 +175,9 @@
     "site_level0": {
         "message": "Level0 Editor"
     },
+    "site_rapideditor": {
+        "message": "Rapid Editor"
+    },
     "site_ideditor": {
         "message": "iD Editor"
     },

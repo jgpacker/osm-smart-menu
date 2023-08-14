@@ -5,7 +5,7 @@
     "test": "jest",
     "tscompile": "svelte-check && webpack --mode=production",
     "watch": "npm run tscompile -- --watch",
-    "build": "npm run tscompile && web-ext build --source-dir addon"
+    "build": "npm run tscompile && web-ext build --overwrite-dest --source-dir addon"
   },
   "repository": {
     "type": "git",
