@@ -185,5 +185,9 @@
     },
     "extensionShortName": {
         "message": "Menu OS"
+    },
+    "extensionStoreDescription": {
+        "message": "Podczas kliknięcia przycisku menu, ten rozszerzenie będzie X54XdetectX68X OpenStreet. Mapa wewnątrz obecnej strony i wola (X136X) generowanego X152X.\n\nObjawy rozpoznawcze obejmują:\n(X250X)\n(X255X) współrzędne (zoom, szerokości i długości)\nElementy X311XOSM (node id, way id, relation id and changeset id)X375X (ang.).\n(X381XUser) i GPS prowadzą ślady idX413X.\n(X419X) (ang.).\nJeśli nie jesteśmy pewni, że witryna będzie dostępna, stara się spróbować https:/wwwwwwwwwwwtstreetmap.org/. Przed kliknięciem na menu.\n\n(X553X) The OpenStreet (ang.). Logo Map jest znakiem towarowym OpenStreetMap Foundation i jest używany z pozwoleniem. Projekt nie jest wspierany przez lub stowarzyszony z OpenStreetMap Foundation",
+        "description": "Description shown in Chrome and Firefox's extension download page"
     }
 }
