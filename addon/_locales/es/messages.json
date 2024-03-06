@@ -159,5 +159,101 @@
     },
     "site_historicmap": {
         "message": "Objetos históricos"
+    },
+    "site_openinframap": {
+        "message": "Abrir mapa de infraestructura "
+    },
+    "site_openptmap": {
+        "message": "Abrir mapa de transporte público"
+    },
+    "site_opnvkarte": {
+        "message": "ÖPNVKarte"
+    },
+    "site_stamen": {
+        "message": "Mapas de estambre"
+    },
+    "site_f4map": {
+        "message": "Mapa F4 (demostración 3D)"
+    },
+    "site_hotmap": {
+        "message": "Mapa del Equipo Humanitario OSM"
+    },
+    "site_mapillary": {
+        "message": "Mapillary"
+    },
+    "site_umap": {
+        "message": "uMap"
+    },
+    "site_osmdeephistory": {
+        "message": "Historia profunda de OSM"
+    },
+    "site_osmlanevisualizer": {
+        "message": "Visualizador de carril OSM"
+    },
+    "site_osmhistoryviewer": {
+        "message": "Visor de historial de OSM"
+    },
+    "site_openstreetcam": {
+        "message": "Vista de Karta"
+    },
+    "site_stravaglobal": {
+        "message": "Mapa de calor global de Strava"
+    },
+    "site_ideditor": {
+        "message": "Editor iD"
+    },
+    "site_pewuosmhistory": {
+        "message": "Visor de historial de OSM (PeWu)"
+    },
+    "site_whodidit": {
+        "message": "WHODIDIT (Zverik)"
+    },
+    "site_overpassapi": {
+        "message": "Visor de cambios de OSM aumentado"
+    },
+    "site_osmrelationanalyzer": {
+        "message": "Analizador de relaciones OSM"
+    },
+    "site_osmroutemanager": {
+        "message": "Administrador de rutas OSM"
+    },
+    "site_osmose": {
+        "message": "Ósmosis"
+    },
+    "site_mapcompare": {
+        "message": "Comparar mapa"
+    },
+    "site_keepright": {
+        "message": "¡Manténgase a la derecha!"
+    },
+    "site_howdidyoucontribute": {
+        "message": "¿Cómo contribuiste a OSM?"
+    },
+    "site_osmchangeviz": {
+        "message": "Conjunto de cambios por comparación (Neis)"
+    },
+    "site_osmbuildings": {
+        "message": "Edificios OSM"
+    },
+    "site_indoorequal": {
+        "message": "interior ="
+    },
+    "site_osmchangetiles": {
+        "message": "Últimas ediciones OSM (Neis)"
+    },
+    "site_openstreetbrowser": {
+        "message": "Navegador OpenStreet"
+    },
+    "site_level0": {
+        "message": "Editor Nivel 0"
+    },
+    "site_deepdiff": {
+        "message": "Diferencia profunda"
+    },
+    "site_openlevelup": {
+        "message": "OpenLevelUp!"
+    },
+    "site_osmcha": {
+        "message": "OSMCha"
     }
 }

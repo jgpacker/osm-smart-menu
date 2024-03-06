@@ -3,7 +3,7 @@
         "message": "OSM Smart Menu"
     },
     "loading": {
-        "message": "Carregant...\nSi no para de carregar, recarregueu la pàgina i torneu-ho a provar.",
+        "message": "S’està carregant…\nSi no para de carregar, recarregueu la pàgina i torneu-ho a provar.",
         "description": "Shown in popup shortly before menu appears."
     },
     "newOptionDetected_notice": {
@@ -11,7 +11,7 @@
         "description": "Shown in popup (before the button) when an unknown website seems compatible with OpenStreetMap"
     },
     "newOptionDetected_buttonText": {
-        "message": "Afegeix enllaç",
+        "message": "Afegeix l’enllaç",
         "description": "Shown in popup (inside the button) when an unknown website seems compatible with OpenStreetMap"
     },
     "newOptionDetected_added": {
@@ -29,19 +29,19 @@
         "description": "Link to configuration page inside main popup."
     },
     "config_editButton": {
-        "message": "Editar",
+        "message": "Edita",
         "description": "Text inside 'edit button' in configuration page"
     },
     "config_saveButton": {
-        "message": "Guardar",
+        "message": "Desa",
         "description": "Text inside 'save button' in configuration page"
     },
     "config_deleteButton": {
-        "message": "Esborrar",
+        "message": "Suprimeix",
         "description": "Text inside 'delete button' in configuration page"
     },
     "config_linkDeleted": {
-        "message": "Enllaç $LINK_NAME$ esborrat. Feu clic aquí per desfer.",
+        "message": "S’ha suprimit l’enllaç $LINK_NAME$. Feu clic aquí per a desfer.",
         "description": "Shown inline when a link is deleted inside configuration page",
         "placeholders": {
             "LINK_NAME": {
@@ -59,11 +59,11 @@
         "description": "Input label"
     },
     "config_pattern_urlTemplate": {
-        "message": "Plantilla d'URL",
+        "message": "Plantilla d’URL",
         "description": "Input label"
     },
     "config_pattern_createOption": {
-        "message": "Crear opció",
+        "message": "Crea l’opció",
         "description": "Button"
     },
     "error_noAccess": {
@@ -77,7 +77,7 @@
         }
     },
     "error_incompatibleWebsite": {
-        "message": "No s'ha trobat cap mapa ni paràmetre d'OpenStreetMap.\nSi això és inesperat, podeu informar-ne a $EXTENSION_SITE$.",
+        "message": "No s’ha trobat cap mapa ni paràmetre de l’OpenStreetMap.\nSi això és inesperat, podeu informar-ne a $EXTENSION_SITE$.",
         "description": "Error shown inside popup when appropriate",
         "placeholders": {
             "EXTENSION_SITE": {
@@ -150,7 +150,7 @@
         "message": "Osmose"
     },
     "site_osmchangetiles": {
-        "message": "Últimes modificacions d'OSM (Neis)"
+        "message": "Modificacions més recents a l’OSM (Neis)"
     },
     "site_waze": {
         "message": "Waze"
@@ -185,12 +185,18 @@
         "message": "Analitzador de relacions d'OSM"
     },
     "site_howdidyoucontribute": {
-        "message": "Com heu contribuït a OSM?"
+        "message": "Com heu contribuït a l’OSM?"
     },
     "site_osmwiki": {
-        "message": "Wiki d'OpenStreetMap"
+        "message": "Wiki de l’OpenStreetMap"
     },
     "site_openstreetbrowser": {
         "message": "OpenStreetBrowser"
+    },
+    "site_whodidit": {
+        "message": "WHODIDIT (Zverik)"
+    },
+    "site_osmchangeviz": {
+        "message": "Conjunt de canvis per comparació (Neis)"
     }
 }

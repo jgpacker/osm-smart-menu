@@ -9,7 +9,7 @@
         "message": "幫助開放街圖貢獻者簡單切換社群當中不同的地圖與分析工具。"
     },
     "extensionStoreDescription": {
-        "message": "當你點選單按鈕時，這個套件會<strong>偵測</strong>目前頁面的開放街圖參數，並且會<strong>產生</strong>相關地圖與對應參數清單。\n\n認可的參數包括:\n<ul>\n<li>地圖經緯度 (縮放、經度、緯度)</li>\n<li>OSM 元素 (節點 id、路徑 id、關聯 id 與變更組合 id)</li>\n<li>使用者名稱與 GPS 軌跡 id</li>\n</ul>\n如果你不確定那些網站能被認可，在點選單之前請瀏覽 https://www.openstreetmap.org/ 網站。\n\n<em>開放街圖的 logo 是開放街圖基金會的註冊商標，已經經由他們同意來使用。這個專案並沒有被開放街圖基金會認可或是有相關聯。</em>\n"
+        "message": "當你點選單按鈕時，這個套件會<strong>偵測</strong>目前頁面的開放街圖參數，並且會<strong>產生</strong>相關地圖與對應參數清單。\n\n認可的參數包括:\n<ul>\n<li>地圖經緯度 (縮放、經度、緯度)</li>\n<li>OSM 元素 (節點 id、路徑 id、關聯 id 與變更組合 id)</li>\n<li>使用者名稱與 GPS 軌跡 id</li>\n</ul>\n如果你不確定那些網站能被認可，在點選單之前請瀏覽 https://www.openstreetmap.org/ 網站。\n\n<em>開放街圖的 logo 是開放街圖基金會的註冊商標，已經經由他們同意來使用。這個專案並沒有被開放街圖基金會認可或是有相關聯。</em>"
     },
     "loading": {
         "message": "載入中...\n如果沒有停止載入，請試著重新整理再試一次。",
@@ -76,7 +76,7 @@
         "description": "按鈕"
     },
     "error_noAccess": {
-        "message": "錯誤，無法找到或連線到目前頁面。\n如果這是非預期狀況，請到 $EXTENSION_SITE$ 回報。",
+        "message": "錯誤，無法找到或連線到目前頁面。\n如果頁面仍在載入，請再試一次。\n如果這是非預期狀況，請到 $EXTENSION_SITE$ 回報。",
         "description": "目前頁面無法連線時，錯誤訊息顯示在跳出視窗當中 (技術問題)",
         "placeholders": {
             "EXTENSION_SITE": {
@@ -96,7 +96,7 @@
         }
     },
     "error_noInformationExtracted": {
-        "message": "錯誤：如果網站被認可，但是無法適別參數時。\n如果你認為這是臭蟲的話，請到 $EXTENSION_SITE$ 回報狀況。",
+        "message": "錯誤：如果網站被認可，但是無法適別參數時。\n如果這是地圖的話，請稍微移動地圖來啟始其參數。\n如果你認為這是臭蟲的話，請到 $EXTENSION_SITE$ 回報狀況。",
         "description": "如果適當錯誤訊息顯示在跳出視窗當中",
         "placeholders": {
             "EXTENSION_SITE": {
@@ -127,10 +127,10 @@
         "message": "Google 地圖"
     },
     "site_sentinelhub": {
-        "message": "Sentinel Hub"
+        "message": "哨兵衛星"
     },
     "site_openmapsurfer": {
-        "message": "OpenMapSurfer"
+        "message": "開放衝浪地圖"
     },
     "site_opencyclemap": {
         "message": "開放單車地圖"
@@ -142,19 +142,19 @@
         "message": "開放雪地地圖"
     },
     "site_opentopomap": {
-        "message": "OpenTopoMap"
+        "message": "開放地景地圖"
     },
     "site_historicmap": {
         "message": "歷史物件"
     },
     "site_openinframap": {
-        "message": "開放設施地圖"
+        "message": "開放設施地圖 "
     },
     "site_openptmap": {
         "message": "開放大眾運輸地圖"
     },
     "site_opnvkarte": {
-        "message": "ÖPNVKarte"
+        "message": "ÖPNVKarte (大眾運輸地圖)"
     },
     "site_stamen": {
         "message": "Stamen 地圖"
@@ -175,19 +175,19 @@
         "message": "Level0 編輯器"
     },
     "site_umap": {
-        "message": "uMap"
+        "message": "uMap (自製地圖)"
     },
     "site_osmdeephistory": {
         "message": "OSM 深度歷史"
     },
     "site_deepdiff": {
-        "message": "Deep Diff"
+        "message": "Deep Diff (深度差異)"
     },
     "site_osmhistoryviewer": {
         "message": "OSM 歷史檢視器"
     },
     "site_whodidit": {
-        "message": "WHODIDIT (Zverik)"
+        "message": "WHODIDIT (Zverik) (誰編輯什麼)"
     },
     "site_overpassapi": {
         "message": "Augmented OSM 變動檢視器"
@@ -199,7 +199,7 @@
         "message": "OSM 導航管理器"
     },
     "site_osmose": {
-        "message": "Osmose"
+        "message": "Osmose (分析工具)"
     },
     "site_osminspector": {
         "message": "OSM 偵側器"
@@ -208,7 +208,7 @@
         "message": "地圖比較"
     },
     "site_keepright": {
-        "message": "keep right!"
+        "message": "keep right! (維持正確!)"
     },
     "site_howdidyoucontribute": {
         "message": "你如何貢獻 OSM?"
@@ -223,22 +223,22 @@
         "message": "最新 OSM 編輯 (Neis)"
     },
     "site_waze": {
-        "message": "Waze"
+        "message": "Waze (群眾地圖)"
     },
     "site_openstreetbrowser": {
         "message": "開放街道瀏覽器"
     },
     "site_osmcha": {
-        "message": "OSMCha"
+        "message": "OSMCha (OSM變更集分析器)"
     },
     "site_osmbuildings": {
         "message": "OSM 建築"
     },
     "site_openlevelup": {
-        "message": "OpenLevelUp!"
+        "message": "OpenLevelUp! (開放樓層吧！)"
     },
     "site_indoorequal": {
-        "message": "indoor="
+        "message": "indoor= (室內)"
     },
     "site_missingmaps": {
         "message": "遺失地圖"

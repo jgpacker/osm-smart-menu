@@ -1,0 +1,160 @@
+{
+    "extensionShortName": {
+        "message": "OSMenüü"
+    },
+    "extensionName": {
+        "message": "Nutikas OSM menüü"
+    },
+    "newOptionDetected_buttonText": {
+        "message": "Lisa link",
+        "description": "Shown in popup (inside the button) when an unknown website seems compatible with OpenStreetMap"
+    },
+    "newOptionDetected_added": {
+        "message": "Lisatud kui $PAGE_TITLE$",
+        "description": "Shown in popup when an unknown website seems compatible with OpenStreetMap. After the button is clicked.",
+        "placeholders": {
+            "PAGE_TITLE": {
+                "content": "$1",
+                "example": "OpenStreetMap"
+            }
+        }
+    },
+    "configurationLink": {
+        "message": "Seadistused",
+        "description": "Link to configuration page inside main popup."
+    },
+    "config_editButton": {
+        "message": "Muuda",
+        "description": "Text inside 'edit button' in configuration page"
+    },
+    "config_saveButton": {
+        "message": "Salvesta",
+        "description": "Text inside 'save button' in configuration page"
+    },
+    "config_deleteButton": {
+        "message": "Kustuta",
+        "description": "Text inside 'delete button' in configuration page"
+    },
+    "config_linkDeleted": {
+        "message": "$LINK_NAME$ link on kustutatud. Muudatuse tagasipööramiseks klõpsi siin.",
+        "description": "Shown inline when a link is deleted inside configuration page",
+        "placeholders": {
+            "LINK_NAME": {
+                "content": "$1",
+                "example": "OpenStreetMap"
+            }
+        }
+    },
+    "extensionDescription": {
+        "message": "Lihtne tarvik, mis võimaldab OpenStreetMap'i kaasautoritel mugavasti vahetada erinevaid kaardivaateid ja kogukonna poolt loodud anaalüüsitarvikuid."
+    },
+    "newOptionDetected_notice": {
+        "message": "Kas sa soovid lisada selle veebisaidi menüüsse?",
+        "description": "Shown in popup (before the button) when an unknown website seems compatible with OpenStreetMap"
+    },
+    "site_opentopomap": {
+        "message": "OpenTopoMap"
+    },
+    "config_pattern_name": {
+        "message": "Nimi",
+        "description": "Input label"
+    },
+    "config_pattern_urlTemplate": {
+        "message": "URL'i mall",
+        "description": "Input label"
+    },
+    "config_pattern_createOption": {
+        "message": "Loo valik",
+        "description": "Button"
+    },
+    "site_openstreetmap": {
+        "message": "OpenStreetMap"
+    },
+    "site_bingmaps": {
+        "message": "Bing'i kaardid"
+    },
+    "site_sentinelhub": {
+        "message": "Sentinel Hub"
+    },
+    "site_googlemaps": {
+        "message": "Google Maps"
+    },
+    "site_openmapsurfer": {
+        "message": "OpenMapSurfer"
+    },
+    "site_opencyclemap": {
+        "message": "OpenCycleMap"
+    },
+    "site_openseamap": {
+        "message": "OpenSeaMap"
+    },
+    "site_opensnowmap": {
+        "message": "OpenSnowMap"
+    },
+    "site_historicmap": {
+        "message": "Ajaloolised objektid"
+    },
+    "site_openinframap": {
+        "message": "Open Infrastructure Map "
+    },
+    "site_openptmap": {
+        "message": "Open Public Transport Map"
+    },
+    "site_stamen": {
+        "message": "Stamen Maps"
+    },
+    "site_opnvkarte": {
+        "message": "ÖPNVKarte"
+    },
+    "site_f4map": {
+        "message": "F4 Map (3D demo)"
+    },
+    "site_openstreetcam": {
+        "message": "KartaView"
+    },
+    "site_mapillary": {
+        "message": "Mapillary"
+    },
+    "site_level0": {
+        "message": "Level0 Editor"
+    },
+    "site_ideditor": {
+        "message": "iD Editor"
+    },
+    "site_umap": {
+        "message": "uMap"
+    },
+    "site_osmdeephistory": {
+        "message": "OSM Deep History"
+    },
+    "site_deepdiff": {
+        "message": "Deep Diff"
+    },
+    "site_whodidit": {
+        "message": "WHODIDIT (Zverik)"
+    },
+    "site_osmose": {
+        "message": "Osmose"
+    },
+    "site_osmwiki": {
+        "message": "OpenStreetMap viki"
+    },
+    "site_openstreetbrowser": {
+        "message": "OpenStreetBrowser"
+    },
+    "site_osmcha": {
+        "message": "OSMCha"
+    },
+    "site_openlevelup": {
+        "message": "OpenLevelUp!"
+    },
+    "site_indoorequal": {
+        "message": "indoor="
+    },
+    "site_missingmaps": {
+        "message": "Puuduvad kaardid"
+    },
+    "site_stravaglobal": {
+        "message": "Strava Global Heatmap"
+    }
+}

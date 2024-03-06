@@ -1,0 +1,259 @@
+{
+    "extensionName": {
+        "message": "OSM intelligens menü"
+    },
+    "extensionShortName": {
+        "message": "OSMenü"
+    },
+    "loading": {
+        "message": "Betöltés…\nHa ez nem állítja le a betöltést, töltse be ismét az oldalt, és próbálkozzon újra.",
+        "description": "Shown in popup shortly before menu appears."
+    },
+    "newOptionDetected_notice": {
+        "message": "Szeretné ezt a weboldalt felvenni a menübe?",
+        "description": "Shown in popup (before the button) when an unknown website seems compatible with OpenStreetMap"
+    },
+    "newOptionDetected_buttonText": {
+        "message": "Link hozzáadása",
+        "description": "Shown in popup (inside the button) when an unknown website seems compatible with OpenStreetMap"
+    },
+    "newOptionDetected_added": {
+        "message": "Hozzáadva mint $PAGE_TITLE$",
+        "description": "Shown in popup when an unknown website seems compatible with OpenStreetMap. After the button is clicked.",
+        "placeholders": {
+            "PAGE_TITLE": {
+                "content": "$1",
+                "example": "OpenStreetMap"
+            }
+        }
+    },
+    "configurationLink": {
+        "message": "Konfigurálás",
+        "description": "Link to configuration page inside main popup."
+    },
+    "config_editButton": {
+        "message": "Szerkesztés",
+        "description": "Text inside 'edit button' in configuration page"
+    },
+    "config_saveButton": {
+        "message": "Mentés",
+        "description": "Text inside 'save button' in configuration page"
+    },
+    "config_deleteButton": {
+        "message": "Törlés",
+        "description": "Text inside 'delete button' in configuration page"
+    },
+    "config_linkDeleted": {
+        "message": "$LINK_NAME$ link törölve. A visszavonáshoz kattintson ide.",
+        "description": "Shown inline when a link is deleted inside configuration page",
+        "placeholders": {
+            "LINK_NAME": {
+                "content": "$1",
+                "example": "OpenStreetMap"
+            }
+        }
+    },
+    "config_pattern_formTitle": {
+        "message": "Haladó beállítás létrehozása (kísérleti)",
+        "description": "Form Legend/Title"
+    },
+    "config_pattern_name": {
+        "message": "Név",
+        "description": "Input label"
+    },
+    "config_pattern_urlTemplate": {
+        "message": "URL-sablon",
+        "description": "Input label"
+    },
+    "config_pattern_createOption": {
+        "message": "Beállítás létrehozása",
+        "description": "Button"
+    },
+    "error_noAccess": {
+        "message": "HIBA: Nem sikerült megtalálni vagy elérni az aktuális oldalt.\nHa az oldal még mindig töltődik, próbálja meg újra.\nHa ez váratlanul következett be, kérjük, jelezze itt: $EXTENSION_SITE$.",
+        "description": "Error shown inside popup when the current page cannot be accessed (technical exception)",
+        "placeholders": {
+            "EXTENSION_SITE": {
+                "content": "$1",
+                "example": "github.com/jgpacker/osm-smart-menu/"
+            }
+        }
+    },
+    "noEnabledCompatibleLinksFound": {
+        "message": "Az engedélyezett linkek egyike sem kompatibilis az ezen az oldalon található paraméterekkel.",
+        "description": "Shown in popup when there aren't any enabled links that support the parameters found in the current page."
+    },
+    "button_showEnabledLinks": {
+        "message": "Engedélyezett linkek megjelenítése további paraméterek használatával",
+        "description": "Shown in popup below some errors to allow users to see enabled links."
+    },
+    "button_showOtherEnabledLinks": {
+        "message": "A fennmaradó engedélyezett linkek megjelenítése további paraméterek használatával",
+        "description": "Shown in popup below the list of links; to see other enabled links with additional parameters."
+    },
+    "site_openstreetmap": {
+        "message": "OpenStreetMap"
+    },
+    "site_bingmaps": {
+        "message": "Bing Maps"
+    },
+    "site_googlemaps": {
+        "message": "Google Maps"
+    },
+    "site_historicmap": {
+        "message": "Történelmi objektumok térképe"
+    },
+    "site_openinframap": {
+        "message": "Open Infrastructure Map "
+    },
+    "site_openptmap": {
+        "message": "Open Public Transport Map (tömeközlekedés)"
+    },
+    "site_opnvkarte": {
+        "message": "ÖPNVKarte (tömegközlekedés)"
+    },
+    "site_stamen": {
+        "message": "Stamen térképek"
+    },
+    "site_f4map": {
+        "message": "F4 Map (3D demo)"
+    },
+    "site_hotmap": {
+        "message": "Humanitarian OSM Team (HOT) térkép"
+    },
+    "site_openstreetcam": {
+        "message": "KartaView (utcaképek)"
+    },
+    "site_mapillary": {
+        "message": "Mapillary (utcaképek)"
+    },
+    "site_level0": {
+        "message": "Level0 szerkesztő"
+    },
+    "site_ideditor": {
+        "message": "iD szerkesztő"
+    },
+    "site_umap": {
+        "message": "uMap (térképrajzoló)"
+    },
+    "site_osmdeephistory": {
+        "message": "OSM Deep History (térképelemek előzményei)"
+    },
+    "site_deepdiff": {
+        "message": "Deep Diff (térképelemek előzményei)"
+    },
+    "site_osmhistoryviewer": {
+        "message": "OSM History Viewer (szerkesztési előzmények)"
+    },
+    "site_pewuosmhistory": {
+        "message": "OSM History Viewer (PeWu) - térképelemek előzményei"
+    },
+    "site_whodidit": {
+        "message": "Who did it? (Zverik)"
+    },
+    "site_overpassapi": {
+        "message": "Augmented OSM Change Viewer (AChaVi)"
+    },
+    "site_osmrelationanalyzer": {
+        "message": "OSM Relation Analyzer (kapcsolatelemző)"
+    },
+    "site_osmroutemanager": {
+        "message": "OSM Route Manager (útvonalkezelő)"
+    },
+    "site_osmose": {
+        "message": "Osmose QA"
+    },
+    "site_osminspector": {
+        "message": "OSM Inspector QA"
+    },
+    "site_mapcompare": {
+        "message": "Map Compare"
+    },
+    "site_keepright": {
+        "message": "keep right! QA"
+    },
+    "site_howdidyoucontribute": {
+        "message": "How did you contribute to OSM?"
+    },
+    "site_osmwiki": {
+        "message": "OpenStreetMap wiki"
+    },
+    "site_osmchangeviz": {
+        "message": "Changeset by Comparison (Neis) módosításkészlet-vizualizáció"
+    },
+    "site_osmchangetiles": {
+        "message": "Latest OSM Edits (Neis) - legutóbbi szerkesztések"
+    },
+    "site_indoorequal": {
+        "message": "indoor="
+    },
+    "site_openstreetbrowser": {
+        "message": "OpenStreetBrowser"
+    },
+    "site_osmcha": {
+        "message": "OSMCha módosításkészlet-elemző"
+    },
+    "site_openlevelup": {
+        "message": "OpenLevelUp! (beltéri objektumok)"
+    },
+    "site_missingmaps": {
+        "message": "Missing Maps (humanitárius projekt)"
+    },
+    "site_osmlanevisualizer": {
+        "message": "OSM Lane Visualizer (sávmegjelenítő)"
+    },
+    "site_stravaglobal": {
+        "message": "Strava Global Heatmap (sporttevékenységek hőtérképe)"
+    },
+    "site_osmbuildings": {
+        "message": "OSM Buildings (3D épületmegjelenítő)"
+    },
+    "extensionDescription": {
+        "message": "Segítség az OpenStreetMap szerkesztőinek, hogy könnyen válthassanak a közösség különböző térképei és elemzőeszközei között."
+    },
+    "error_incompatibleWebsite": {
+        "message": "Nem található térkép vagy OpenStreetMap-paraméter.\nHa ez váratlan, akkor bejelentheti itt: $EXTENSION_SITE$.",
+        "description": "Error shown inside popup when appropriate",
+        "placeholders": {
+            "EXTENSION_SITE": {
+                "content": "$1",
+                "example": "github.com/jgpacker/osm-smart-menu/"
+            }
+        }
+    },
+    "site_opencyclemap": {
+        "message": "OpenCycleMap"
+    },
+    "extensionStoreDescription": {
+        "message": "Amikor a menü gombjára kattint, a bővítmény <strong>felismeri</strong> az OpenStreetMap paramétereit az aktuális oldalon, és ezekkel a paraméterekkel <strong> létrehozza</strong> a kapcsolódó térképek és eszközök listáját.\n\nA felismert paraméterek:\n<ul>.\n<li>Térképkoordináták (zoom, szélességi és hosszúsági fok)</li>\n<li>OSM-elemek (pont, vonal, kapcsolat és módosításkészlet azonosítója)</li>\n<li>Felhasználónevek és GPS nyomvonalak azonosítója</li>\n</ul>\nHa nem biztos benne, hogy melyik weboldalt ismeri fel, a menü gombjára kattintás előtt próbáljon meg ellátogatni a https://www.openstreetmap.org/ oldalra.\n\n<em>Az OpenStreetMap logó az OpenStreetMap Foundation védjegye, és az ő engedélyükkel használjuk. Ezt a projektet az OpenStreetMap Foundation nem támogatja, és nem áll kapcsolatban vele.</em>",
+        "description": "Description shown in Chrome and Firefox's extension download page"
+    },
+    "error_noInformationExtracted": {
+        "message": "A webhelyet sikerült felismerni, de nem találhatók rajta paraméterek.\nHa ez egy térkép, próbálja meg egy kicsit mozgatni, hogy a paraméterei inicializálódjanak.\nHa ez hibának tűnik, kérjük, jelezze itt: $EXTENSION_SITE$.",
+        "description": "Error shown inside popup when appropriate",
+        "placeholders": {
+            "EXTENSION_SITE": {
+                "content": "$1",
+                "example": "github.com/jgpacker/osm-smart-menu/"
+            }
+        }
+    },
+    "site_openseamap": {
+        "message": "OpenSeaMap"
+    },
+    "site_openmapsurfer": {
+        "message": "OpenMapSurfer"
+    },
+    "site_sentinelhub": {
+        "message": "Sentinel Hub (műholdképek)"
+    },
+    "site_opensnowmap": {
+        "message": "OpenSnowMap"
+    },
+    "site_opentopomap": {
+        "message": "OpenTopoMap"
+    },
+    "site_waze": {
+        "message": "Waze"
+    }
+}

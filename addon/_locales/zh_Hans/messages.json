@@ -1,0 +1,114 @@
+{
+    "extensionName": {
+        "message": "OSM智能菜单"
+    },
+    "extensionShortName": {
+        "message": "OSM菜单"
+    },
+    "extensionDescription": {
+        "message": "帮助OpenStreetMap贡献者快速切换不同地图以及使用社区的分析工具。"
+    },
+    "newOptionDetected_notice": {
+        "message": "你想要将这个网站添加到菜单吗？",
+        "description": "Shown in popup (before the button) when an unknown website seems compatible with OpenStreetMap"
+    },
+    "newOptionDetected_buttonText": {
+        "message": "添加链接",
+        "description": "Shown in popup (inside the button) when an unknown website seems compatible with OpenStreetMap"
+    },
+    "configurationLink": {
+        "message": "配置",
+        "description": "Link to configuration page inside main popup."
+    },
+    "config_deleteButton": {
+        "message": "删除",
+        "description": "Text inside 'delete button' in configuration page"
+    },
+    "config_linkDeleted": {
+        "message": "链接$LINK_NAME$已被删除，点击这里撤销。",
+        "description": "Shown inline when a link is deleted inside configuration page",
+        "placeholders": {
+            "LINK_NAME": {
+                "content": "$1",
+                "example": "OpenStreetMap"
+            }
+        }
+    },
+    "config_pattern_formTitle": {
+        "message": "高级选项编辑（实验性）",
+        "description": "Form Legend/Title"
+    },
+    "config_pattern_name": {
+        "message": "名称",
+        "description": "Input label"
+    },
+    "config_pattern_urlTemplate": {
+        "message": "URL模板",
+        "description": "Input label"
+    },
+    "config_pattern_createOption": {
+        "message": "添加选项",
+        "description": "Button"
+    },
+    "site_bingmaps": {
+        "message": "Bing地图"
+    },
+    "site_googlemaps": {
+        "message": "谷歌地图"
+    },
+    "site_opencyclemap": {
+        "message": "骑行运动地图"
+    },
+    "site_openseamap": {
+        "message": "OpenSeaMap"
+    },
+    "site_opensnowmap": {
+        "message": "OpenSnowMap"
+    },
+    "site_historicmap": {
+        "message": "历史对象"
+    },
+    "site_openptmap": {
+        "message": "交通路网地图"
+    },
+    "site_hotmap": {
+        "message": "人道救援地图"
+    },
+    "site_stravaglobal": {
+        "message": "Strava全球热力图"
+    },
+    "loading": {
+        "message": "加载中……\n如果它并未停止，请刷新页面并重试。",
+        "description": "Shown in popup shortly before menu appears."
+    },
+    "newOptionDetected_added": {
+        "message": "以 $PAGE_TITLE$添加",
+        "description": "Shown in popup when an unknown website seems compatible with OpenStreetMap. After the button is clicked.",
+        "placeholders": {
+            "PAGE_TITLE": {
+                "content": "$1",
+                "example": "OpenStreetMap"
+            }
+        }
+    },
+    "config_editButton": {
+        "message": "编辑",
+        "description": "Text inside 'edit button' in configuration page"
+    },
+    "config_saveButton": {
+        "message": "保存",
+        "description": "Text inside 'save button' in configuration page"
+    },
+    "site_openstreetmap": {
+        "message": "OpenStreetMap"
+    },
+    "site_sentinelhub": {
+        "message": "Sentinel Hub"
+    },
+    "site_opentopomap": {
+        "message": "OpenTopoMap（开放地形地图）"
+    },
+    "site_opnvkarte": {
+        "message": "公共交通地图"
+    }
+}
